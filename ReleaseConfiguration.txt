@@ -1,0 +1,11 @@
+
+# relese version 
+RELEASE_VERSION = 'V1.6.1'
+
+Branch_Config = {
+    'IBM': 'sandbox/develop_C673',
+    'BLU': 'sandbox/develop_C673',
+    'FBL': 'sandbox/develop_C673',
+    'FLASHER': 'sandbox/develop_C673',
+    'APP':  'develop'
+}

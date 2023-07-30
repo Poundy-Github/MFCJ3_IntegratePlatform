@@ -1,0 +1,24 @@
+
+@startuml
+
+start
+
+:BLU flow;
+
+:BLU Hardware/Software init;
+:Get customer TxPduId;
+while (Copy FBL data is not finished ?) is (no)
+fork
+    :Transmit 7f 31 78 use got TxPduId periodically;
+fork again
+    :Copy FBL data to FBL linked region;
+end fork
+endwhile (yes)
+
+:Set FBL valid ;
+:Set BLU invalid;
+:Perform reset;
+
+stop
+
+@enduml

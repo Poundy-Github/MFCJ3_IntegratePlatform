@@ -1,0 +1,271 @@
+/*@!Encoding:936*/
+
+includes
+{
+  #include "Crc.cin"
+  #include "Util.cin"
+}
+
+variables
+{
+  const dword BLOCK_MAX   = 4;
+  const dword SEGMENT_MAX = 1;
+  const dword DATA_MAX    = 5 * 1024 * 1024;
+
+  struct ST_SEGMENT_INFO
+  {
+    dword dwAddress;
+    dword dwSize;
+    dword dwOffset;
+    dword dwCrc;
+  };
+
+  struct ST_BLOCK_INFO
+  {
+    dword                  dwAddress;
+    dword                  dwBlockSize;
+    dword                  dwDataSize;
+    dword                  dwSegmentNum;
+    struct ST_SEGMENT_INFO stSegment[SEGMENT_MAX];
+  };
+
+  struct ST_UPDATE_INFO
+  {
+    byte                  byAppNum;
+    struct ST_BLOCK_INFO  stApp[BLOCK_MAX];
+    struct ST_BLOCK_INFO  stDriver;
+    dword                 dwSize;
+    byte                  byData[DATA_MAX];
+  };
+}
+
+byte ParserFile(char cPathName[], struct ST_BLOCK_INFO stBlock, byte byData[], dword dwOffset)
+{
+  byte byRet;
+
+  if((strstr(cPathName, ".mot") != -1) || (strstr(cPathName, ".s19") != -1))
+  {
+    byRet = ParserMotFile(cPathName, stBlock, byData, dwOffset);
+  }
+  else if(strstr(cPathName, ".hex") != -1)
+  {
+    byRet = ParserHexFile(cPathName, stBlock, byData, dwOffset);
+  }
+  else
+  {
+    writeLineEx(s_lSink, 3, "File[%s] not support", cPathName);
+    byRet = FALSE;
+  }
+
+  return byRet;
+}
+
+byte ParserMotFile(char cPathName[], struct ST_BLOCK_INFO stBlock, byte byData[], dword dwOffset)
+{
+  dword dwFileHandle;
+  char line[255];
+  byte i;
+  byte Len;
+  byte addr_byte;
+  dword dwAddress;
+
+  stBlock.dwAddress = 0;
+  stBlock.dwBlockSize = 0;
+  stBlock.dwDataSize = 0;
+  stBlock.dwSegmentNum = 0;
+
+  for (i = 0; i < SEGMENT_MAX; i++)
+  {
+    stBlock.stSegment[i].dwAddress = 0;
+    stBlock.stSegment[i].dwSize = 0;
+    stBlock.stSegment[i].dwOffset = 0;
+    stBlock.stSegment[i].dwCrc = 0;
+  }
+
+  writeLineEx(s_lSink, 1, "ParserMotFile[%s]", cPathName);
+
+  dwFileHandle = openFileRead(cPathName,0);
+  if ( dwFileHandle == 0 )
+  {
+    writeLineEx(s_lSink, 3, "openFileRead[%s] error", cPathName);
+    return FALSE;
+  }
+
+  while(fileGetstringSZ(line, elcount(line), dwFileHandle) != 0)
+  {
+    switch(line[1])
+    {
+      case '1':
+        addr_byte = 2;
+        break;
+      case '2':
+        addr_byte = 3;
+        break;
+      case '3':
+        addr_byte = 4;
+        break;
+      default:
+        addr_byte = 0;
+        break;
+    }
+
+    if(addr_byte > 0)
+    {
+      Len = String2Hex(line, 2, 2) - addr_byte - 1;
+
+      dwAddress = String2Hex(line, 4, addr_byte * 2);
+
+      if (stBlock.dwAddress == 0)
+      {
+        stBlock.stSegment[stBlock.dwSegmentNum].dwAddress = dwAddress;
+        stBlock.stSegment[stBlock.dwSegmentNum].dwSize = Len;
+        stBlock.stSegment[stBlock.dwSegmentNum].dwOffset = dwOffset;
+        stBlock.dwAddress = dwAddress;
+        stBlock.dwDataSize = Len;
+      }
+      else if (dwAddress == stBlock.stSegment[stBlock.dwSegmentNum].dwAddress + stBlock.stSegment[stBlock.dwSegmentNum].dwSize)
+      {
+        stBlock.stSegment[stBlock.dwSegmentNum].dwSize += Len;
+        stBlock.dwDataSize += Len;
+      }
+      else
+      {
+        stBlock.dwSegmentNum++;
+        stBlock.stSegment[stBlock.dwSegmentNum].dwAddress = dwAddress;
+        stBlock.stSegment[stBlock.dwSegmentNum].dwSize = Len;
+        stBlock.stSegment[stBlock.dwSegmentNum].dwOffset = dwOffset;
+        stBlock.dwDataSize += Len;
+      }
+
+      for (i = 0; i < Len; i++)
+      {
+        byData[dwOffset] = (byte)String2Hex(line, 2 * (i + addr_byte) + 4, 2);
+        dwOffset++;
+      }
+    }
+  }
+
+  fileclose(dwFileHandle);
+
+  stBlock.dwBlockSize = stBlock.stSegment[stBlock.dwSegmentNum].dwAddress + stBlock.stSegment[stBlock.dwSegmentNum].dwSize - stBlock.stSegment[0].dwAddress;
+  stBlock.dwSegmentNum++;
+  for(i = 0; i < stBlock.dwSegmentNum; i++)
+  {
+    stBlock.stSegment[i].dwCrc = CalculateCRC16(byData, elcount(byData), stBlock.stSegment[i].dwOffset, stBlock.stSegment[i].dwSize, 0, 1);
+  }
+
+  writeLineEx(s_lSink, 1, "Mot Parser finish. Address[0x%08X] BlockSize[0x%08X] DataSize[0x%08X] SegmentNum[%ld]", stBlock.dwAddress, stBlock.dwBlockSize, stBlock.dwDataSize, stBlock.dwSegmentNum);
+  for(i = 0; i < stBlock.dwSegmentNum; i++)
+  {
+    writeLineEx(s_lSink, 1, "Segment[%ld]: Address[0x%08X] Size[0x%08X] Offset[0x%08X] CRC[0x%08X]", i, stBlock.stSegment[i].dwAddress, stBlock.stSegment[i].dwSize, stBlock.stSegment[i].dwOffset, stBlock.stSegment[i].dwCrc);
+    dwOffset = stBlock.stSegment[i].dwOffset;
+    writeLineEx(s_lSink, 1, "Segment[%ld]: DataTop[%02X%02X%02X%02X]", i, byData[dwOffset], byData[dwOffset+1], byData[dwOffset+2], byData[dwOffset+3]);
+    dwOffset = stBlock.stSegment[i].dwOffset + stBlock.stSegment[i].dwSize -1;
+    writeLineEx(s_lSink, 1, "Segment[%ld]: DataEnd[%02X%02X%02X%02X]", i, byData[dwOffset-3],  byData[dwOffset-2], byData[dwOffset-1], byData[dwOffset]);
+  }
+
+  return TRUE;
+}
+
+byte ParserHexFile(char cPathName[], struct ST_BLOCK_INFO stBlock, byte byData[], dword dwOffset)
+{
+  dword dwFileHandle;
+  char line[255];
+  byte i;
+  byte Len;
+  byte type;
+  word wBaseAddress;
+  word wOffsetAddress;
+  dword dwAddress;
+
+  wBaseAddress = 0;
+  stBlock.dwAddress = 0;
+  stBlock.dwBlockSize = 0;
+  stBlock.dwDataSize = 0;
+  stBlock.dwSegmentNum = 0;
+
+  for (i = 0; i < SEGMENT_MAX; i++)
+  {
+    stBlock.stSegment[i].dwAddress = 0;
+    stBlock.stSegment[i].dwSize = 0;
+    stBlock.stSegment[i].dwOffset = 0;
+    stBlock.stSegment[i].dwCrc = 0;
+  }
+
+  writeLineEx(s_lSink, 1, "ParserHexFile[%s]", cPathName);
+
+  dwFileHandle = openFileRead(cPathName,0);
+  if ( dwFileHandle == 0 )
+  {
+    writeLineEx(s_lSink, 3, "openFileRead[%s] error", cPathName);
+    return FALSE;
+  }
+
+  while(fileGetstringSZ(line, elcount(line), dwFileHandle) != 0)
+  {
+    type = (byte)String2Hex(line, 7, 2);
+    switch(type)
+    {
+      case 0:
+        Len = String2Hex(line, 1, 2);
+        wOffsetAddress = (word)String2Hex(line, 3, 4);
+        dwAddress = Word2Dword(wBaseAddress, wOffsetAddress);
+        if (stBlock.dwAddress == 0)
+        {
+          stBlock.stSegment[stBlock.dwSegmentNum].dwAddress = dwAddress;
+          stBlock.stSegment[stBlock.dwSegmentNum].dwSize = Len;
+          stBlock.stSegment[stBlock.dwSegmentNum].dwOffset = dwOffset;
+          stBlock.dwAddress = dwAddress;
+          stBlock.dwDataSize = Len;
+        }
+        else if (dwAddress == stBlock.stSegment[stBlock.dwSegmentNum].dwAddress + stBlock.stSegment[stBlock.dwSegmentNum].dwSize)
+        {
+          stBlock.stSegment[stBlock.dwSegmentNum].dwSize += Len;
+          stBlock.dwDataSize += Len;
+        }
+        else
+        {
+          stBlock.dwSegmentNum++;
+          stBlock.stSegment[stBlock.dwSegmentNum].dwAddress = dwAddress;
+          stBlock.stSegment[stBlock.dwSegmentNum].dwSize = Len;
+          stBlock.stSegment[stBlock.dwSegmentNum].dwOffset = dwOffset;
+          stBlock.dwDataSize += Len;
+        }
+
+        for (i = 0; i < Len; i++)
+        {
+          byData[dwOffset] = (byte)String2Hex(line, 2 * i + 9, 2);
+          dwOffset++;
+        }
+        break;
+
+      case 4:
+        wBaseAddress = (word)String2Hex(line, 9, 4);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  fileclose(dwFileHandle);
+
+  stBlock.dwBlockSize = stBlock.stSegment[stBlock.dwSegmentNum].dwAddress + stBlock.stSegment[stBlock.dwSegmentNum].dwSize - stBlock.stSegment[0].dwAddress;
+  stBlock.dwSegmentNum++;
+  for(i = 0; i < stBlock.dwSegmentNum; i++)
+  {
+    stBlock.stSegment[i].dwCrc = CalculateCRC16(byData, elcount(byData), stBlock.stSegment[i].dwOffset, stBlock.stSegment[i].dwSize, 0, 1);
+  }
+
+  writeLineEx(s_lSink, 1, "Hex Parser finish. Address[0x%08X] BlockSize[0x%08X] DataSize[0x%08X] SegmentNum[%ld]", stBlock.dwAddress, stBlock.dwBlockSize, stBlock.dwDataSize, stBlock.dwSegmentNum);
+  for(i = 0; i < stBlock.dwSegmentNum; i++)
+  {
+    writeLineEx(s_lSink, 1, "Segment[%ld]: Address[0x%08X] Size[0x%08X] Offset[0x%08X] CRC[0x%08X]", i, stBlock.stSegment[i].dwAddress, stBlock.stSegment[i].dwSize, stBlock.stSegment[i].dwOffset, stBlock.stSegment[i].dwCrc);
+    dwOffset = stBlock.stSegment[i].dwOffset;
+    writeLineEx(s_lSink, 1, "Segment[%ld]: DataTop[%02X%02X%02X%02X]", i, byData[dwOffset], byData[dwOffset+1], byData[dwOffset+2], byData[dwOffset+3]);
+    dwOffset = stBlock.stSegment[i].dwOffset + stBlock.stSegment[i].dwSize -1;
+    writeLineEx(s_lSink, 1, "Segment[%ld]: DataEnd[%02X%02X%02X%02X]", i, byData[dwOffset-3],  byData[dwOffset-2], byData[dwOffset-1], byData[dwOffset]);
+  }
+
+  return TRUE;
+}

@@ -1,0 +1,49 @@
+
+@startuml
+
+start
+
+:IBM flow;
+' floating note right : <Valid check> has 2 steps : \nvalid patter check and signature check 
+:FBL Hardware/Software init;
+
+if(BLU is inprogress?) then (yes)
+    :Response 71 01 02 02 00;
+    #LightPink:Enter prog_session and continue this flashing circle;
+    stop
+else(no)
+    if(SwReset and Reprog requested?) then (yes)
+        :Response 50 02;
+        if (S3 timeout && Application is valid ?) then (yes)
+            #SpringGreen:Jump to application;
+            stop
+        else (no)
+            #CadetBlue:Stay in boot and wait for flashing;
+            stop
+        endif
+    else (no)
+        #YellowGreen:(A)
+    endif 
+endif
+
+
+#YellowGreen:(A)
+partition StayInBoot_20ms{
+    :Set jump timout counter 20ms;
+    while (Jmp timeout counter timeover ?) is (no)
+    floating note right : Stay in boot command : 10 03 
+        if (Stay in boot command is recieved ?) then (yes)
+            #CadetBlue:Stay in boot and wait for flashing;
+            stop
+        endif
+        :Jump timeout counter decrease;
+    endwhile (yes)
+    if (Application is valid ?) then (yes)
+        #Green:Jump to application;
+        stop
+    else (no)
+        #CadetBlue:Stay in boot and wait for flashing;
+        stop
+    endif
+}
+@enduml

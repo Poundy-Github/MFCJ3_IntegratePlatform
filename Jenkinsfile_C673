@@ -1,0 +1,19 @@
+pipeline {
+    agent {label 'SHKD009W'}
+    options {
+        timeout(time: 4, unit: 'HOURS') 
+    }
+    stages {
+        stage('Precondition - Pull') {
+            steps {
+                script{
+                    echo("[==> Checking ...")
+                    echo("[==> ${env.JENKINS_URL}")
+				bat '''
+					python release.py
+                '''
+                }
+			}
+		} 
+    }
+}

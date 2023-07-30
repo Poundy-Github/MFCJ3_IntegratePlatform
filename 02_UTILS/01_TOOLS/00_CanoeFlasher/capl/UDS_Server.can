@@ -1,0 +1,240 @@
+/*@!Encoding:936*/
+
+includes
+{
+  #include "UDS_Common.cin"
+  #include "Util.cin"
+}
+
+variables
+{
+  byte SYSTEM_SUPPLIER[7] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  byte ECU_HARDWARE_VERSION[8] = {'H', 'W', ':', 'A', '.' ,'0', '.', '0'};
+  byte ECU_SOFTWARE_VERSION[8] = {'S', 'W', ':', 'A', '.' ,'0', '.', '0'};
+  byte FBL_VERSION[4] = {'V', '0', '.', '0'};
+  byte FBL_REQUIREMENT_SPECIFICATION_VERSION[4] = {'V', '0', '.', '0'};
+  byte APPLICATION_DOWNLOAD_AREA = 'A';
+
+  byte s_bySeed[SEED_LENGTH];
+  byte s_byKey[KEY_LENGTH];
+  byte s_byFingerPrint[FINGER_PRINT_LENGTH];
+  byte s_byFirstCall;
+  dword s_dwCrc;
+
+  long s_lSink;
+}
+
+on preStart
+{
+  // Create a new page at the Write Window
+  s_lSink = writeCreate("UDS_Server");
+}
+
+on preStop
+{
+  // Destroy the new created Page
+  writeDestroy(s_lSink);
+}
+
+on start
+{
+  diagSetTarget("UDS");
+}
+
+on stopMeasurement
+{
+}
+
+on diagRequest *
+{
+  if(!this.GetSuppressResp())
+  {
+    diagResponse this res;
+    res.SendPositiveResponse();
+  }
+}
+
+on diagRequest DefaultSession
+{
+  if(!this.GetSuppressResp())
+  {
+    diagResponse this res;
+    res.SendNegativeResponse(0x78);
+    res.SetParameter("P2Server", diagGetP2Timeout(2));
+    res.SetParameter("P2XServer", diagGetP2Extended(2)/10);
+    res.SendPositiveResponse();
+  }
+}
+
+on diagRequest ProgrammingSession
+{
+  if(!this.GetSuppressResp())
+  {
+    diagResponse this res;
+    res.SendNegativeResponse(0x78);
+    res.SetParameter("P2Server", diagGetP2Timeout(2));
+    res.SetParameter("P2XServer", diagGetP2Extended(2)/10);
+    res.SendPositiveResponse();
+  }
+}
+
+on diagRequest ExtendedDiagnosticSession
+{
+  if(!this.GetSuppressResp())
+  {
+    diagResponse this res;
+    res.SendNegativeResponse(0x78);
+    res.SetParameter("P2Server", diagGetP2Timeout(2));
+    res.SetParameter("P2XServer", diagGetP2Extended(2)/10);
+    res.SendPositiveResponse();
+  }
+}
+
+on diagRequest SoftReset
+{
+  if(!this.GetSuppressResp())
+  {
+    diagResponse this res;
+    res.SendNegativeResponse(0x78);
+    res.SendPositiveResponse();
+  }
+}
+
+on diagRequest ReadSystemSupplier
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", SYSTEM_SUPPLIER, elCount(SYSTEM_SUPPLIER));
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadECUHardwareVersion
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", ECU_HARDWARE_VERSION, elCount(ECU_HARDWARE_VERSION));
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadECUSoftwareVersion
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", ECU_SOFTWARE_VERSION, elCount(ECU_SOFTWARE_VERSION));
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadFBLVersion
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", FBL_VERSION, elCount(FBL_VERSION));
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadFBLRequirementSpecificationVersion
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", FBL_REQUIREMENT_SPECIFICATION_VERSION, elCount(FBL_REQUIREMENT_SPECIFICATION_VERSION));
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadApplicationDownloadArea
+{
+  diagResponse this res;
+  res.SetParameter("Data", APPLICATION_DOWNLOAD_AREA);
+  res.SendPositiveResponse();
+}
+
+on diagRequest ReadFingerPrint
+{
+  diagResponse this res;
+  res.SetParameterRaw("Data", s_byFingerPrint, elCount(s_byFingerPrint));
+  res.SendPositiveResponse();
+}
+
+on diagRequest RequestSeed
+{
+  diagResponse this res;
+  GenerateSeed(s_bySeed, elCount(s_bySeed));
+  res.SetParameterRaw("securitySeed", s_bySeed, elCount(s_bySeed));
+  res.SendPositiveResponse();
+}
+
+on diagRequest SendKey
+{
+  byte byKey[KEY_LENGTH];
+  diagResponse this res;
+
+  res.SendNegativeResponse(0x78);
+
+  this.GetParameterRaw("SecurityKey", byKey, elcount(byKey));
+
+  GenerateKey(s_bySeed, s_byKey);
+
+  if(!memcmp(s_byKey, byKey, KEY_LENGTH))
+  {
+    res.SendPositiveResponse();
+  }
+  else
+  {
+    res.SendNegativeResponse(NRC_INVALID_KEY);
+  }
+}
+
+on diagRequest WriteFingerPrint
+{
+  diagResponse this res;
+  this.GetParameterRaw("Data", s_byFingerPrint, elcount(s_byFingerPrint));
+  res.SendNegativeResponse(0x78);
+  res.SendPositiveResponse();
+}
+
+on diagRequest EraseMemory
+{
+  diagResponse this res;
+  res.SendNegativeResponse(0x78);
+  res.SendPositiveResponse();
+}
+
+on diagRequest CheckRoutine
+{
+  diagResponse this res;
+  res.SendNegativeResponse(0x78);
+  res.SendPositiveResponse();
+}
+
+on diagRequest StartCheckData
+{
+  diagResponse this res;
+  res.SendNegativeResponse(0x78);
+  res.SendPositiveResponse();
+}
+
+on diagRequest RequestDownload
+{
+  diagResponse this res;
+  res.SetParameter("lengthFormatIdentifier", 0x20);
+  res.SetParameter("maxNumberOfBlockLength", MAX_NUMBER_OF_BLOCK_LENGTH);
+  res.SendPositiveResponse();
+}
+
+on diagRequest TransferData
+{
+  byte byData[MAX_NUMBER_OF_BLOCK_LENGTH - 2];
+  diagResponse this res;
+
+  res.SendNegativeResponse(0x78);
+
+  this.GetParameterRaw("Data", byData, MAX_NUMBER_OF_BLOCK_LENGTH - 2);
+
+  Crc_CalculateCRC16(byData, elcount(byData), 0, MAX_NUMBER_OF_BLOCK_LENGTH - 2, s_dwCrc, s_byFirstCall, s_dwCrc);
+  s_byFirstCall = 0;
+
+  res.SetParameter("blockSequenceCounter", this.GetParameter("BlockSequenceCounter"));
+  res.SendPositiveResponse();
+}
+
+on diagRequest RequestTransferExit
+{
+  diagResponse this res;
+  res.SetParameter("crc", s_dwCrc);
+  res.SendPositiveResponse();
+}
+

@@ -1,0 +1,964 @@
+/*@!Encoding:936*/
+
+includes
+{
+  #include "UDS_Common.cin"
+  #include "ParserFile.cin"
+  #include "Util.cin"
+}
+
+variables
+{
+  enum REPROGRAMMING_STEP
+  {
+    REPROGRAMMING_NULL,
+    REPROGRAMMING_EXTENDED_SESSION_TRANSITION_1,
+    REPROGRAMMING_REQUEST_SEED_1,
+    REPROGRAMMING_SEND_KEY_1,
+    REPROGRAMMING_READ_SYSTEM_SUPPLIER,
+    REPROGRAMMING_READ_ECU_HARDWARE_VERSION,
+    REPROGRAMMING_READ_ECU_SOFTWARE_VERSION,
+    REPROGRAMMING_CHECK_PROG_PRE_CONDITION,
+    REPROGRAMMING_EXTENDED_SESSION_TRANSITION_2,
+    REPROGRAMMING_DTC_SETTING_OFF,
+    REPROGRAMMING_DISABLE_RX_AND_TX,
+    REPROGRAMMING_PROGRAMMING_SESSION_TRANSITION,
+    REPROGRAMMING_REQUEST_SEED_2,
+    REPROGRAMMING_SEND_KEY_2,
+    REPROGRAMMING_READ_FBL_VERSION,
+    REPROGRAMMING_READ_FBL_REQUIREMENT_SPECIFICATION_VERSION,
+    REPROGRAMMING_READ_APPLICATION_DOWNLOAD_AREA,
+    REPROGRAMMING_WRITE_FINGER_PRINT,
+    REPROGRAMMING_REQUEST_DOWNLOAD_DRIVER,
+    REPROGRAMMING_TRANSFER_DATA_DRIVER,
+    REPROGRAMMING_REQUEST_TRANSFER_EXIT_DRIVER,
+    REPROGRAMMING_CHECK_MEMORY,
+    REPROGRAMMING_ERASE_MEMORY,
+    REPROGRAMMING_REQUEST_DOWNLOAD_APP,
+    REPROGRAMMING_TRANSFER_DATA_APP,
+    REPROGRAMMING_REQUEST_TRANSFER_EXIT_APP,
+    REPROGRAMMING_CHECK_PROG_DEPENDENCIES,
+    REPROGRAMMING_EXCHANGE,
+    REPROGRAMMING_ECU_RESET,
+    REPROGRAMMING_WAIT,
+    
+    REPROGRAMMING_EXTENDED_SESSION_TRANSITION_3,
+    REPROGRAMMING_READ_DOWNLOAD_AREA,
+    REPROGRAMMING_ENABLE_RX_AND_TX,
+    REPROGRAMMING_DTC_SETTING_ON,
+    
+    REPROGRAMMING_DEFAULT_SESSION_TRANSITION,
+    REPROGRAMMING_SUCCESS,
+    REPROGRAMMING_FAILURE,
+    REPROGRAMMING_STOP
+  };
+
+  enum EXCHANGE_STEP
+  {
+    EXCHANGE_NULL,
+    EXCHANGE_EXTENDED_SESSION_TRANSITION,
+    EXCHANGE_REQUEST_SEED,
+    EXCHANGE_SEND_KEY,
+    EXCHANGE_READ_ECU_SOFTWARE_VERSION_1,
+    EXCHANGE_ROUTINE,
+    EXCHANGE_ECU_RESET,
+    EXCHANGE_WAIT,
+    EXCHANGE_READ_DOWNLOAD_AREA,
+    EXCHANGE_READ_ECU_SOFTWARE_VERSION_2,
+    EXCHANGE_SUCCESS,
+    EXCHANGE_FAILURE,
+    EXCHANGE_STOP
+  };
+
+  enum EXCHANGE_TYPE
+  {
+    FORWARD,
+    BACKWARD
+  };
+  
+  char bank_A[6] = "APP_A";
+  char bank_B[6] = "APP_B";
+  char bank_unkown[10] = "Invalid";
+
+  diagRequest DefaultSession                            reqDefaultSession;
+  diagRequest ProgrammingSession                        reqProgrammingSession;
+  diagRequest ExtendedDiagnosticSession                 reqExtendedDiagnosticSession;
+  diagRequest HardReset                                 reqHardReset;
+  diagRequest SoftReset                                 reqSoftReset;
+  diagRequest ReadSystemSupplier                        reqReadSystemSupplier;
+  diagRequest ReadECUHardwareVersion                    reqReadECUHardwareVersion;
+  diagRequest ReadECUSoftwareVersion                    reqReadECUSoftwareVersion;
+  diagRequest ReadFBLVersion                            reqReadFBLVersion;
+  diagRequest ReadFBLRequirementSpecificationVersion    reqReadFBLRequirementSpecificationVersion;
+  diagRequest ReadApplicationDownloadArea               reqReadApplicationDownloadArea;
+  diagRequest ReadFingerPrint                           reqReadFingerPrint;
+  diagRequest RequestSeed                               reqRequestSeed;
+  diagRequest SendKey                                   reqSendKey;
+  diagRequest EnableRxAndTx                             reqEnableRxAndTx;
+  diagRequest EnableRxAndDisableTx                      reqEnableRxAndDisableTx;
+  diagRequest DisableRxAndEnableTx                      reqDisableRxAndEnableTx;
+  diagRequest DisableRxAndTx                            reqDisableRxAndTx;
+  diagRequest WriteFingerPrint                          reqWriteFingerPrint;
+  diagRequest EraseMemory                               reqEraseMemory;
+  diagRequest CheckMemory                               reqCheckMemory;
+  diagRequest CheckProgPreCondition                     reqCheckProgPreCondition;
+  diagRequest CheckProgDependencies                     reqCheckProgDependencies;
+  diagRequest ApplicationRollback                       reqApplicationRollback;
+  diagRequest ExchangeApplicationRunningArea            reqExchangeApplicationRunningArea;
+  diagRequest RequestDownload                           reqRequestDownload;
+  diagRequest TransferData                              reqTransferData;
+  diagRequest RequestTransferExit                       reqRequestTransferExit;
+  diagRequest TesterPresent                             reqTesterPresent;
+  diagRequest DTCSettingOn                              reqDTCSettingOn;
+  diagRequest DTCSettingOff                             reqDTCSettingOff;
+
+  byte s_bySeed[SEED_LENGTH];
+  byte s_byKey[KEY_LENGTH];
+  byte s_byFingerPrint[FINGER_PRINT_LENGTH];
+
+  byte s_byReprogrammingStep;
+  byte s_byExchangeStep;
+  byte s_byExchangeType;
+  byte s_byApplicationDownloadArea;
+  byte s_byBlockCounter;
+  byte s_bySegmentCounter;
+  dword s_dwBlockSequenceCounter;
+  word s_wMaxNumberOfBlockLength;
+  dword s_dwCRC;
+  dword s_dwTransferedSize;
+  struct ST_UPDATE_INFO s_stUpdate;
+
+  msTimer P3Client;
+  msTimer WaitReset;
+
+  long s_lSink;
+
+  char FLASH_DRIVER_FILE[256] = "data\\FlashDriver.s19";
+  char APPLICATION_FILE[3][BLOCK_MAX][256] = 
+  {
+    {
+      "data\\A_Application_pfls0_OTA.s19",
+      "data\\A_Application_pfls1_OTA.s19",
+      "data\\A_Application_pfls2_OTA.s19",
+      "data\\A_Application_pfls3_OTA.s19"
+    },
+    {
+      "data\\B_Application_pfls0_OTA.s19",
+      "data\\B_Application_pfls1_OTA.s19",
+      "data\\B_Application_pfls2_OTA.s19",
+      "data\\B_Application_pfls3_OTA.s19"
+
+    },
+//    {
+//      "data\\APP_OTA_A.s19",
+//      "",
+//      "",
+//      ""
+//    },
+//    {
+//      "data\\APP_OTA_B.s19",
+//      "",
+//      "",
+//      ""
+//    },
+    {
+      "data\\BLU.s19",
+      "data\\FBL_BLU.s19",
+      "",
+      ""
+    }
+
+//     ,{
+//      "data\\01_BootLoaderUpdater.s19",
+//      "data\\02_FlashBootLoader.s19",
+//      "",
+//      ""
+//    }
+    
+  };
+}
+
+on preStart
+{
+  // Create a new page at the Write Window
+  s_lSink = writeCreate("UDS_Client");
+}
+
+on preStop
+{
+  // Destroy the new created Page
+  writeDestroy(s_lSink);
+}
+
+on start
+{
+  s_byReprogrammingStep       = REPROGRAMMING_NULL;
+  s_byExchangeStep            = EXCHANGE_NULL;
+  s_byBlockCounter            = 0;
+  s_bySegmentCounter          = 0;
+  s_dwBlockSequenceCounter    = 0;
+  s_wMaxNumberOfBlockLength   = 0;
+  s_dwCRC                     = 0;
+  s_dwTransferedSize          = 0;
+  s_byApplicationDownloadArea = 0;
+
+  diagSetTarget("UDS");
+  diagSetP2Timeouts("UDS", TIMER_P2_CLIENT, TIMER_P2X_CLIENT);
+  diagSetTimeout(TIMER_P2_CLIENT);
+  diagSetTimeoutHandler("P2Client");
+
+  writeLineEx(s_lSink, 1, "diagGetP2Timeout(0)  %d ms", (long)diagGetP2Timeout(0));
+  writeLineEx(s_lSink, 1, "diagGetP2Timeout(1)  %d ms", (long)diagGetP2Timeout(1));
+  writeLineEx(s_lSink, 1, "diagGetP2Timeout(2)  %d ms", (long)diagGetP2Timeout(2));
+  writeLineEx(s_lSink, 1, "diagGetP2Extended(0) %d ms", (long)diagGetP2Extended(0));
+  writeLineEx(s_lSink, 1, "diagGetP2Extended(1) %d ms", (long)diagGetP2Extended(1));
+  writeLineEx(s_lSink, 1, "diagGetP2Extended(2) %d ms", (long)diagGetP2Extended(2));
+  
+  reqReadApplicationDownloadArea.SendRequest();
+}
+
+on stopMeasurement
+{
+}
+
+on envVar Env_FBL_Exchange
+{
+  if((getValue(this) == 1) && (s_byReprogrammingStep == REPROGRAMMING_NULL) && (s_byExchangeStep == EXCHANGE_NULL))
+  {
+    writeLineEx(s_lSink, 1, "Exchange Application");
+    s_byExchangeType = FORWARD;
+    s_byExchangeStep = EXCHANGE_EXTENDED_SESSION_TRANSITION;
+    ExchangeSequence();
+  }
+}
+
+on envVar Env_FBL_Rollback
+{
+  if((getValue(this) == 1) && (s_byReprogrammingStep == REPROGRAMMING_NULL) && (s_byExchangeStep == EXCHANGE_NULL))
+  {
+    writeLineEx(s_lSink, 1, "Rollback Application");
+    s_byExchangeType = BACKWARD;
+    s_byExchangeStep = EXCHANGE_EXTENDED_SESSION_TRANSITION;
+    ExchangeSequence();
+  }
+}
+on envVar Env_FBL_Update
+{
+  if((getValue(this) == 1) && (s_byReprogrammingStep == REPROGRAMMING_NULL) && (s_byExchangeStep == EXCHANGE_NULL))
+  {
+    writeLineEx(s_lSink, 1, "Update Application");
+    ClockControlReset("FBL", "TimeCount");
+    s_byReprogrammingStep = REPROGRAMMING_NULL;
+    s_byBlockCounter = 0;
+    s_bySegmentCounter = 0;
+    s_dwBlockSequenceCounter = 0;
+    s_wMaxNumberOfBlockLength = 0;
+    s_dwCRC = 0;
+    s_dwTransferedSize = 0;
+    s_stUpdate.byAppNum = 0;
+    s_stUpdate.dwSize = 0;
+    memset(s_stUpdate.byData, 0, elCount(s_stUpdate.byData));
+
+    PutValue(Env_FBL_Status, "");
+    PutValue(Env_FBL_Progress, 0);
+    
+    sysSetVariableString(sysvar::FBL_panel::CurrentApplication,bank_unkown);
+
+    s_byReprogrammingStep ++;
+    ReprogrammingSequence();
+  }
+}
+
+on envVar Env_FBL_Stop
+{
+  if(getValue(this) == 1)
+  {
+    writeLineEx(s_lSink, 1, "stop");
+
+    if(s_byReprogrammingStep != REPROGRAMMING_NULL)
+    {
+      s_byReprogrammingStep = REPROGRAMMING_STOP;
+      ReprogrammingSequence();
+    }
+
+    if(s_byExchangeStep != EXCHANGE_NULL)
+    {
+      s_byExchangeStep = EXCHANGE_STOP;
+      ExchangeSequence();
+    }
+  }
+}
+
+on sysvar FBL_panel::FBL_ReadBank
+{
+  if(@FBL_panel::FBL_ReadBank == 1)
+  {
+    reqReadApplicationDownloadArea.SendRequest();
+  }
+}
+
+on key '1'
+{
+  reqRequestSeed.SendRequest();
+}
+
+on key '2'
+{
+  GenerateKey(s_bySeed, s_byKey);
+  writeLineEx(s_lSink, 1, "Expected s_byKey is: 0x%02x 0x%02x 0x%02x 0x%02x",s_byKey[0],s_byKey[1],s_byKey[2],s_byKey[3]);
+  reqSendKey.SetParameterRaw("securityKey", s_byKey, elCount(s_byKey));
+  reqSendKey.SendRequest();
+}
+
+on diagResponse *
+{
+  if(this.IsNegativeResponse())
+  {
+    if((long)this.GetParameter("NRC") == 0x78)
+    {
+      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, ErrorCode 0x%x", 
+      (long)this.GetParameter("ServiceIdentifier"), 
+      (long)this.GetParameter("NRC"));
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+    UDS_NotifyStatus(TRUE);
+  }
+}
+
+
+
+//on diagRequest CheckProgDependencies
+//{
+//  if(this.IsNegativeResponse())
+//  {
+//    if((long)this.GetParameter("NRC") == 0x78)
+//    {
+//      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+//    }
+//    else
+//    {
+//      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, code 0x%x", 
+//      (long)this.GetParameter("ServiceIdentifier"), 
+//      (long)this.GetParameter("NRC" ));
+//      UDS_NotifyStatus(FALSE);
+//    }
+//  }
+//  else
+//  {
+//    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+//    this.GetParameterRaw("securitySeed", s_bySeed, elcount(s_bySeed));
+//    writeLineEx(s_lSink, 1, "Received Seed is: 0x%02x 0x%02x 0x%02x 0x%02x",s_bySeed[0],s_bySeed[1],s_bySeed[2],s_bySeed[3]);
+//    UDS_NotifyStatus(TRUE);
+//  }
+//}
+
+on diagResponse UDS.ReadDataByIdentifier::*
+{
+  UDS_NotifyStatus(TRUE);
+}
+
+on diagResponse RequestSeed
+{
+  if(this.IsNegativeResponse())
+  {
+    if((long)this.GetParameter("NRC") == 0x78)
+    {
+      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, code 0x%x", 
+      (long)this.GetParameter("ServiceIdentifier"), 
+      (long)this.GetParameter("NRC" ));
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+    this.GetParameterRaw("securitySeed", s_bySeed, elcount(s_bySeed));
+    writeLineEx(s_lSink, 1, "Received Seed is: 0x%02x 0x%02x 0x%02x 0x%02x",s_bySeed[0],s_bySeed[1],s_bySeed[2],s_bySeed[3]);
+    UDS_NotifyStatus(TRUE);
+  }
+}
+
+on diagResponse ReadApplicationDownloadArea
+{
+  byte byRet;
+  
+
+  if(this.IsNegativeResponse())
+  {
+    if((long)this.GetParameter("NRC") == 0x78)
+    {
+      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, code 0x%x", (long)this.GetParameter("ServiceIdentifier"), (long)this.GetParameter("NRC" ));
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+    s_byApplicationDownloadArea = this.GetParameter("Data") - 'A';
+    
+    if (s_byReprogrammingStep  == REPROGRAMMING_NULL || s_byReprogrammingStep >= REPROGRAMMING_READ_DOWNLOAD_AREA)
+    {
+      if(s_byApplicationDownloadArea == 0)
+      {
+        sysSetVariableString(sysvar::FBL_panel::CurrentApplication,bank_B);
+      }
+      else
+      {
+        sysSetVariableString(sysvar::FBL_panel::CurrentApplication,bank_A);
+      }
+    }
+    
+    
+    byRet = PrepareUpdateInfo();
+    UDS_NotifyStatus(byRet);
+  }
+}
+on diagResponse RequestDownload
+{
+  if(this.IsNegativeResponse())
+  {
+    if((long)this.GetParameter("NRC") == 0x78)
+    {
+      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, code 0x%x",
+      (long)this.GetParameter("ServiceIdentifier"),
+      (long)this.GetParameter("NRC"));
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+    s_wMaxNumberOfBlockLength = this.GetParameter("maxNumberOfBlockLength");
+    writeLineEx(s_lSink, 1, "wMaxNumberOfBlockLength[%d]", s_wMaxNumberOfBlockLength);
+    UDS_NotifyStatus(TRUE);
+  }
+}
+
+on diagResponse RequestTransferExit
+{
+  dword dwCRC16;
+
+  if(this.IsNegativeResponse())
+  {
+    if((long)this.GetParameter("NRC") == 0x78)
+    {
+      writeLineEx(s_lSink, 2, "Received pennding for service 0x%x", (long)this.GetParameter("ServiceIdentifier"));
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "Received negative response for service 0x%x, code 0x%x", (long)this.GetParameter("ServiceIdentifier"), (long)this.GetParameter("NRC"));
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Received positive response for service 0x%x", (long)this.GetParameter("SID_PR"));
+    dwCRC16 = (dword)this.GetParameter("crc");
+    if(s_dwCRC == dwCRC16)
+    {
+      UDS_NotifyStatus(TRUE);
+    }
+    else
+    {
+      writeLineEx(s_lSink, 3, "CRC wrong Expect:0x%x, Received 0x%x", s_dwCRC, dwCRC16);
+      UDS_NotifyStatus(FALSE);
+    }
+  }
+}
+
+on timer WaitReset
+{
+  writeLineEx(s_lSink, 1, "WaitReset Timeout");
+  UDS_NotifyStatus(TRUE);
+}
+
+on timer P3Client
+{
+  writeLineEx(s_lSink, 1, "P3Client Timeout");
+  UDS_NotifyStatus(TRUE);
+}
+
+void P2Client()
+{
+  writeLineEx(s_lSink, 3, "P2Client Timeout");
+  UDS_NotifyStatus(FALSE);
+}
+
+UDS_NotifyStatus(byte byStatus)
+{
+  if(s_byReprogrammingStep != REPROGRAMMING_NULL)
+  {
+    UDS_NotifyReprogrammingStatus(byStatus);
+  }
+  else if(s_byExchangeStep != EXCHANGE_NULL)
+  {
+    UDS_NotifyExchangeStatus(byStatus);
+  }
+  else
+  {
+  }
+}
+
+UDS_NotifyReprogrammingStatus(byte byStatus)
+{
+  if(byStatus == TRUE)
+  {
+    switch(s_byReprogrammingStep)
+    {
+      case REPROGRAMMING_REQUEST_DOWNLOAD_DRIVER:
+      case REPROGRAMMING_REQUEST_DOWNLOAD_APP:
+        s_dwBlockSequenceCounter = 0;
+        s_byReprogrammingStep ++;
+        break;
+
+      case REPROGRAMMING_TRANSFER_DATA_DRIVER:
+        if(s_dwBlockSequenceCounter * (s_wMaxNumberOfBlockLength - 2) >= s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwSize)
+        {
+          s_byReprogrammingStep ++;
+        }
+        break;
+
+      case REPROGRAMMING_TRANSFER_DATA_APP:
+        if(s_dwBlockSequenceCounter * (s_wMaxNumberOfBlockLength - 2) >= s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwSize )
+        {
+          s_byReprogrammingStep ++;
+        }
+        break;
+
+      case REPROGRAMMING_REQUEST_TRANSFER_EXIT_DRIVER:
+        s_bySegmentCounter++;
+        if(s_bySegmentCounter < s_stUpdate.stDriver.dwSegmentNum )
+        {
+          s_byReprogrammingStep = REPROGRAMMING_REQUEST_DOWNLOAD_DRIVER;
+        }
+        else
+        {
+          s_bySegmentCounter = 0;
+          s_byReprogrammingStep ++;
+        }
+        break;
+
+      case REPROGRAMMING_REQUEST_TRANSFER_EXIT_APP:
+        s_bySegmentCounter++;
+        if(s_bySegmentCounter < s_stUpdate.stApp[s_byBlockCounter].dwSegmentNum )
+        {
+          s_byReprogrammingStep = REPROGRAMMING_REQUEST_DOWNLOAD_APP;
+        }
+        else
+        {
+          s_bySegmentCounter = 0;
+          s_byBlockCounter++;
+          if(s_byBlockCounter < s_stUpdate.byAppNum )
+          {
+            s_byReprogrammingStep = REPROGRAMMING_ERASE_MEMORY;
+          }
+          else
+          {
+            s_byReprogrammingStep ++;
+          }
+        }
+
+        break;
+
+      default:
+        s_byReprogrammingStep ++;
+        break;
+    }
+
+    ReprogrammingSequence();
+  }
+  else if(byStatus == FALSE)
+  {
+    s_byReprogrammingStep = REPROGRAMMING_FAILURE;
+    ReprogrammingSequence();
+  }
+  else
+  {
+  }
+}
+
+UDS_NotifyExchangeStatus(byte byStatus)
+{
+  if(byStatus == TRUE)
+  {
+    s_byExchangeStep ++;
+    ExchangeSequence();
+  }
+  else if(byStatus == FALSE)
+  {
+    s_byExchangeStep = EXCHANGE_FAILURE;
+    ExchangeSequence();
+  }
+  else
+  {
+  }
+}
+
+ReprogrammingSequence()
+{
+  dword dwSize;
+  dword dwOffset;
+  byte byData[4095];
+
+  writeLineEx(s_lSink, 1, "Change to step[%d]", s_byReprogrammingStep);
+  UpdateProgress();
+
+  switch(s_byReprogrammingStep)
+  {
+    case REPROGRAMMING_DEFAULT_SESSION_TRANSITION:
+      reqDefaultSession.SetSuppressResp(1);
+      reqDefaultSession.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+
+    case REPROGRAMMING_PROGRAMMING_SESSION_TRANSITION:
+      ClockControlStart("FBL", "TimeCount");
+      reqProgrammingSession.SendRequest();
+      break;
+
+    case REPROGRAMMING_EXTENDED_SESSION_TRANSITION_1:
+    case REPROGRAMMING_EXTENDED_SESSION_TRANSITION_3:
+      reqExtendedDiagnosticSession.SetSuppressResp(0);
+      reqExtendedDiagnosticSession.SendRequest();
+      break;
+
+    case REPROGRAMMING_EXTENDED_SESSION_TRANSITION_2:
+      reqExtendedDiagnosticSession.SetSuppressResp(1);
+      reqExtendedDiagnosticSession.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+
+    case REPROGRAMMING_ECU_RESET:
+      reqSoftReset.SendRequest();
+      break;
+
+    case REPROGRAMMING_ENABLE_RX_AND_TX:
+      reqEnableRxAndTx.SetSuppressResp(1);
+      reqEnableRxAndTx.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+
+    case REPROGRAMMING_DISABLE_RX_AND_TX:
+      reqDisableRxAndTx.SetSuppressResp(1);
+      reqDisableRxAndTx.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+
+    case REPROGRAMMING_DTC_SETTING_ON:
+      reqDTCSettingOn.SetSuppressResp(1);
+      reqDTCSettingOn.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+
+    case REPROGRAMMING_DTC_SETTING_OFF:
+      reqDTCSettingOff.SetSuppressResp(1);
+      reqDTCSettingOff.SendFunctional();
+      setTimer(P3Client, TIMER_P3_CLIENT_FUNC);
+      break;
+    case REPROGRAMMING_READ_DOWNLOAD_AREA:
+      reqReadApplicationDownloadArea.SendRequest();
+      break;
+    case REPROGRAMMING_REQUEST_SEED_1:
+    case REPROGRAMMING_REQUEST_SEED_2:
+      reqRequestSeed.SendRequest();
+      break;
+
+    case REPROGRAMMING_SEND_KEY_1:
+    case REPROGRAMMING_SEND_KEY_2:
+      GenerateKey(s_bySeed, s_byKey);
+      reqSendKey.SetParameterRaw("securityKey", s_byKey, elCount(s_byKey));
+      writeLineEx(s_lSink, 1, "Expected s_byKey is: 0x%02x 0x%02x 0x%02x 0x%02x",s_byKey[0],s_byKey[1],s_byKey[2],s_byKey[3]);
+      reqSendKey.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_SYSTEM_SUPPLIER:
+      reqReadSystemSupplier.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_ECU_HARDWARE_VERSION:
+      reqReadECUHardwareVersion.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_ECU_SOFTWARE_VERSION:
+      reqReadECUSoftwareVersion.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_FBL_VERSION:
+      reqReadFBLVersion.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_FBL_REQUIREMENT_SPECIFICATION_VERSION:
+      reqReadFBLRequirementSpecificationVersion.SendRequest();
+      break;
+
+    case REPROGRAMMING_READ_APPLICATION_DOWNLOAD_AREA:
+      reqReadApplicationDownloadArea.SendRequest();
+      break;
+
+    case REPROGRAMMING_WRITE_FINGER_PRINT:
+      GenerateFingerPrint(s_byFingerPrint);
+      reqWriteFingerPrint.SetParameterRaw("dataRecord", s_byFingerPrint, elCount(s_byFingerPrint));
+      reqWriteFingerPrint.SendRequest();
+      break;
+
+    case REPROGRAMMING_ERASE_MEMORY:
+      reqEraseMemory.SetParameter("address", s_stUpdate.stApp[s_byBlockCounter].dwAddress);
+      reqEraseMemory.SetParameter("length", s_stUpdate.stApp[s_byBlockCounter].dwBlockSize);
+      reqEraseMemory.SendRequest();
+      break;
+
+    case REPROGRAMMING_CHECK_MEMORY:
+      reqCheckMemory.SetParameter("address", s_stUpdate.stDriver.dwAddress);
+      reqCheckMemory.SendRequest();
+      break;
+
+    case REPROGRAMMING_CHECK_PROG_PRE_CONDITION:
+      reqCheckProgPreCondition.SendRequest();
+      break;
+
+    case REPROGRAMMING_CHECK_PROG_DEPENDENCIES:
+      reqCheckProgDependencies.SendRequest();
+      break;
+
+    case REPROGRAMMING_EXCHANGE:
+//      if(@Env_FBL_Target == 1)
+//      {
+//        s_byReprogrammingStep++;
+//        ReprogrammingSequence();
+//      }
+//      else
+//      {
+        reqExchangeApplicationRunningArea.SendRequest();
+//      }
+      break;
+
+    case REPROGRAMMING_REQUEST_DOWNLOAD_DRIVER:
+      reqRequestDownload.SetParameter("address", s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwAddress);
+      reqRequestDownload.SetParameter("length", s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwSize);
+      reqRequestDownload.SendRequest();
+      break;
+
+    case REPROGRAMMING_REQUEST_DOWNLOAD_APP:
+      reqRequestDownload.SetParameter("address", s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwAddress);
+      reqRequestDownload.SetParameter("length", s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwSize);
+      reqRequestDownload.SendRequest();
+      break;
+
+    case REPROGRAMMING_TRANSFER_DATA_DRIVER:
+      s_dwBlockSequenceCounter ++;
+      if(s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwSize > s_dwBlockSequenceCounter * (s_wMaxNumberOfBlockLength - 2))
+      {
+        dwSize = s_wMaxNumberOfBlockLength - 2;
+      }
+      else
+      {
+        dwSize = s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwSize - (s_dwBlockSequenceCounter - 1) * (s_wMaxNumberOfBlockLength - 2);
+      }
+      dwOffset = s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwOffset + (s_dwBlockSequenceCounter - 1) * (s_wMaxNumberOfBlockLength - 2);
+      s_dwTransferedSize += dwSize;
+      memcpy_off(byData, 0, s_stUpdate.byData, dwOffset, dwSize);
+
+      reqTransferData.SetParameter("blockSequenceCounter", (byte)s_dwBlockSequenceCounter);
+      reqTransferData.SetParameterRaw("transferRequestParameterRecord", byData, dwSize);
+      reqTransferData.SendRequest();
+      break;
+
+    case REPROGRAMMING_TRANSFER_DATA_APP:
+      s_dwBlockSequenceCounter ++;
+      if(s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwSize > s_dwBlockSequenceCounter * (s_wMaxNumberOfBlockLength - 2))
+      {
+        dwSize = s_wMaxNumberOfBlockLength - 2;
+      }
+      else
+      {
+        dwSize = s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwSize - (s_dwBlockSequenceCounter - 1) * (s_wMaxNumberOfBlockLength - 2);
+      }
+      dwOffset = s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwOffset + (s_dwBlockSequenceCounter - 1) * (s_wMaxNumberOfBlockLength - 2);
+      s_dwTransferedSize += dwSize;
+
+      memcpy_off(byData, 0, s_stUpdate.byData, dwOffset, dwSize);
+
+      reqTransferData.SetParameter("blockSequenceCounter", (byte)s_dwBlockSequenceCounter);
+      reqTransferData.SetParameterRaw("transferRequestParameterRecord", byData, dwSize);
+      reqTransferData.SendRequest();
+      break;
+
+    case REPROGRAMMING_REQUEST_TRANSFER_EXIT_DRIVER:
+      s_dwCRC = s_stUpdate.stDriver.stSegment[s_bySegmentCounter].dwCrc;
+      reqRequestTransferExit.SendRequest();
+      break;
+
+    case REPROGRAMMING_REQUEST_TRANSFER_EXIT_APP:
+      s_dwCRC = s_stUpdate.stApp[s_byBlockCounter].stSegment[s_bySegmentCounter].dwCrc;
+      reqRequestTransferExit.SendRequest();
+      break;
+
+    case REPROGRAMMING_WAIT:
+      setTimer(WaitReset, TIMER_RESET);
+      break;
+
+    case REPROGRAMMING_SUCCESS:
+    case REPROGRAMMING_FAILURE:
+    case REPROGRAMMING_STOP:
+      ClockControlStop("FBL", "TimeCount");
+      s_byReprogrammingStep = REPROGRAMMING_NULL;
+      break;
+
+    case REPROGRAMMING_NULL:
+    default:
+      break;
+  }
+}
+
+ExchangeSequence()
+{
+  dword dwSize;
+  dword dwOffset;
+
+  writeLineEx(s_lSink, 1, "Change to step[%d]", s_byExchangeStep);
+
+  switch(s_byExchangeStep)
+  {
+    case EXCHANGE_EXTENDED_SESSION_TRANSITION:
+      reqExtendedDiagnosticSession.SetSuppressResp(0);
+      reqExtendedDiagnosticSession.SendRequest();
+      break;
+
+    case EXCHANGE_ECU_RESET:
+      reqSoftReset.SendRequest();
+      break;
+
+    case EXCHANGE_REQUEST_SEED:
+      reqRequestSeed.SendRequest();
+      break;
+
+    case EXCHANGE_SEND_KEY:
+      GenerateKey(s_bySeed, s_byKey);
+      writeLineEx(s_lSink, 1, "Expected s_byKey is: 0x%02x 0x%02x 0x%02x 0x%02x",s_byKey[0],s_byKey[1],s_byKey[2],s_byKey[3]);
+      reqSendKey.SetParameterRaw("securityKey", s_byKey, elCount(s_byKey));
+      reqSendKey.SendRequest();
+      break;
+
+    case EXCHANGE_READ_ECU_SOFTWARE_VERSION_1:
+    case EXCHANGE_READ_ECU_SOFTWARE_VERSION_2:
+      reqReadECUSoftwareVersion.SendRequest();
+      break;
+
+    case EXCHANGE_ROUTINE:
+      if(s_byExchangeType == FORWARD)
+      {
+        reqExchangeApplicationRunningArea.SendRequest();
+      }
+      else
+      {
+        reqApplicationRollback.SendRequest();
+      }
+      break;
+
+    case EXCHANGE_WAIT:
+      setTimer(WaitReset, TIMER_RESET);
+      break;
+    case EXCHANGE_READ_DOWNLOAD_AREA:
+      reqReadApplicationDownloadArea.SendRequest();
+      break;
+    case EXCHANGE_SUCCESS:
+    case EXCHANGE_FAILURE:
+    case EXCHANGE_STOP:
+      s_byExchangeStep = EXCHANGE_NULL;
+      break;
+
+    case EXCHANGE_NULL:
+    default:
+      break;
+  }
+}
+
+UpdateProgress()
+{
+  if(s_byReprogrammingStep == REPROGRAMMING_NULL)
+  {
+
+  }
+  else if(s_byReprogrammingStep == REPROGRAMMING_SUCCESS)
+  {
+    putValue(Env_FBL_Status, "success");
+  }
+  else if(s_byReprogrammingStep == REPROGRAMMING_FAILURE)
+  {
+    putValue(Env_FBL_Status, "failure");
+  }
+  else if(s_byReprogrammingStep == REPROGRAMMING_STOP)
+  {
+    putValue(Env_FBL_Status, "stop");
+  }
+  else
+  {
+    putValue(Env_FBL_Status, "execing");
+  }
+
+  if(s_stUpdate.dwSize == 0)
+  {
+    putValue(Env_FBL_Progress, 0);
+  }
+  else
+  {
+    writeLineEx(s_lSink, 1, "Progress[%d/%d]", s_dwTransferedSize, s_stUpdate.dwSize);
+    putValue(Env_FBL_Progress, s_dwTransferedSize * 100 / s_stUpdate.dwSize);
+  }
+}
+
+byte PrepareUpdateInfo()
+{
+  byte byRet;
+
+  s_stUpdate.dwSize = 0;
+  memset(s_stUpdate.byData, 0, elCount(s_stUpdate.byData));
+
+  byRet = ParserFile(FLASH_DRIVER_FILE, s_stUpdate.stDriver, s_stUpdate.byData, s_stUpdate.dwSize);
+  if(byRet == FALSE)
+  {
+    return FALSE;
+  }
+
+  s_stUpdate.dwSize += s_stUpdate.stDriver.dwDataSize;
+  
+  s_byApplicationDownloadArea = @Env_FBL_Target;
+
+  for(s_stUpdate.byAppNum = 0; s_stUpdate.byAppNum < BLOCK_MAX; s_stUpdate.byAppNum++)
+  {
+    if(APPLICATION_FILE[s_byApplicationDownloadArea][s_stUpdate.byAppNum][0] == 0)
+    {
+      break;
+    }
+
+    byRet = ParserFile(APPLICATION_FILE[s_byApplicationDownloadArea][s_stUpdate.byAppNum], s_stUpdate.stApp[s_stUpdate.byAppNum], s_stUpdate.byData, s_stUpdate.dwSize);
+    if(byRet == FALSE)
+    {
+      return FALSE;
+    }
+
+    s_stUpdate.dwSize += s_stUpdate.stApp[s_stUpdate.byAppNum].dwDataSize;
+  }
+
+  return TRUE;
+}

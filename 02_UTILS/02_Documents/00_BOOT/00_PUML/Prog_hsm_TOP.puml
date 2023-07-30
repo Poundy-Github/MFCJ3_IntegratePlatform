@@ -1,0 +1,304 @@
+@startuml
+
+[*]-->TOP
+state TOP {
+
+    [*] --> PRE_INIT
+    ' transition list:
+    PRE_INIT-->ALIVE :  EVENT_INIT 
+    ALIVE-->SLEEP :  EVENT_SLEEP 
+    
+    state PRE_INIT {
+        
+    }
+    state SLEEP {
+        
+    }
+    
+    state ALIVE {
+        ' transition list:
+
+
+        ' note on link : \n internal self-transition
+        
+        state INIT {
+            ' terminal leap state
+            ' No transitions
+        }
+
+        state DEFAULT_SESSION {
+            ' transition list:
+
+        }
+        state EXT_SESSION {
+            ' transition list:
+
+
+        
+        }
+        state PROG_SESSION {
+            ' terminal leap state
+            ' transition list:
+
+
+
+
+            ' 5 internal transition
+
+        }
+
+
+        state CHECK_MEMORY_TOP {
+
+
+
+
+            ' 5 internal transition
+
+        
+            state SIGNATURE_CHECK {
+                ' terminal leap state
+
+
+            }
+            state SECUREBOOT_COMPUTE_CHECKSUM{
+                ' terminal leap state
+
+
+
+            }
+            state CHECK_MEMORY_FINISH{
+                ' terminal leap state
+
+
+
+            }
+            state CHECK_MEMORY{
+                ' terminal leap state
+
+
+
+
+            }
+            state BLU_RESUME{
+                ' terminal leap state
+
+            }
+            state BLU_PRE_RESET{
+                ' terminal leap state
+
+            }
+
+        }
+        state CHECK_PROG_DEPENDENCIES_TOP {
+            ' 4 internal transitions
+
+            
+
+
+
+            
+            state CHECK_PROG_DEP{
+                ' terminal leap state
+
+            }
+            state CHECK_PROG_DEP_FINISH{
+                ' terminal leap state
+
+
+
+            }
+            
+        }
+        state COMPARE_KEY {
+             ' terminal leap state
+            '  5 intern transitions
+
+             
+
+
+
+
+
+
+        }
+
+        state ECU_RESET {
+            ' terminal leap state
+
+        }
+        state RESET {
+            ' terminal leap state
+            ' There are no transitions
+        }
+        state ERASE_TOP {
+            ' 4 internal tansitions
+
+
+
+            state ERASE_TRANSMITNRC78{
+
+                ' terminal leap state
+            }
+            state ERASE_NRC78{
+                ' terminal leap state
+
+            }
+            state ERASE_CHECK{
+                ' terminal leap state
+
+
+            }
+            state ERASE{
+                ' terminal leap state
+
+
+            }
+            state ERASE_FINISH{
+                ' terminal leap state
+
+
+
+            }
+            
+        }
+        state EXT_SESSION {
+            ' terminal leap state
+
+
+        }
+
+        state GET_SEED {
+            ' terminal leap state
+
+
+
+        }
+        state LOCKED {
+            ' terminal leap state
+            ' 6 intern trans
+
+
+        }
+        
+        state REPROG {
+
+            ' 2 internal transitions
+
+
+            state RD{
+                ' terminal leap state
+                ' 3 internal transitions
+
+
+
+
+
+
+            }
+            state  TD_TOP{
+
+
+
+
+
+
+
+
+
+                state TD{
+                    ' terminal leap state
+
+                }
+
+                state TD_WRITE{
+
+                    ' 2 internal transitions
+
+                    
+                    state DECRYPT_UPDATE{
+                        ' terminal leap state
+
+                    }
+
+
+                    state DECRYPT_FINISH{
+                        ' terminal leap state
+
+
+                    }
+
+                    state WRITE_CHECK{
+                        ' terminal leap state
+
+
+
+                    }
+                    state WRITE{
+                        ' terminal leap state
+
+                    }
+
+                }
+                state TD_FAILED{
+                    ' terminal leap state
+
+
+                }
+                state TD_CRC{
+                    ' terminal leap state
+
+
+                }
+                ' addition state compared to origin sc 
+                state TD_STREAMING{
+                    ' terminal leap state
+
+                }
+                
+            }
+            state RTE_TOP{
+
+                ' 2 internal transitions
+
+
+
+
+                state RTE {
+                    ' terminal leap state
+
+
+                }
+                state RTE_FAILED{
+                    ' terminal leap state
+                    ' No transitions
+                }
+                state RTE_FINISH{
+                    ' terminal leap state
+
+
+                }
+            }
+        state WRITE_FINGERPRINT {
+
+            ' 6 internal transitions
+
+
+
+            state WFP_INPROGRESS{
+                ' terminal leap state
+
+            }
+            state WFP_FINISHED{
+                ' terminal leap state
+
+
+            }
+            
+        }
+
+    }
+}   
+
+
+@enduml

@@ -1,0 +1,172 @@
+/*@!Encoding:932*/
+
+includes
+{
+}
+
+variables
+{
+  const byte NRC_GENERAL_REJECT                                 = 0x10;
+  const byte NRC_SERVICE_NOT_SUPPORTED                          = 0x11;
+  const byte NRC_SUB_FUNCTION_NOT_SUPPORTED                     = 0x12;
+  const byte NRC_INCORRECT_MESSAGE_LENGTH_OR_INVALID_FORMAT     = 0x13;
+  const byte NRC_RESPONSE_TOO_LONG                              = 0x14;
+  const byte NRC_BUSY_REPEAT_REQUEST                            = 0x21;
+  const byte NRC_CONDITIONS_NOT_CORRECT                         = 0x22;
+  const byte NRC_REQUEST_SEQUENCE_ERROR                         = 0x24;
+  const byte NRC_NO_RESPONSE_FROM_SUBNET_COMPONENT              = 0x25;
+  const byte NRC_FAILURE_PREVENTS_EXECUTION_OF_REQUESTED_ACTION = 0x26;
+  const byte NRC_REQUEST_OUT_OF_RANGE                           = 0x31;
+  const byte NRC_SECURITY_ACCESS_DENIED                         = 0x33;
+  const byte NRC_INVALID_KEY                                    = 0x35;
+  const byte NRC_EXCEEDED_NUMBER_OF_ATTEMPTS                    = 0x36;
+  const byte NRC_REQUIRED_TIME_DELAY_NOT_EXPIRED                = 0x37;
+  const byte NRC_UPLOAD_DOWNLOAD_NOT_ACCEPTED                   = 0x70;
+  const byte NRC_TRANSFER_DATA_SUSPENDED                        = 0x71;
+  const byte NRC_GENERAL_PROGRAMMING_FAILURE                    = 0x72;
+  const byte NRC_WRONG_BLOCK_SEQUENCE_COUNTER                   = 0x73;
+  const byte NRC_REQUEST_CORRECTLY_RECEIVED_RESPONSE_PENDING    = 0x78;
+  const byte NRC_SUB_FUNCTION_NOT_SUPPORTED_IN_ACTIVE_SESSION   = 0x7E;
+  const byte NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION        = 0x7F;
+  const byte NRC_RPM_TOO_HIGH                                   = 0x81;
+  const byte NRC_RPM_TOO_LOW                                    = 0x82;
+  const byte NRC_ENGINE_IS_RUNNING                              = 0x83;
+  const byte NRC_ENGINE_IS_NOT_RUNNING                          = 0x84;
+  const byte NRC_ENGINE_RUN_TIME_TOO_LOW                        = 0x85;
+  const byte NRC_TEMPERATURE_TOO_HIGH                           = 0x86;
+  const byte NRC_TEMPERATURE_TOO_LOW                            = 0x87;
+  const byte NRC_VEHICLE_SPEED_TOO_HIGH                         = 0x88;
+  const byte NRC_VEHICLE_SPEED_TOO_LOW                          = 0x89;
+  const byte NRC_THROTTLE_PEDAL_TOO_HIGH                        = 0x8A;
+  const byte NRC_THROTTLE_PEDAL_TOO_LOW                         = 0x8B;
+  const byte NRC_TRANSMISSION_RANGE_NOT_IN_NEUTRAL              = 0x8C;
+  const byte NRC_TRANSMISSION_RANGE_NOT_IN_GEAR                 = 0x8D;
+  const byte NRC_BRAKE_SWITCH_NOT_CLOSED                        = 0x8F;
+  const byte NRC_SHIFTER_LEVER_NOT_IN_PARK                      = 0x90;
+  const byte NRC_TORQUE_CONVERTER_CLUTCH_LOCKED                 = 0x91;
+  const byte NRC_VOLTAGE_TOO_HIGH                               = 0x92;
+  const byte NRC_VOLTAGE_TOO_LOW                                = 0x93;
+
+  const byte FUNCTIONAL_ADDRESSING      = 0x00;
+  const byte PHYSICAL_ADDRESSING        = 0x01;
+
+  const dword TIMER_P2_CLIENT           = 100;
+  const dword TIMER_P2_SERVER           = 50;
+  const dword TIMER_P2X_CLIENT          = 5050;
+  const dword TIMER_P2X_SERVER          = 5000;
+  const dword TIMER_P3_CLIENT_PHY       = 100;
+  const dword TIMER_P3_CLIENT_FUNC      = 100;
+  const dword TIMER_S3_CLIENT           = 4000;
+  const dword TIMER_S3_SERVER           = 5000;
+  const dword TIMER_RESET               = 3000;
+  const dword SEED_LENGTH               = 4;
+  const dword KEY_LENGTH                = 4;
+  const dword FINGER_PRINT_LENGTH       = 7;
+  const word MAX_NUMBER_OF_BLOCK_LENGTH = 0x0802;
+
+  byte APP_KEY[4] = {0x52, 0x7F, 0x63, 0x74};
+  byte COEF[4] = {0x4B, 0x2D, 0x41, 0x62};//27 11
+}
+
+GenerateFingerPrint(byte byFingerPrint[])
+{
+  long time[9];
+  getLocalTime(time);
+
+  byFingerPrint[0] = time[5]-100;     /* Year */
+  byFingerPrint[1] = time[4]+1;       /* Month */
+  byFingerPrint[2] = time[3];         /* Day */
+  byFingerPrint[3] = 0x00;
+  byFingerPrint[4] = 0x00;
+  byFingerPrint[5] = 0x00;
+  byFingerPrint[6] = 0x00;
+}
+
+GenerateSeed(byte bySeed[], dword dwSize)
+{
+  dword i;
+  dword x;
+
+  for(i = 0; i < dwSize; i ++)
+  {
+    if(i % 4 == 0)
+    {
+      x = random(0xFFFFFFFF);
+    }
+    else
+    {
+      x = x >> 8;
+    }
+
+    bySeed[i] = (byte)x;
+  }
+}
+
+
+//M18 SA
+GenerateKey_0x11(byte bySeed[], byte byKey[])
+{
+  byte bySeed1[4];
+  byte bySeed2[4];
+  byte bySeed3[4];
+  byte byKey1[4];
+
+  bySeed1[0] = bySeed[0]<<5 | bySeed[0]>>3;
+  bySeed1[1] = bySeed[1]<<5 | bySeed[1]>>3;
+  bySeed1[2] = bySeed[2]<<5 | bySeed[2]>>3;
+  bySeed1[3] = bySeed[3]<<5 | bySeed[3]>>3;
+
+  bySeed2[0] = (bySeed1[0]<<1 & 0xAA) | (bySeed1[0]>>1 & 0x55);
+  bySeed2[1] = (bySeed1[1]<<1 & 0xAA) | (bySeed1[1]>>1 & 0x55);
+  bySeed2[2] = (bySeed1[2]<<1 & 0xAA) | (bySeed1[2]>>1 & 0x55);
+  bySeed2[3] = (bySeed1[3]<<1 & 0xAA) | (bySeed1[3]>>1 & 0x55);
+
+  bySeed3[0] = bySeed2[0]<<3 | bySeed2[1]>>5;
+  bySeed3[1] = bySeed2[1]<<3 | bySeed2[0]>>5;
+  bySeed3[2] = bySeed2[2]<<3 | bySeed2[3]>>5;
+  bySeed3[3] = bySeed2[3]<<3 | bySeed2[2]>>5;
+
+  byKey1[0] = bySeed3[0] ^ COEF[0];
+  byKey1[1] = bySeed3[1] ^ COEF[1];
+  byKey1[2] = bySeed3[2] ^ COEF[2];
+  byKey1[3] = bySeed3[3] ^ COEF[3];
+
+  byKey[0] = ~byKey1[0];
+  byKey[1] = ~byKey1[1];
+  byKey[2] = ~byKey1[2];
+  byKey[3] = ~byKey1[3];
+}
+
+GenerateKey(byte bySeed[], byte byKey[])
+{
+  byte bySeed2[4];
+  byte byKey1[4];
+  byte byKey2[4];
+  dword dwKey1;
+  dword dwKey2;
+  dword dwKey;
+
+  bySeed2[0] = ReverseByte(bySeed[3]);
+  bySeed2[1] = ReverseByte(bySeed[2]);
+  bySeed2[2] = ReverseByte(bySeed[1]);
+  bySeed2[3] = ReverseByte(bySeed[0]);
+
+  byKey1[0] = bySeed[0] ^ APP_KEY[0];
+  byKey1[1] = bySeed[1] ^ APP_KEY[1];
+  byKey1[2] = bySeed[2] ^ APP_KEY[2];
+  byKey1[3] = bySeed[3] ^ APP_KEY[3];
+
+  byKey2[0] = bySeed2[0] ^ APP_KEY[0];
+  byKey2[1] = bySeed2[1] ^ APP_KEY[1];
+  byKey2[2] = bySeed2[2] ^ APP_KEY[2];
+  byKey2[3] = bySeed2[3] ^ APP_KEY[3];
+
+  dwKey1 = Byte2Dword(byKey1[0], byKey1[1], byKey1[2], byKey1[3]);
+  dwKey2 = Byte2Dword(byKey2[0], byKey2[1], byKey2[2], byKey2[3]);
+  dwKey =  dwKey1 + dwKey2;
+
+  byKey[0] = (byte)(dwKey >> 24);
+  byKey[1] = (byte)(dwKey >> 16);
+  byKey[2] = (byte)(dwKey >> 8);
+  byKey[3] = (byte)dwKey;
+}

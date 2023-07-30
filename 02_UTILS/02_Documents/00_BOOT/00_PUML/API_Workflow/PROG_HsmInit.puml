@@ -1,0 +1,23 @@
+'HsmInit
+
+
+@startuml
+start
+floating note left : input :\nsc: Hsm state chart entity \ninstIdx : instance index to be inited of sc  
+:inst = &PROG_INST_ACCESS(sc->instances, instIdx);
+' note right : Got instance to be initiated of sc via insIdx;
+:inst->stateId = topStateId;
+:inst->sourceId = PROG_HSM_SIDX_INVALID;
+
+
+repeat
+:(sc)->events[(i)] = 0u;
+:(sc)->evCounters[(i)] = 0;
+repeat while (i < sc->numEvents ?)
+floating note right : Clear evQueue;
+:inst->evQueueFill       = 0U;
+:inst->evQueueInsertEvNo = 0U;
+:execute entry function of top state if there are valid entry funcs;
+:init substates;
+stop 
+@enduml

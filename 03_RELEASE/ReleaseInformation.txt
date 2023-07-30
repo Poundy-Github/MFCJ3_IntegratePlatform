@@ -1,0 +1,5 @@
+Repo:E:\00_Code\MFC5J3_Platform\00_BOOT\01_MFC5J3_IBM			branch:sandbox/develop_C673		current commit_id = a9d9eda
+Repo:E:\00_Code\MFC5J3_Platform\00_BOOT\02_MFC5J3_BLU			branch:sandbox/develop_C673		current commit_id = 5e1fafe
+Repo:E:\00_Code\MFC5J3_Platform\00_BOOT\03_MFC5J3_FBL			branch:sandbox/develop_C673		current commit_id = 54e56c8
+Repo:E:\00_Code\MFC5J3_Platform\02_UTILS\01_TOOLS			branch:sandbox/develop_C673		current commit_id = 06a1121
+Repo:E:\00_Code\MFC5J3_Platform\01_APP\\MFC5J3_C673_Mcu_App			branch:develop		current commit_id = b2d6070

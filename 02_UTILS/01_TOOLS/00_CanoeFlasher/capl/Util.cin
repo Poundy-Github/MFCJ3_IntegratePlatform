@@ -1,0 +1,223 @@
+/*@!Encoding:936*/
+
+variables
+{
+  const byte TRUE  = 1;
+  const byte FALSE = 0;
+  const byte NULL  = 0;
+}
+
+byte GetDlc(byte byLength)
+{
+  if(byLength <= 8)
+  {
+    return byLength;
+  }
+  else if(byLength <= 12)
+  {
+    return 9;
+  }
+  else if(byLength <= 16)
+  {
+    return 10;
+  }
+  else if(byLength <= 20)
+  {
+    return 11;
+  }
+  else if(byLength <= 24)
+  {
+    return 12;
+  }
+  else if(byLength <= 32)
+  {
+    return 13;
+  }
+  else if(byLength <= 48)
+  {
+    return 14;
+  }
+  else if(byLength <= 64)
+  {
+    return 15;
+  }
+}
+
+void memset(char dest[], byte val, dword length)
+{
+  dword i;
+
+  for(i = 0; i < length; i ++)
+  {
+    dest[i] = val;
+  }
+}
+
+void memset(byte dest[], byte val, dword length)
+{
+  dword i;
+
+  for(i = 0; i < length; i ++)
+  {
+    dest[i] = val;
+  }
+}
+
+void memset_off(char dest[], dword destOffset, byte val, dword length)
+{
+  dword i;
+
+  for(i = 0; i < length; i ++)
+  {
+    dest[i + destOffset] = val;
+  }
+}
+
+void memset_off(byte dest[], dword destOffset, byte val, dword length)
+{
+  dword i;
+
+  for(i = 0; i < length; i ++)
+  {
+    dest[i + destOffset] = val;
+  }
+}
+
+byte ReverseByte(byte byData)
+{
+    byData = ((byData & 0x0F) << 4) | ((byData & 0xF0) >> 4);
+    byData = ((byData & 0x33) << 2) | ((byData & 0xCC) >> 2);
+    byData = ((byData & 0x55) << 1) | ((byData & 0xAA) >> 1);
+    return byData;
+}
+
+word Byte2Word(byte byData1, byte byData2)
+{
+  return ((byData1 << 8) | byData2);
+}
+
+dword Word2Dword(word wData1, word wData2)
+{
+  return ((wData1 << 16) | wData2);
+}
+
+dword Byte2Dword(byte byData1, byte byData2, byte byData3, byte byData4)
+{
+  return ((byData1 << 24) | (byData2 << 16) | (byData3 << 8) | byData4);
+}
+
+Word2Byte(word wData, byte byData[])
+{
+  byData[0] = (byte)(wData >> 8);
+  byData[1] = (byte)(wData);
+}
+
+Dword2Word(dword dwData, word wData[])
+{
+  wData[0] = (word)(dwData >> 16);
+  wData[1] = (word)(dwData);
+}
+
+Dword2Byte(dword dwData, byte byData[])
+{
+  byData[0] = (byte)(dwData >> 24);
+  byData[1] = (byte)(dwData >> 16);
+  byData[2] = (byte)(dwData >> 8);
+  byData[3] = (byte)(dwData);
+}
+
+string2array(char src[], byte dst[])
+{
+  int i;
+  for (i = 0; i < elCount(dst); i++)
+  {
+    dst[i] = (asc2hex(src[2*i]) << 4) + asc2hex(src[2*i+1]);
+  }
+}
+
+byte asc2hex(char byAsc)
+{
+  byte byHex = 0xFF;
+
+  if(byAsc >= 0x30 && byAsc <= 0x39)
+  {
+    byHex = (byAsc - 0x30);
+  }
+  else 
+  {
+    switch (byAsc)
+    {
+      case 0x41:
+      case 0x61:
+        byHex = 0x0A;
+        break;
+      case 0x42:
+      case 0x62:
+        byHex = 0x0B;
+        break;
+      case 0x43:
+      case 0x63:
+        byHex = 0x0C;
+        break;
+      case 0x44:
+      case 0x64:
+        byHex = 0x0D;
+        break;
+      case 0x45:
+      case 0x65:
+        byHex = 0x0E;
+        break;
+      case 0x46:
+      case 0x66:
+        byHex = 0x0F;
+      break;
+      default :
+        break;
+    }
+  }
+
+  return(byHex);
+}
+
+dword String2Hex(char src[], dword dwOffset, dword dwSize)
+{
+  dword i;
+  dword dwData;
+
+  dwData = 0;
+
+  for(i = 0; i < dwSize; i++)
+  {
+    dwData = (dwData << 4) + asc2hex(src[dwOffset+i]);
+  }
+
+  return dwData;
+}
+
+void Hex2String(byte src[], dword dwSize, char dst[])
+{
+  dword i;
+  char tmpStr[4];
+
+  tmpStr[0] = 0;
+  dst[0] = 0;
+
+  for(i = 0; i < dwSize; i++)
+  {
+    snprintf(tmpStr, 4, "%02X ", src[i] );
+    strncat(dst, tmpStr, elCount(dst));
+  }
+}
+
+void writeMessage(long lSink, dword dwSeverity, char cDesc[], byte byData[], dword dwSize)
+{
+  byte i;
+
+  writeLineEx(lSink, dwSeverity, "%s[%4d]", cDesc, dwSize);
+
+  for(i = 0; i < dwSize; i ++)
+  {
+    writeEx(lSink, dwSeverity, " %02X", byData[i]);
+  }
+}
+

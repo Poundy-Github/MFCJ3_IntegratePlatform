@@ -1,0 +1,81 @@
+System	12-0005 Time-Sync: Deactivating software time synchronization. (HW-Sync active for all channels or <= 1 HW participating in SW-Sync).
+System	Start of measurement 11:45:33.393 am
+System	01-0003 CAN 1 (CAN FD)  real bus with ABR: 500000 BPS. / DBR: 2000000 BPS.
+UDS_Client	diagGetP2Timeout(0)  100 ms
+UDS_Client	diagGetP2Timeout(1)  100 ms
+UDS_Client	diagGetP2Timeout(2)  100 ms
+UDS_Client	diagGetP2Extended(0) 5050 ms
+UDS_Client	diagGetP2Extended(1) 5050 ms
+UDS_Client	diagGetP2Extended(2) 5050 ms
+UDS_Client	Received positive response for service 0x62
+UDS_Client	ParserMotFile[data\FlashDriver.s19]
+UDS_Client	Mot Parser finish. Address[0x70000000] BlockSize[0x00001000] DataSize[0x00001000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x70000000] Size[0x00001000] Offset[0x00000000] CRC[0x00005726]
+UDS_Client	Segment[0]: DataTop[5AA5A55A]
+UDS_Client	Segment[0]: DataEnd[00000000]
+UDS_Client	ParserMotFile[data\A_Application_pfls0_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80104000] BlockSize[0x000FC000] DataSize[0x000FC000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80104000] Size[0x000FC000] Offset[0x00001000] CRC[0x0000EEB1]
+UDS_Client	Segment[0]: DataTop[5AA5A55A]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls1_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80300000] BlockSize[0x00180000] DataSize[0x00180000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80300000] Size[0x00180000] Offset[0x000FD000] CRC[0x0000E56F]
+UDS_Client	Segment[0]: DataTop[D9AA004F]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls2_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80600000] BlockSize[0x00180000] DataSize[0x00180000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80600000] Size[0x00180000] Offset[0x0027D000] CRC[0x00006081]
+UDS_Client	Segment[0]: DataTop[00000000]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls3_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80900000] BlockSize[0x00080000] DataSize[0x00080000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80900000] Size[0x00080000] Offset[0x003FD000] CRC[0x00005C35]
+UDS_Client	Segment[0]: DataTop[407B0040]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	Exchange Application
+UDS_Client	Change to step[1]
+UDS_Client	Received positive response for service 0x50
+UDS_Client	Change to step[2]
+UDS_Client	Received positive response for service 0x67
+UDS_Client	Received Seed is: 0xf3 0xe0 0xe3 0x61
+UDS_Client	Change to step[3]
+UDS_Client	Expected s_byKey is: 0x76 0x57 0xe4 0xd0
+UDS_Client	Received positive response for service 0x67
+UDS_Client	Change to step[4]
+UDS_Client	Change to step[5]
+UDS_Client	Received positive response for service 0x71
+UDS_Client	Change to step[6]
+UDS_Client	Received positive response for service 0x51
+UDS_Client	Change to step[7]
+UDS_Client	WaitReset Timeout
+UDS_Client	Change to step[8]
+UDS_Client	Received positive response for service 0x62
+UDS_Client	ParserMotFile[data\FlashDriver.s19]
+UDS_Client	Mot Parser finish. Address[0x70000000] BlockSize[0x00001000] DataSize[0x00001000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x70000000] Size[0x00001000] Offset[0x00000000] CRC[0x00005726]
+UDS_Client	Segment[0]: DataTop[5AA5A55A]
+UDS_Client	Segment[0]: DataEnd[00000000]
+UDS_Client	ParserMotFile[data\A_Application_pfls0_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80104000] BlockSize[0x000FC000] DataSize[0x000FC000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80104000] Size[0x000FC000] Offset[0x00001000] CRC[0x0000EEB1]
+UDS_Client	Segment[0]: DataTop[5AA5A55A]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls1_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80300000] BlockSize[0x00180000] DataSize[0x00180000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80300000] Size[0x00180000] Offset[0x000FD000] CRC[0x0000E56F]
+UDS_Client	Segment[0]: DataTop[D9AA004F]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls2_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80600000] BlockSize[0x00180000] DataSize[0x00180000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80600000] Size[0x00180000] Offset[0x0027D000] CRC[0x00006081]
+UDS_Client	Segment[0]: DataTop[00000000]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	ParserMotFile[data\A_Application_pfls3_OTA.s19]
+UDS_Client	Mot Parser finish. Address[0x80900000] BlockSize[0x00080000] DataSize[0x00080000] SegmentNum[1]
+UDS_Client	Segment[0]: Address[0x80900000] Size[0x00080000] Offset[0x003FD000] CRC[0x00005C35]
+UDS_Client	Segment[0]: DataTop[407B0040]
+UDS_Client	Segment[0]: DataEnd[FFFFFFFF]
+UDS_Client	Change to step[9]
+UDS_Client	Change to step[10]
+System	End of measurement 11:45:48.132 am

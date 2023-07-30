@@ -1,0 +1,319 @@
+@startuml
+
+[*]-down->TOP
+
+
+state TOP {
+
+    [*] -down-> PRE_INIT
+    
+    state PRE_INIT {
+        ' transition list:
+        PRE_INIT-down->ALIVE :  EVENT_INIT 
+        
+    }
+    state SLEEP {
+        
+    }
+    ' alive
+    INIT-down->PROG_SESSION :  EVENT_OPEN_PROG_SESSION
+    INIT-down->DEFAULT_SESSION :  EVENT_REQ_DSC01
+    INIT-down->EXT_SESSION :  EVENT_REQ_DSC03
+    INIT-down->ECU_RESET :  EVENT_REQ_ER
+    INIT-down->RESET :  EVENT_RESET \n EVENT_S3_TIMEOUT
+    
+    INIT-down->INIT : \n EVENT_REQ_PRECOND_CHECK\n\n
+    
+    ' note on link : \n internal self-transition
+    state ALIVE {
+        ' transition list:
+        [*] -down-> INIT : \t init leaf state of state alive 
+
+        state INIT {
+            ' terminal leap state
+            ' No transitions
+        }
+
+        ' transition list:
+        DEFAULT_SESSION -down-> RESET :  EVENT_TX_CONF
+        state DEFAULT_SESSION {
+            
+        }
+        EXT_SESSION-down->EXT_SESSION :  EVENT_REQ_COMPARE_KEY
+        EXT_SESSION-down->GET_SEED :  EVENT_REQ_GET_SEED
+        state EXT_SESSION {
+            ' transition list:
+        
+        }
+        ' transition list:
+        PROG_SESSION-down->BLU_RESUME :  EVENT_BLU_PROGRESS
+        PROG_SESSION-down-> ERASE_TOP :  EVENT_REQ_ERASE
+        PROG_SESSION-down-> GET_SEED :   EVENT_REQ_GET_SEED
+        PROG_SESSION-down-> WRITE_FINGERPRINT :   EVENT_REQ_WRITE_FP
+        ' 5 internal transition
+        PROG_SESSION-down->PROG_SESSION : EVENT_REQ_CHECKMEMORY\n EVENT_REQ_COHERENCY_CHECK\n EVENT_REQ_COMPARE_KEY\n EVENT_REQ_RTE\n EVENT_REQ_TD
+        state PROG_SESSION {
+            ' terminal leap state
+            
+        }
+
+
+        state CHECK_MEMORY_TOP {
+
+            [*]-down-> SIGNATURE_CHECK
+             SIGNATURE_CHECK-down-> ERASE_TOP :  EVENT_REQ_ERASE
+             SIGNATURE_CHECK-down-> WRITE_FINGERPRINT :  EVENT_REQ_WRITE_FP
+            ' 5 internal transition
+             SIGNATURE_CHECK-down-> SIGNATURE_CHECK: EVENT_REQ_COMPARE_KEY\n EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD
+             SIGNATURE_CHECK-down-> CHECK_MEMORY: EVENT_CRYPTO_FINISH
+            SIGNATURE_CHECK-down-> CHECK_MEMORY_FINISH: EVENT_FAILED
+            state SIGNATURE_CHECK {
+                ' terminal leap state
+                
+            }
+            SECUREBOOT_COMPUTE_CHECKSUM-down->SECUREBOOT_COMPUTE_CHECKSUM: EVENT_FAILED
+                SECUREBOOT_COMPUTE_CHECKSUM-down-> BLU_PRE_RESET: EVENT_BLU_PROGRESS
+                SECUREBOOT_COMPUTE_CHECKSUM-down-> CHECK_MEMORY_FINISH: EVENT_FINISHED
+            state SECUREBOOT_COMPUTE_CHECKSUM{
+                ' terminal leap state
+                
+            }
+            CHECK_MEMORY_FINISH-down->CHECK_MEMORY_FINISH: EVENT_REQ_CHECKMEMORY
+                CHECK_MEMORY_FINISH-down-> CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_COHERENCY_CHECK
+                CHECK_MEMORY_FINISH-down-> REPROG: EVENT_REQ_RD
+            }
+            state CHECK_MEMORY_FINISH{
+                ' terminal leap state
+            }
+            CHECK_MEMORY-down->CHECK_MEMORY: EVENT_CRC_FINISH\n EVENT_CRYPTO_FINISH
+                CHECK_MEMORY-down-> BLU_PRE_RESET: EVENT_BLU_PROGRESS
+                CHECK_MEMORY-down-> SECUREBOOT_COMPUTE_CHECKSUM: EVENT_CHECKSUM_UPDATE
+                CHECK_MEMORY-down-> CHECK_MEMORY_FINISH: EVENT_FAILED\n EVENT_FINISHED    
+            state CHECK_MEMORY{
+                ' terminal leap state
+                
+            }
+            BLU_RESUME-down-> CHECK_MEMORY_FINISH: EVENT_FINISHED
+            state BLU_RESUME{
+                ' terminal leap state
+                
+            }
+            BLU_PRE_RESET-down-> RESET: EVENT_TX_CONF
+            state BLU_PRE_RESET{
+                ' terminal leap state
+                
+            }
+
+        }
+        state CHECK_PROG_DEPENDENCIES_TOP {
+            ' 4 internal transitions
+            CHECK_PROG_DEPENDENCIES_TOP-down->CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD
+            
+            CHECK_PROG_DEPENDENCIES_TOP-down-> COMPARE_KEY: EVENT_REQ_COMPARE_KEY
+            CHECK_PROG_DEPENDENCIES_TOP-down-> ERASE_TOP: EVENT_REQ_ERASE
+            CHECK_PROG_DEPENDENCIES_TOP-down-> WRITE_FINGERPRINT: EVENT_REQ_WRITE_FP
+            CHECK_PROG_DEP_FINISH-down-> CHECK_PROG_DEP_FINISH: EVENT_FINISHED
+            state CHECK_PROG_DEP{
+                ' terminal leap state
+
+            }
+            CHECK_PROG_DEP_FINISH-down->CHECK_PROG_DEP_FINISH: EVENT_REQ_CHECKMEMORY
+            CHECK_PROG_DEP_FINISH-down-> CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_COHERENCY_CHECK
+            CHECK_PROG_DEP_FINISH-down-> REPROG: EVENT_REQ_RD
+            state CHECK_PROG_DEP_FINISH{
+                ' terminal leap state
+                
+            }
+            
+        }
+        '  5 intern transitions
+        COMPARE_KEY-down->COMPARE_KEY: EVENT_REQ_CHECKMEMORY\n EVENT_REQ_COMPARE_KEY\n EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD
+        COMPARE_KEY-down-> CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_COHERENCY_CHECK
+        COMPARE_KEY-down-> ERASE_TOP: EVENT_REQ_ERASE
+        COMPARE_KEY-down-> RD: EVENT_REQ_RD
+        COMPARE_KEY-down-> WRITE_FINGERPRINT: EVENT_REQ_WRITE_FP
+        COMPARE_KEY-down-> LOCKED: EVENT_UNLOCK_FAILED
+        state COMPARE_KEY {
+             ' terminal leap state
+            
+        }
+
+        state ECU_RESET {
+            ' terminal leap state
+            ECU_RESET-down-> RESET: EVENT_TX_CONF
+        }
+        state RESET {
+            ' terminal leap state
+            ' There are no transitions
+        }
+        state ERASE_TOP {
+            ' 4 internal tansitions
+            [*]-down-> ERASE_TRANSMITNRC78
+            ERASE_TOP-down->ERASE_TOP: EVENT_REQ_COMPARE_KEY\n EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD
+            ERASE_TOP-down-> CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_COHERENCY_CHECK
+            state ERASE_TRANSMITNRC78{
+                ERASE_TRANSMITNRC78-down->ERASE_CHECK: EVENT_TX_CONF
+                ' terminal leap state
+            }
+            state ERASE_NRC78{
+                ' terminal leap state
+                ERASE_NRC78-down-> ERASE: EVENT_TX_CONF
+            }
+            state ERASE_CHECK{
+                ' terminal leap state
+                ERASE_CHECK-down-> ERASE_FINISH: EVENT_FINISHED
+                ERASE_CHECK-down-> ERASE: EVENT_TX_CONF
+            }
+            state ERASE{
+                ' terminal leap state
+                ERASE-down-> ERASE_FINISH: EVENT_FINISHED
+                ERASE-down-> ERASE_NRC78: EVENT_WAIT_NRC78
+            }
+            state ERASE_FINISH{
+                ' terminal leap state
+                ERASE_FINISH-down-> ERASE_TOP: EVENT_REQ_ERASE
+                ERASE_FINISH-down-> REPROG: EVENT_REQ_RD
+                ERASE_FINISH-down-> WRITE_FINGERPRINT: EVENT_REQ_WRITE_FP
+            }
+            
+        }
+        state EXT_SESSION {
+            ' terminal leap state
+            EXT_SESSION-down->EXT_SESSION: EVENT_REQ_COMPARE_KEY
+            EXT_SESSION-down-> GET_SEED: EVENT_REQ_GET_SEED
+        }
+
+        state GET_SEED {
+            ' terminal leap state
+            GET_SEED-down->GET_SEED: EVENT_REQ_CHECKMEMORY\n EVENT_REQ_COHERENCY_CHECK\n EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD\n EVENT_REQ_WRITE_FP
+            GET_SEED-down-> COMPARE_KEY: EVENT_REQ_COMPARE_KEY
+            GET_SEED-down-> LOCKED: EVENT_UNLOCK_FAILED
+        }
+        state LOCKED {
+            ' terminal leap state
+            ' 6 intern trans
+            LOCKED-down->LOCKED: EVENT_REQ_CHECKMEMORY\n EVENT_REQ_COHERENCY_CHECK\n EVENT_REQ_COMPARE_KEY\n EVENT_REQ_RTE\n EVENT_REQ_TD\n EVENT_REQ_WRITE_FP
+            LOCKED-down->GET_SEED: EVENT_REQ_GET_SEED
+        }
+        
+        state REPROG {
+            [*]-down->RD
+            ' 2 internal transitions
+            REPROG-down->REPROG:EVENT_REQ_COMPARE_KEY\nEVENT_REQ_GET_SEED
+
+            state RD{
+                ' terminal leap state
+                ' 3 internal transitions
+                RD-down->RD:EVENT_REQ_CHECKMEMORY\n EVENT_REQ_RTE
+                RD-down-> CHECK_PROG_DEPENDENCIES_TOP:EVENT_REQ_COHERENCY_CHECK
+                RD-down-> ERASE_TOP:EVENT_REQ_ERASE
+                RD-down-> REPROG:EVENT_REQ_RD
+                RD-down-> TD_TOP:EVENT_REQ_TD
+                RD-down-> WRITE_FINGERPRINT:EVENT_REQ_WRITE_FP
+            }
+            state  TD_TOP{
+                [*]-down-> TD
+                TD_TOP-down->TD_TOP:EVENT_REQ_CHECKMEMORY
+                TD_TOP-down-> TD_FAILED:EVENT_FAILED
+                TD_TOP-down-> CHECK_PROG_DEPENDENCIES_TOP:EVENT_REQ_COHERENCY_CHECK
+                TD_TOP-down-> ERASE_TOP:EVENT_REQ_ERASE
+                TD_TOP-down-> RD:EVENT_REQ_RD
+                TD_TOP-down-> RTE_TOP:EVENT_REQ_RTE
+                TD_TOP-down-> WRITE_FINGERPRINT:EVENT_REQ_WRITE_FP
+
+                state TD{
+                    ' terminal leap state
+                    TD-down-> TD_WRITE: EVENT_WRITE_CHECK
+                }
+
+                state TD_WRITE{
+                    [*]-down-> DECRYPT_UPDATE
+                    ' 2 internal transitions
+                    TD_WRITE-down->TD_WRITE: EVENT_REQ_TD\n EVENT_STREAMING
+                    
+                    state DECRYPT_UPDATE{
+                        ' terminal leap state
+                        DECRYPT_UPDATE-down-> WRITE_CHECK: EVENT_WRITE_CHECK
+                    }
+
+
+                    state DECRYPT_FINISH{
+                        ' terminal leap state
+                        DECRYPT_FINISH-down-> WRITE: EVENT_WRITE
+                        DECRYPT_FINISH-down-> WRITE_CHECK: EVENT_WRITE_CHECK
+                    }
+
+                    state WRITE_CHECK{
+                        ' terminal leap state
+                        WRITE_CHECK-down-> DECRYPT_FINISH: EVENT_CRYPTO_FINISH
+                        WRITE_CHECK-down-> TD_CRC: EVENT_TD_END
+                        WRITE_CHECK-down-> WRITE: EVENT_WRITE
+                    }
+                    state WRITE{
+                        ' terminal leap state
+                        WRITE-down-> WRITE_CHECK: EVENT_WRITE_CHECK
+                    }
+
+                }
+                state TD_FAILED{
+                    ' terminal leap state
+                    TD_FAILED-down-> TD: EVENT_REQ_TD
+                    TD_FAILED-down-> TD_STREAMING: EVENT_STREAMING
+                }
+                state TD_CRC{
+                    ' terminal leap state
+                    TD_CRC-down-> TD: EVENT_REQ_TD
+                    TD_CRC-down-> TD_STREAMING: EVENT_STREAMING
+                }
+                ' addition state compared to origin sc 
+                state TD_STREAMING{
+                    ' terminal leap state
+                    TD_STREAMING-down-> TD_WRITE: EVENT_WRITE_CHECK
+                }
+                
+            }
+            state RTE_TOP{
+                [*]-down-> RTE
+                ' 2 internal transitions
+                RTE_TOP-down->RTE_TOP: EVENT_REQ_RTE\n  EVENT_REQ_TD
+                RTE_TOP-down-> ERASE_TOP: EVENT_REQ_ERASE
+                RTE_TOP-down-> REPROG: EVENT_REQ_RD
+                RTE_TOP-down-> WRITE_FINGERPRINT: EVENT_REQ_WRITE_FP
+                state RTE {
+                    ' terminal leap state
+                    RTE-down-> RTE_FAILED: EVENT_FAILED
+                    RTE-down-> RTE_FINISH: EVENT_FINISHED
+                }
+                state RTE_FAILED{
+                    ' terminal leap state
+                    ' No transitions
+                }
+                state RTE_FINISH{
+                    ' terminal leap state
+                    RTE_FINISH-down-> CHECK_MEMORY_TOP: EVENT_REQ_CHECKMEMORY
+                    RTE_FINISH-down-> CHECK_PROG_DEPENDENCIES_TOP: EVENT_REQ_COHERENCY_CHECK
+                }
+            }
+        state WRITE_FINGERPRINT {
+            [*]-down-> WFP_INPROGRESS
+            ' 6 internal transitions
+            WRITE_FINGERPRINT-down->WRITE_FINGERPRINT: EVENT_REQ_CHECKMEMORY\n EVENT_REQ_COMPARE_KEY\n EVENT_REQ_GET_SEED\n EVENT_REQ_RTE\n EVENT_REQ_TD
+            WRITE_FINGERPRINT-down-> CHECK_PROG_DEPENDENCIES_TOP:  EVENT_REQ_COHERENCY_CHECK
+
+            state WFP_INPROGRESS{
+                ' terminal leap state
+                WFP_INPROGRESS-down-> WFP_FINISHED: EVENT_FINISHED
+            }
+            state WFP_FINISHED{
+                ' terminal leap state
+                WFP_FINISHED-down-> ERASE_TOP: EVENT_REQ_ERASE
+                FP_FINISHED-down-> WRITE_FINGERPRINT: EVENT_REQ_WRITE_FP
+            }
+            
+        }
+
+    }
+}   
+
+
+@enduml

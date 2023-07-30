@@ -1,0 +1,29 @@
+
+@startuml
+
+start
+
+:Startup Or Reset;
+floating note right : <Valid check> has 2 steps : \nvalid patter check and signature check 
+
+:IBM Hardware init;
+
+if (SwReset is performed **__and__** Reprog is request ?) then (yes)
+
+else (no)
+    if(BLU is valid ? ) then (yes)
+        #Green:Jump to BLU; 
+        stop
+    endif
+endif
+
+if (FBL is valid ?) then (yes)
+    #Red:Jump to FBL;
+    stop
+else(no)
+    note right: Stay in IBM forever;
+    end
+endif
+
+
+@enduml

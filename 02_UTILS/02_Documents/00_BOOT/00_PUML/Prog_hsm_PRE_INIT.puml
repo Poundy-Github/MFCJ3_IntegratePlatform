@@ -1,0 +1,12 @@
+@startuml
+
+
+[*] --> PRE_INIT
+
+state PRE_INIT {
+    ' transition list:
+    PRE_INIT-->ALIVE :  EVENT_INIT 
+    
+}
+
+@enduml
