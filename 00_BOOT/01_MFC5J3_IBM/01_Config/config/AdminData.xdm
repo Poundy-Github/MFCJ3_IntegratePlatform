@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<datamodel version="3.0"
+  xmlns="http://www.tresos.de/_projects/DataModel2/08/root.xsd"
+  xmlns:a="http://www.tresos.de/_projects/DataModel2/08/attribute.xsd"
+  xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+  xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <!--
+       ecuc_sws_6005: For each module definition there needs to be
+       provided which revision the StMD is. For the VSMD the AUTOSAR
+       release version and the vendor's ownversion information must be
+       provided. The usage of AdminData on EcucModuleDef is mandatory.
+  -->
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+    xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+    xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TS_TxDxM1I0R0" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+
+          <d:chc name="Demo" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+
+              <!-- Admin Data -->
+              <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                <ad:ADMIN-DATA>
+                  <ad:LANGUAGE>EN</ad:LANGUAGE>
+                  <ad:DOC-REVISIONS>
+                    <!-- Revision of AUTOSAR ARXML file -->
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.2.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2011-11-09T11:36:22Z</ad:DATE>
+                    </ad:DOC-REVISION>
+                    <!-- Revision of Elektrobit Automotive GmbH Demo module -->
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>1.0.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>Elektrobit Automotive GmbH</ad:ISSUED-BY>
+                      <ad:DATE>2019-10-30T23:59:59Z</ad:DATE>
+                    </ad:DOC-REVISION>
+                  </ad:DOC-REVISIONS>
+                </ad:ADMIN-DATA>
+              </a:a>
+            </v:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

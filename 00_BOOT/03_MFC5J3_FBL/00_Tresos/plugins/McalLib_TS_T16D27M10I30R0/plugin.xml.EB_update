@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+ <!--
+*   @file    plugin.xml
+*   @version 10.30.0
+*
+*   @brief   AUTOSAR McalLib_TS_T16D27M10I30R0 - Tresos Studio plugin configuration file.
+*   @details This file contains the configuration for the McalLib Tresos Studio plugin.
+-->
+<!--
+====================================================================================================
+*   Project              : AUTOSAR 4.2 MCAL
+*   Platform             : TRICORE
+*   Peripheral           : TC38XQ
+*   Dependencies         : none
+*
+*   Autosar Version      : 4.2.2
+*   Autosar Revision     : ASR_REL_4_2_REV_M4_REL_VERSION_SUFFIX
+*   Autosar Conf.Variant :
+*
+*   This file is part of MCAL integration. Elektrobit included or updated extentions.
+*   (c) 2019 Infineon Technologies
+*   All rights exclusively reserved for Infineon,
+*   unless expressly agreed to otherwise.
+====================================================================================================
+====================================================================================================
+====================================================================================================
+-->
+
+<plugin>
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+          id="McalLib_TS_T16D27M10I30R0_ModuleId"
+          name="McalLib Driver PlugIn with a TemplateGenerator">
+
+
+          <module id="McalLib_TS_T16D27M10I30R0"
+            label="McalLib"
+            mandatory="false"
+            allowMultiple="false"
+            description="%ModuleDesc"
+            copyright="(c) 2019 Infineon Technologies"
+            swVersionMajor="10"
+            swVersionMinor="30"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="2"
+            specVersionPatch="2"
+            specVersionSuffix=""
+            relVersionMajor="4"
+            relVersionMinor="2"
+            relVersionPatch="2"
+            categoryType="McalLib"
+            categoryLayer="Microcontroller Driver"
+            categoryCategory="MCAL"
+            categoryComponent="ECUC">
+			
+           <cluster name="Microcontroller Driver"/>			
+
+           <ecuType target="TRICORE" derivate="TC38XQ"/>
+       </module>
+   </extension>
+
+   <!--
+     This extension is used to register configuration specific information:
+
+     - Schemas (including pre-configuration and recommended configuration)
+     - Editors
+   -->
+   <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+              id="McalLib_TS_T16D27M10I30R0_ConfigId"
+              name="McalLib_TS_T16D27M10I30R0 Configuration">
+    <configuration moduleId="McalLib_TS_T16D27M10I30R0">
+
+           <!--
+             Register the files from which schemas and pre- an
+             recommended configuration is loaded. For Autosar Modules
+             this is normally dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager
+           -->
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+          <!-- Define the file(s) from which to load the schemas -->
+          <resource value="config/McalLib.xdm"  type="xdm"/>
+
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TS_T16D27M10I30R0/EcucDefs/McalLib"/>
+      </data>
+
+      <editor id="McalLib_TS_T16D27M10I30R0_EditorId"
+              label="Default"
+              tooltip="%ModuleDesc">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TS_T16D27M10I30R0/EcucDefs/McalLib"/>
+          <parameter name="title" value="McalLib"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+             id="EPCGenerator"
+             name="EPC Generator">
+    <generator moduleId="McalLib_TS_T16D27M10I30R0"
+               id="McalLib_TS_T16D27M10I30R0"
+               class="dreisoft.tresos.autosar2.generator.EPCFileGenerator">
+      <parameter name="variantAware" value="true"/> 
+      <parameter name="cfgFilePath" value="output"/>
+      <parameter name="generateAllModules" value="false"/>
+      <parameter name="generateIntoOneFile" value="false"/>
+      <parameter name="contentType" value="asc:4.2.2"/>
+   </generator>
+ </extension>
+
+   <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="McalLib_TS_T16D27M10I30R0_GeneratorId"
+              name="McalLib_TS_T16D27M10I30R0 Generator">
+    <generator moduleId="McalLib_TS_T16D27M10I30R0"
+               class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate"/>
+        <!-- swcd modes and template path parameters -->
+      <parameter name="mode_type" mode="generate_swcd" value="generate"/>
+      <parameter name="mode_type" mode="verify_swcd" value="verify"/>
+      <parameter name="templates" mode="generate_swcd,verify_swcd" value="generate_swcd"/>
+      </generator>
+  </extension>
+ 
+     
+  
+  <extension point="dreisoft.tresos.guidedconfig.api.plugin.pushservice">
+      <pushoperation
+            id="SvcAsReq_McalLib_TS_T16D27M10I30R0"
+            name="McalLib service need requests">
+         <operationclass
+               class="eb.tresos.svclib.api.pushservice.SvcRequestOperation">
+               <parameter name="module" value="McalLib" />
+               <parameter name="req://schm.mainFunctions:1" value="resources/McalLib_SchM_MainFunctions.xml" />
+               <parameter name="req://dem.events:1" value="resources/McalLib_Dem_Events.xml" />
+               <parameter name="req://ecum.initFunctions:1" value="resources/McalLib_EcuM_InitFunctions.xml" />
+         </operationclass>
+         <event>
+            <and>
+               <with variable="class">
+                  <equals value="eb.tresos.svclib.api.event.SvcRequestsEvent" />
+               </with>
+               <with variable="svc.type">
+                  <equals value="request" />
+               </with>
+              <with variable="ecuConfig.moduleId.McalLib_TS_T16D27M10I30R0">
+                  <equals value="true" />
+               </with>
+               <or>
+                  <with variable="ecuConfig.relVersion">
+                     <equals value="4.2" />
+                  </with>
+                  <with variable="ecuConfig.relVersion">
+                     <equals value="0.0" />
+                  </with>
+               </or>
+            </and>
+         </event>
+      </pushoperation>
+  </extension>
+
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension>
+</plugin>

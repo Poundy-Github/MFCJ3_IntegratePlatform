@@ -1,0 +1,252 @@
+/**************************************
+ * (c) 2008 Elektrobit Automotive GmbH
+ *
+ **************************************/
+
+/* Memory as mapped by the BAM (Internal Boot mode):
+ *
+ */
+
+MEMORY
+{
+  
+  /**********************************************************/
+  /***************************ROM****************************/
+  /**********************************************************/
+  
+    /*
+      * !LINKSTO OsekCore.Platforms.Linker.007, 1
+      */
+    reset         : org = 0xa0000000, len = 0x400
+          
+	/*
+    * !LINKSTO OsekCore.Platforms.Linker.006, 1
+    */
+    intctab       : org = 0xa0000400, len = 0x05000
+    exctab        : org = 0xa0005400, len = 0x02000
+
+	int_rom   	  : org = 0xa0008000, len = 0xFB000
+  
+    /* 
+     * !LINKSTO OsekCore.Platforms.Linker.008, 1
+     */
+    DRV_FLS_WRITE_SEC   : org = 0xa0103000, len = 0x1000
+
+  
+  /**********************************************************/
+  /***************************RAM****************************/
+  /**********************************************************/  
+
+  
+      /*
+       * !LINKSTO OsekCore.Platforms.Linker.009, 1
+       */
+  int_ram_stack   : org = 0x70000000, len = 0x00001800
+  
+       /*
+       * !LINKSTO OsekCore.Platforms.Linker.003, 1
+       */
+  int_ram_data    : org = 0x70001800, len = 0x00010000
+
+     /*
+      * !LINKSTO OsekCore.Platforms.Linker.005, 1
+      */
+  /*int_ram_no_init   : org = 0x70011800, len = 0x00000400*/
+    int_ram_no_init   : org = 0x70100000, len = 0x00004400
+  
+    /*
+     * !LINKSTO OsekCore.Platforms.Linker.008, 1
+     */
+      
+    FLS_LOADER_RAM_AREA : org = 0x70011800, len = 0x00001000
+   
+   
+     
+  
+}
+
+SECTIONS
+{
+   /****************************************************************************
+   ** ROM Sections                                                            **
+   ****************************************************************************/
+      .reset: 
+    { 
+      __RESET_START = . ;
+      *(.reset)
+      __RESET_END   =. ;
+    } > reset
+
+    .intctab:
+    {
+        __INTC_TABLE_START = .;
+        *(.intctab)
+        *(.intctab_vle)
+        __INTC_TABLE_END = .;
+    } > intctab
+
+    .exctab :
+    {
+        __EXCEPTION_TABLE_START = .;
+        *(.exctab)
+        *(.exctab_vle)
+        __EXCEPTION_TABLE_END = .;
+    } > exctab
+    
+   GROUP ALIGN(4):                  
+   /* Must be aligned to an address multiple of 10000 */
+   {
+    
+    .sdata2 (TEXT) : {}   /* small CONST area for */
+
+
+    .text (TEXT) :
+    {
+    *(.platforms_text)
+    *(.text_vle)
+    *(.text)
+    *(.frame_info)
+    *(.j_class_table)
+    *(.init)
+    *(.fini)
+    *(.ctors)   /* constructor function ptrs */
+    *(.dtors)   /* destructor function ptrs */
+    } 
+
+    .rodata (CONST) :
+    {
+    *(.rdata)
+    *(.rodata)
+    } 
+
+    .sdata2 (TEXT) : {} =0xff   /* small CONST area for some targets */
+
+
+    
+
+    
+
+    __DATA_ROM = .;
+    __INITDATA = . + 0x20;
+
+   } > int_rom
+   
+   .DRV_FLS_WRITE_SEC ALIGN(32): 
+   {
+    _lc_gb_FLS_DRV_WRITE_CODE = . ;
+    *(.DRV_FLS_WRITE_SEC)
+    _lc_ge_FLS_DRV_WRITE_CODE = . ;
+    
+   } > DRV_FLS_WRITE_SEC
+  
+  
+  
+   /*
+    * This group will allocate space for the initialized data
+    * (.data/.sdata) and the unititialized data (.bss/.sbss) in the
+    * "ram" section.
+    */
+  
+  
+    .int_ram_stack (DATA):
+        {
+              __STACK_BEGIN = . ;
+              *(.int_ram_stack)
+              __STACK_END = . ;
+              
+        } > int_ram_stack
+    __STACK_SIZE = __STACK_BEGIN +  0x1800;
+   GROUP ALIGN(4):
+   {
+      
+    
+      
+      __STARTDATA = . + 0x20;
+      __DATA_RAM = . ;
+    
+    /* With the LOAD specification, the next command will
+         * reserve space for the .data section at the beginning of
+         * "ram" (the "logical" address), but actually place the
+         * data in the image at the end of the .text section as
+         * defined by __DATA_ROM in the GROUP above (the "physical"
+         * address).
+         */
+        .data (DATA) LOAD(__DATA_ROM) : 
+		{
+			wrc_ssp_guard.o(.data)
+			chario.o(.data)
+			*(.data)			
+		}
+
+
+        /* .sdata is the "small data area" for some targets.        */
+        .sdata (DATA) LOAD(__DATA_ROM+SIZEOF(.data)) :
+        {
+            *(.sdata)
+            *(.j_spdata)
+        }
+
+        __DATA_END = .;
+        __ENDDATA = .;
+
+
+      /* This will allocate the .bss symbols */
+      __BSS_START = .;
+      __STARTBSS = .;
+      .sbss(BSS)    : {}
+      .bss(BSS)     : {}
+      .tibss(BSS): {}
+      __ENDBSS = .;
+      __BSS_END = .;
+    
+   
+      
+    
+    
+      __HEAP_START = .;
+      /* Any space left over will be used as a heap */
+   } > int_ram_data
+
+  .int_ram_no_init (BSS):
+  {
+   *(.noinit)
+   *(.prog_sig) 
+   *(.ram_no_init)   
+  } > int_ram_no_init
+  
+  .FLS_LOADER_RAM_AREA (TEXT) ALIGN(32): 
+  {
+    _lc_ub_FLS_LOADER_RAM_AREA  = . ;
+    _lc_ue_FLS_LOADER_RAM_AREA = _lc_ub_FLS_LOADER_RAM_AREA + 0x1000;
+  } > FLS_LOADER_RAM_AREA
+     
+
+    __IVPR          = __EXCEPTION_TABLE_START;
+    _EXCEPTION_TABLE_START = __EXCEPTION_TABLE_START;
+    _INTC_TABLE_START = __INTC_TABLE_START;
+    __SP_INIT       = ADDR(int_ram_stack) + SIZEOF(int_ram_stack);
+    __SP_END        = ADDR(int_ram_stack);
+    _SP_INIT_       = __SP_INIT;
+    
+    _INIT_          = __DATA_ROM;
+    _DATA_START_    = __DATA_RAM;
+    _DATA_END_      = __DATA_END; /* This prevent the copy loop to copy anything */
+    
+    _BSS_START_     = __BSS_START;
+    _BSS_END_       = __BSS_END;
+
+    ___SP_INIT      = __SP_INIT;
+    ___SP_END       = __SP_END;
+
+    ___DATA_ROM     = __DATA_ROM;
+
+    /* RAM to be initialized if the complete RAM sections WITHOUT RamNoInit*/
+    __GLBL_RAM_START    = ADDR(int_ram_stack);
+    __GLBL_RAM_SIZE     = SIZEOF(int_ram_stack) + SIZEOF(.FLS_LOADER_RAM_AREA) + SIZEOF(int_ram_data);
+    __GLBL_RAM_END      = __GLBL_RAM_START + __GLBL_RAM_SIZE;
+  
+  __GLBL_TEXT_START   = ADDR(int_rom);
+  BOARD_CSAMEMORY_BEGIN  = 0x70012800;
+  BOARD_CSAMEMORY_END    = 0x70016800;
+  
+}

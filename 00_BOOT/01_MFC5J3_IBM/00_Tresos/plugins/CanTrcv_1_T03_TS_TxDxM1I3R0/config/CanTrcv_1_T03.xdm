@@ -1,0 +1,1539 @@
+<?xml version='1.0'?>
+<datamodel version="7.0" 
+           xmlns="http://www.tresos.de/_projects/DataModel2/16/root.xsd" 
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/16/attribute.xsd" 
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="CanTrcv_1_T03_TS_TxDxM1I3R0" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="CanTrcv" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+              <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                <ad:ADMIN-DATA>
+                  <ad:DOC-REVISIONS>
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.2.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2011-11-09</ad:DATE>
+                    </ad:DOC-REVISION>
+                  </ad:DOC-REVISIONS>
+                </ad:ADMIN-DATA>
+              </a:a>
+              <a:a name="DESC">
+                <a:v>&lt;html&gt;
+                        Configuration of the CanTrcv (CAN Transceiver driver) module.
+                      &lt;/html&gt;</a:v>
+              </a:a>
+              <a:a name="LOWER-MULTIPLICITY" value="1"/>
+              <a:a name="RELEASE" value="asc:4.0"/>
+              <a:a name="UPPER-MULTIPLICITY" value="*"/>
+              <a:a name="UUID" value="ae02f365-bd3f-466e-8fec-34dea338cdfd"/>
+              <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                <a:a name="LABEL" value="Config Variant"/>
+                <a:a name="UUID" value="432cdbef-7ac4-4558-a974-2f7ab308d98c"/>
+                <a:da name="DEFAULT" value="VariantPostBuild"/>
+                <a:da name="EDITABLE" value="false"/>
+                <a:da name="RANGE" value="VariantPostBuild"/>
+              </v:var>
+              <v:lst name="CanTrcvConfigSet" 
+                     type="MULTIPLE-CONFIGURATION-CONTAINER">
+                <a:da name="MIN" value="1"/>
+                <v:ctr name="CanTrcvConfigSet" 
+                       type="MULTIPLE-CONFIGURATION-CONTAINER">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                        This is the multiple configuration set container for CAN Transceiver.
+                      &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="UUID" value="f8cbf90c-63c5-4102-969c-4db33e55adbd"/>
+                  <v:var name="CanTrcvSPICommRetries" type="INTEGER">
+                    <a:a name="DESC">
+                      <a:v>&lt;html&gt;
+                          Indicates the maximum number of communication retries in case of a failed SPI communication (applies both to timed out communication and to errors/NACK in the response data).
+                        &lt;/html&gt;</a:v>
+                    </a:a>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="3c072a34-a895-4eb2-bd6e-9cc05d90934b"/>
+                    <a:da name="DEFAULT" value="0"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=255"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="CanTrcvSPICommTimeout" type="INTEGER">
+                    <a:a name="DESC">
+                      <a:v>&lt;html&gt;
+                          Indicates the maximum time allowed to the CanTrcv for replying (either positively or negatively) to a SPI command.
+                          This parameter is unused, the CanTrcv supports only synchronous SPI access.
+                        &lt;/html&gt;</a:v>
+                    </a:a>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="0bc2cced-34f7-4330-a18d-f83a5f9721cf"/>
+                    <a:da name="DEFAULT" value="0"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=100"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="CanTrcvChannel" type="MAP">
+                    <a:da name="INVALID" type="XPath">
+                      <a:tst expr="node:isconsecutive(./*/CanTrcvChannelId,0)" 
+                             false="&quot;CanTrcvChannelId&quot; of all CAN transceiver channels must be zero-based and dense."/>
+                      <a:tst 
+                             expr="count(./*) &gt; ../../../VendorSpecific/CanTrcvMaxChannelNumber" 
+                             true="Number of configured channels must not exceed parameter &quot;CanTrcvMaxChannelNumber&quot;"/>
+                    </a:da>
+                    <a:da name="MIN" value="1"/>
+                    <v:ctr name="CanTrcvChannel" type="IDENTIFIABLE">
+                      <a:a name="DESC">
+                        <a:v>&lt;html&gt;
+                            Container gives CAN transceiver driver information about a single CAN.
+                          &lt;/html&gt;</a:v>
+                      </a:a>
+                      <a:a name="POSTBUILDCHANGEABLE" value="true"/>
+                      <a:a name="UUID" 
+                           value="fe26e432-2b79-47aa-9750-ae64585672a2"/>
+                      <v:var name="CanTrcvChannelId" type="INTEGER">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Unique identifier of the CAN Transceiver Channel.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                        <a:a name="UUID" 
+                             value="fee06c61-0148-451d-b4b0-e799353a72e7"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="CanTrcvChannelUsed" type="BOOLEAN">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Shall the related CAN transceiver channel be used?
+                              This parameter is not used.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="9139e2f6-d014-40cc-938b-58602490919f"/>
+                        <a:da name="DEFAULT" value="true"/>
+                        <a:da name="EDITABLE" value="false"/>
+                      </v:var>
+                      <v:var name="CanTrcvControlsPowerSupply" type="BOOLEAN">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Is ECU power supply controlled by this transceiver?
+                              TRUE = Controlled by transceiver.
+                              FALSE = Not controlled by transceiver.
+                              This parameter is not used.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="e88eeee7-5f25-4cab-b2df-2110392586ea"/>
+                        <a:da name="DEFAULT" value="true"/>
+                        <a:da name="EDITABLE" value="false"/>
+                      </v:var>
+                      <v:var name="CanTrcvHwPnSupport" type="BOOLEAN">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                               Indicates whether the selective wake-up functionality is enabled or disabled in HW on a per-channel basis.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="947ff944-a4a7-4461-b121-60a81773e2bb"/>
+                        <a:da name="DEFAULT" value="true"/>
+                        <a:da name="EDITABLE" value="true"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="(node:exists(../../../../../VendorSpecific/CanTrcvPnSupport) and node:value(../../../../../VendorSpecific/CanTrcvPnSupport) = &apos;false&apos;) and ( node:value(.) = &apos;true&apos;)" 
+                              true="CanTrcv/VendorSpecific/CanTrcvPnSupport should be enabled to use this function"/>
+                      </v:var>
+                      <v:var name="CanTrcvInitState" type="ENUMERATION">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              State of CAN transceiver after call to CanTrcv_Init.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="9a1cf7dc-0ef5-4ea3-a48e-a3a1b0bc476e"/>
+                        <a:da name="DEFAULT" value="CANTRCV_OP_MODE_NORMAL"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="(node:value(.) = &apos;CANTRCV_OP_MODE_SLEEP&apos;) and                                         (node:value(../../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) = &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;)" 
+                              true="CanTrcvInitState can not be set to &apos;CANTRCV_OP_MODE_SLEEP&apos; if wakeup support is disabled."/>
+                        <a:da name="RANGE">
+                          <a:v>CANTRCV_OP_MODE_NORMAL</a:v>
+                          <a:v>CANTRCV_OP_MODE_SLEEP</a:v>
+                          <a:v>CANTRCV_OP_MODE_STANDBY</a:v>
+                        </a:da>
+                      </v:var>
+                      <v:var name="CanTrcvMaxBaudrate" type="INTEGER">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Max baudrate for transceiver hardware type. Only used for validation purposes. Value shall be configured by configuration tool based on trans-ceiver hardware type.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="c428556c-42bd-4c71-b31d-e9edea9d0380"/>
+                        <a:a name="VISIBLE" value="false"/>
+                        <a:da name="DEFAULT" value="1000"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=1000"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="CanTrcvWakeupByBusUsed" type="BOOLEAN">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Is wake up by bus supported? If CAN transceiver hardware does not support wake up by bus value is always FALSE. If CAN transceiver hardware supports wake up by bus value is TRUE or FALSE depending whether it is used or not.
+                              TRUE = Is used.
+                              FALSE = Is not used
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="5b0d49dc-0008-4383-b0a1-dd1aaf8f3d5a"/>
+                        <a:da name="DEFAULT" value="false"/>
+                        <a:da name="EDITABLE" type="XPath" 
+                              expr="node:value(../../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) = &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;" 
+                              true="false" false="true"/>
+                        <a:da name="ENABLE" value="false"/>
+                      </v:var>
+                      <v:ref name="CanTrcvWakeupSourceRef" type="REFERENCE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Reference to a wakeup source in the EcuM configuration.
+                              &lt;strong&gt;This configuration parameter is unused and replaced
+                              by the vendor specific parameters CanTrcvSyserrWakeupSourceRef, 
+                              CanTrcvByBusWakeupSourceRef and CanTrcvByPinWakeupSourceRef.&lt;/strong&gt;
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="91b7c577-b61c-4e8e-b65b-9650f7a9fdc7"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"/>
+                      </v:ref>
+                      <v:ref name="CanTrcvSyserrWakeupSourceRef" 
+                             type="REFERENCE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for SYSERR detection. This parameter is active only if CanTrcvWakeUpSupport is active.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a SYSERR:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Partial networking frame detection error (always active if partial network enabled)&lt;/li&gt;
+                                &lt;li&gt;CAN failure (if CanTrcvCanFailureDetection enabled)&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              If all of the listed conditions are false, this reference can be disabled.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification (except all listed conditions are also disabled).
+                            &lt;/p&gt;
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="25cc0a03-2f0f-11e2-81c1-0800200c9a66"/>
+                        <a:da name="EDITABLE" type="XPath" 
+                              expr="node:value(../../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) != &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;"/>
+                        <a:da name="ENABLE" value="true"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="node:refvalid(.)" 
+                              false="Please set a valid reference for this wake-up source!"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"/>
+                      </v:ref>
+                      <v:ref name="CanTrcvByBusWakeupSourceRef" 
+                             type="REFERENCE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for a by bus wake-up detection. This parameter is only active if CanTrcvWakeupByBusUsed is active and true.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a by-bus wake-up:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Wakeup on CAN bus&lt;/li&gt;
+                                &lt;li&gt;Internal ECU wakeup via request to NORMAL mode&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification.
+                            &lt;/p&gt;
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="25cc0a02-2f0f-11e2-81c1-0800200c9a66"/>
+                        <a:da name="EDITABLE" type="XPath" 
+                              expr="../CanTrcvWakeupByBusUsed = &apos;true&apos;"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="../CanTrcvWakeupByBusUsed = &apos;true&apos; and not(node:refvalid(.))" 
+                              true="Please set a valid reference for this wake-up source!"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"/>
+                      </v:ref>
+                      <v:ctr name="VendorSpecific" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: Container contains CAN transceiver optimization parameter."/>
+                        <a:a name="UUID" 
+                             value="71aabf20-0dea-11e2-892e-0800200c9a66"/>
+                        <v:ref name="CanTrcvIcuChannelRef" type="REFERENCE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Reference to the IcuChannel to enable/disable the interrupts for wakeups.
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="INVALID" type="XPath">
+                            <a:tst 
+                                   expr="as:modconf(&apos;CanTrcv&apos;)[(CommonPublishedInformation/VendorId = 1) and (CommonPublishedInformation/VendorApiInfix = &apos;T03&apos;)]/VendorSpecific/CanTrcvIcuDriverSupportApiEnable = &apos;true&apos;" 
+                                   false="CanTrcvIcuDriverSupportApiEnable must be enabled to use CanTrcvIcuChannelRef"/>
+                            <a:tst expr="node:refexists(.) != &apos;true&apos;" 
+                                   true="Valid reference to Icu channel necessary for parameter CanTrcvIcuChannelRef"/>
+                          </a:da>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"/>
+                        </v:ref>
+                        <v:var name="CanTrcvSubModeCMC" type="ENUMERATION">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Select the CAN transceiver operating mode. This mode is
+                                  only available in Normal mode. The state can be set into
+                                  Offline mode
+                                  Active mode
+                                  Listen-only mode
+                                  This parameter corresponds to the CMC bit of the TJA1145 hardware
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ECUC:3c48b6f3-61ff-4bd9-be07-4e0ed8351855"/>
+                          <a:da name="DEFAULT" value="Active"/>
+                          <a:da name="RANGE">
+                            <a:v>Active</a:v>
+                            <a:v>Offline</a:v>
+                            <a:v>Listen_Only</a:v>
+                          </a:da>
+                        </v:var>
+                        <v:var name="CanTrcvPnFramePNDM" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Indicates if the data and DLC have to be checked when Partial Networking is activated.
+                                This parameter has no effect, if PN is disabled.
+                             &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ECUC:3c48b6f3-61ff-4bd9-be07-4e0ed8351855"/>
+                          <a:da name="DEFAULT" value="true"/>
+                        </v:var>
+                        <v:ctr name="CanTrcvTrcvEventRegister" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Contains setting to enable or disable various transceiver
+                                  event notifications.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:9eb99fe0-2cee-11e2-81c1-0800200c9a66"/>
+                          <v:var name="CanTrcvSilentDetection" type="BOOLEAN">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches CAN bus silence detection on or off.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case the silent detection is disabled API
+                                      service CanTrcv_ReadTrcvSilenceFlag can not obtain
+                                      the silence status.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" 
+                                 value="Elektrobit Automotive GmbH"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:893f46b1-0dea-11e2-892e-0800200c9a66"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                          <v:var name="CanTrcvCanFailureDetection" 
+                                 type="BOOLEAN">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches CAN failure detection on or off.
+                                      If disabled, a CAN failure does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case CAN failure detection is enabled the CanTrcv sets the SYSERR flag
+                                      if the TXD dominant time-out time is exceeded.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" 
+                                 value="Elektrobit Automotive GmbH"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:893f46b2-0dea-11e2-892e-0800200c9a66"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                        </v:ctr>
+                        <v:ctr name="CanTrcvSystEventRegister" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Contains setting to enable or disable various system
+                                  event notifications.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:893f46b4-0dea-11e2-892e-0800200c9a66"/>
+                        </v:ctr>
+                        <v:ctr name="CanTrcvWakeEventRegister" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Sets behavior for the transceiver wake-up pins.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:893f46b7-0dea-11e2-892e-0800200c9a66"/>
+                          <v:var name="CanTrcvRisingEdgeDetection" 
+                                 type="BOOLEAN">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches rising-edge detection on WAKE pin on or off.
+                                      If disabled, a rising-edge on the WAKE pin does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case of a rising edge the CanTrcv reports a wake-up.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" 
+                                 value="Elektrobit Automotive GmbH"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:893f46b8-0dea-11e2-892e-0800200c9a66"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                          <v:var name="CanTrcvFallingEdgeDetection" 
+                                 type="BOOLEAN">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches falling-edge detection on WAKE pin on or off.
+                                      If disabled, a falling-edge on the WAKE pin does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case of a falling edge the CanTrcv reports a wake-up.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" 
+                                 value="Elektrobit Automotive GmbH"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:893f46b9-0dea-11e2-892e-0800200c9a66"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                        </v:ctr>
+                      </v:ctr>
+                      <v:ref name="CanTrcvByPinWakeupSourceRef" 
+                             type="REFERENCE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for a by PIN wake-up detection. This parameter is only active if CanTrcvWakeUpSupport is active.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a wakeup-by-pin:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Rising edge on WAKE pin (if CanTrcvRisingEdgeDetection enabled)&lt;/li&gt;
+                                &lt;li&gt;Falling edge on WAKE pin (if CanTrcvFallingEdgeDetection enabled)&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              If all of the listed conditions are false, this reference can be disabled.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification (except all listed conditions are also disabled).
+                            &lt;/p&gt;
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="37fa44a1-113a-11e2-892e-0800200c9a66"/>
+                        <a:da name="EDITABLE" type="XPath" 
+                              expr="node:value(../../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) != &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;"/>
+                        <a:da name="ENABLE" value="true"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="node:refvalid(.)" 
+                              false="Please set a valid reference for this wake-up source!"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"/>
+                      </v:ref>
+                      <v:chc name="CanTrcvAccess" type="IDENTIFIABLE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Container gives CanTrcv Driver information about access to a single CAN transceiver.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="UUID" 
+                             value="3460d3f9-1f76-44fb-a245-409160c286c1"/>
+                        <v:ctr name="CanTrcvDioAccess" type="IDENTIFIABLE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Container gives CAN transceiver driver information about accessing
+                                  ports and port pins. In addition relation between CAN transceiver
+                                  hardware pin names and Dio port access information is given. If a
+                                  CAN transceiver hardware has no Dio interface, there is no instance of this container.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:1d8e654e-9746-428f-929d-ddefe3a44578"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <v:lst name="CanTrcvDioChannelAccess" type="MAP">
+                            <a:da name="MIN" value="1"/>
+                            <v:ctr name="CanTrcvDioChannelAccess" 
+                                   type="IDENTIFIABLE">
+                              <a:a name="DESC">
+                                <a:v>&lt;html&gt;
+                                      Container gives DIO channel access by single Can transceiver channel.
+                                    &lt;/html&gt;</a:v>
+                              </a:a>
+                              <a:a name="POSTBUILDCHANGEABLE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="ECUC:f3735ce7-dc10-4544-b55e-626808f713e0"/>
+                              <v:var name="CanTrcvHardwareInterfaceName" 
+                                     type="STRING">
+                                <a:a name="DESC">
+                                  <a:v>&lt;html&gt;
+                                        CAN transceiver hardware interface name. It is typically the
+                                        name of a pin. From a Dio point of view it is either a port,
+                                        a single channel or a channel group. Depending on this fact
+                                        either. CANTRCV_DIO_PORT_SYMBOLIC_NAME or
+                                        CANTRCV_DIO_CHANNEL_SYMBOLIC_NAME or
+                                        CANTRCV_DIO_CHANNEL_GROUP_SYMBOLIC_NAME  shall reference a
+                                        Dio configuration. The CAN transceiver driver implementation
+                                        description shall list up this name for the appropriate CAN transceiver hardware.
+                                      &lt;/html&gt;</a:v>
+                                </a:a>
+                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                     type="IMPLEMENTATIONCONFIGCLASS">
+                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                </a:a>
+                                <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                                <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                                <a:a name="UUID" 
+                                     value="ECUC:0ec03d65-0055-4853-8dc8-5fcd1ef5a43e"/>
+                              </v:var>
+                              <v:ref name="CanTrcvDioSymNameRef" 
+                                     type="CHOICE-REFERENCE">
+                                <a:a name="DESC">
+                                  <a:v>&lt;html&gt;
+                                        Choice Reference to a DIO Port, DIO Channel or DIO Channel
+                                        Group. This reference replaces the
+                                        CANTRCV_DIO_PORT_SYM_NAME, CANTRCV_DIO_CHANNEL_SYM_NAME and
+                                        CANTRCV_DIO_GROUP_SYM_NAME references in the Can Trcv SWS.
+                                      &lt;/html&gt;</a:v>
+                                </a:a>
+                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                     type="IMPLEMENTATIONCONFIGCLASS">
+                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                </a:a>
+                                <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                                <a:a name="UUID" 
+                                     value="ECUC:1e464264-ce16-4a16-87d1-89aab53d6a2b"/>
+                                <a:da name="REF" 
+                                      value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel"/>
+                              </v:ref>
+                            </v:ctr>
+                          </v:lst>
+                        </v:ctr>
+                        <v:ctr name="CanTrcvSpiSequence" type="IDENTIFIABLE">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  Container gives CAN transceiver driver information about one SPI se-quence. One SPI sequence used by CAN transceiver driver is in exclusive
+                                  use for it. No other driver is allowed to access this sequence. CAN trans-ceiver driver may use one sequence to access n CAN transceiver hard-wares chips of the same type or n sequences are used to access one sin-gle CAN transceiver hardware chip. If a CAN transceiver hardware has no
+                                  SPI interface, there is no instance of this container.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="657f4f80-c0ff-440e-9296-ad9247944f44"/>
+                          <v:var name="CanTrcvSpiAccessSynchronous" 
+                                 type="BOOLEAN">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                    This parameter is used to define whether the access to the Spi sequence is synchronous or asynchronous.
+                                    true:SPI access is synchronous.
+                                    false: SPI access is asynchronous.
+                                  &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                            </a:a>
+                            <a:a name="OPTIONAL" value="true"/>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="21962caa-5566-4d4b-bed2-a6567e4e5bbc"/>
+                            <a:da name="DEFAULT" value="true"/>
+                            <a:da name="EDITABLE" value="true"/>
+                            <a:da name="ENABLE" value="true"/>
+                            <a:da name="INVALID" type="XPath" 
+                                  expr="(node:value(.) = &apos;false&apos;) and (not(node:exists(../../../../../../VendorSpecific/CanTrcvSpiAccessAsynchronousTimeout)))" 
+                                  true="If this parameter is set as &apos;false&apos;, the CanTrcvSpiAccessAsynchronousTimeout parameter has to be enabled."/>
+                          </v:var>
+                          <v:lst name="CanTrcvSpiSequenceName">
+                            <a:da name="MAX" value="1"/>
+                            <a:da name="MIN" value="1"/>
+                            <v:ref name="CanTrcvSpiSequenceName" 
+                                   type="SYMBOLIC-NAME-REFERENCE">
+                              <a:a name="DESC">
+                                <a:v>&lt;html&gt;
+                                      Reference to a Spi sequence configuration container.
+                                    &lt;/html&gt;</a:v>
+                              </a:a>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="UUID" 
+                                   value="084f2684-c7cc-4ba4-9267-549ad43a6f91"/>
+                              <a:da name="INVALID" type="XPath" 
+                                    expr="node:refexists(.) != &apos;true&apos;" 
+                                    true="Valid reference to SPI sequence necessary for parameter CanTrcvSpiSequenceName"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"/>
+                            </v:ref>
+                          </v:lst>
+                        </v:ctr>
+                      </v:chc>
+                      <v:ctr name="CanTrcvPartialNetwork" type="IDENTIFIABLE">
+                        <a:a name="DESC">
+                          <a:v>&lt;html&gt;
+                              Container gives CAN transceiver driver information about the configuration of Partial Networking functionality.
+                            &lt;/html&gt;</a:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="UUID" 
+                             value="361971eb-b0ed-49d9-b7f9-688bf995a545"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="node:value(../../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) = &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;" 
+                              true="Partial networking must not be used if wakeup is disabled (see parameter CanTrcvWakeUpSupport)."/>
+                        <v:var name="CanTrcvBaudRate" type="INTEGER">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Indicates the CAN Bus communication baud rate in kbps.
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="2d80c167-0c4c-4292-957e-858b3971a53b"/>
+                          <a:da name="INVALID" type="Multi">
+                            <mt:range>
+                              <mt:tst expr="&lt;=1000"/>
+                              <mt:tst expr="&gt;=0"/>
+                            </mt:range>
+                            <mt:xpath 
+                                      false="CanTrcvMaxBaudrate can be set to &apos;125&apos;, &apos;250&apos;, &apos;500&apos; or &apos;1000&apos; kbit/s rate." 
+                                      expr="(node:value(.) = &apos;125&apos;) or                                          (node:value(.) = &apos;250&apos;) or                                          (node:value(.) = &apos;500&apos;) or                                          (node:value(.) = &apos;1000&apos;)"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="CanTrcvBusErrFlag" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  &lt;p&gt;
+                                  &lt;strong&gt;
+                                    This parameter is not used. Detecting of bus failures is currently not implemented.
+                                  &lt;/strong&gt;
+                                  &lt;/p&gt;
+                                  &lt;p&gt;
+                                    Indicates if the Bus Error (BUSERR) flag is managed by the BSW.
+                                    This flag is set if a bus failure is detected by the transceiver.
+                                  &lt;/p&gt;
+                                  &lt;ul&gt;
+                                    &lt;li&gt;&lt;tt&gt;TRUE&lt;/tt&gt;: Supported by transceiver and managed by BSW.&lt;/li&gt;
+                                    &lt;li&gt;&lt;tt&gt;FALSE&lt;/tt&gt;: Not managed by BSW. This parameter is not used.&lt;/li&gt;
+                                  &lt;/ul&gt;
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="7c61f764-8732-4a02-9ea8-9bb6fdf7fee7"/>
+                          <a:da name="DEFAULT" value="false"/>
+                        </v:var>
+                        <v:var name="CanTrcvPnCanIdIsExtended" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Indicates whether extended or standard ID is used.
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="d76cedb0-7dad-4ebf-aec5-2ae915cd1310"/>
+                          <a:da name="DEFAULT" value="false"/>
+                        </v:var>
+                        <v:var name="CanTrcvPnEnabled" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Enables/disables the call to CanIf_ConfirmPNAvailabity() function.
+                                This parameter needs partial network support enabled in the upper layers.
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="f893ee64-659f-4e81-ad9f-fe1d10341156"/>
+                          <a:da name="DEFAULT" value="false"/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="(node:exists(../../../../../../VendorSpecific/CanTrcvPnCanIfCallbackSupport) and node:value(../../../../../../VendorSpecific/CanTrcvPnCanIfCallbackSupport) = &apos;false&apos;) and ( node:value(.) = &apos;true&apos;)" 
+                                true="CanTrcv/VendorSpecific/CanTrcvPnCanIfCallbackSupport should be enabled to use this function"/>
+                        </v:var>
+                        <v:var name="CanTrcvPnFrameCanId" type="INTEGER">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                CAN ID of the Wake-up Frame (WUF).
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="c6f912f8-0127-4a3a-97f9-17074af73c96"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="CanTrcvPnFrameCanIdMask" type="INTEGER">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                ID Mask for the selective activation of the transceiver. It is used to enableFrame Wake-up (WUF) on a group of IDs.
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="dadc25f7-6bdb-489b-87bf-2ac1c8b441b0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="CanTrcvPnFrameDlc" type="INTEGER">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                Data Length of the Wake-up Frame (WUF).
+                              &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="2cbf3dad-5daa-4049-8965-475790b359e9"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=8"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="CanTrcvPowerOnFlag" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>&lt;html&gt;
+                                  &lt;p&gt;
+                                  &lt;strong&gt;
+                                    This parameter is not used. Power on flag currently not checked
+                                    on startup.
+                                  &lt;/strong&gt;
+                                  &lt;/p&gt;
+                                  &lt;p&gt;
+                                    Indicates if the Power On Reset (POR) flag is
+                                    available and is managed by the transceiver.
+                                  &lt;/p&gt;
+                                  &lt;ul&gt;
+                                    &lt;li&gt;&lt;tt&gt;TRUE&lt;/tt&gt;: Supported by Hardware.&lt;/li&gt;
+                                    &lt;li&gt;&lt;tt&gt;FALSE&lt;/tt&gt;: Not supported by Hardware.&lt;/li&gt;
+                                  &lt;/ul&gt;
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="cc1b786d-3635-455c-914d-b7cadd492a87"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                        <v:lst name="CanTrcvPnFrameDataMaskSpec" type="MAP">
+                          <a:da name="MAX" value="8"/>
+                          <v:ctr name="CanTrcvPnFrameDataMaskSpec" 
+                                 type="IDENTIFIABLE">
+                            <a:a name="DESC">
+                              <a:v>&lt;html&gt;
+                                  Defines data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the received Wake-up Frame (WUF).
+                                &lt;/html&gt;</a:v>
+                            </a:a>
+                            <a:a name="POSTBUILDCHANGEABLE" value="true"/>
+                            <a:a name="UUID" 
+                                 value="04604149-8a9e-491e-84ef-bff4ce735f6e"/>
+                            <v:var name="CanTrcvPnFrameDataMask" type="INTEGER">
+                              <a:a name="DESC">
+                                <a:v>&lt;html&gt;
+                                   Defines the n byte (Byte0 = LSB) of the data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the received Wake-up Frame (WUF).
+                                 &lt;/html&gt;</a:v>
+                              </a:a>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="0dcdc6fb-9ad6-4b72-908c-6be63a3528f8"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=255"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="CanTrcvPnFrameDataMaskIndex" 
+                                   type="INTEGER">
+                              <a:a name="DESC">
+                                <a:v>&lt;html&gt;
+                                   holds the position n in frame of the mask-part
+                                 &lt;/html&gt;</a:v>
+                              </a:a>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="fa6b68e5-641c-4ad6-ab41-7a3e26eca012"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=7"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                          </v:ctr>
+                        </v:lst>
+                      </v:ctr>
+                    </v:ctr>
+                  </v:lst>
+                </v:ctr>
+              </v:lst>
+              <v:ctr name="CanTrcvGeneral" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>&lt;html&gt;
+                     Container gives CAN transceiver driver basic information.
+                   &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="UUID" value="77dd8e45-fbca-4dc7-af14-0bbea5d4fa7c"/>
+                <v:var name="CanTrcvDevErrorDetect" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                       Switches development error detection and notification on and off.
+                     &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="de2e79dd-5384-4fb0-8b42-05b6f2850626"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="CanTrcvGetVersionInfo" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                       Switches version information API on and off. If switched off, function need not be present in compiled code
+                     &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="15e73632-8506-40e8-9477-24d7a2afc1a3"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="CanTrcvWaitCount" type="INTEGER">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                       Indicates the number of wait states to change the transceiver operation mode. Transceiver hardware may need wait states for some transitions.
+                     &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="13dc3acf-7f3e-4b05-af4c-dfe27b2ee6f1"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=4294967295"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="CanTrcvWakeUpSupport" type="ENUMERATION">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                       Informs whether wake up is supported by polling or not supported. In case no wake up is supported by the hardware,setting has to be NOT_SUPPORTED.
+                       Only in the case of wake up supported by polling, function CanTrcv_MainFunction has to be present and to be invoked by the scheduler.
+                     &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e3e61706-3144-4f34-b636-55916c55db1a"/>
+                  <a:da name="DEFAULT" value="CANTRCV_WAKEUP_BY_POLLING"/>
+                  <a:da name="RANGE">
+                    <a:v>CANTRCV_WAKEUP_BY_POLLING</a:v>
+                    <a:v>CANTRCV_WAKEUP_NOT_SUPPORTED</a:v>
+                  </a:da>
+                </v:var>
+              </v:ctr>
+              <d:ref type="REFINED_MODULE_DEF" 
+                     value="ASPath:/AUTOSAR/EcucDefs/CanTrcv"/>
+              <v:ctr name="VendorSpecific" type="IDENTIFIABLE">
+                <a:a name="DESC" 
+                     value="EN: Container contains CAN transceiver optimization parameter."/>
+                <a:a name="UUID" value="af17f760-b5d1-11df-8d81-0800200c9a66"/>
+                <v:var name="CanTrcvOperationModeApiEnable" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Switches &lt;tt&gt;CanTrcv_SetOpMode&lt;/tt&gt; and &lt;tt&gt;CanTrcv_GetOpMode&lt;/tt&gt;
+                              API on and off. If set to &lt;tt&gt;false&lt;/tt&gt; the Can transceiver is
+                              always set to mode &apos;CANTRCV_OP_MODE_NORMAL&apos; after initalization.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables operation mode API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables operation mode API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the
+                                module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="7b67bfa0-bf2b-11df-851a-0800200c9a66"/>
+                  <a:da name="DEFAULT" value="true"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(node:value(.) = &apos;false&apos;) and                                    (node:value(../../CanTrcvGeneral/CanTrcvWakeUpSupport) != &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;)" 
+                        true="Operation mode API can not be disabled if CanTrcvWakeUpSupport is enabled."/>
+                </v:var>
+                <v:var name="CanTrcvWakeupModeApiEnable" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Switches &lt;tt&gt;CanTrcv_SetWakeupMode&lt;/tt&gt; and &lt;tt&gt;CanTrcv_GetWuReason&lt;/tt&gt;
+                              API on and off. The API can only be disabled if parameter
+                              CanTrcvWakeUpSupport is set to &lt;tt&gt;CANTRCV_WAKEUP_NOT_SUPPORTED&lt;/tt&gt;.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables Wakeup mode API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables Wakeup mode API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a29ab610-c4bf-11df-851a-0800200c9a66"/>
+                  <a:da name="DEFAULT" value="true"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(node:value(.) = &apos;false&apos;) and                                    (node:value(../../CanTrcvGeneral/CanTrcvWakeUpSupport) != &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;)" 
+                        true="Wakeup mode API can not be disabled if CanTrcvWakeUpSupport is enabled."/>
+                </v:var>
+                <v:var name="CanTrcvPnSupport" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                        &lt;p&gt;Enables the support for the selective wake-up function
+                        (partial networking).&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables selective wake-up.&lt;/li&gt;
+                          &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables selective wake-up.&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                            &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                            Disabling this parameter reduces the ROM consumption of
+                            the module code.
+                          &lt;/li&gt;
+                          &lt;li class=&quot;optimization.config.rom.reduction&quot;&gt;
+                            &lt;strong&gt;ROM reduction (config):&lt;/strong&gt;
+                            Disabling this parameter reduces the ROM consumption of
+                            the module configuration.
+                          &lt;/li&gt;
+                          &lt;li class=&quot;optimization.code.exetime.reduction&quot;&gt;
+                            &lt;strong&gt;Execution time reduction (code):&lt;/strong&gt;
+                            Disabling this parameter reduces the execution
+                            time of the module code.
+                          &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p&gt;&lt;strong&gt;This configuration parameter replaces CanTrcvHwPnSupport.&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;Please note that this parameter is enabled only if a valid license for the
+                        license feature CANTRCV_FEATURE_PARTIAL_NETWORKING is installed.&lt;/p&gt;
+                        &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="false"/>
+                  <a:da name="EDITABLE" type="XPath" 
+                        expr="lic:feature(&apos;CANTRCV_FEATURE_PARTIAL_NETWORKING&apos;) or lic:feature(&apos;EB_CANTRCV_PARTIAL_NETWORK&apos;) or  (node:value(.) = &apos;true&apos;)"/>
+                  <a:da name="INVALID" type="XPath">
+                    <a:tst 
+                           expr="(node:value(.) = &apos;true&apos;) and (not(lic:feature(&apos;CANTRCV_FEATURE_PARTIAL_NETWORKING&apos;)) and not(lic:feature(&apos;EB_CANTRCV_PARTIAL_NETWORK&apos;)))" 
+                           true="Your EB tresos license does not include the feature CANTRCV_FEATURE_PARTIAL_NETWORKING or EB_CANTRCV_PARTIAL_NETWORK. - Please contact EB."/>
+                    <a:tst 
+                           expr="(. = &apos;true&apos;) and (../../CanTrcvGeneral/CanTrcvWakeUpSupport = &apos;CANTRCV_WAKEUP_NOT_SUPPORTED&apos;)" 
+                           true="Partial networking must not be used if wakeup is disabled (see parameter CanTrcvWakeUpSupport)."/>
+                  </a:da>
+                </v:var>
+                <v:var name="CanTrcvCanFdTolerance" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                          &lt;p&gt;Controls the tolerance of CAN-FD frames in
+                          combination with partial networking (passive support).&lt;/p&gt;
+                          &lt;ul&gt;
+                            &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: CFDC bit set&lt;/li&gt;
+                            &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: CFDC bit &lt;strong&gt;not&lt;/strong&gt; set&lt;/li&gt;
+                          &lt;/ul&gt;
+                          &lt;p&gt;This parameter corresponds to the CFDC bit of the TJA1145&apos;s control register.&lt;/p&gt;
+                        &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:9cde4cc9-c11f-4289-ab92-2606b0001f99"/>
+                  <a:da name="DEFAULT" value="false"/>
+                  <a:da name="ENABLE" type="XPath" 
+                        expr="node:value(../CanTrcvPnSupport)"/>
+                </v:var>
+                <v:var name="CanTrcvMaxChannelNumber" type="INTEGER">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                        &lt;p&gt;This parameter defines the size of the reserved RAM
+                        during link-time to hold the runtime data of the CanTrcv
+                        channel configuration.&lt;/p&gt;
+                        &lt;p&gt;This parameter has impact on the size of the PostBuild RAM.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li class=&quot;optimization.code.ram.reduction&quot;&gt;
+                            &lt;strong&gt;RAM reduction:&lt;/strong&gt;
+                            Selecting a small value for this parameter reduces
+                            the RAM consumption of the module.
+                          &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="CanTrcvRelocatablePbcfgEnable" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                          Enables/disable support for relocatable postbuild configuration.
+                          &lt;ul&gt;
+                            &lt;li&gt;True: Postbuild configuration relocatable in memory.&lt;/li&gt;
+                            &lt;li&gt;False: Postbuild configuration not relocatable in memory.&lt;/li&gt;
+                          &lt;/ul&gt;
+                          &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="true"/>
+                  <a:da name="EDITABLE" type="XPath" 
+                        expr="(node:contains(node:refs(as:modconf(&apos;PbcfgM&apos;)/PbcfgMBswModules/*/PbcfgMBswModuleRef), as:modconf(&apos;CanTrcv&apos;)[(CommonPublishedInformation/VendorId = 1) and (CommonPublishedInformation/VendorApiInfix = &apos;T03&apos;)]) = &apos;true&apos;)" 
+                        true="false" false="true"/>
+                </v:var>
+                <v:var name="CanTrcvPnCanIfCallbackSupport" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Switches on/off the call of CanIf_ConfirmPNAvailabity(),
+                              CanIf_ClearTrcvWufFlagIndication(), and CanIf_CheckTrcvWakeFlagIndication() functions
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;True: Enables the call of APIs.&lt;/li&gt;
+                              &lt;li&gt;False: Disables the call of APIs.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;p&gt;
+                              This parameter shall be set to true only if PN is enabled in CanIf. 
+                            &lt;/p&gt;
+                          &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0a797ea5-75d4-4786-89c7-07282f0b1ba7"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="CanTrcvIcuDriverSupportApiEnable" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                            &lt;p&gt;
+                              Switches ICU driver API on and off. The API can only be
+                              disabled if all channels do not support ICU driver.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables ICU driver API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables ICU driver API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the
+                                module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0a797ea5-75d4-4786-89c7-07282f0bdda7"/>
+                  <a:da name="DEFAULT" value="false"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(. = &apos;true&apos;) and (../CanTrcvOperationModeApiEnable = &apos;false&apos;)" 
+                        true="API CanTrcv_SetOpMode must be available in code to use ICU driver notification. Please enable parameter CanTrcvOperationModeApiEnable."/>
+                </v:var>
+                <v:var name="CanTrcvSpiAccessAsynchronousTimeout" 
+                       type="INTEGER">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                         Indicates the maximum number of loop iterations used from polling the completion of the asynchronous transfer.
+                         This parameter is related to the SpiMainFunctionPeriod parameter.
+                         See limitations chapter.
+                         &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="3c072a34-a895-4eb2-ba6f-9cc05ff0934b"/>
+                  <a:da name="DEFAULT" value="1"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=1"/>
+                  </a:da>
+                </v:var>
+              </v:ctr>
+              <v:ctr name="CommonPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Common container, aggregated by all modules. It contains published information about vendor and versions.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="Common Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:a00be3e0-8783-9123-2d52-1eb616737ca6"/>
+                <v:var name="ArMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:948f3f2e-f129-4bc5-b4e1-7a7bdb8599e1"/>
+                  <a:da name="DEFAULT" value="3"/>
+                </v:var>
+                <v:var name="ArMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:2893b920-59d5-4ac2-b2c1-e23742e66d70"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="ArPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:6428eb9b-8790-488a-b9a3-0fba52d0f59e"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="SwMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of the vendor specific implementation of the module.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:605b18ae-3f9a-41d4-9225-67c9c5f6fc34"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="SwMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a7fe44dc-ea25-4b8d-8fad-9fbcae86d56f"/>
+                  <a:da name="DEFAULT" value="3"/>
+                </v:var>
+                <v:var name="SwPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a318d2d9-0e75-49da-ac43-e7e4e682e2f9"/>
+                  <a:da name="DEFAULT" value="9"/>
+                </v:var>
+                <v:var name="ModuleId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Module ID of this module from Module List
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Numeric Module ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:78bc8362-080f-4253-b3da-804ab69a7154"/>
+                  <a:da name="DEFAULT" value="70"/>
+                </v:var>
+                <v:var name="VendorId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Vendor ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:01b0f467-6943-4558-b4f2-3fa1fad28449"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="VendorApiInfix" type="STRING_LABEL">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Vendor API Infix"/>
+                  <a:a name="OPTIONAL" value="false"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:1c68a547-f24e-4a4e-9540-69fbd466ec89"/>
+                  <a:a name="VISIBLE" value="true"/>
+                  <a:da name="DEFAULT" value="T03"/>
+                  <a:da name="ENABLE" value="true"/>
+                </v:var>
+                <v:var name="Release" type="STRING_LABEL">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Release Information"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:1c68a547-f24e-4a4e-9540-69fbd533ec89"/>
+                  <a:da name="DEFAULT" value=""/>
+                </v:var>
+              </v:ctr>
+              <v:ctr name="PublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Additional published parameters not covered by CommonPublishedInformation container.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="EB Published Information"/>
+                <a:a name="TAB" value="EB Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:cb4128ed-26c1-4ddd-906e-854bed917e07"/>
+                <v:var name="PbcfgMSupport" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Specifies whether or not the CanTrcv_1_T03 can use the PbcfgM module for post-build support.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="PbcfgM support"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:eb61002e-69c0-4f16-a910-c27adb75f6ee"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+              </v:ctr>
+            </v:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

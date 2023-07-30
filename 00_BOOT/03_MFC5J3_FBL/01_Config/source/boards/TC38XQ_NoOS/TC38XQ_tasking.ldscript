@@ -1,0 +1,207 @@
+/* Linker script for the TRICORE system. */
+
+architecture TC
+{
+	endianness
+	{
+		little;
+	}
+
+	space linear
+	{
+		id = 1;
+		mau = 8;
+
+		map (src_offset=0x00000000, dest_offset=0x00000000, size=4G, dest=bus:fpi_bus);
+
+		copytable (align = 1 << 2, copy_unit = 1, dest = linear);
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+	}
+}
+
+architecture TC1V1.6.2 extends TC
+{
+}
+
+processor spe
+{
+	derivative = tcxxx;
+}
+
+derivative tcxxx
+{
+	core tc
+	{
+		architecture = TC1V1.6.2;
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+		map (dest=bus:tc:fpi_bus, dest_offset=0, size=4G);
+	}
+}
+
+/*******************************************************************************
+ *                    ROM / FLASH Configuration
+ ******************************************************************************/
+
+/* Flash ROM at 0x80064000 (240K), PMU0 */
+memory int_PFLASH
+{
+    mau = 8;
+    size = 240K;
+    type = rom;
+    map (dest=bus:spe:fpi_bus, dest_offset=0x80064000, size=240K);
+}
+
+/*******************************************************************************
+ *                    RAM Configuration
+ ******************************************************************************/
+
+memory int_Data_Scratch_Pad_SRAM
+{
+  mau = 8;
+  size = 224k;
+  type = ram;
+  map (dest=bus:spe:fpi_bus, dest_offset=0x70000000, size=224k);
+}
+
+section_layout spe:tc:linear
+{
+  "BOARD_CSAMEMORY_BEGIN"  := 0x70038000;
+  "BOARD_CSAMEMORY_END"    := 0x7003C000;
+}
+
+section_layout spe:tc:linear
+{
+/*******************************************************************************
+ *                    FLASH Driver Configuration
+ ******************************************************************************/
+
+  group __AREA_FLS_DRV_RAM (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0x20], align=8)
+  {
+    group FLS_DRV_WRITE_CODE_RAM (contiguous, ordered, align=8)
+    {
+      section "text_fls_drv_write_code_ram" (fill=0, attributes=rwx, size = 4k-0x20)
+      {
+        select ".rodata.APP_Prg.m_aubFlashDriverVersion";
+        select ".text.*.*.DRV_FLS_WRITE_SEC";
+      }
+    }
+  }
+
+/*******************************************************************************
+ *                    ROM Configuration
+ ******************************************************************************/
+
+  group __AREA_version (contiguous, ordered, run_addr = mem:int_PFLASH[0x40], align=16)
+  {
+    group rodata.version  (contiguous, ordered)
+    {
+      select ".rodata.APP_Prg.m_aubBootloaderSpecVersion";
+      select ".rodata.APP_Prg.m_auReleaseVersion";
+      select ".rodata.APP_Prg.m_aubBootloaderVersion";
+      select ".rodata.APP_Prg.m_aubFlashDriverPartNumber";
+      select ".rodata.APP_Prg.m_aubEcuPartNumber";
+    }
+  }
+
+  group __AREA_reset (contiguous, ordered, run_addr = mem:int_PFLASH[0x100])
+  {
+      select ".reset";
+  }
+
+  group __AREA_textvect (contiguous, ordered, run_addr = mem:int_PFLASH[0x2000])
+  {
+    group text.vectors (contiguous, ordered)
+    {
+      select ".intctab";
+    }
+    group text.exept (contiguous, ordered)
+    {
+      select ".exctab";
+    }
+  }
+
+  group __AREA_text (contiguous, ordered, run_addr = mem:int_PFLASH)
+  {
+    group text.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".text*";
+    }
+  }
+
+  group __AREA_rodata (contiguous, ordered, run_addr = mem:int_PFLASH, align=8)
+  {
+    group rodata.TRICORE (contiguous, ordered)
+    {
+      select ".rodata*";
+    }
+  }
+
+  group __AREA_initdata (contiguous, ordered, load_addr = mem:int_PFLASH, align=8)
+  {
+    group initdata.TRICORE (contiguous, ordered)
+    {
+      select ".data*";
+    }
+  }
+
+/*******************************************************************************
+ *                    RAM Configuration
+ ******************************************************************************/
+
+  group __AREA_databssnoinit (attributes=s, contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[sizeof(mem:int_Data_Scratch_Pad_SRAM)-0x100], align=8)
+  {
+    group bssnoinit.TRICORE (contiguous, ordered)
+    {
+      select "*.prog_sig*";
+      select ".bss.PROG_Cbk.m_ulBluSig";
+      select "*.ram_no_init*";
+    }
+  }
+
+  group __AREA_log (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0x37000], align=8)
+  {
+    group log.TRICORE(align=8, attributes=rwx)
+    {
+      select ".bss.log.g_lsg_log";
+    }
+  }
+
+  group __AREA_stack (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0x1000], align=8)
+  {
+    group stacks.TRICORE (contiguous, ordered)
+    {
+      select ".bss.stack*";
+    }
+  }
+
+  group __AREA_databss (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0x2000], align=8)
+  {
+    group data.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".data*";
+    }
+
+    group bss.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".bss*";
+    }
+  }
+
+
+  /* Symbols for the global initialisation.*/
+  "__INITDATA"  := "_lc_gb_initdata.TRICORE";
+  "__STARTDATA" := "_lc_gb_data.TRICORE";
+  "__ENDDATA"   := "_lc_ge_data.TRICORE";
+  "__STARTBSS"  := "_lc_gb_bss.TRICORE";
+  "__ENDBSS"    := "_lc_ge_bss.TRICORE";
+}

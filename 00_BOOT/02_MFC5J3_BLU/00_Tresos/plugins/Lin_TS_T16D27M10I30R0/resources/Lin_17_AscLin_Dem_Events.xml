@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dem:events xmlns:dem="http://www.tresos.de/_project/AutoCore/dem.events_1.xsd"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.tresos.de/_project/AutoCore/dem.events_1.xsd">
+         <!-- Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references. NOTE: As Lin driver do not support throwing DEM errors, configuring DEM error is disabled -->     
+</dem:events>

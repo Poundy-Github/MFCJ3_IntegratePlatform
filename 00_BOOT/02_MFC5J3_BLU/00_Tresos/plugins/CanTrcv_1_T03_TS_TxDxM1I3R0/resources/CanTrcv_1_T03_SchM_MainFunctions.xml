@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schm:mainFunctions
+    xmlns:schm="http://www.tresos.de/_project/AutoCore/schm.mainFunctions_1.xsd"
+    xmlns:svc="http://www.tresos.de/_project/AutoCore/svc.base_1.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.tresos.de/_project/AutoCore/schm.mainFunctions_1.xsd">
+
+    <mainFunction name="CanTrcv_1_T03_MainFunction">
+        <enable type="XPATH" value="as:modconf('CanTrcv')[(CommonPublishedInformation/VendorId = 1) and (CommonPublishedInformation/VendorApiInfix = 'T03')]/CanTrcvGeneral/CanTrcvWakeUpSupport='CANTRCV_WAKEUP_BY_POLLING'"/>
+        <header value="CanTrcv_1_T03.h" />
+        <cycleTime type="PLAIN" value="0.005" />
+        <taskPrefix value="SchMComTask" />
+        <taskPriority value="150" />
+        <callBefore>
+            <mainFunction>Com_MainFunctionRx</mainFunction>
+            <mainFunction>Com_MainFunctionTx</mainFunction>
+            <mainFunction>FrIf_MainFunction</mainFunction>
+            <mainFunction>LinIf_MainFunction</mainFunction>
+            <mainFunction>Xcp_MainFunction</mainFunction>
+            <mainFunction>Spi_MainFunction_Handling</mainFunction>
+        </callBefore>
+        <callAfter>
+            <mainFunction>Can_MainFunction_BusOff</mainFunction>
+            <mainFunction>Can_MainFunction_Wakeup</mainFunction>
+            <mainFunction>Can_MainFunction_Mode</mainFunction>
+        </callAfter>
+    </mainFunction>
+
+
+</schm:mainFunctions>

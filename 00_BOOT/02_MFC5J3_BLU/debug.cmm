@@ -1,0 +1,2 @@
+do .\01_Config\source\boards\TC38XQ_NoOS\TC38XQ.cmm .\01_Config\output\bin\TRICORE_TC38XQ_01_Config.elf
+

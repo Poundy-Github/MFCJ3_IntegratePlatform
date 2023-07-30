@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+  <!--
+    AUTOSAR Os_TS_T0D1M4I0R0 plugin
+    Project: EB tresos AutoCore
+
+    Copyright 2005-2019 by Elektrobit Automotive GmbH
+    All rights exclusively reserved for Elektrobit Automotive GmbH,
+    unless expressly agreed to otherwise.
+  -->
+
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Os_TS_T0D1M4I0R0_ModuleId"
+             name="Os_TS_T0D1M4I0R0 Module">
+
+    <module id="Os_TS_T0D1M4I0R0"
+            label="Os"
+            mandatory="false"
+            allowMultiple="false"
+            description="ACG-Stubs: AUTOSAR config stub to replace Os module in tests"
+            copyright="(c) 2005-2019 Elektrobit Automotive GmbH"
+            swVersionMajor="4"
+            swVersionMinor="0"
+            swVersionPatch="3"
+            swVersionSuffix="B321093"
+            specVersionMajor="4"
+            specVersionMinor="1"
+            specVersionPatch="0"
+            specVersionSuffix="0000"
+            relVersionMajor="4"
+            relVersionMinor="0"
+            relVersionPatch="3"
+            categoryType="Os"
+            categoryLayer="Stub"
+            categoryCategory="Stub"
+            categoryComponent="ECUC">
+
+      <cluster name="Stubs"/>
+
+    </module>
+  </extension>
+
+
+  <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="Os_TS_T0D1M4I0R0_ConfigId"
+             name="Os_TS_T0D1M4I0R0 Configuration">
+    <configuration moduleId="Os_TS_T0D1M4I0R0">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/Os.xdm" type="xdm" id="res_default"/>
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TS_T0D1M4I0R0/Os"/>
+      </data>
+
+      <editor id="Os_TS_T0D1M4I0R0_EditorId"
+              label="Default"
+              tooltip="ACG-Stubs: AUTOSAR config stub to replace Os module in tests">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TS_T0D1M4I0R0/Os"/>
+          <parameter name="title" value="Os"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+
+
+
+
+
+
+
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+             id="Os_TS_T0D1M4I0R0_GeneratorId"
+             name="Os_TS_T0D1M4I0R0 Generator">
+    <generator class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+               id="Os_TS_T0D1M4I0R0_TemplateBasedCodeGeneratorId"
+               moduleId="Os_TS_T0D1M4I0R0">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate"/>
+
+
+
+
+    </generator>
+  </extension>
+
+
+
+
+
+
+
+
+
+
+</plugin>
+

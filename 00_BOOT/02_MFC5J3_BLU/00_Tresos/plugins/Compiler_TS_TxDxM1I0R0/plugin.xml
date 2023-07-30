@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+  <!--
+  ** brief AUTOSAR Compiler_TS_TxDxM1I0R0 plugin
+  ** project AUTOSAR Standard Core
+  **
+  ** All rights exclusively reserved for Elektrobit Automotive GmbH,
+  ** unless expressly agreed to otherwise.
+  -->
+  
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Compiler_TS_TxDxM1I0R0_ModuleId"
+             name="Compiler_TS_TxDxM1I0R0 Module">
+
+    <module id="Compiler_TS_TxDxM1I0R0"
+            label="Compiler"
+            mandatory="true"
+            allowMultiple="false"
+            description="ACM-Base: Compiler standard header files of the EB tresos AutoCore"
+            copyright="(c) 2017-2019 Elektrobit Automotive GmbH"
+            swVersionMajor="1"
+            swVersionMinor="0"
+            swVersionPatch="3"
+            swVersionSuffix="B321093"
+            specVersionMajor="3"
+            specVersionMinor="2"
+            specVersionPatch="0"
+            specVersionSuffix="0000"
+            relVersionMajor="4"
+            relVersionMinor="0"
+            relVersionPatch="3"
+            categoryType="Compiler"
+            categoryLayer="EB Base Bundle"
+            categoryCategory="EB"
+            categoryComponent="ECUC">
+
+      <cluster name="Basic Services"/>
+
+    </module>
+  </extension>
+
+</plugin>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+ <!--
+*   @file    plugin.xml
+*   @version 8.0.0
+*
+*   @brief   AUTOSAR Bfx_TS_T16D27M8I0R0 - Tresos Studio plugin configuration file.
+*   @details This file contains the configuration for the Bfx Tresos Studio plugin.
+-->
+<!--
+====================================================================================================
+*   Project              : AUTOSAR 4.2 MCAL
+*   Platform             : TRICORE
+*   Peripheral           : TC38XQ
+*   Dependencies         : none
+*
+*   Autosar Version      : 4.2.2
+*   Autosar Revision     : ASR_REL_4_2_REV_M4_REL_VERSION_SUFFIX
+*   Autosar Conf.Variant :
+*
+*   This file is part of MCAL integration. Elektrobit included or updated extentions.
+*   (c) 2019 Infineon Technologies
+*   All rights exclusively reserved for Infineon,
+*   unless expressly agreed to otherwise.
+====================================================================================================
+====================================================================================================
+====================================================================================================
+-->
+
+<plugin>
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+          id="Bfx_TS_T16D27M8I0R0_ModuleId"
+          name="Bfx Driver PlugIn with a TemplateGenerator">
+
+
+          <module id="Bfx_TS_T16D27M8I0R0"
+            label="Bfx"
+            mandatory="false"
+            allowMultiple="false"
+            description="%ModuleDesc"
+            copyright="(c) 2019 Infineon Technologies"
+            swVersionMajor="8"
+            swVersionMinor="0"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="2"
+            specVersionPatch="2"
+            specVersionSuffix=""
+            relVersionMajor="4"
+            relVersionMinor="2"
+            relVersionPatch="2"
+            categoryType="Bfx"
+            categoryLayer="Bfx Library"
+            categoryCategory="BFX"
+            categoryComponent="ECUC">
+			
+           <cluster name="Microcontroller Driver"/>			
+
+           <ecuType target="TRICORE" derivate="TC38XQ"/>
+       </module>
+   </extension>
+  <!--
+  ** AutoCore Bfx_TS_T16D27M8I0R0 plugin
+  **
+  ** All rights exclusively reserved for Infineon,
+  ** unless expressly agreed to otherwise.
+  -->
+  <!-- 
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Bfx_TS_T16D27M8I0R0_ModuleId"
+             name="Bfx_TS_T16D27M8I0R0 Module">
+
+    <module id="Bfx_TS_T16D27M8I0R0"
+            label="Bfx"
+            mandatory="false"
+            allowMultiple="false"
+            description="ACM-MCAL: AUTOSAR Bfx driver module (TRICORE TC38XQ)"
+            copyright="(c) 2005-2019 Infineon"
+            swVersionMajor="8"
+            swVersionMinor="0"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="2"
+            specVersionPatch="2"
+            specVersionSuffix=""
+            relVersionMajor="4"
+            relVersionMinor="2"
+            relVersionPatch="2"
+            categoryType="Bfx"
+            categoryLayer="Bfx Library"
+            categoryCategory="BFX"
+            categoryComponent="ECUC">
+
+      <ecuType target="TRICORE" derivate="TC38XQ"/>
+      <cluster name="MCAL"/>
+
+    </module>
+  </extension>
+
+    -->
+  
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+             id="Bfx_TS_T16D27M8I0R0_GeneratorId"
+             name="Bfx_TS_T16D27M8I0R0 Generator">
+    <generator class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+               id="Bfx_TS_T16D27M8I0R0_TemplateBasedCodeGeneratorId"
+               moduleId="Bfx_TS_T16D27M8I0R0">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate"/>
+
+      <!-- swcd modes and template path parameters -->
+      <parameter name="mode_type"
+                 mode="generate_swcd" value="generate"/>
+
+      <parameter name="mode_type"
+                 mode="verify_swcd" value="verify"/>
+
+      <parameter name="templates"
+                 mode="generate_swcd,verify_swcd" value="generate_swcd"/>
+
+
+
+
+    </generator>
+  </extension>
+
+ 
+  
+  <extension point="dreisoft.tresos.guidedconfig.api.plugin.pushservice">
+      <pushoperation
+            id="SvcAsReq_Bfx_TS_T16D27M8I0R0"
+            name="Bfx service need requests">
+         <operationclass
+               class="eb.tresos.svclib.api.pushservice.SvcRequestOperation">
+               <parameter name="module" value="Bfx" />
+               <parameter name="req://schm.mainFunctions:1" value="resources/Bfx_SchM_MainFunctions.xml" />
+               <parameter name="req://dem.events:1" value="resources/Bfx_Dem_Events.xml" />
+               <parameter name="req://ecum.initFunctions:1" value="resources/Bfx_EcuM_InitFunctions.xml" />
+         </operationclass>
+         <event>
+            <and>
+               <with variable="class">
+                  <equals value="eb.tresos.svclib.api.event.SvcRequestsEvent" />
+               </with>
+               <with variable="svc.type">
+                  <equals value="request" />
+               </with>
+              <with variable="ecuConfig.moduleId.Bfx_TS_T16D27M8I0R0">
+                  <equals value="true" />
+               </with>
+               <or>
+                  <with variable="ecuConfig.relVersion">
+                     <equals value="4.2" />
+                  </with>
+                  <with variable="ecuConfig.relVersion">
+                     <equals value="0.0" />
+                  </with>
+               </or>
+            </and>
+         </event>
+      </pushoperation>
+  </extension>
+
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension>
+  
+
+</plugin>
+

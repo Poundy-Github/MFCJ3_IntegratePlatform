@@ -1,0 +1,1529 @@
+<?xml version='1.0'?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>CanTrcv_1_T03_TS_TxDxM1I3R0</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-DEF UUID="ae02f365-bd3f-466e-8fec-34dea338cdfd">
+          <SHORT-NAME>CanTrcv</SHORT-NAME>
+          <DESC>
+            <L-2 L="FOR-ALL">&lt;html&gt;
+                        Configuration of the CanTrcv (CAN Transceiver driver) module.
+                      &lt;/html&gt;</L-2>
+          </DESC>
+          <ADMIN-DATA>
+            <DOC-REVISIONS>
+              <DOC-REVISION>
+                <REVISION-LABEL>4.2.0</REVISION-LABEL>
+                <ISSUED-BY>AUTOSAR</ISSUED-BY>
+                <DATE>2011-11-09</DATE>
+              </DOC-REVISION>
+            </DOC-REVISIONS>
+          </ADMIN-DATA>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+          <REFINED-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/CanTrcv</REFINED-MODULE-DEF-REF>
+          <SUPPORTED-CONFIG-VARIANTS>
+            <SUPPORTED-CONFIG-VARIANT>VARIANT-POST-BUILD</SUPPORTED-CONFIG-VARIANT>
+          </SUPPORTED-CONFIG-VARIANTS>
+          <CONTAINERS>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="f8cbf90c-63c5-4102-969c-4db33e55adbd">
+              <SHORT-NAME>CanTrcvConfigSet</SHORT-NAME>
+              <DESC>
+                <L-2 L="FOR-ALL">&lt;html&gt;
+                        This is the multiple configuration set container for CAN Transceiver.
+                      &lt;/html&gt;</L-2>
+              </DESC>
+              <MULTIPLE-CONFIGURATION-CONTAINER>true</MULTIPLE-CONFIGURATION-CONTAINER>
+              <PARAMETERS>
+                <ECUC-INTEGER-PARAM-DEF UUID="3c072a34-a895-4eb2-bd6e-9cc05d90934b">
+                  <SHORT-NAME>CanTrcvSPICommRetries</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                          Indicates the maximum number of communication retries in case of a failed SPI communication (applies both to timed out communication and to errors/NACK in the response data).
+                        &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>255</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="0bc2cced-34f7-4330-a18d-f83a5f9721cf">
+                  <SHORT-NAME>CanTrcvSPICommTimeout</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                          Indicates the maximum time allowed to the CanTrcv for replying (either positively or negatively) to a SPI command.
+                          This parameter is unused, the CanTrcv supports only synchronous SPI access.
+                        &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>100</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+              </PARAMETERS>
+              <SUB-CONTAINERS>
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="fe26e432-2b79-47aa-9750-ae64585672a2">
+                  <SHORT-NAME>CanTrcvChannel</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                            Container gives CAN transceiver driver information about a single CAN.
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+                  <POST-BUILD-CHANGEABLE>true</POST-BUILD-CHANGEABLE>
+                  <PARAMETERS>
+                    <ECUC-INTEGER-PARAM-DEF UUID="fee06c61-0148-451d-b4b0-e799353a72e7">
+                      <SHORT-NAME>CanTrcvChannelId</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Unique identifier of the CAN Transceiver Channel.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+                      <MAX>255</MAX>
+                      <MIN>0</MIN>
+                    </ECUC-INTEGER-PARAM-DEF>
+                    <ECUC-BOOLEAN-PARAM-DEF UUID="9139e2f6-d014-40cc-938b-58602490919f">
+                      <SHORT-NAME>CanTrcvChannelUsed</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Shall the related CAN transceiver channel be used?
+                              This parameter is not used.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                    </ECUC-BOOLEAN-PARAM-DEF>
+                    <ECUC-BOOLEAN-PARAM-DEF UUID="e88eeee7-5f25-4cab-b2df-2110392586ea">
+                      <SHORT-NAME>CanTrcvControlsPowerSupply</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Is ECU power supply controlled by this transceiver?
+                              TRUE = Controlled by transceiver.
+                              FALSE = Not controlled by transceiver.
+                              This parameter is not used.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                    </ECUC-BOOLEAN-PARAM-DEF>
+                    <ECUC-BOOLEAN-PARAM-DEF UUID="947ff944-a4a7-4461-b121-60a81773e2bb">
+                      <SHORT-NAME>CanTrcvHwPnSupport</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                               Indicates whether the selective wake-up functionality is enabled or disabled in HW on a per-channel basis.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                    </ECUC-BOOLEAN-PARAM-DEF>
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="9a1cf7dc-0ef5-4ea3-a48e-a3a1b0bc476e">
+                      <SHORT-NAME>CanTrcvInitState</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              State of CAN transceiver after call to CanTrcv_Init.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>CANTRCV_OP_MODE_NORMAL</DEFAULT-VALUE>
+                      <LITERALS>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CANTRCV_OP_MODE_NORMAL</SHORT-NAME>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CANTRCV_OP_MODE_SLEEP</SHORT-NAME>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CANTRCV_OP_MODE_STANDBY</SHORT-NAME>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                      </LITERALS>
+                    </ECUC-ENUMERATION-PARAM-DEF>
+                    <ECUC-INTEGER-PARAM-DEF UUID="c428556c-42bd-4c71-b31d-e9edea9d0380">
+                      <SHORT-NAME>CanTrcvMaxBaudrate</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Max baudrate for transceiver hardware type. Only used for validation purposes. Value shall be configured by configuration tool based on trans-ceiver hardware type.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>1000</DEFAULT-VALUE>
+                      <MAX>1000</MAX>
+                      <MIN>0</MIN>
+                    </ECUC-INTEGER-PARAM-DEF>
+                    <ECUC-BOOLEAN-PARAM-DEF UUID="5b0d49dc-0008-4383-b0a1-dd1aaf8f3d5a">
+                      <SHORT-NAME>CanTrcvWakeupByBusUsed</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Is wake up by bus supported? If CAN transceiver hardware does not support wake up by bus value is always FALSE. If CAN transceiver hardware supports wake up by bus value is TRUE or FALSE depending whether it is used or not.
+                              TRUE = Is used.
+                              FALSE = Is not used
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                    </ECUC-BOOLEAN-PARAM-DEF>
+                  </PARAMETERS>
+                  <REFERENCES>
+                    <ECUC-REFERENCE-DEF UUID="91b7c577-b61c-4e8e-b65b-9650f7a9fdc7">
+                      <SHORT-NAME>CanTrcvWakeupSourceRef</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Reference to a wakeup source in the EcuM configuration.
+                              &lt;strong&gt;This configuration parameter is unused and replaced
+                              by the vendor specific parameters CanTrcvSyserrWakeupSourceRef, 
+                              CanTrcvByBusWakeupSourceRef and CanTrcvByPinWakeupSourceRef.&lt;/strong&gt;
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource</DESTINATION-REF>
+                    </ECUC-REFERENCE-DEF>
+                    <ECUC-REFERENCE-DEF UUID="25cc0a03-2f0f-11e2-81c1-0800200c9a66">
+                      <SHORT-NAME>CanTrcvSyserrWakeupSourceRef</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for SYSERR detection. This parameter is active only if CanTrcvWakeUpSupport is active.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a SYSERR:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Partial networking frame detection error (always active if partial network enabled)&lt;/li&gt;
+                                &lt;li&gt;CAN failure (if CanTrcvCanFailureDetection enabled)&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              If all of the listed conditions are false, this reference can be disabled.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification (except all listed conditions are also disabled).
+                            &lt;/p&gt;
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource</DESTINATION-REF>
+                    </ECUC-REFERENCE-DEF>
+                    <ECUC-REFERENCE-DEF UUID="25cc0a02-2f0f-11e2-81c1-0800200c9a66">
+                      <SHORT-NAME>CanTrcvByBusWakeupSourceRef</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for a by bus wake-up detection. This parameter is only active if CanTrcvWakeupByBusUsed is active and true.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a by-bus wake-up:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Wakeup on CAN bus&lt;/li&gt;
+                                &lt;li&gt;Internal ECU wakeup via request to NORMAL mode&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification.
+                            &lt;/p&gt;
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource</DESTINATION-REF>
+                    </ECUC-REFERENCE-DEF>
+                    <ECUC-REFERENCE-DEF UUID="37fa44a1-113a-11e2-892e-0800200c9a66">
+                      <SHORT-NAME>CanTrcvByPinWakeupSourceRef</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Reference to a wakeup source in the EcuM configuration for a by PIN wake-up detection. This parameter is only active if CanTrcvWakeUpSupport is active.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                            The following events trigger a wakeup-by-pin:
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;Rising edge on WAKE pin (if CanTrcvRisingEdgeDetection enabled)&lt;/li&gt;
+                                &lt;li&gt;Falling edge on WAKE pin (if CanTrcvFallingEdgeDetection enabled)&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              If all of the listed conditions are false, this reference can be disabled.
+                            &lt;/p&gt;
+                            &lt;p&gt;
+                              Disabling this parameter does not prevent wakeup, it only prevents EcuM notification (except all listed conditions are also disabled).
+                            &lt;/p&gt;
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <IMPLEMENTATION-CONFIG-CLASSES>
+                        <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      </IMPLEMENTATION-CONFIG-CLASSES>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource</DESTINATION-REF>
+                    </ECUC-REFERENCE-DEF>
+                  </REFERENCES>
+                  <SUB-CONTAINERS>
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="71aabf20-0dea-11e2-892e-0800200c9a66">
+                      <SHORT-NAME>VendorSpecific</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">Container contains CAN transceiver optimization parameter.</L-2>
+                      </DESC>
+                      <PARAMETERS>
+                        <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3c48b6f3-61ff-4bd9-be07-4e0ed8351855">
+                          <SHORT-NAME>CanTrcvSubModeCMC</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Select the CAN transceiver operating mode. This mode is
+                                  only available in Normal mode. The state can be set into
+                                  Offline mode
+                                  Active mode
+                                  Listen-only mode
+                                  This parameter corresponds to the CMC bit of the TJA1145 hardware
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>Active</DEFAULT-VALUE>
+                          <LITERALS>
+                            <ECUC-ENUMERATION-LITERAL-DEF>
+                              <SHORT-NAME>Active</SHORT-NAME>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                            </ECUC-ENUMERATION-LITERAL-DEF>
+                            <ECUC-ENUMERATION-LITERAL-DEF>
+                              <SHORT-NAME>Offline</SHORT-NAME>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                            </ECUC-ENUMERATION-LITERAL-DEF>
+                            <ECUC-ENUMERATION-LITERAL-DEF>
+                              <SHORT-NAME>Listen_Only</SHORT-NAME>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                            </ECUC-ENUMERATION-LITERAL-DEF>
+                          </LITERALS>
+                        </ECUC-ENUMERATION-PARAM-DEF>
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:3c48b6f3-61ff-4bd9-be07-4e0ed8351855">
+                          <SHORT-NAME>CanTrcvPnFramePNDM</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Indicates if the data and DLC have to be checked when Partial Networking is activated.
+                                This parameter has no effect, if PN is disabled.
+                             &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                        </ECUC-BOOLEAN-PARAM-DEF>
+                      </PARAMETERS>
+                      <REFERENCES>
+                        <ECUC-REFERENCE-DEF>
+                          <SHORT-NAME>CanTrcvIcuChannelRef</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Reference to the IcuChannel to enable/disable the interrupts for wakeups.
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel</DESTINATION-REF>
+                        </ECUC-REFERENCE-DEF>
+                      </REFERENCES>
+                      <SUB-CONTAINERS>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:9eb99fe0-2cee-11e2-81c1-0800200c9a66">
+                          <SHORT-NAME>CanTrcvTrcvEventRegister</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Contains setting to enable or disable various transceiver
+                                  event notifications.
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <PARAMETERS>
+                            <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:893f46b1-0dea-11e2-892e-0800200c9a66">
+                              <SHORT-NAME>CanTrcvSilentDetection</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches CAN bus silence detection on or off.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case the silent detection is disabled API
+                                      service CanTrcv_ReadTrcvSilenceFlag can not obtain
+                                      the silence status.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                            </ECUC-BOOLEAN-PARAM-DEF>
+                            <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:893f46b2-0dea-11e2-892e-0800200c9a66">
+                              <SHORT-NAME>CanTrcvCanFailureDetection</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches CAN failure detection on or off.
+                                      If disabled, a CAN failure does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case CAN failure detection is enabled the CanTrcv sets the SYSERR flag
+                                      if the TXD dominant time-out time is exceeded.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                            </ECUC-BOOLEAN-PARAM-DEF>
+                          </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:893f46b4-0dea-11e2-892e-0800200c9a66">
+                          <SHORT-NAME>CanTrcvSystEventRegister</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Contains setting to enable or disable various system
+                                  event notifications.
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:893f46b7-0dea-11e2-892e-0800200c9a66">
+                          <SHORT-NAME>CanTrcvWakeEventRegister</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Sets behavior for the transceiver wake-up pins.
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <PARAMETERS>
+                            <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:893f46b8-0dea-11e2-892e-0800200c9a66">
+                              <SHORT-NAME>CanTrcvRisingEdgeDetection</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches rising-edge detection on WAKE pin on or off.
+                                      If disabled, a rising-edge on the WAKE pin does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case of a rising edge the CanTrcv reports a wake-up.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                            </ECUC-BOOLEAN-PARAM-DEF>
+                            <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:893f46b9-0dea-11e2-892e-0800200c9a66">
+                              <SHORT-NAME>CanTrcvFallingEdgeDetection</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                    &lt;para&gt;
+                                      Switches falling-edge detection on WAKE pin on or off.
+                                      If disabled, a falling-edge on the WAKE pin does not result in a wakeup of the transceiver device.
+                                    &lt;/para&gt;
+                                    &lt;para&gt;
+                                      In case of a falling edge the CanTrcv reports a wake-up.
+                                    &lt;/para&gt;
+                                  &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                            </ECUC-BOOLEAN-PARAM-DEF>
+                          </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                      </SUB-CONTAINERS>
+                    </ECUC-PARAM-CONF-CONTAINER-DEF>
+                    <ECUC-CHOICE-CONTAINER-DEF UUID="3460d3f9-1f76-44fb-a245-409160c286c1">
+                      <SHORT-NAME>CanTrcvAccess</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Container gives CanTrcv Driver information about access to a single CAN transceiver.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <CHOICES>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:1d8e654e-9746-428f-929d-ddefe3a44578">
+                          <SHORT-NAME>CanTrcvDioAccess</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Container gives CAN transceiver driver information about accessing
+                                  ports and port pins. In addition relation between CAN transceiver
+                                  hardware pin names and Dio port access information is given. If a
+                                  CAN transceiver hardware has no Dio interface, there is no instance of this container.
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>0</UPPER-MULTIPLICITY>
+                          <SUB-CONTAINERS>
+                            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:f3735ce7-dc10-4544-b55e-626808f713e0">
+                              <SHORT-NAME>CanTrcvDioChannelAccess</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                      Container gives DIO channel access by single Can transceiver channel.
+                                    &lt;/html&gt;</L-2>
+                              </DESC>
+                              <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                              <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+                              <POST-BUILD-CHANGEABLE>false</POST-BUILD-CHANGEABLE>
+                              <PARAMETERS>
+                                <ECUC-STRING-PARAM-DEF UUID="ECUC:0ec03d65-0055-4853-8dc8-5fcd1ef5a43e">
+                                  <SHORT-NAME>CanTrcvHardwareInterfaceName</SHORT-NAME>
+                                  <DESC>
+                                    <L-2 L="FOR-ALL">&lt;html&gt;
+                                        CAN transceiver hardware interface name. It is typically the
+                                        name of a pin. From a Dio point of view it is either a port,
+                                        a single channel or a channel group. Depending on this fact
+                                        either. CANTRCV_DIO_PORT_SYMBOLIC_NAME or
+                                        CANTRCV_DIO_CHANNEL_SYMBOLIC_NAME or
+                                        CANTRCV_DIO_CHANNEL_GROUP_SYMBOLIC_NAME  shall reference a
+                                        Dio configuration. The CAN transceiver driver implementation
+                                        description shall list up this name for the appropriate CAN transceiver hardware.
+                                      &lt;/html&gt;</L-2>
+                                  </DESC>
+                                  <IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  </IMPLEMENTATION-CONFIG-CLASSES>
+                                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                                </ECUC-STRING-PARAM-DEF>
+                              </PARAMETERS>
+                              <REFERENCES>
+                                <ECUC-CHOICE-REFERENCE-DEF UUID="ECUC:1e464264-ce16-4a16-87d1-89aab53d6a2b">
+                                  <SHORT-NAME>CanTrcvDioSymNameRef</SHORT-NAME>
+                                  <DESC>
+                                    <L-2 L="FOR-ALL">&lt;html&gt;
+                                        Choice Reference to a DIO Port, DIO Channel or DIO Channel
+                                        Group. This reference replaces the
+                                        CANTRCV_DIO_PORT_SYM_NAME, CANTRCV_DIO_CHANNEL_SYM_NAME and
+                                        CANTRCV_DIO_GROUP_SYM_NAME references in the Can Trcv SWS.
+                                      &lt;/html&gt;</L-2>
+                                  </DESC>
+                                  <IMPLEMENTATION-CONFIG-CLASSES>
+                                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  </IMPLEMENTATION-CONFIG-CLASSES>
+                                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                                  <DESTINATION-REFS>
+                                    <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel</DESTINATION-REF>
+                                  </DESTINATION-REFS>
+                                </ECUC-CHOICE-REFERENCE-DEF>
+                              </REFERENCES>
+                            </ECUC-PARAM-CONF-CONTAINER-DEF>
+                          </SUB-CONTAINERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="657f4f80-c0ff-440e-9296-ad9247944f44">
+                          <SHORT-NAME>CanTrcvSpiSequence</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Container gives CAN transceiver driver information about one SPI se-quence. One SPI sequence used by CAN transceiver driver is in exclusive
+                                  use for it. No other driver is allowed to access this sequence. CAN trans-ceiver driver may use one sequence to access n CAN transceiver hard-wares chips of the same type or n sequences are used to access one sin-gle CAN transceiver hardware chip. If a CAN transceiver hardware has no
+                                  SPI interface, there is no instance of this container.
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                          <PARAMETERS>
+                            <ECUC-BOOLEAN-PARAM-DEF UUID="21962caa-5566-4d4b-bed2-a6567e4e5bbc">
+                              <SHORT-NAME>CanTrcvSpiAccessSynchronous</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                    This parameter is used to define whether the access to the Spi sequence is synchronous or asynchronous.
+                                    true:SPI access is synchronous.
+                                    false: SPI access is asynchronous.
+                                  &lt;/html&gt;</L-2>
+                              </DESC>
+                              <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                            </ECUC-BOOLEAN-PARAM-DEF>
+                          </PARAMETERS>
+                          <REFERENCES>
+                            <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="084f2684-c7cc-4ba4-9267-549ad43a6f91">
+                              <SHORT-NAME>CanTrcvSpiSequenceName</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                      Reference to a Spi sequence configuration container.
+                                    &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                              <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence</DESTINATION-REF>
+                            </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+                          </REFERENCES>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                      </CHOICES>
+                    </ECUC-CHOICE-CONTAINER-DEF>
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="361971eb-b0ed-49d9-b7f9-688bf995a545">
+                      <SHORT-NAME>CanTrcvPartialNetwork</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="FOR-ALL">&lt;html&gt;
+                              Container gives CAN transceiver driver information about the configuration of Partial Networking functionality.
+                            &lt;/html&gt;</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <PARAMETERS>
+                        <ECUC-INTEGER-PARAM-DEF UUID="2d80c167-0c4c-4292-957e-858b3971a53b">
+                          <SHORT-NAME>CanTrcvBaudRate</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Indicates the CAN Bus communication baud rate in kbps.
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <MAX>1000</MAX>
+                          <MIN>0</MIN>
+                        </ECUC-INTEGER-PARAM-DEF>
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="7c61f764-8732-4a02-9ea8-9bb6fdf7fee7">
+                          <SHORT-NAME>CanTrcvBusErrFlag</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  &lt;p&gt;
+                                  &lt;strong&gt;
+                                    This parameter is not used. Detecting of bus failures is currently not implemented.
+                                  &lt;/strong&gt;
+                                  &lt;/p&gt;
+                                  &lt;p&gt;
+                                    Indicates if the Bus Error (BUSERR) flag is managed by the BSW.
+                                    This flag is set if a bus failure is detected by the transceiver.
+                                  &lt;/p&gt;
+                                  &lt;ul&gt;
+                                    &lt;li&gt;&lt;tt&gt;TRUE&lt;/tt&gt;: Supported by transceiver and managed by BSW.&lt;/li&gt;
+                                    &lt;li&gt;&lt;tt&gt;FALSE&lt;/tt&gt;: Not managed by BSW. This parameter is not used.&lt;/li&gt;
+                                  &lt;/ul&gt;
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                        </ECUC-BOOLEAN-PARAM-DEF>
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="d76cedb0-7dad-4ebf-aec5-2ae915cd1310">
+                          <SHORT-NAME>CanTrcvPnCanIdIsExtended</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Indicates whether extended or standard ID is used.
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                        </ECUC-BOOLEAN-PARAM-DEF>
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="f893ee64-659f-4e81-ad9f-fe1d10341156">
+                          <SHORT-NAME>CanTrcvPnEnabled</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Enables/disables the call to CanIf_ConfirmPNAvailabity() function.
+                                This parameter needs partial network support enabled in the upper layers.
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                        </ECUC-BOOLEAN-PARAM-DEF>
+                        <ECUC-INTEGER-PARAM-DEF UUID="c6f912f8-0127-4a3a-97f9-17074af73c96">
+                          <SHORT-NAME>CanTrcvPnFrameCanId</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                CAN ID of the Wake-up Frame (WUF).
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <MAX>4294967295</MAX>
+                          <MIN>0</MIN>
+                        </ECUC-INTEGER-PARAM-DEF>
+                        <ECUC-INTEGER-PARAM-DEF UUID="dadc25f7-6bdb-489b-87bf-2ac1c8b441b0">
+                          <SHORT-NAME>CanTrcvPnFrameCanIdMask</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                ID Mask for the selective activation of the transceiver. It is used to enableFrame Wake-up (WUF) on a group of IDs.
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <MAX>4294967295</MAX>
+                          <MIN>0</MIN>
+                        </ECUC-INTEGER-PARAM-DEF>
+                        <ECUC-INTEGER-PARAM-DEF UUID="2cbf3dad-5daa-4049-8965-475790b359e9">
+                          <SHORT-NAME>CanTrcvPnFrameDlc</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                Data Length of the Wake-up Frame (WUF).
+                              &lt;/html&gt;</L-2>
+                          </DESC>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <MAX>8</MAX>
+                          <MIN>0</MIN>
+                        </ECUC-INTEGER-PARAM-DEF>
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="cc1b786d-3635-455c-914d-b7cadd492a87">
+                          <SHORT-NAME>CanTrcvPowerOnFlag</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  &lt;p&gt;
+                                  &lt;strong&gt;
+                                    This parameter is not used. Power on flag currently not checked
+                                    on startup.
+                                  &lt;/strong&gt;
+                                  &lt;/p&gt;
+                                  &lt;p&gt;
+                                    Indicates if the Power On Reset (POR) flag is
+                                    available and is managed by the transceiver.
+                                  &lt;/p&gt;
+                                  &lt;ul&gt;
+                                    &lt;li&gt;&lt;tt&gt;TRUE&lt;/tt&gt;: Supported by Hardware.&lt;/li&gt;
+                                    &lt;li&gt;&lt;tt&gt;FALSE&lt;/tt&gt;: Not supported by Hardware.&lt;/li&gt;
+                                  &lt;/ul&gt;
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>0</UPPER-MULTIPLICITY>
+                          <IMPLEMENTATION-CONFIG-CLASSES>
+                            <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                            </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                          </IMPLEMENTATION-CONFIG-CLASSES>
+                          <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                        </ECUC-BOOLEAN-PARAM-DEF>
+                      </PARAMETERS>
+                      <SUB-CONTAINERS>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="04604149-8a9e-491e-84ef-bff4ce735f6e">
+                          <SHORT-NAME>CanTrcvPnFrameDataMaskSpec</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="FOR-ALL">&lt;html&gt;
+                                  Defines data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the received Wake-up Frame (WUF).
+                                &lt;/html&gt;</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
+                          <POST-BUILD-CHANGEABLE>true</POST-BUILD-CHANGEABLE>
+                          <PARAMETERS>
+                            <ECUC-INTEGER-PARAM-DEF UUID="0dcdc6fb-9ad6-4b72-908c-6be63a3528f8">
+                              <SHORT-NAME>CanTrcvPnFrameDataMask</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                   Defines the n byte (Byte0 = LSB) of the data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the received Wake-up Frame (WUF).
+                                 &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <MAX>255</MAX>
+                              <MIN>0</MIN>
+                            </ECUC-INTEGER-PARAM-DEF>
+                            <ECUC-INTEGER-PARAM-DEF UUID="fa6b68e5-641c-4ad6-ab41-7a3e26eca012">
+                              <SHORT-NAME>CanTrcvPnFrameDataMaskIndex</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="FOR-ALL">&lt;html&gt;
+                                   holds the position n in frame of the mask-part
+                                 &lt;/html&gt;</L-2>
+                              </DESC>
+                              <IMPLEMENTATION-CONFIG-CLASSES>
+                                <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                              </IMPLEMENTATION-CONFIG-CLASSES>
+                              <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                              <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <MAX>7</MAX>
+                              <MIN>0</MIN>
+                            </ECUC-INTEGER-PARAM-DEF>
+                          </PARAMETERS>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                      </SUB-CONTAINERS>
+                    </ECUC-PARAM-CONF-CONTAINER-DEF>
+                  </SUB-CONTAINERS>
+                </ECUC-PARAM-CONF-CONTAINER-DEF>
+              </SUB-CONTAINERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="77dd8e45-fbca-4dc7-af14-0bbea5d4fa7c">
+              <SHORT-NAME>CanTrcvGeneral</SHORT-NAME>
+              <DESC>
+                <L-2 L="FOR-ALL">&lt;html&gt;
+                     Container gives CAN transceiver driver basic information.
+                   &lt;/html&gt;</L-2>
+              </DESC>
+              <PARAMETERS>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="de2e79dd-5384-4fb0-8b42-05b6f2850626">
+                  <SHORT-NAME>CanTrcvDevErrorDetect</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                       Switches development error detection and notification on and off.
+                     &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="15e73632-8506-40e8-9477-24d7a2afc1a3">
+                  <SHORT-NAME>CanTrcvGetVersionInfo</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                       Switches version information API on and off. If switched off, function need not be present in compiled code
+                     &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="13dc3acf-7f3e-4b05-af4c-dfe27b2ee6f1">
+                  <SHORT-NAME>CanTrcvWaitCount</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                       Indicates the number of wait states to change the transceiver operation mode. Transceiver hardware may need wait states for some transitions.
+                     &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>4294967295</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="e3e61706-3144-4f34-b636-55916c55db1a">
+                  <SHORT-NAME>CanTrcvWakeUpSupport</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                       Informs whether wake up is supported by polling or not supported. In case no wake up is supported by the hardware,setting has to be NOT_SUPPORTED.
+                       Only in the case of wake up supported by polling, function CanTrcv_MainFunction has to be present and to be invoked by the scheduler.
+                     &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>CANTRCV_WAKEUP_BY_POLLING</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CANTRCV_WAKEUP_BY_POLLING</SHORT-NAME>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CANTRCV_WAKEUP_NOT_SUPPORTED</SHORT-NAME>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="af17f760-b5d1-11df-8d81-0800200c9a66">
+              <SHORT-NAME>VendorSpecific</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">Container contains CAN transceiver optimization parameter.</L-2>
+              </DESC>
+              <PARAMETERS>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="7b67bfa0-bf2b-11df-851a-0800200c9a66">
+                  <SHORT-NAME>CanTrcvOperationModeApiEnable</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Switches &lt;tt&gt;CanTrcv_SetOpMode&lt;/tt&gt; and &lt;tt&gt;CanTrcv_GetOpMode&lt;/tt&gt;
+                              API on and off. If set to &lt;tt&gt;false&lt;/tt&gt; the Can transceiver is
+                              always set to mode &apos;CANTRCV_OP_MODE_NORMAL&apos; after initalization.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables operation mode API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables operation mode API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the
+                                module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="a29ab610-c4bf-11df-851a-0800200c9a66">
+                  <SHORT-NAME>CanTrcvWakeupModeApiEnable</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Switches &lt;tt&gt;CanTrcv_SetWakeupMode&lt;/tt&gt; and &lt;tt&gt;CanTrcv_GetWuReason&lt;/tt&gt;
+                              API on and off. The API can only be disabled if parameter
+                              CanTrcvWakeUpSupport is set to &lt;tt&gt;CANTRCV_WAKEUP_NOT_SUPPORTED&lt;/tt&gt;.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables Wakeup mode API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables Wakeup mode API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF>
+                  <SHORT-NAME>CanTrcvPnSupport</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                        &lt;p&gt;Enables the support for the selective wake-up function
+                        (partial networking).&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables selective wake-up.&lt;/li&gt;
+                          &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables selective wake-up.&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                            &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                            Disabling this parameter reduces the ROM consumption of
+                            the module code.
+                          &lt;/li&gt;
+                          &lt;li class=&quot;optimization.config.rom.reduction&quot;&gt;
+                            &lt;strong&gt;ROM reduction (config):&lt;/strong&gt;
+                            Disabling this parameter reduces the ROM consumption of
+                            the module configuration.
+                          &lt;/li&gt;
+                          &lt;li class=&quot;optimization.code.exetime.reduction&quot;&gt;
+                            &lt;strong&gt;Execution time reduction (code):&lt;/strong&gt;
+                            Disabling this parameter reduces the execution
+                            time of the module code.
+                          &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p&gt;&lt;strong&gt;This configuration parameter replaces CanTrcvHwPnSupport.&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;Please note that this parameter is enabled only if a valid license for the
+                        license feature CANTRCV_FEATURE_PARTIAL_NETWORKING is installed.&lt;/p&gt;
+                        &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:9cde4cc9-c11f-4289-ab92-2606b0001f99">
+                  <SHORT-NAME>CanTrcvCanFdTolerance</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                          &lt;p&gt;Controls the tolerance of CAN-FD frames in
+                          combination with partial networking (passive support).&lt;/p&gt;
+                          &lt;ul&gt;
+                            &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: CFDC bit set&lt;/li&gt;
+                            &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: CFDC bit &lt;strong&gt;not&lt;/strong&gt; set&lt;/li&gt;
+                          &lt;/ul&gt;
+                          &lt;p&gt;This parameter corresponds to the CFDC bit of the TJA1145&apos;s control register.&lt;/p&gt;
+                        &lt;/html&gt;</L-2>
+                  </DESC>
+                  <!-- @Calculated /CanTrcv_1_T03_TS_TxDxM1I3R0/CanTrcv/VendorSpecific/CanTrcvCanFdTolerance: ENABLE(XPath: node:value(../CanTrcvPnSupport))-->
+                  <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                  <!-- @CalculatedEnd -->
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF>
+                  <SHORT-NAME>CanTrcvMaxChannelNumber</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                        &lt;p&gt;This parameter defines the size of the reserved RAM
+                        during link-time to hold the runtime data of the CanTrcv
+                        channel configuration.&lt;/p&gt;
+                        &lt;p&gt;This parameter has impact on the size of the PostBuild RAM.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul&gt;
+                          &lt;li class=&quot;optimization.code.ram.reduction&quot;&gt;
+                            &lt;strong&gt;RAM reduction:&lt;/strong&gt;
+                            Selecting a small value for this parameter reduces
+                            the RAM consumption of the module.
+                          &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF>
+                  <SHORT-NAME>CanTrcvRelocatablePbcfgEnable</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                          Enables/disable support for relocatable postbuild configuration.
+                          &lt;ul&gt;
+                            &lt;li&gt;True: Postbuild configuration relocatable in memory.&lt;/li&gt;
+                            &lt;li&gt;False: Postbuild configuration not relocatable in memory.&lt;/li&gt;
+                          &lt;/ul&gt;
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="0a797ea5-75d4-4786-89c7-07282f0b1ba7">
+                  <SHORT-NAME>CanTrcvPnCanIfCallbackSupport</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Switches on/off the call of CanIf_ConfirmPNAvailabity(),
+                              CanIf_ClearTrcvWufFlagIndication(), and CanIf_CheckTrcvWakeFlagIndication() functions
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;True: Enables the call of APIs.&lt;/li&gt;
+                              &lt;li&gt;False: Disables the call of APIs.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;p&gt;
+                              This parameter shall be set to true only if PN is enabled in CanIf. 
+                            &lt;/p&gt;
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="0a797ea5-75d4-4786-89c7-07282f0bdda7">
+                  <SHORT-NAME>CanTrcvIcuDriverSupportApiEnable</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                            &lt;p&gt;
+                              Switches ICU driver API on and off. The API can only be
+                              disabled if all channels do not support ICU driver.
+                            &lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;tt&gt;true&lt;/tt&gt;: Enables ICU driver API.&lt;/li&gt;
+                              &lt;li&gt;&lt;tt&gt;false&lt;/tt&gt;: Disables ICU driver API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;p&gt;&lt;strong&gt;Optimization Effect:&lt;/strong&gt;&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li class=&quot;optimization.code.rom.reduction&quot;&gt;
+                                &lt;strong&gt;ROM reduction (code):&lt;/strong&gt;
+                                Disabling this parameter reduces the ROM consumption of the
+                                module code.
+                              &lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="3c072a34-a895-4eb2-ba6f-9cc05ff0934b">
+                  <SHORT-NAME>CanTrcvSpiAccessAsynchronousTimeout</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">&lt;html&gt;
+                         Indicates the maximum number of loop iterations used from polling the completion of the asynchronous transfer.
+                         This parameter is related to the SpiMainFunctionPeriod parameter.
+                         See limitations chapter.
+                         &lt;/html&gt;</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                  <MAX>255</MAX>
+                  <MIN>1</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:a00be3e0-8783-9123-2d52-1eb616737ca6">
+              <SHORT-NAME>CommonPublishedInformation</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">
+                    &lt;html&gt;
+                      Common container, aggregated by all modules. It contains published information about vendor and versions.
+                  &lt;/html&gt;</L-2>
+              </DESC>
+              <PARAMETERS>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:948f3f2e-f129-4bc5-b4e1-7a7bdb8599e1">
+                  <SHORT-NAME>ArMajorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Major version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>3</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2893b920-59d5-4ac2-b2c1-e23742e66d70">
+                  <SHORT-NAME>ArMinorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Minor version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6428eb9b-8790-488a-b9a3-0fba52d0f59e">
+                  <SHORT-NAME>ArPatchVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Patch level version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:605b18ae-3f9a-41d4-9225-67c9c5f6fc34">
+                  <SHORT-NAME>SwMajorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Major version number of the vendor specific implementation of the module.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="a7fe44dc-ea25-4b8d-8fad-9fbcae86d56f">
+                  <SHORT-NAME>SwMinorVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Minor version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>3</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="a318d2d9-0e75-49da-ac43-e7e4e682e2f9">
+                  <SHORT-NAME>SwPatchVersion</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Patch level version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>9</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:78bc8362-080f-4253-b3da-804ab69a7154">
+                  <SHORT-NAME>ModuleId</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Module ID of this module from Module List
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>70</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:01b0f467-6943-4558-b4f2-3fa1fad28449">
+                  <SHORT-NAME>VendorId</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-STRING-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd466ec89">
+                  <SHORT-NAME>VendorApiInfix</SHORT-NAME>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <ECUC-STRING-PARAM-DEF-VARIANTS>
+                    <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                      <DEFAULT-VALUE>T03</DEFAULT-VALUE>
+                    </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                  </ECUC-STRING-PARAM-DEF-VARIANTS>
+                </ECUC-STRING-PARAM-DEF>
+                <ECUC-STRING-PARAM-DEF UUID="ECUC:1c68a547-f24e-4a4e-9540-69fbd533ec89">
+                  <SHORT-NAME>Release</SHORT-NAME>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <ECUC-STRING-PARAM-DEF-VARIANTS>
+                    <ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                      <DEFAULT-VALUE></DEFAULT-VALUE>
+                    </ECUC-STRING-PARAM-DEF-CONDITIONAL>
+                  </ECUC-STRING-PARAM-DEF-VARIANTS>
+                </ECUC-STRING-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:cb4128ed-26c1-4ddd-906e-854bed917e07">
+              <SHORT-NAME>PublishedInformation</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">
+                    &lt;html&gt;
+                      Additional published parameters not covered by CommonPublishedInformation container.
+                  &lt;/html&gt;</L-2>
+              </DESC>
+              <PARAMETERS>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:eb61002e-69c0-4f16-a910-c27adb75f6ee">
+                  <SHORT-NAME>PbcfgMSupport</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">
+                      &lt;html&gt;
+                        Specifies whether or not the CanTrcv_1_T03 can use the PbcfgM module for post-build support.
+                    &lt;/html&gt;</L-2>
+                  </DESC>
+                  <IMPLEMENTATION-CONFIG-CLASSES>
+                    <ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PUBLISHED-INFORMATION</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-IMPLEMENTATION-CONFIGURATION-CLASS>
+                  </IMPLEMENTATION-CONFIG-CLASSES>
+                  <ORIGIN>Elektrobit Automotive GmbH</ORIGIN>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+          </CONTAINERS>
+        </ECUC-MODULE-DEF>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

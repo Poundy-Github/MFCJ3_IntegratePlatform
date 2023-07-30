@@ -1,0 +1,343 @@
+/*********************************************************************************/
+/*                                                                               */
+/*                                BOOT Layers                                    */
+/*                                                                               */
+/* ------------------------------------------------------------------------------*/
+/*                                                                               */
+/*                                 PROG configuration                            */
+/*                                                                               */
+/*********************************************************************************/
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                        */
+/*%%   _____________________________   %%  \file PROG_Cfg_Impl10.h              */
+/*%%  |                             |  %%  \brief PROG layer include plugin file */
+/*%%  |   &&&&&   &&&&&             |  %%  Module version: 2.17.0 BL-3.X              */
+/*%%  |   &       &    &            |  %%                                        */
+/*%%  |   &&&&    &&&&&             |  %%                                        */
+/*%%  |   &       &    &            |  %%                                        */
+/*%%  |   &&&&&   &&&&&             |  %%                                        */
+/*%%  |_____________________________|  %%                                        */
+/*%%                                   %%                                        */
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                        */
+/*********************************************************************************/
+/* Copyright 2010 by Elektrobit Automotive GmbH                                  */
+/* All rights exclusively reserved for Elektrobit Automotive GmbH,               */
+/* unless expressly agreed to otherwise.                                         */
+/*********************************************************************************/
+[!AUTOSPACING!]
+#ifndef PROG_CFG_IMPL10_H
+#define PROG_CFG_IMPL10_H
+
+[!NOCODE!]
+[!IF "not(node:exists(as:modconf('ProgVCC')))"!]
+    [!SKIPFILE!]
+[!ENDIF!]
+[!ENDNOCODE!]
+
+[!IF "node:exists(as:modconf('ProgVCC'))"!]
+#define PROG_ACTIVE_SBL_RESPONSE_SIZE                   5U
+#define PROG_CHK_MEMORY_RESPONSE_SIZE                   6U
+#define PROG_ECU_RESET_RESPONSE_SIZE                    2U
+#define PROG_DSC_RESPONSE_SIZE                          2U
+#define PROG_TD_RESPONSE_SIZE                           2U
+#define PROG_RTE_RESPONSE_SIZE                          1U
+#define PROG_COMPARE_KEY_RESPONSE_SIZE                  2U
+#define PROG_ERASE_POS_RESPONSE_SIZE                    5U
+#define PROG_CHK_PROG_DEP_POS_RESPONSE_SIZE             7U
+#define PROG_ERASE_REQUEST_DATA                         4U
+#define PROG_RD_RESPONSE_SIZE                           4U
+#define PROG_WK_RESPONSE_SIZE                           3U
+#define PROG_RK_RESPONSE_SIZE                           35U
+#define PROG_TD_MIN_SIZE                                2U
+#define PROG_TD_MIN_SIZE_RD                             3U
+#define PROG_NRC_SIZE                                   3U
+#define PROG_RTE_SIZE                                   1U
+
+#define PROG_RC_CHK_MEMORY_STATUS_INDEX                 4U
+#define PROG_RC_CHK_MEMORY_RESULT_INDEX                 5U
+#define PROG_RC_CHK_MEMORY_SIGNATURE_INDEX              4U
+#define PROG_ERASE_ADDR_LEN                             4U
+#define PROG_ERASE_SIZE_LEN                             4U
+#define PROG_PROD_KEY_REQ_SIZE                          291U
+#define PROG_PROD_KEY_INDEX                             3U
+#define PROG_PROD_KEY_HASH_INDEX                        263U
+
+#define PROG_EXPECTED_VBT_FORMAT_ID         0x0000U
+#define PROG_WRONG_SIGNATURE                0x01U
+#define PROG_INVALID_PUBLIC_KEY             0x02U
+#define PROG_INVALID_VBT_FORMAT_LENGTH      0x03U
+#define PROG_WRONG_HASH                     0x04U
+#define PROG_BLANK_CHECK_FAILED             0x05U
+#define PROG_READ_ERROR_FOR_HASH            0x07U
+#define PROG_ESS_MEM_COVERAGE_FAIL          0x08U
+#define PROG_VALIDITY_STORAGE_FAIL          0x0AU
+#define PROG_CERTIFICATE_FAILED             0x0BU
+#define PROG_SBL_BLANK_VALUE                0xEBU
+ 
+#define PROG_CHECK_MEMORY_MAX_ATTEMPTS                  2U
+
+#define PROG_SBL_VALIDITY_FLAG_OFF                      120U
+#define PROG_SBL_VALIDITY_FLAG                          0xAF5A50A5U
+
+#define PROG_SBL_SOFTWARE_VERSION                       0x00000004U
+
+#define PROG_ERASE_TYPE                                 PROG_ERASE_BY_ADDR
+/* Data verification */
+#define PROG_VERIFICATION_METHOD                        PROG_VERIFICATION_HASH
+#define PROG_CRC_CALCULATION                            PROG_NO_CRC
+#define PROG_SIGNATURE_CALCULATION                      STD_ON
+#define PROG_HASH_CALCULATION                           STD_ON
+#define PROG_RANGE_CKS                                  STD_OFF
+#define PROG_SEG_LIST_CKS                               STD_ON
+#define PROG_VERIFICATION_ON_THE_FLY                    STD_ON
+#define PROG_SIGNATURE_VERIFICATION_ON_FLASHED_DATA     STD_ON
+#define PROG_SINGLE_STEP_SIGNATURE_CHECK                STD_ON
+#define PROG_DOWNLOAD_TYPE                              PROG_DOWNLOAD_BY_ADDR
+#define PROG_MAX_RD_ADDRESS_LENGTH                      4U
+#define PROG_CVN_CHECK                                  STD_OFF
+/* Maximum Number of byte on which Block is coded in the Erase request */
+#define PROG_MAX_BYTE_ERASE_BLOCK_LENGTH                1U
+
+/* !!!! To Be Generated once Csm stub will be available !!!!*/
+#define PROG_CRY_PRESENT                                STD_ON
+#define PROG_CAL_PRESENT                                STD_OFF
+
+
+#define PROG_KEY_LENGTH                                 256U
+#define PROG_MOD_LENGTH                                 4U
+#define PROG_DIGEST_LENGTH                              32U
+#define PROG_SIGNATURE_LENGTH                           256U
+#define PROG_CRY_EXPONENT_ENABLED                       STD_ON
+/* Routine type defines */
+#define PROG_ROUTINE_TYPE_1                             0x10U
+#define PROG_ROUTINE_TYPE_2                             0x20U
+#define PROG_ROUTINE_TYPE_3                             0x30U
+
+/* Routine status defines */
+#define PROG_ROUTINE_FINISHED_OK                        0x00U
+#define PROG_ROUTINE_FINISHED_NOK                       0x01U
+#define PROG_ROUTINE_IN_PROGRESS                        0x02U
+
+/* Return value for a valid application  (0 means ok)*/
+#define PROG_APPL_VALID                                 0x00000000U
+/* Return value if the compare and compatible block is not coherent */
+#define PROG_APPL_INVALID                               0x00000005U
+
+#define PROG_AUTOCONTROL_POS_RESPONSE_SIZE              9U
+
+#define PROG_GET_PROG_CNTR_ENABLE                       1U
+#define PROG_GET_PROG_CNTR_DISABLE                      0U
+#define PROG_CNTR_GET_TYPE                              PROG_GET_PROG_CNTR_DISABLE
+
+[!IF "General/Network_Management = 'true'"!]
+#define PROG_FR_NS_INIT                                 0x0000U
+#define PROG_FR_NS_NORMAL                               0x0001U
+#define PROG_FR_NS_BOOT                                 0x1000U
+#define PROG_FR_NS_UNDEFINED                            0x2000U
+[!ENDIF!]
+
+#define PROG_GET_EXPECTED_CRC_ENABLED                   STD_OFF
+#define PROG_CRC_COMPUTE_COMPARE_ENABLE                 STD_OFF
+
+/* Dynamic reconfiguration of TP parameters: BS and STmin */
+#define PROG_UPDATE_TP_PARAM_ENABLE                     STD_OFF
+
+/* Block Id in Fingerprint */
+#define PROG_BLOCKID_IN_FINGERPRINT                     STD_OFF
+
+#define PROG_DECOMP_FLASH_ROUTINES                      STD_OFF
+
+#define PROG_SIGNATURE_CALCULATION_OVER_HASH            STD_OFF
+#define PROG_COMPUTE_HASH_WITH_ADDR_LEN                 STD_OFF
+#define PROG_RESUM_REPROG                               STD_OFF
+
+[!IF "as:modconf('Prog')/DownloadVerification/Allow2MaxSuccessiveCheckMemoryRequests='true'"!]
+#define PROG_2_SUCCESSIVE_CHECKMEMORY_ALLOWED           STD_ON
+[!ELSE!]
+#define PROG_2_SUCCESSIVE_CHECKMEMORY_ALLOWED           STD_OFF
+[!ENDIF!]
+
+[!IF "as:modconf('ProgVCC')/General/PROG_VCC_VARIANT='PBL'"!]
+[!/********************* Feature configuration for VCC PBL ************************/!]
+
+#define PROG_IMPL_VARIANT                               PROG_IMPL_10
+
+#define PROG_WATCHDOG_ENABLE                            STD_ON
+#define PROG_REQUEST_DOWNLOAD_ENABLE                    STD_ON
+#define PROG_SECURITY_ENABLE                            STD_ON
+#define PROG_SA_SEED_ENABLE                             STD_ON
+#define PROG_SA_KEY_ENABLE                              STD_ON
+#define PROG_ERASE_MEMORY_ENABLE                        STD_OFF
+#define PROG_TRANSFER_DATA_ENABLE                       STD_ON
+#define PROG_REQUEST_TRANSFER_EXIT_ENABLE               STD_ON
+#define PROG_ECU_RESET_ENABLE                           STD_ON
+#define PROG_ACTIVE_SBL_ENABLE                          STD_ON
+#define PROG_UPDATE_PSI_ENABLE                          STD_OFF
+#define PROG_CONTROL_DTC_SETTING_ENABLE                 STD_OFF
+#define PROG_COMMUNICATION_CONTROL_ENABLE               STD_OFF
+#define PROG_CHECK_MEMORY_ENABLE                        STD_ON
+#define PROG_SET_CRC_COMPARE_RESULT_ENABLE              STD_OFF
+#define PROG_CONTROL_FAIL_SAFE_REACTION_START_ENABLE    STD_OFF
+#define PROG_CONTROL_FAIL_SAFE_REACTION_STOP_ENABLE     STD_OFF
+#define PROG_CHECK_PROGRAMMING_DEPENDENCIES_ENABLE      STD_OFF
+#define PROG_NETWORK_MANAGEMENT_ENABLE                  [!WS "18"!][!IF "General/Network_Management = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+#define PROG_APPLI_CHECK_ON_S3TIMEOUT_ENABLE            STD_ON
+#define PROG_APPLI_CHECK_ENABLE                         STD_ON
+#define PROG_RESPOND_TO_PROG_SESSION                    STD_OFF
+#define PROG_PEC_ENABLE                                 STD_OFF
+#define PROG_MULTIPLE_BUFFERS_ENABLE                    [!WS "20"!][!IF "as:modconf('BlPduR')/General/MultipleRxBuffer = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+
+#define PROG_SBL_HEADER_DEFINE                          STD_OFF
+
+#define PROG_SWITCH_APPLICATION_MODE_ENABLE             STD_ON
+#define PROG_CHECK_PROGRAMMING_REQUEST_ENABLE           STD_ON
+#define PROG_CAL_CRC_ENABLE                             STD_ON
+#define PROG_ACTIVE_SBL_RESPONSE_ENABLE                 STD_OFF
+#define PROG_PRE_INIT_ENABLE                            STD_ON
+#define PROG_EXTENDED_SESSION_MANAGED                   STD_OFF
+
+#define PROG_SLEEP_MANAGEMENT_TYPE                      PROG_SLEEP_MANAGEMENT_OFF
+#define PROG_ERASE_ALL                                  STD_OFF
+
+#define PROG_AUTHENTICATED_BOOT_ENABLE                  STD_OFF
+#define PROG_SECURE_BOOT_ENABLE                         [!WS "25"!][!IF "(as:modconf('BM')/Security/SecureBoot/SECURE_AUTHENTICATED_BOOT = 'Secure')"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+#define PROG_BOOT_VERIFICATION                          [!WS "26"!][!IF "(as:modconf('BM')/Security/SecureBoot/BOOT_VERIFICATION = 'ON')"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+#define PROG_SECURE_BOOT_CHECKSUM_COMPUTATION           STD_OFF
+#define PROG_SECURE_APPLI_CHECKSUM_COMPUTATION          STD_OFF
+
+#define PROG_CSM_MAC_USED                               STD_OFF
+#define PROG_CSM_HASH_USED                              STD_OFF
+/*Prog signature values */
+#define PROG_SIG_HIGH                                   [!"num:inttohex(Startup/PROG_Signature_High)"!]U
+#define PROG_SIG_LOW                                    [!"num:inttohex(Startup/PROG_Signature_Low)"!]U
+#define PROG_SIG_CLEAR                                  [!"num:inttohex(Startup/PROG_Signature_Clear)"!]U
+
+#define PROG_SBL_VBT_START_ADDRESS                      [!"num:inttohex(SBLVerificationBlockTable/Verification_Block_Table_Start_Address)"!]U
+#define PROG_SBL_VBT_LENGTH                             [!"num:inttohex(SBLVerificationBlockTable/Verification_Block_Table_Length)"!]U
+#define PROG_BOOT_REPROG                                1U
+#define PROG_BOOT_NOREPROG                              0U
+
+[!ELSEIF "as:modconf('ProgVCC')/General/PROG_VCC_VARIANT='SBL'"!]
+[!/********************* Feature configuration for VCC SBL ************************/!]
+#define PROG_IMPL_VARIANT                               PROG_IMPL_11
+
+#define PROG_WATCHDOG_ENABLE                            STD_ON
+#define PROG_REQUEST_DOWNLOAD_ENABLE                    STD_ON
+#define PROG_SECURITY_ENABLE                            STD_ON
+#define PROG_SA_SEED_ENABLE                             STD_ON
+#define PROG_SA_KEY_ENABLE                              STD_ON
+#define PROG_ERASE_MEMORY_ENABLE                        STD_ON
+#define PROG_TRANSFER_DATA_ENABLE                       STD_ON
+#define PROG_REQUEST_TRANSFER_EXIT_ENABLE               STD_ON
+#define PROG_ECU_RESET_ENABLE                           STD_ON
+#define PROG_ACTIVE_SBL_ENABLE                          STD_OFF
+#define PROG_UPDATE_PSI_ENABLE                          STD_OFF
+#define PROG_CONTROL_DTC_SETTING_ENABLE                 STD_OFF
+#define PROG_COMMUNICATION_CONTROL_ENABLE               STD_OFF
+#define PROG_CHECK_MEMORY_ENABLE                        STD_ON
+#define PROG_CONTROL_FAIL_SAFE_REACTION_START_ENABLE    STD_OFF
+#define PROG_CONTROL_FAIL_SAFE_REACTION_STOP_ENABLE     STD_OFF
+#define PROG_CHECK_PROGRAMMING_DEPENDENCIES_ENABLE      STD_OFF
+#define PROG_NETWORK_MANAGEMENT_ENABLE                  [!WS "18"!][!IF "General/Network_Management = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+#define PROG_APPLI_CHECK_ON_S3TIMEOUT_ENABLE            STD_OFF
+#define PROG_APPLI_CHECK_ENABLE                         STD_ON
+#define PROG_RESPOND_TO_PROG_SESSION                    STD_OFF
+#define PROG_PEC_ENABLE                                 STD_OFF
+#define PROG_MULTIPLE_BUFFERS_ENABLE                    [!WS "20"!][!IF "as:modconf('BlPduR')/General/MultipleRxBuffer = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!][!CR!]
+
+#define PROG_SBL_HEADER_DEFINE                          STD_ON
+
+#define PROG_SWITCH_APPLICATION_MODE_ENABLE             STD_OFF
+#define PROG_CHECK_PROGRAMMING_REQUEST_ENABLE           STD_OFF
+#define PROG_CAL_CRC_ENABLE                             STD_ON
+#define PROG_ACTIVE_SBL_RESPONSE_ENABLE                 STD_ON
+#define PROG_PRE_INIT_ENABLE                            STD_ON
+#define PROG_EXTENDED_SESSION_MANAGED                   STD_OFF
+
+#define PROG_AUTHENTICATED_BOOT_ENABLE                  STD_OFF
+#define PROG_SECURE_BOOT_ENABLE                         STD_OFF
+#define PROG_BOOT_VERIFICATION                          STD_OFF
+#define PROG_SECURE_BOOT_CHECKSUM_COMPUTATION           STD_OFF
+[!IF "(as:modconf('Prog')/Security/Secure_Checksum_computation = 'true')"!]
+#define PROG_SECURE_APPLI_CHECKSUM_COMPUTATION          STD_ON
+#define PROG_CSM_MAC_USED                               STD_ON
+#define PROG_CSM_SECURE_MAC_ID                          [!"name(as:ref(as:modconf('Prog')/Security/ProgCsmSecureConfigId))"!]
+#define PROG_SECURE_CHECKSUM_SIZE_IN_BITS               [!"num:dectoint((as:modconf('Prog')/Security/CHECKSUM_LENGTH) * 8)"!]U
+#define PROG_SECURE_CHECKSUM_SIZE_IN_BYTES              [!"num:dectoint(as:modconf('Prog')/Security/CHECKSUM_LENGTH)"!]U
+[!ELSE!]
+#define PROG_SECURE_APPLI_CHECKSUM_COMPUTATION          STD_OFF
+#define PROG_CSM_MAC_USED                               STD_OFF
+[!ENDIF!]
+#define PROG_CSM_HASH_USED                              STD_OFF
+
+#define PROG_SLEEP_MANAGEMENT_TYPE                      PROG_SLEEP_MANAGEMENT_OFF
+
+#define PROG_ERASE_ALL                                  STD_OFF
+
+[!ELSE!]
+[!ERROR "The VCC variant configured in ProgVCC is unknown"!]
+[!ENDIF!] [!/* as:modconf('ProgVCC')/General/PROG_VCC_VARIANT='PBL' */!]
+
+/* Start complete and compatible value */
+#define PROG_START_COMP_BLK_HIGH                        [!"num:inttohex(CompleteAndCompatibleBlock/Start_Complete_Compatible_Signature_High)"!]U
+#define PROG_START_COMP_BLK_LOW                         [!"num:inttohex(CompleteAndCompatibleBlock/Start_Complete_Compatible_Signature_Low)"!]U
+
+/* End complete and compatible value */
+#define PROG_END_COMP_BLK_HIGH                          [!"num:inttohex(CompleteAndCompatibleBlock/End_Complete_Compatible_Signature_High)"!]U
+#define PROG_END_COMP_BLK_LOW                           [!"num:inttohex(CompleteAndCompatibleBlock/End_Complete_Compatible_Signature_Low)"!]U
+
+#ifndef NCS_UNITARY_TEST
+#define PROG_COMP_BLK_START_ADDR                        [!"num:inttohex(CompleteAndCompatibleBlock/Block_Start_Addr)"!]U
+#else
+#define PROG_COMP_BLK_START_ADDR                        TS_PROG_COMP_BLK_START_ADDR
+#endif
+#define PROG_COMP_BLK_APPL_ADDR_OFFSET                  8U
+#define PROG_COMP_BLK_FUNC_ADDR_OFFSET                  12U
+#define PROG_COMP_BLK_END_SIG_ADDR_OFFSET               16U
+
+#define PROG_INIT_TIMEOUT_VALUE                         0U
+#define PROG_COMP_TIMEOUT_VALUE                         ([!"num:dectoint(CompleteAndCompatibleBlock/CompleteCompatibleFunction_Timeout)"!]U/PROG_MANAGE_PERIOD)-1U
+
+/* Define use for setting or clearing Complete and COmpatible flag in RAM */
+#define PROG_COMP_NO_ERROR                              0x00000000U
+#define PROG_COMP_ERROR                                 0xA5A555AAU
+
+/*Use of StartAddress - EndAddress instead of StartAddress-Length*/
+#define PROG_USE_START_ADDR_END_ADDR                    STD_OFF
+/*Programming Status usage*/
+#define PROG_REQ_PROGRAMMING_STATUS_ENABLE              STD_OFF
+/*Security access antiscanning*/
+[!IF "(as:modconf('SA')/General/Enable_Antiscanning = 'true')"!]
+#define PROG_ANTISCANNING_ENABLED                       STD_ON
+[!ELSE!]
+#define PROG_ANTISCANNING_ENABLED                       STD_OFF
+[!ENDIF!]
+
+/*Enable the response after reset in function of reset cause*/
+#define PROG_RESET_CAUSE_ENABLE                         STD_OFF
+/* Programming pre-conditions check */
+#define PROG_PRECOND_CHECK_ENABLE                       STD_OFF
+/*Use Coherency check*/
+#define PROG_COHERENCY_CHECK_ENABLE                     STD_OFF
+#define PROG_USE_ECUID_CALLBACK                         STD_OFF
+
+/* Use Programming counter */
+#define PROG_PROGRAMMING_CNTR_ENABLE                    STD_OFF
+
+/* Use partial checksum verification */
+#define PROG_PARTIAL_VERIFY_CRC                         STD_OFF
+
+/* Define if NRC78 shall be sent before SecurityAccess */
+#define PROG_NRC78_ON_SA_ENABLE                         STD_OFF
+
+#define PROG_BLOCK_NB   1U
+extern const tProg_Block     stCfgBlock[PROG_BLOCK_NB];
+[!ENDIF!]
+
+/* Downloading Flash driver feature activation */
+#define PROG_DOWNLOAD_FLASH_ROUTINES_ENABLE             STD_OFF
+
+/*Introduced below the compiler switch to support Fingerprint for the Segments in RAM*/
+#ifndef PROG_RAMSEG_FINGERPRINT_SUPPORT
+#define PROG_RAMSEG_FINGERPRINT_SUPPORT STD_OFF
+#endif
+#endif /* PROG_CFG_IMPL10_H */

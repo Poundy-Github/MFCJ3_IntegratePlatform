@@ -1,0 +1,2768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?module IpduM?>
+
+<xgen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns="http://www.elektrobit.com/2013/xgen" xmlns:xi="http://www.w3.org/2001/XInclude">
+ <!-- include the AUTOSAR standard data types, etc. -->
+ 
+[!CODE!]
+[!AUTOSPACING!]
+
+[!INCLUDE "..\include\IpduM_checks.m"!]
+[!INCLUDE "..\include\IpduM_Macros.m"!]
+
+ <!-- This is the configuration of module IpduM -->
+<!-- !LINKSTO IPDUM.ASR40.IPDUM096,2 -->
+<!-- !LINKSTO IPDUM.ASR40.IPDUM075,1 -->
+ <module name="IpduM">
+   <comment>
+
+     <![CDATA[
+
+     ]]>
+   </comment>
+   
+   <configuration class="PreCompile">
+      <!-- Intentionally included IpduM_Int.h as workaround in order to generate 
+      data offsets macros for buffers, e.g. IPDUM_TXPATHWAY_BUFFER_OFFSET_1 -->
+      <!-- Generates circular inclusion of IpduM_Types.h and IpduM_Int. but errors 
+      are avoided thanks to include guards -->
+      <?artifact directory="include" file="IpduM_Int.h" type ="types-h" generate="no"?>
+      <?artifact directory="include" file="IpduM_Types.h" type="types-h"?>
+      
+      [!VAR "relocatable" = "'false'"!]
+      [!IF "node:contains(node:refs(as:modconf('PbcfgM')/PbcfgMBswModules/*/PbcfgMBswModuleRef), as:modconf('IpduM')) = 'true'"!]
+        [!IF "as:modconf('PbcfgM')/PbcfgMGeneral/PbcfgMRelocatableCfgEnable = 'true'"!]
+          [!VAR "relocatable" = "'true'"!]
+        [!ENDIF!]
+      [!ELSE!]
+        [!IF "as:modconf('IpduM')[1]/IpduMGeneral/IpduMRelocatablePbcfgEnable = 'true'"!]
+          [!VAR "relocatable" = "'true'"!]
+        [!ENDIF!]
+      [!ENDIF!]
+
+      <parameter name="relocatable-enable">
+        <boolean-value>[!"$relocatable"!]</boolean-value>
+      </parameter>
+      
+      <!-- Types.h -->
+      
+      <type name="IpduM_BitfieldType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_BitfieldArraySizeType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_SelectorType">
+        <reference type="uint8">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_MainFuncIdxType">
+        <reference type="uint8">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_CopyBitFieldType">
+        <struct>
+          <member name="StartBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="EndBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="DestinationBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <!--
+      Deactivated, discussion for uint64 needs to be done.
+      [!IF "as:modconf('EcuC')/EcucPduCollection/PduLengthTypeEnum = 'UINT32'"!]
+      <type name="IpduM_DataOffsetType">
+          <reference type="uint64">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </reference>
+        </type>
+      [!ELSE!]
+      <type name="IpduM_DataOffsetType">
+          <reference type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </reference>
+        </type>
+      [!ENDIF!]
+      -->
+      
+      <type name="IpduM_DataOffsetType">
+          <reference type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </reference>
+      </type>
+      
+      <type name="IpduM_TxTimeoutType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_PathWayLenType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_ContainerNumType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_ContainedNumType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_ContainerQueueType">
+        <struct>
+          <member name="QPushIdx" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="QPopIdx" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="QFull" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="QLBTxConf" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_RxPartType">
+        <struct>
+          <member name="CopyBitField" type="IpduM_CopyBitFieldType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="OutgoingHandleId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="CopyBitFieldArraySize" type="IpduM_BitfieldArraySizeType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="SelectorValue" type="IpduM_SelectorType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+      <type name="IpduM_ContainedRxPduType">
+        <struct>
+          <member name="ContainedPduHeaderId" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="OutgoingPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+      <type name="IpduM_StaticContainedRxPduType">
+        <struct>
+          <member name="IpduMContainedPduOffset" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMUpdateBitBytePosition" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduLength" type="PduLengthType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="OutgoingPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMUpdateBitMask" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="HasIpduMUpdateBitPositionSet" type="boolean">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      [!ENDIF!]
+      
+      <type name="IpduM_ContainerPduDataType">
+        <struct>
+          <member name="dataBuffer" type="uint8">
+            <compiler-abstraction>
+              <ref2var/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_ContainerRxPduType">
+        <struct>
+          <member name="ContainedRxPduFirst" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ContainedRxPduNum" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="BuffOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduLength" type="PduLengthType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMContainerQueuingRxEnable = 'true'"!]
+          <member name="QueueBuffOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ContainerQueueSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="HeaderSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      [!ENDIF!]
+      
+      <type name="IpduM_RxPathWayType">
+        <struct>
+          [!IF "$IpduMStaticPartExists = 'true'"!]
+          <member name="StaticPart" type="IpduM_RxPartType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="DynamicPart" type="IpduM_RxPartType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="DynamicPduArraySize" type="uint16">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="StartBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="EndBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_JitDataType">
+        <struct>
+          <member name="TxPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxPartIndex" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_TxOffsetType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_TxPathWayType">
+        <struct>
+          [!IF "$IpduMZeroCopy = 'false'"!]
+          <member name="BufferOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="Size" type="PduLengthType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ConfirmationTimeout" type="IpduM_TxTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMStaticPartExists = 'true'"!]
+          <member name="StaticPartTxConfHandleId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+          <member name="StaticPartTrigTxHandleId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="StaticPartIndex" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!ENDIF!]
+          [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+          <member name="InitialDynamicPartTrigTxHandleId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="InitialDynamicPartIndex" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMDynamicPartQueue = 'true'"!]
+          <member name="QueueOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="StartBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="EndBit" type="IpduM_BitfieldType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="DynamicConfirmArraySize" type="IpduM_SelectorType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="UnusedAreasDefault" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TriggerMode" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMDynamicPartQueue = 'true'"!]
+          <member name="QueueSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+        </struct>
+      </type>
+      
+      <type name="IpduM_TxPartType">
+        <struct>
+          <member name="CopyBitField" type="IpduM_CopyBitFieldType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="CopyBitFieldArraySize" type="IpduM_BitfieldArraySizeType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduRTxConfirmationPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+          <member name="PduRTriggerTxPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="TxConfirmationPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxOutgoingPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMEnableJitUpdate = 'true'"!]
+          <member name="JitUpdate" type="boolean">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMDynamicPartQueue = 'true'"!]
+          <member name="DynamicPriority" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMTxAutomaticSelector = 'true'"!]
+          <member name="SelectorValue" type="IpduM_SelectorType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+        </struct>
+      </type>
+      
+      [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+      <type name="IpduM_TxConfirmTimeoutType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_TxSendTimeoutType">
+        <reference type="uint16">
+          <compiler-abstraction>
+            <var memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <type name="IpduM_ContainerTxPduType">
+        <struct>
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="StaticSduLength" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="IpduMContainerTxSizeThreshold" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMContainerTxConfirmationTimeout" type="IpduM_TxConfirmTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMContainerTxHandleId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduLength" type="PduLengthType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="CurrentDataOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PdusListOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ConfirmListOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMContainerQueuingTxEnable = 'true'"!]
+          <member name="BuffOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="QueueBuffOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="NumCntdStatic" type="uint16">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMContainerQueuingTxEnable = 'true'"!]
+          <member name="chunkSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="IpduMUnusedAreasDefault" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="IpduMContainerQueueSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="HeaderSize" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="CfgFlags" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      <type name="IpduM_ContainedTxPduType">
+        <struct>
+          <member name="IpduMContainedPduHeaderId" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="IpduMContainedPduOffset" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMUpdateBitBytePosition" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="IpduMContainedTxPduHandleId" type="uint16">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMContainedTxPduSendTimeout" type="IpduM_TxSendTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduMContainerTxIndex" type="uint16">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduLength" type="PduLengthType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="BuffOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="IpduMUpdateBitMask" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMContainedTxPduPriorityHandlingEnable = 'true'"!]
+          <member name="IpduMContainedTxPduPriority" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="CfgFlags" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_CntrTxDataType">
+        <struct>
+          <member name="ListSize" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="SendTimeout" type="IpduM_TxSendTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ConfirmTimeout" type="IpduM_TxConfirmTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxMtx" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="ConfAwait" type="boolean">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="AnnounceSize" type="boolean">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="QMFSizeAnnounceFlag" type="boolean">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      [!ENDIF!]
+      
+      <type name="IpduM_ConfigType">
+        <struct>
+          <member name="PlatformSignature" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="LcfgSignature" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="CfgSignature" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PublicInfoSignature" type="uint32">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMMultiMF = 'true'"!]
+          <member name="MFTxLookup" type="PduIdType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="MFRxLookup" type="PduIdType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="RxMFLookup" type="PduIdType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="RxHandlerIndices" type="uint8">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="RxPathWay" type="IpduM_RxPathWayType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxPathWay" type="IpduM_TxPathWayType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxPart" type="IpduM_TxPartType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+          <member name="ContainerRxPdu" type="IpduM_ContainerRxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="ContainedRxPdu" type="IpduM_ContainedRxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="ContainedRxPduAcceptAll" type="IpduM_ContainedRxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          <member name="StaticContainedRxPdu" type="IpduM_StaticContainedRxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="ContainerTxPdu" type="IpduM_ContainerTxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="ContainedTxPdu" type="IpduM_ContainedTxPduType">
+            <compiler-abstraction>
+              <ref2cfg/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxContainerPduNum" type="IpduM_ContainerNumType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxCntrOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxContainedPduNum" type="IpduM_ContainedNumType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="RxPathWayLen" type="IpduM_PathWayLenType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxPathWayLen" type="IpduM_PathWayLenType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxPartLen" type="IpduM_PathWayLenType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="TxDynamicPartOffset" type="IpduM_TxOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+          <member name="RxContainerPduNum" type="IpduM_ContainerNumType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="RxCntdPduAcceptAllNum" type="IpduM_ContainedNumType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+            <member name="RxStaticCntdPduNum" type="IpduM_ContainedNumType">
+              <compiler-abstraction>
+                <var memory-class="TYPEDEF"/>
+              </compiler-abstraction>
+            </member>
+          [!ENDIF!]
+          <member name="RxContainerProcessingDeferredNum" type="IpduM_ContainerNumType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="RxCntrOffset" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          <member name="DataMemMinLen" type="IpduM_DataOffsetType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      [!VAR "IPDUM_TX_SDU_SIZE" = "num:i(1)"!]
+      [!IF "node:exists(node:refs(as:modconf('IpduM')/IpduMConfig/*[1]/IpduMTxPathway/*/IpduMTxRequest/IpduMOutgoingPduRef)/PduLength) = 'true'"!]
+      [!VAR "IPDUM_TX_SDU_SIZE" = "num:i(num:max(node:refs(as:modconf('IpduM')/IpduMConfig/*[1]/IpduMTxPathway/*/IpduMTxRequest/IpduMOutgoingPduRef)/PduLength))"!]
+      [!ENDIF!]
+      <!-- !LINKSTO IPDUM.EB.IPDUM902,2 -->
+      <type name="IpduM_QueueEntryType">
+        <struct>
+          <member name="TxPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduRTxConfirmationPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="DynamicPriority" type="uint16">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="SduData" type="uint8" count="[!"$IPDUM_TX_SDU_SIZE"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+        </struct>
+      </type>
+      
+      <type name="IpduM_TxDataType">
+        <struct>
+          <member name="ConfirmationTimeoutCounter" type="IpduM_TxTimeoutType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduRTxConfirmationPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+          <member name="DynamicPartIndex" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="PduRTriggerTxPduId" type="PduIdType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMDynamicPartQueue = 'true'"!]
+          <member name="QueuePos" type="uint8">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+        </struct>
+      </type>
+      
+   </configuration>
+
+   <!-- This is the post-build configuration of the module. -->
+   <configuration class="PostBuild">
+      <?artifact directory="include" file="IpduM_PBcfg.h" type="postbuild-h"?>
+      <?artifact directory="src" file="IpduM_PBcfg.c" type="postbuild-c"?>
+          
+      <!-- Pbcfg.h -->
+      
+      [!SELECT "IpduMConfig/*[1]"!]
+      [!VAR "numTxPathway" = "num:i(count(IpduMTxPathway/*))"!]
+      [!VAR "numRxPathway" = "num:i(count(IpduMRxPathway/*))"!]
+      [!VAR "numTxContainer" = "num:i(count(IpduMContainerTxPdu/*))"!]
+      [!VAR "numContainedTx" = "num:i(count(IpduMContainedTxPdu/*))"!]
+      [!VAR "NrOfRxContained" = "num:i(count(IpduMContainedRxPdu/*))"!]
+      [!VAR "NumAcceptAllCntdRx" = "num:i(count(IpduMContainedRxPdu/*[ not(node:exists(IpduMContainedRxInContainerPduRef)) ]))"!]
+      [!VAR "NrOfRxContainers" = "num:i(count(IpduMContainerRxPdu/*))"!]
+      [!VAR "numRxTotal" = "num:i(count(IpduMRxPathway/*) + $NrOfRxContainers)"!]
+      [!VAR "DynamicIdMax" = "node:order(IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*, 'node:IpduMTxDynamicHandleId')[last()]/IpduMTxDynamicHandleId"!]
+      [!IF "not(var:defined('IpduMDeferredListSize'))"!][!CALL "GetRxCntrSize"!][!ENDIF!]
+      [!CALL "createRXMFAlloc"!]
+      [!VAR "numRxMFs" = "num:i(count(text:split($mfRXalloc,';')))"!]
+      [!VAR "NumStaticRxCntdPdus" = "num:i(count(IpduMContainedRxPdu/* [node:exists(IpduMContainedRxInContainerPduRef) and as:ref(IpduMContainedRxInContainerPduRef)/IpduMContainerHeaderSize = 'IPDUM_HEADERTYPE_NONE']))"!]
+      
+      <type name="IpduM_ConfigLayoutType">
+        <struct>
+          <member name="IpduM_RootConfig" type="IpduM_ConfigType">
+            <compiler-abstraction>
+              <const memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$IpduMMultiMF = 'true'"!]
+          [!IF "$numTxContainer > 0 or $numTxPathway > 0"!]
+          <member name="IpduM_MFTxLookup" type="PduIdType" count="[!"num:i($numTxContainer + $numTxPathway + count(as:modconf('IpduM')[1]/IpduMGeneral/IpduMTxProcessing/*) + 1)"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$NoOfDeferredContainers > 0"!]
+          <member name="IpduM_MFRxLookup" type="PduIdType" count="[!"$numRxMFs"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduM_RxMFLookup" type="PduIdType" count="[!"$NoOfDeferredContainers"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!ENDIF!]
+          <member name="IpduM_RxIndHandlerIdx" type="uint8" count="[!IF "$numRxTotal != 0"!][!"$numRxTotal"!][!ELSE!]1[!ENDIF!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!IF "$numRxPathway > 0"!]
+          [!LOOP "node:order(IpduMRxPathway/*, 'node:IpduMRxIndication/IpduMRxHandleId')"!]
+          [!VAR "HandleId" = "IpduMRxIndication/IpduMRxHandleId"!]
+          [!IF "(node:exists(IpduMRxIndication/IpduMRxStaticPart))"!]
+          [!VAR "NrOfStaticCopyBitFields" = "num:i(count(IpduMRxIndication/IpduMRxStaticPart/IpduMSegment/*))"!]
+          <member name="IpduM_Rx_StaticPart_CopyBitField_[!"$HandleId"!]" type="IpduM_CopyBitFieldType" count="[!"$NrOfStaticCopyBitFields"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduM_Rx_StaticPart_[!"$HandleId"!]" type="IpduM_RxPartType">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!VAR "NrOfDynamicCopyBitFields" = "num:i(count(IpduMRxIndication/IpduMRxDynamicPart/*/IpduMSegment/*))"!]
+          <member name="IpduM_Rx_DynamicPart_CopyBitField_[!"$HandleId"!]" type="IpduM_CopyBitFieldType" count="[!"$NrOfDynamicCopyBitFields"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduM_Rx_DynamicPart_[!"$HandleId"!]" type="IpduM_RxPartType" count="[!"num:i(count(IpduMRxIndication/IpduMRxDynamicPart/*))"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDLOOP!]
+          <member name="IpduM_RxPathWay" type="IpduM_RxPathWayType" count="[!"$numRxPathway"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$numTxPathway > 0"!]
+          <member name="IpduM_TxCopyBitField" type="IpduM_CopyBitFieldType" count="[!"num:i(count(IpduMTxPathway/*/IpduMTxRequest/IpduMTxStaticPart/IpduMSegment/*) + count(IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*/IpduMSegment/*))"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduM_TxPart" type="IpduM_TxPartType" count="[!"num:i($DynamicIdMax + 1)"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          <member name="IpduM_TxPathWay" type="IpduM_TxPathWayType" count="[!"$numTxPathway"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+          [!IF "$NrOfRxContainers > 0"!]
+          <member name="IpduM_ContainerRxPdu" type="IpduM_ContainerRxPduType" count="[!"num:i($NrOfRxContainers)"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "num:i($NrOfRxContained - $NumAcceptAllCntdRx - $NumStaticRxCntdPdus) > num:i(0)"!]
+          <member name="IpduM_ContainedRxPdu" type="IpduM_ContainedRxPduType" count="[!"num:i($NrOfRxContained - $NumAcceptAllCntdRx - $NumStaticRxCntdPdus)"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$NumAcceptAllCntdRx > 0"!]
+          <member name="IpduM_ContainedRxPduAcceptAll" type="IpduM_ContainedRxPduType" count="[!"$NrOfRxContained"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+            [!IF "$NumStaticRxCntdPdus > 0"!]
+              <member name="IpduM_StaticContainedRxPdu" type="IpduM_StaticContainedRxPduType" count="[!"$NumStaticRxCntdPdus"!]">
+                <compiler-abstraction>
+                  <var memory-class="TYPEDEF"/>
+                </compiler-abstraction>
+              </member>
+            [!ENDIF!]
+          [!ENDIF!]
+          [!IF "$numTxContainer > 0"!]
+          <member name="IpduM_ContainerTxPdu" type="IpduM_ContainerTxPduType" count="[!"$numTxContainer"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!IF "$numContainedTx > 0"!]
+          <member name="IpduM_ContainedTxPdu" type="IpduM_ContainedTxPduType" count="[!"$numContainedTx"!]">
+            <compiler-abstraction>
+              <var memory-class="TYPEDEF"/>
+            </compiler-abstraction>
+          </member>
+          [!ENDIF!]
+          [!ENDIF!]
+        </struct>
+      </type>
+      [!ENDSELECT!]
+      
+      <type name="IpduM_ConstConfigLayoutType">
+        <reference type="IpduM_ConfigLayoutType">
+          <compiler-abstraction>
+            <const memory-class="TYPEDEF"/>
+          </compiler-abstraction>
+        </reference>
+      </type>
+      
+      <!-- Pbcfg.c -->
+      
+      [!SELECT "IpduMConfig/*[1]"!]
+      <!--
+      TxDynamicPartOffset is used to distinguish the static PDU from the dynamic one
+      -->[!VAR "TxDynamicPartOffset"= "num:i(0)"!]<!--
+      Offset in bytes
+      -->[!VAR "QueueOffset"= "num:i(0)"!]<!--
+      Offset in bytes
+      -->[!VAR "BufferOffset"= "num:i(0)"!]<!--
+      Is IpduMTxPathway present
+      -->[!IF "node:exists(IpduMTxPathway/*)"!]
+        [!IF "$IpduMDynamicPartQueue = 'true'"!]
+          [!VAR "TxQueueTotalEntries" = "num:i(sum(IpduMTxPathway/*/IpduMTxRequest/IpduMQueueSize))"!]
+        [!ELSE!]
+          [!VAR "TxQueueTotalEntries" = "num:i(0)"!]
+        [!ENDIF!]
+        [!LOOP "IpduMTxPathway/*"!]<!--
+          Logic to get the number of static parts
+          -->
+          [!IF "node:exists(./IpduMTxRequest/IpduMTxStaticPart)"!]
+            [!VAR "TxDynamicPartOffset"= "num:i($TxDynamicPartOffset + 1)"!]
+          [!ENDIF!]
+        [!ENDLOOP!]<!--
+      
+        -->[!VAR "StaticIdMax" = "num:i($TxDynamicPartOffset - 1)"!]
+      [!ENDIF!]
+      
+      [!VAR "numTxPathway" = "num:i(count(IpduMTxPathway/*))"!]
+      [!VAR "numRxPathway" = "num:i(count(IpduMRxPathway/*))"!]
+      [!VAR "numTxContainer" = "num:i(count(IpduMContainerTxPdu/*))"!]
+      [!VAR "numContainedTx" = "num:i(count(IpduMContainedTxPdu/*))"!]
+      [!VAR "NrOfRxContained" = "num:i(count(IpduMContainedRxPdu/*))"!]
+      [!VAR "NumAcceptAllCntdRx" = "num:i(count(IpduMContainedRxPdu/*[ not(node:exists(IpduMContainedRxInContainerPduRef)) ]))"!]
+      [!VAR "NrOfRxContainers" = "num:i(count(IpduMContainerRxPdu/*))"!]
+      [!VAR "numRxTotal" = "num:i(count(IpduMRxPathway/*) + $NrOfRxContainers)"!]
+      [!VAR "DynamicIdMax" = "node:order(IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*, 'node:IpduMTxDynamicHandleId')[last()]/IpduMTxDynamicHandleId"!]
+      [!VAR "FirstPduPos" = "num:i(count(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/*[not(node:exists(IpduMContainedRxInContainerPduRef))]))"!]
+      [!VAR "NumRxCntdPdusRef" = "num:i(0)"!]
+      
+      [!NOCODE!]
+      <symbol-def name="IPDUM_TXCNTROFFSET">
+        <parameter reference="IPDUM_TXCNTROFFSET"/>
+      </symbol-def>
+      <symbol-def name="IPDUM_RXCNTROFFSET">
+        <parameter reference="IPDUM_RXCNTROFFSET"/>
+      </symbol-def>
+      <symbol-def name="IPDUM_DATAMEMMINLEN">
+        <parameter reference="IPDUM_DATAMEMMINLEN"/>
+      </symbol-def>
+      [!ENDNOCODE!]
+      
+      <memory-section name="CONFIG_DATA_UNSPECIFIED">
+        <instance type="IpduM_ConstConfigLayoutType"
+                  name="IpduM_ConfigLayout">
+          <comment><![CDATA[
+          IpduM post build config. - Static code accesses this config
+          solely via the pointer of type IpduM_ConfigType passed to
+          \a IpduM_Init() as parameter.
+          ]]></comment>
+          <parameter name="postbuild-configuration-name">
+            <symbolic-value>[!"node:name(.)"!]</symbolic-value>
+          </parameter>
+          
+          <!-- IpduM_RootConfig -->          
+          <field>
+            <field>
+              <int>[!"asc:getPlatformSignature()"!]</int>
+            </field>
+            <field>
+              <int>[!"asc:getConfigSignature(as:modconf('IpduM')[1]//*[not(child::*) and (node:configclass() = 'Link')])"!]</int>
+            </field>
+            <field>
+              <int>[!"asc:getConfigSignature(as:modconf('IpduM')[1]//*[not(child::*) and (node:configclass() = 'PreCompile') ])"!]</int>
+            </field>
+            <field>
+              <int>[!"asc:getConfigSignature(as:modconf('IpduM')[1]/CommonPublishedInformation//*[not(child::*) and (node:configclass() = 'PublishedInformation') ])"!]</int>
+            </field>
+            [!IF "$IpduMMultiMF = 'true'"!]
+            [!IF "$numTxContainer > 0 or $numTxPathway > 0"!]
+              <!--IpduM_MFTxLookup-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_MFTxLookup" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <!--IpduM_MFTxLookup-->
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            [!IF "$NoOfDeferredContainers > 0"!]
+              <!--IpduM_MFRxLookup-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_MFRxLookup" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+              <!--IpduM_RxMFLookup-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_RxMFLookup" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <!--IpduM_MFRxLookup-->
+              <field>
+                  <ref/>
+              </field>
+              <!--IpduM_RxMFLookup-->
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            [!ENDIF!]   
+            
+            <!--IpduM_RxIndHandlerIdx-->
+            <field>
+                <ref>
+                    <struct-field name="IpduM_RxIndHandlerIdx" />
+                    <array-field index="0" />
+                </ref>
+            </field>
+
+            [!IF "$numRxPathway > 0"!]
+              <!--RxPathWay-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_RxPathWay" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <!--RxPathWay-->
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            [!IF "$numTxPathway > 0"!]
+              <!--TxPathWay-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_TxPathWay" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+              <!--TxPart-->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_TxPart" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <!--TxPathWay-->
+              <field>
+                  <ref/>
+              </field>
+              <!--TxPart-->
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+            <!--ContainerRxPdu-->
+            [!IF "$NrOfRxContainers > 0"!]
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_ContainerRxPdu" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+        
+            <!--ContainedRxPdu-->
+            [!IF "num:i($NrOfRxContained - $NumAcceptAllCntdRx - $NumStaticRxCntdPdus) > num:i(0)"!][!//
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_ContainedRxPdu" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+        
+            <!--ContainedRxPduAccceptAll-->
+            [!IF "$NumAcceptAllCntdRx > 0"!][!//
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_ContainedRxPduAcceptAll" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+              <!--StaticContainedRxPdu-->
+              [!IF "$NumStaticRxCntdPdus > 0"!][!//
+                <field>
+                    <ref>
+                        <struct-field name="IpduM_StaticContainedRxPdu" />
+                        <array-field index="0" />
+                    </ref>
+                </field>
+              [!ELSE!]
+                <field>
+                    <ref/>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+        
+            <!--ContainerTxPdusTbl-->
+            [!IF "$numTxContainer > 0"!]
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_ContainerTxPdu" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+        
+            <!--ContainedTxPdusTbl-->
+            [!IF "$numContainedTx > 0"!]
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_ContainedTxPdu" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+            [!ELSE!]
+              <field>
+                  <ref/>
+              </field>
+            [!ENDIF!]
+            
+            <!--TxContainerPduNum-->
+            [!IF "$numTxContainer > 0"!]
+              <field>
+                <int>[!"$numTxContainer"!]</int>
+              </field>
+            [!ELSE!]
+              <field>
+                <int>0</int>
+              </field>
+            [!ENDIF!]
+        
+            <!--TxCntrOffset-->
+            [!IF "not(var:defined('IpduMDataMemTxContainerOffset'))"!][!CALL "GetDataMemSlices"!][!ENDIF!][!//
+            <field>
+              <symbol>IPDUM_TXCNTROFFSET</symbol>
+            </field>
+        
+            <!--TxContainedPduNum-->
+            [!IF "$numContainedTx > 0"!]
+            <field>
+              <int>[!"$numContainedTx"!]</int>
+            </field>
+            [!ELSE!]
+            <field>
+              <int>0</int>
+            </field>
+            [!ENDIF!]
+            [!ENDIF!]
+        
+            <!--RxPathWayLen, number of RxPathway array entries-->
+            <field>
+              <int>[!"num:i($numRxPathway)"!]</int>
+            </field>
+        
+            <!--TxPathWayLen, number of TxPathway array entries-->
+            <field>
+              <int>[!"num:i($numTxPathway)"!]</int>
+            </field>
+        
+            <!--TxPartLen, length of TxPart array-->
+            [!IF "$numTxPathway > 0"!]
+              <field>
+                <int>[!"num:i($DynamicIdMax + 1)"!]</int>
+              </field>
+            [!ELSE!]
+              <field>
+                <int>0</int>
+              </field>
+            [!ENDIF!]
+        
+            <!--TxDynamicPartOffset-->
+            <field>
+              <int>[!"$TxDynamicPartOffset"!]</int>
+            </field>
+        
+            [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+            <!--RxContainerPduNum-->
+            <field>
+              <int>[!"$NrOfRxContainers"!]</int>
+            </field>
+        
+            <!--RxCntdPduAcceptAllNum-->
+            <field>
+              <int>[!"$NumAcceptAllCntdRx"!]</int>
+            </field>
+            
+            [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+              <!--RxStaticCntdPduNum-->
+              <field>
+                <int>[!"$NumStaticRxCntdPdus"!]</int>
+              </field>
+            [!ENDIF!]
+        
+            <!--RxContainerProcessingDeferredNum-->
+            <field>
+              <int>[!"$NoOfDeferredContainers"!]</int>
+            </field>
+        
+            <!--RxCntrOffset-->
+            <field>
+              <symbol>IPDUM_RXCNTROFFSET</symbol>
+            </field>
+            [!ENDIF!]
+        
+            <!--DataMemMinLen-->
+            <field>
+              <symbol>IPDUM_DATAMEMMINLEN</symbol>
+            </field>
+            
+          </field>
+          
+          [!IF "$IpduMMultiMF = 'true'"!]
+          [!IF "$numTxContainer > 0 or $numTxPathway > 0"!]
+          <!-- IpduM_MFTxLookup -->
+          <field>
+          [!CALL "createTXMFAlloc"!]
+          [!FOR "j" = "0" TO "text:split(text:split($mfTXalloc,';')[last()],'#')[1]"!]
+          [!VAR "entry" = "text:split($mfTXalloc,';')[position()-1 = $j]"!]
+            [!VAR "numRef" = "num:i(count(text:split(text:split($entry,'#')[4],'|')))"!]
+            <field>
+              <int>[!"$numRef"!]</int>
+            </field>
+            [!FOR "i" = "0" TO "$numRef - 1"!]
+            [!VAR "ref" = "text:split(text:split($entry,'#')[4],'|')[position()-1 = $i]"!]
+              [!CALL "GetProcessingRefID", "refPath"="$ref", "Direction"="'TX'"!]
+              <field>
+                <int>[!"$MFProcRefID"!]</int>
+              </field>
+            [!ENDFOR!]
+          [!ENDFOR!]
+          </field>
+          [!ENDIF!]
+
+          [!IF "$NoOfDeferredContainers > 0"!]
+          [!IF "not(var:defined('IpduMDeferredListSize'))"!][!CALL "GetRxCntrSize"!][!ENDIF!]
+          [!CALL "createRXMFAlloc"!]
+          [!VAR "numRxMFs" = "num:i(count(text:split($mfRXalloc,';')))"!]
+          [!VAR "defListOfs" = "num:i(0)"!]
+          <!-- IpduM_MFRxLookup -->
+          <field>
+          [!LOOP "text:split($mfRXalloc,';')"!]
+            <field>
+              <int>[!"$defListOfs"!]</int>
+            </field>
+          [!VAR "defListOfs" = "num:i(1 + 1 + $defListOfs + count(text:split(text:split(.,'#')[4],'|')))"!]
+          [!ENDLOOP!]
+          </field>
+          
+          <!-- IpduM_RxMFLookup -->
+          <field>
+          [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainerRxPdu/*[IpduMContainerPduProcessing='IPDUM_PROCESSING_DEFERRED'], 'node:IpduMContainerRxHandleId')"!]
+            [!FOR "i" = "0" TO "$numRxMFs -1"!]
+              [!VAR "entry" = "text:split($mfRXalloc,';')[position()-1 = $i]"!]
+                [!IF "contains($entry, as:path(.))"!]
+                  <field>
+                    <int>[!"text:split($entry, '#')[1]"!]</int>
+                  </field>
+                  [!BREAK!]
+                [!ENDIF!]
+            [!ENDFOR!]
+          [!ENDLOOP!]
+          </field>
+          [!ENDIF!]
+          
+          [!ENDIF!]
+          
+          <!-- IpduM_RxIndHandlerIdx -->
+          <field>
+          [!IF "$numRxTotal != 0"!]
+          [!LOOP "node:order(./IpduMRxPathway/*, 'node:IpduMRxIndication/IpduMRxHandleId')"!]
+            [!CALL "IpduMGetRxIndHandlerFuncIdx", "cfgItemPath"="node:path(.)"!]
+            <field>
+              <int>[!"$IpduMRxIndHandlerFuncIdx"!]</int>
+            </field>
+          [!ENDLOOP!]
+          [!LOOP "node:order(./IpduMContainerRxPdu/*, 'node:IpduMContainerRxHandleId')"!]
+            [!CALL "IpduMGetRxIndHandlerFuncIdx", "cfgItemPath"="node:path(.)"!]
+            <field>
+              <int>[!"$IpduMRxIndHandlerFuncIdx"!]</int>
+            </field>
+          [!ENDLOOP!]
+          [!ELSE!]
+            <field>
+              <int>0</int>
+            </field>
+          [!ENDIF!]
+          </field>
+          
+          [!IF "$numRxPathway > 0"!]
+            [!LOOP "node:order(IpduMRxPathway/*, 'node:IpduMRxIndication/IpduMRxHandleId')"!]
+            [!VAR "HandleId" = "IpduMRxIndication/IpduMRxHandleId"!]
+            [!IF "(node:exists(IpduMRxIndication/IpduMRxStaticPart))"!]
+            [!VAR "NrOfStaticCopyBitFields" = "num:i(count(IpduMRxIndication/IpduMRxStaticPart/IpduMSegment/*))"!]
+            <!-- IpduM_Rx_StaticPart_CopyBitField_[!"$HandleId"!] -->
+            <field>
+              [!LOOP "IpduMRxIndication/IpduMRxStaticPart/IpduMSegment/*"!]
+              <field>
+                <!-- StartBit -->
+                <field>
+                  <int>[!"IpduMSegmentPosition"!]</int>
+                </field>
+                <!-- EndBit -->
+                <field>
+                  <int>[!"num:i(IpduMSegmentLength + IpduMSegmentPosition - 1)"!]</int>
+                </field>
+                <!-- DestinationBit -->
+                [!IF "(node:exists(IpduMDestinationBit))"!]
+                <field>
+                  <int>[!"IpduMDestinationBit"!]</int>
+                </field>
+                [!ELSE!]
+                <field>
+                  <int>[!"IpduMSegmentPosition"!]</int>
+                </field>
+                [!ENDIF!]
+              </field>
+              [!ENDLOOP!]
+            </field>
+            
+            <!-- IpduM_Rx_StaticPart_[!"$HandleId"!] -->
+            <field>
+              <!-- CopyBitField -->
+              <field>
+                  <ref>
+                      <struct-field name="IpduM_Rx_StaticPart_CopyBitField_[!"$HandleId"!]" />
+                      <array-field index="0" />
+                  </ref>
+              </field>
+              <!-- OutgoingHandleId -->
+              [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="IpduMRxIndication/IpduMRxStaticPart/IpduMOutgoingStaticPduRef"!]
+              <field>
+                <int>[!"$PduID"!]</int>
+              </field>
+              <!-- CopyBitFieldArraySize -->
+              <field>
+                <int>[!"$NrOfStaticCopyBitFields"!]</int>
+              </field>
+              <!-- SelectorValue -->
+              <field>
+                <int>0</int>
+              </field>
+            </field>
+            [!ENDIF!]
+            
+            [!VAR "NrOfDynamicCopyBitFields" = "num:i(count(IpduMRxIndication/IpduMRxDynamicPart/*/IpduMSegment/*))"!]
+            <!-- IpduM_Rx_DynamicPart_CopyBitField_[!"$HandleId"!] -->
+            <field>
+            [!LOOP "node:order(IpduMRxIndication/IpduMRxDynamicPart/*, 'node:IpduMRxSelectorValue')"!]
+            [!LOOP "IpduMSegment/*"!]
+              <field>
+                <!-- StartBit -->
+                <field>
+                  <int>[!"IpduMSegmentPosition"!]</int>
+                </field>
+                <!-- EndBit -->
+                <field>
+                  <int>[!"num:i(IpduMSegmentLength + IpduMSegmentPosition - 1)"!]</int>
+                </field>
+                <!-- DestinationBit -->
+                [!IF "(node:exists(IpduMDestinationBit))"!]
+                <field>
+                  <int>[!"IpduMDestinationBit"!]</int>
+                </field>
+                [!ELSE!]
+                <field>
+                  <int>[!"IpduMSegmentPosition"!]</int>
+                </field>
+                [!ENDIF!]
+              </field>
+            [!ENDLOOP!]
+            [!ENDLOOP!]
+            </field>
+            
+            [!VAR "CopyBitFieldIndex" = "0"!]
+            <!-- IpduM_Rx_DynamicPart_[!"$HandleId"!] -->
+            <field>
+            [!LOOP "node:order(IpduMRxIndication/IpduMRxDynamicPart/*, 'node:IpduMRxSelectorValue')"!]
+              <field>
+                <!-- CopyBitField -->
+                <field>
+                    <ref>
+                        <struct-field name="IpduM_Rx_DynamicPart_CopyBitField_[!"$HandleId"!]" />
+                        <array-field index="[!"num:i($CopyBitFieldIndex)"!]" />
+                    </ref>
+                </field>
+                [!VAR "CopyBitFieldIndex" = "$CopyBitFieldIndex + count(IpduMSegment/*)"!]
+                <!-- OutgoingHandleId -->
+                [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="IpduMOutgoingDynamicPduRef"!]
+                <field>
+                  <int>[!"$PduID"!]</int>
+                </field>
+                <!-- CopyBitFieldArraySize -->
+                <field>
+                  <int>[!"num:i(count(IpduMSegment/*))"!]</int>
+                </field>
+                <!-- SelectorValue -->
+                <field>
+                  <int>[!"IpduMRxSelectorValue"!]</int>
+                </field>
+              </field>
+              [!ENDLOOP!]
+            </field>
+            [!ENDLOOP!]
+            
+            <!-- IpduM_RxPathWay -->
+            <field>
+            [!LOOP "node:order(IpduMRxPathway/*, 'node:IpduMRxIndication/IpduMRxHandleId')"!]
+            [!VAR "HandleId" = "IpduMRxIndication/IpduMRxHandleId"!]
+              <field>
+                [!IF "$IpduMStaticPartExists = 'true'"!]
+                  [!IF "(node:exists(IpduMRxIndication/IpduMRxStaticPart))"!]
+                    <!-- StaticPart -->
+                    <field>
+                        <ref>
+                            <struct-field name="IpduM_Rx_StaticPart_[!"$HandleId"!]" />
+                        </ref>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                        <ref/>
+                    </field>
+                  [!ENDIF!]
+                [!ENDIF!]
+                <!-- DynamicPart -->
+                <field>
+                    <ref>
+                        <struct-field name="IpduM_Rx_DynamicPart_[!"$HandleId"!]" />
+                        <array-field index="0" />
+                    </ref>
+                </field>
+                <!-- DynamicPduArraySize -->
+                <field>
+                  <int>[!"num:i(count(IpduMRxIndication/IpduMRxDynamicPart/*))"!]</int>
+                </field>
+                <!-- SelectorStartBit -->
+                <field>
+                  <int>[!"num:i(IpduMRxIndication/IpduMSelectorFieldPosition/IpduMSelectorFieldPosition)"!]</int>
+                </field>
+                <!-- SelectorEndBit -->
+                <field>
+                  <int>[!"num:i(IpduMRxIndication/IpduMSelectorFieldPosition/IpduMSelectorFieldLength + IpduMRxIndication/IpduMSelectorFieldPosition/IpduMSelectorFieldPosition -1 )"!]</int>
+                </field>
+              </field>
+              [!ENDLOOP!]
+            </field>
+          [!ENDIF!]
+          
+          [!IF "$numTxPathway > 0"!]
+          <!-- IpduM_TxCopyBitField -->
+          <field>
+            [!FOR "StaticId" = "0" TO "$StaticIdMax"!]
+              [!VAR "StaticIdExist" = "num:i(0)"!]
+              [!LOOP "IpduMTxPathway/*"!]
+                [!IF "node:exists(./IpduMTxRequest/IpduMTxStaticPart)"!]
+                  [!IF "$StaticId = num:i(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticHandleId)"!]
+                    [!VAR "StaticIdExist" = "num:i(1)"!]
+                    [!LOOP "./IpduMTxRequest/IpduMTxStaticPart/IpduMSegment/*"!]
+                    <field>
+                      <!-- StartBit -->
+                      <field>
+                        <int>[!"./IpduMSegmentPosition"!]</int>
+                      </field>
+                 
+                      <!-- EndBit -->
+                      <field>
+                        <int>[!"num:i(./IpduMSegmentLength + ./IpduMSegmentPosition - 1)"!]</int>
+                      </field>
+                 
+                      <!-- DestinationBit -->
+                      [!IF "(node:exists(./IpduMDestinationBit))"!]
+                      <field>
+                        <int>[!"./IpduMDestinationBit"!]</int>
+                      </field>
+                      [!ELSE!]
+                      <field>
+                        <int>[!"./IpduMSegmentPosition"!]</int>
+                      </field>
+                      [!ENDIF!]
+                    </field>
+                    [!ENDLOOP!]
+                  [!ENDIF!]
+                [!ENDIF!]
+              [!ENDLOOP!]
+              [!IF "$StaticIdExist = 0"!]
+                [!ERROR "Static Tx IDs should be zero based and consecutive"!]
+              [!ENDIF!]
+            [!ENDFOR!]
+            [!FOR "DynamicId" = "0" TO "$TxDynamicPartOffset - 1"!]
+              [!LOOP "IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*"!]
+                [!IF "$DynamicId = num:i(./IpduMTxDynamicHandleId)"!]
+                  [!ERROR "Static Tx IDs and Dynamic Tx IDs are overlapping"!]
+                [!ENDIF!]
+              [!ENDLOOP!]
+            [!ENDFOR!]
+            [!FOR "DynamicId" = "$TxDynamicPartOffset" TO "$DynamicIdMax"!]
+              [!VAR "DynamicIdExist" = "num:i(0)"!]
+              [!LOOP "IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*"!]
+                [!IF "$DynamicId = num:i(./IpduMTxDynamicHandleId)"!]
+                  [!VAR "DynamicIdExist" = "num:i(1)"!]
+                  [!LOOP "./IpduMSegment/*"!]
+                  <field>
+                    <!-- StartBit -->
+                    <field>
+                      <int>[!"./IpduMSegmentPosition"!]</int>
+                    </field>
+              
+                    <!-- EndBit -->
+                    <field>
+                      <int>[!"num:i(./IpduMSegmentLength + ./IpduMSegmentPosition - 1)"!]</int>
+                    </field>
+              
+                    <!-- DestinationBit -->
+                    [!IF "(node:exists(./IpduMDestinationBit))"!]
+                      <field>
+                        <int>[!"./IpduMDestinationBit"!]</int>
+                      </field>
+                    [!ELSE!]
+                      <field>
+                        <int>[!"./IpduMSegmentPosition"!]</int>
+                      </field>
+                    [!ENDIF!]
+                  </field>
+                  [!ENDLOOP!]
+                [!ENDIF!]
+              [!ENDLOOP!]
+              [!IF "$DynamicIdExist = 0"!]
+                  [!ERROR "Dynamic Tx IDs should be consecutive"!]
+              [!ENDIF!]
+            [!ENDFOR!]
+          </field>
+          
+          <!-- IpduM_TxPart -->
+          <field>
+            [!VAR "TxCopyBitFieldIndex" = "num:i(0)"!]
+            [!FOR "StaticId" = "0" TO "$StaticIdMax"!]
+              [!LOOP "IpduMTxPathway/*"!]
+                [!IF "node:exists(./IpduMTxRequest/IpduMTxStaticPart)"!]
+                  [!IF "$StaticId = num:i(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticHandleId)"!]
+                    <!-- Static part, IpduMTxStaticHandleId = [!"$StaticId"!] -->
+                    <field>
+         
+                      <!-- CopyBitField -->
+                      <field>
+                        <ref>
+                            <struct-field name="IpduM_TxCopyBitField" />
+                            <array-field index="[!"$TxCopyBitFieldIndex"!]" />
+                        </ref>
+                      </field>
+                 
+                      <!-- CopyBitFieldArraySize -->
+                      <field>
+                        <int>[!"num:i(count(./IpduMTxRequest/IpduMTxStaticPart/IpduMSegment/*))"!]</int>
+                      </field>
+                 
+                      [!VAR "TxCopyBitFieldIndex" = "num:i($TxCopyBitFieldIndex + count(./IpduMTxRequest/IpduMTxStaticPart/IpduMSegment/*))"!]
+                      <!-- PduRTxConfirmationPduId -->[!//
+                      [!// Get the PDU-ID which is referenced by IpduMTxStaticPduRef within PduR
+                      [!CALL "GetResponsePduId","IpduMPduRef"="./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef"!][!//
+                      [!IF "./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticConfirmation = 'true'"!]
+                        <field>
+                          <int>[!"$ResponsePduID"!]</int>
+                        </field>
+                      [!ELSE!]
+                        <field>
+                          <symbol>IPDUM_RESERVED_PDUID</symbol> <!-- Disabled static TxConfirmation -->
+                        </field>
+                      [!ENDIF!]
+                 
+                      [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+                        <!-- PduRTriggerTxPduId -->
+                        <field>
+                          <int>[!"$ResponsePduID"!]</int>
+                        </field>
+                      [!ENDIF!]
+           
+                      <!-- TxConfirmationPduId -->
+                      <field>
+                        <int>[!"num:i(./IpduMTxRequest/IpduMTxConfirmationPduId)"!]</int>
+                      </field>
+                   
+                      [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="./IpduMTxRequest/IpduMOutgoingPduRef"!]
+                      <!-- TxOutgoingPduId -->
+                      <field>
+                        <int>[!"num:i($PduID)"!]</int>
+                      </field>
+                   
+                      [!IF "$IpduMEnableJitUpdate = 'true'"!]
+                        <!-- JitUpdate -->
+                        [!IF "./IpduMTxRequest/IpduMTxStaticPart/IpduMJitUpdate = 'true'"!]
+                        <field>
+                          <symbol>TRUE</symbol>
+                        </field>
+                        [!ELSE!]
+                        <field>
+                          <symbol>FALSE</symbol>
+                        </field>
+                        [!ENDIF!]
+                      [!ENDIF!]
+                   
+                      [!IF "$IpduMDynamicPartQueue = 'true'"!]
+                        <!-- DynamicPriority -->
+                        <field>
+                          <int>0</int>
+                        </field>
+                      [!ENDIF!]
+                   
+                      [!IF "$IpduMTxAutomaticSelector = 'true'"!]
+                        <!-- SelectorValue -->
+                        <field>
+                          <int>0</int>
+                        </field>
+                      [!ENDIF!]
+                    </field>
+                    [!ENDIF!]
+                  [!ENDIF!]
+                [!ENDLOOP!]
+              [!ENDFOR!]
+              [!FOR "DynamicId" = "$TxDynamicPartOffset" TO "$DynamicIdMax"!]
+                [!LOOP "IpduMTxPathway/*/IpduMTxRequest/IpduMTxDynamicPart/*"!]
+                  [!IF "$DynamicId = num:i(./IpduMTxDynamicHandleId)"!]
+              <!-- Dynamic part, IpduMTxDynamicHandleId = [!"$DynamicId"!] -->
+              <field>
+              
+                <!-- CopyBitField -->
+                <field>
+                  <ref>
+                      <struct-field name="IpduM_TxCopyBitField" />
+                      <array-field index="[!"$TxCopyBitFieldIndex"!]" />
+                  </ref>
+                </field>
+          
+                <!-- CopyBitFieldArraySize -->
+                <field>
+                  <int>[!"num:i(count(./IpduMSegment/*))"!]</int>
+                </field>
+          
+                [!VAR "TxCopyBitFieldIndex" = "num:i($TxCopyBitFieldIndex + count(./IpduMSegment/*))"!][!//
+                <!-- PduRTxConfirmationPduId -->[!//
+                [!// Get the PDU-ID which is referenced by IpduMTxDynamicPduRef within PduR
+                [!CALL "GetResponsePduId","IpduMPduRef"="./IpduMTxDynamicPduRef"!][!//
+                [!IF "./IpduMTxDynamicConfirmation = 'true'"!]
+                  <field>
+                    <int>[!"$ResponsePduID"!]</int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <symbol>IPDUM_RESERVED_PDUID</symbol> <!-- Disabled dynamic TxConfirmation -->
+                  </field>
+                [!ENDIF!]
+          
+                [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+                  <!-- PduRTriggerTxPduId -->
+                  <field>
+                    <int>[!"$ResponsePduID"!]</int>
+                  </field>
+                [!ENDIF!]
+  
+                <!-- TxConfirmationPduId -->
+                <field>
+                  <int>[!"num:i(../../IpduMTxConfirmationPduId)"!]</int>
+                </field>
+          
+                <!-- TxOutgoingPduId -->
+                [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="../../IpduMOutgoingPduRef"!]
+                <field>
+                  <int>[!"num:i($PduID)"!]</int>
+                </field>
+          
+                [!IF "$IpduMEnableJitUpdate = 'true'"!]
+                  <!-- JitUpdate -->
+                  [!IF "./IpduMJitUpdate = 'true'"!]
+                    <field>
+                      <symbol>TRUE</symbol>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <symbol>FALSE</symbol>
+                    </field>
+                  [!ENDIF!]
+                [!ENDIF!]
+        
+                [!IF "$IpduMDynamicPartQueue = 'true'"!]
+                  <!-- DynamicPriority -->
+                  [!IF "($IpduMDynamicPartQueue = 'true') and (../../IpduMQueueSize != num:i(0))"!]
+                    <field>
+                      <int>[!"num:i(./IpduMTxDynamicPriority)"!]</int>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <int>0</int>
+                    </field>
+                  [!ENDIF!]
+                [!ENDIF!]
+            
+                [!IF "$IpduMTxAutomaticSelector = 'true'"!]  
+                  <!-- SelectorValue -->
+                  [!IF "$IpduMTxAutomaticSelector = 'true'"!]
+                    <field>
+                      <int>[!"num:i(./IpduMTxSelectorValue)"!]</int>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <int>0</int>
+                    </field>
+                  [!ENDIF!]
+                [!ENDIF!]
+              </field>
+                [!ENDIF!]
+              [!ENDLOOP!]
+            [!ENDFOR!]
+          </field>
+          
+          <!-- IpduM_TxPathWay -->
+          <field>
+            [!NOCODE!]
+            [!// Loop over all TX pathways in order of IpduMTxConfirmationPduId.
+            [!ENDNOCODE!]
+            [!LOOP "node:order(IpduMTxPathway/*, 'node:value(./IpduMTxRequest/IpduMTxConfirmationPduId)')"!]
+            [!NOCODE!]
+          
+            [!// BufferOffset
+            [!VAR "OutgoingPduLength" = "node:value(as:ref(./IpduMTxRequest/IpduMOutgoingPduRef)/PduLength)"!]
+            <symbol-def name="IPDUM_TXPATHWAY_BUFFER_OFFSET_[!"node:pos(.)"!]">
+              <parameter reference="IPDUM_TXPATHWAY_BUFFER_OFFSET_[!"node:pos(.)"!]"/>
+            </symbol-def>
+              
+          
+            [!// Count enabled confirmations for the dynamic part
+            [!VAR "ConfirmCountWithinTxRequest"= "num:i(count(./IpduMTxRequest/IpduMTxDynamicPart/*[node:value(./IpduMTxDynamicConfirmation) = 'true']))"!]
+          
+            [!// ConfirmationTimeout
+            [!IF "node:exists(./IpduMTxRequest/IpduMTxConfirmationTimeout)"!]
+              [!CALL "TxTimeoutToMFC", "nodePath"="as:path(.)", "valPathNode"="concat(as:path(.),'/IpduMTxRequest/IpduMTxConfirmationTimeout')","asPathChildrenWorkaround"="2"!]
+              [!VAR "ConfirmationTimeout" = "$mVal"!]
+            [!ELSE!]
+              [!VAR "ConfirmationTimeout" = "'0'"!]
+            [!ENDIF!]
+          
+            [!// StaticPartTxConfHandleId
+            [!IF "node:containsValue(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticConfirmation, 'true') = 'true'"!]
+              [!// Get the response PDU-ID which is referenced by IpduMTxStaticPduRef within PduR
+              [!CALL "GetResponsePduId","IpduMPduRef"="./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef"!]
+              [!VAR "StaticPartTxConfHandleId" = "$ResponsePduID"!]
+            [!ELSE!]
+              [!VAR "StaticPartTxConfHandleId" = "'IPDUM_RESERVED_PDUID'"!]
+            [!ENDIF!]
+          
+            [!// StaticPartTrigTxHandleId
+            [!IF "node:exists(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef)"!]
+              [!// Get the response PDU-ID which is referenced by IpduMTxStaticPduRef within PduR
+              [!CALL "GetResponsePduId","IpduMPduRef"="./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef"!]
+              [!VAR "StaticPartTrigTxHandleId" = "$ResponsePduID"!]
+            [!ELSE!]
+              [!VAR "StaticPartTrigTxHandleId" = "'IPDUM_RESERVED_PDUID'"!]
+            [!ENDIF!]
+          
+            [!// StaticPartIndex
+            [!IF "node:exists(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef)"!]
+              [!// Get IpduMTxStaticHandleId used as index to the part array at initialization
+              [!VAR "StaticHandleId" = "num:i(./IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticHandleId)"!]
+              [!VAR "StaticPartIndex" = "$StaticHandleId"!]
+            [!ELSE!]
+              [!VAR "StaticPartIndex" = "'IPDUM_RESERVED_PDUID'"!]
+            [!ENDIF!]
+          
+            [!// QueueOffset
+            <symbol-def name="IPDUM_TXPATHWAY_QUEUE_OFFSET_[!"node:pos(.)"!]">
+              <parameter reference="IPDUM_TXPATHWAY_QUEUE_OFFSET_[!"node:pos(.)"!]"/>
+            </symbol-def>
+          
+            [!// UnusedAreasDefault
+            [!IF "node:exists(./IpduMTxRequest/IpduMIPduUnusedAreasDefault)"!]
+              [!VAR "UnusedAreasDefault" = "num:i(./IpduMTxRequest/IpduMIPduUnusedAreasDefault)"!]
+            [!ELSE!]
+              [!VAR "UnusedAreasDefault" = "'0'"!]
+            [!ENDIF!]
+          
+            [!// InitialDynamicPartTrigTxHandleId
+            [!// Get the response PDU-ID which is referenced by IpduMInitialDynamicPart within PduR
+            [!CALL "GetResponsePduId","IpduMPduRef"="node:ref(./IpduMTxRequest/IpduMInitialDynamicPart)/IpduMTxDynamicPduRef"!]
+            [!VAR "InitialDynamicPartTrigTxHandleId" = "$ResponsePduID"!]
+          
+            [!// InitialDynamicPartIndex
+            [!// Get the PDU-ID which is referenced by IpduMTxDynamicPduRef identical to IpduMInitialDynamicPart
+            [!VAR "DynamicHandleId" = "num:i(node:ref(./IpduMTxRequest/IpduMInitialDynamicPart)/IpduMTxDynamicHandleId)"!]
+            [!VAR "InitialDynamicPartIndex" = "$DynamicHandleId"!]
+              
+            [!// TriggerMode
+            [!IF "./IpduMTxRequest/IpduMTxTriggerMode = 'DYNAMIC_PART_TRIGGER'"!]
+              [!VAR "TriggerMode" = "'IPDUM_TRIGGER_DYNAMIC'"!]
+            [!ELSEIF "./IpduMTxRequest/IpduMTxTriggerMode = 'NONE'"!]
+              [!VAR "TriggerMode" = "'IPDUM_TRIGGER_NONE'"!]
+            [!ELSEIF "./IpduMTxRequest/IpduMTxTriggerMode = 'STATIC_OR_DYNAMIC_PART_TRIGGER'"!]
+              [!VAR "TriggerMode" = "'IPDUM_TRIGGER_STATIC_OR_DYNAMIC'"!]
+            [!ELSE!]
+              [!VAR "TriggerMode" = "'IPDUM_TRIGGER_STATIC'"!]
+            [!ENDIF!]
+          
+            [!// QueueSize
+            [!IF "$IpduMDynamicPartQueue = 'true'"!]
+              [!VAR "QueueSize" = "num:i(./IpduMTxRequest/IpduMQueueSize)"!]
+            [!ELSE!]
+              [!VAR "QueueSize" = "'0'"!]
+            [!ENDIF!]
+          
+            [!// Generate code
+            [!ENDNOCODE!]
+
+            <!-- Path way [!"node:pos(.)"!]: [!"node:name(.)"!] -->
+            <field>           
+              [!IF "$IpduMZeroCopy = 'false'"!]
+                <!-- BufferOffset -->
+                <field>
+                  <symbol>IPDUM_TXPATHWAY_BUFFER_OFFSET_[!"node:pos(.)"!]</symbol>
+                </field>
+              [!ENDIF!]
+              
+              <!-- Size -->
+              <field>
+                <int>[!"num:i($OutgoingPduLength * 8)"!]</int>
+              </field>
+        
+              <!-- ConfirmationTimeout -->
+              <field>
+                <int>[!"$ConfirmationTimeout"!]</int>
+              </field>
+        
+              [!IF "$IpduMStaticPartExists = 'true'"!]
+                <!-- StaticPartTxConfHandleId -->
+                [!IF "$StaticPartTxConfHandleId ='IPDUM_RESERVED_PDUID'"!]
+                <field>
+                  <symbol>IPDUM_RESERVED_PDUID</symbol>
+                </field>
+                [!ELSE!]
+                  <field>
+                    <int>[!"$StaticPartTxConfHandleId"!]</int>
+                  </field>
+                [!ENDIF!]
+          
+                [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]
+                  <!-- StaticPartTrigTxHandleId -->
+                  [!IF "$StaticPartTrigTxHandleId ='IPDUM_RESERVED_PDUID'"!]
+                  <field>
+                    <symbol>IPDUM_RESERVED_PDUID</symbol>
+                  </field>
+                  [!ELSE!]
+                    <field>
+                      <int>[!"$StaticPartTrigTxHandleId"!]</int>
+                    </field>
+                  [!ENDIF!]
+            
+                  <!-- StaticPartIndex -->
+                  [!IF "$StaticPartIndex ='IPDUM_RESERVED_PDUID'"!]
+                  <field>
+                    <symbol>IPDUM_RESERVED_PDUID</symbol>
+                  </field>
+                  [!ELSE!]
+                    <field>
+                      <int>[!"$StaticPartIndex"!]</int>
+                    </field>
+                  [!ENDIF!]
+                [!ENDIF!]
+
+              [!ENDIF!]
+       
+              [!IF "$IpduMEnableJitUpdate = 'true' or $IpduMInitializationBySignalValue = 'true'"!]                  
+                <!-- InitialDynamicPartTrigTxHandleId -->
+                <field>
+                  <int>[!"$InitialDynamicPartTrigTxHandleId"!]</int>
+                </field>
+                
+                <!-- InitialDynamicPartIndex -->
+                <field>
+                  <int>[!"$InitialDynamicPartIndex"!]</int>
+                </field>
+              [!ENDIF!]
+        
+              [!IF "$IpduMDynamicPartQueue = 'true'"!]
+                <!-- QueueOffset -->
+                <field>
+                  <symbol>IPDUM_TXPATHWAY_QUEUE_OFFSET_[!"node:pos(.)"!]</symbol>
+                </field>
+              [!ENDIF!]
+    
+              <!-- StartBit of the selector value -->
+              <field>
+                <int>[!"num:i(./IpduMTxRequest/IpduMSelectorFieldPosition/IpduMSelectorFieldPosition)"!]</int>
+              </field>
+        
+              <!-- EndBit of the selector value -->
+              <field>
+                <int>[!"num:i(./IpduMTxRequest/IpduMSelectorFieldPosition/IpduMSelectorFieldLength + ./IpduMTxRequest/IpduMSelectorFieldPosition/IpduMSelectorFieldPosition - 1)"!]</int>
+              </field>
+        
+              <!-- DynamicConfirmArraySize -->
+              <field>
+                <int>[!"$ConfirmCountWithinTxRequest"!]</int>
+              </field>
+        
+              <!-- UnusedAreasDefault -->
+              <field>
+                <int>[!"$UnusedAreasDefault"!]</int>
+              </field>
+        
+              <!-- TriggerMode -->
+              <field>
+                <symbol>[!"$TriggerMode"!]</symbol>
+              </field>
+        
+              [!IF "$IpduMDynamicPartQueue = 'true'"!]
+                <!-- QueueSize -->
+                <field>
+                  <int>[!"$QueueSize"!]</int>
+                </field>
+              [!ENDIF!]
+            </field>
+          [!ENDLOOP!]
+          </field>
+        [!ENDIF!]
+        
+        [!IF "$IpduMContainerPduHandlingEnable = 'true'"!]
+        [!VAR "FirstStaticPduPos" = "0"!]
+        [!IF "$NrOfRxContainers > 0"!]
+          <!-- IpduM_ContainerRxPdu -->
+          <field>
+          [!LOOP "node:order(IpduMContainerRxPdu/*, 'node:IpduMContainerRxHandleId')"!]
+            [!NOCODE!]
+            <symbol-def name="IPDUM_RXCNTR_BUFFER_OFFSET_[!"node:pos(.)"!]">
+              <parameter reference="IPDUM_RXCNTR_BUFFER_OFFSET_[!"node:pos(.)"!]"/>
+            </symbol-def>
+            <symbol-def name="IPDUM_RXCNTR_QUEUE_BUFFER_OFFSET_[!"node:pos(.)"!]">
+              <parameter reference="IPDUM_RXCNTR_QUEUE_BUFFER_OFFSET_[!"node:pos(.)"!]"/>
+            </symbol-def>
+            [!ENDNOCODE!]
+            
+            <!-- [!"node:name(.)"!] -->
+            <field>
+
+            [!VAR "Val" = "0"!]
+            [!IF "node:value(./IpduMContainerRxAcceptContainedPdu) = 'IPDUM_ACCEPT_ALL'"!]<!-- Handle the case where the container PDU accepts all contained PDUs -->
+              <!-- Number of contained PDUs that refer to considered RxContainerPdu accepting all -->
+              [!VAR "NumRxCntdPdusRef" = "$NumRxCntdPdusRef + num:i(count(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/*[(node:exists(IpduMContainedRxInContainerPduRef)) and (node:path(node:ref(IpduMContainedRxInContainerPduRef)) = node:path(node:current())) ]))"!]
+              <!-- ContainedRxPduFirst -->
+              <field>
+                  <int>0</int>
+              </field>
+              <!-- ContainedRxPduNum -->
+              <field>
+                  <int>[!"$NrOfRxContained"!]</int>
+              </field>
+            [!ELSE!]<!-- Rx container PDU which is referenced by contained PDUs -->
+              <!-- Number of contained PDUs that refer to the considered ContainerRxPdu -->
+              [!VAR "NumOfRxPdus" = "num:i(count(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/*[(node:exists(IpduMContainedRxInContainerPduRef)) and (node:path(node:ref(IpduMContainedRxInContainerPduRef)) = node:path(node:current())) ]))"!]
+              <!-- ContainedRxPduFirst -->
+              <field>
+                [!IF "node:value(./IpduMContainerHeaderSize) = 'IPDUM_HEADERTYPE_NONE'"!]
+                  <int>[!"num:i($FirstStaticPduPos)"!]</int> <!-- NumRxCntdPdusRef holds the number of contained PDUs that refer to previous container PDUs accepting all -->
+                  [!VAR "FirstStaticPduPos" = "$FirstStaticPduPos + $NumOfRxPdus"!]
+                [!ELSE!]
+                  <int>[!"num:i($FirstPduPos + $NumRxCntdPdusRef)"!]</int> <!-- NumRxCntdPdusRef holds the number of contained PDUs that refer to previous container PDUs accepting all -->
+                  [!VAR "FirstPduPos" = "$FirstPduPos + $NumOfRxPdus"!]
+                [!ENDIF!]
+              </field>
+              <!-- ContainedRxPduNum -->
+              <field>
+                  <int>[!"$NumOfRxPdus"!]</int>
+              </field>
+            [!ENDIF!]
+            <!-- BuffOffset -->
+            <field>
+                <symbol>IPDUM_RXCNTR_BUFFER_OFFSET_[!"node:pos(.)"!]</symbol>
+            </field>
+              <!-- PduLength -->
+              <field>
+                  <int>[!"node:value(as:ref(IpduMContainerRxPduRef)/PduLength)"!]</int>
+              </field>
+            [!IF "$IpduMContainerQueuingRxEnable = 'true'"!]
+              [!IF "node:exists(./IpduMContainerQueueSize)"!]
+                [!VAR "Val" = "bit:or($Val, 8)"!]
+                <!-- QueueBuffOffset -->
+                <field>
+                  <symbol>IPDUM_RXCNTR_QUEUE_BUFFER_OFFSET_[!"node:pos(.)"!]</symbol>
+                </field>
+                <!-- ContainerQueueSize -->
+                <field>
+                  <int>[!"num:i(./IpduMContainerQueueSize)"!]</int>
+                </field>
+              [!ELSE!]
+                <!-- QueueBuffOffset -->
+                <field>
+                  <int>0</int>
+                </field>
+                <!-- ContainerQueueSize -->
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+            <!-- HeaderSize -->
+            <field>
+              <symbol>[!"node:value(./IpduMContainerHeaderSize)"!]</symbol>
+            </field>
+
+            </field>
+          [!ENDLOOP!]
+          </field>
+        [!ENDIF!]
+        [!IF "num:i($NrOfRxContained - $NumAcceptAllCntdRx - $NumStaticRxCntdPdus) > num:i(0)"!]
+          <!-- IpduM_ContainedRxPdu -->
+          <field>
+        <!--Loop over all container PDUs which are referenced by a contained PDU, sorted by RxHandleId -->[!//
+        [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainerRxPdu/* [not(IpduMContainerHeaderSize = 'IPDUM_HEADERTYPE_NONE')], 'node:IpduMContainerRxHandleId')"!]
+          [!VAR "RxHandleId" = "IpduMContainerRxHandleId"!]
+          [!VAR "ContainerName" = "node:name(.)"!]
+          <!-- Loop over all contained PDUs which reference current container PDU, sorted by IpduMContainedPduHeaderId -->
+          [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/*[(node:exists(IpduMContainedRxInContainerPduRef)) and (node:path(node:ref(IpduMContainedRxInContainerPduRef)) = node:path(node:current()))], 'IpduMContainedPduHeaderId')"!]
+            <field>
+
+              <!-- Container: [!"$ContainerName"!] (RxHandleId: [!"$RxHandleId"!]) -->
+              <!-- ContainedPduHeaderId -->
+              <field>
+                <int>[!"node:value(IpduMContainedPduHeaderId)"!]</int>
+              </field>
+              
+              <!-- OutgoingHandleId -->
+              [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="./IpduMContainedRxPduRef"!]
+              <field>
+                <int>[!"$PduID"!]</int>
+              </field>
+
+            </field>
+          [!ENDLOOP!]
+        [!ENDLOOP!]
+          </field>
+        [!ENDIF!]
+        [!IF "$NumAcceptAllCntdRx > 0"!]
+          <!-- IpduM_ContainedRxPduAcceptAll -->
+          <field>
+          <!-- Loop over all contained PDUs -->
+          [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/* [node:exists(IpduMContainedPduHeaderId)], 'IpduMContainedPduHeaderId')"!]
+            <field>
+              <!-- ContainedPduHeaderId -->
+              <field>
+                <int>[!"node:value(IpduMContainedPduHeaderId)"!]</int>
+              </field>
+          
+              <!-- OutgoingHandleId -->
+              [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="./IpduMContainedRxPduRef"!]
+              <field>
+                <int>[!"$PduID"!]</int>
+              </field>
+
+            </field>
+          [!ENDLOOP!]
+          </field>
+        [!ENDIF!]
+        [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+          [!IF "$NumStaticRxCntdPdus > 0"!]
+            <!-- IpduM_StaticContainedRxPdu -->
+            <field>
+            <!-- Loop over all contained PDUs with static container PDU referenced -->
+            [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainerRxPdu/* [IpduMContainerHeaderSize = 'IPDUM_HEADERTYPE_NONE'], 'node:IpduMContainerRxHandleId')"!]
+              <!-- Loop over all contained PDUs which reference current container PDU, sorted by IpduMContainedPduOffset -->
+              [!LOOP "node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedRxPdu/*[(node:exists(IpduMContainedRxInContainerPduRef)) and (node:path(node:ref(IpduMContainedRxInContainerPduRef)) = node:path(node:current()))], 'IpduMContainedPduOffset')"!]
+                <field>
+                  <!-- IpduMContainedPduOffset -->
+                  <field>
+                    <int>[!"node:value(IpduMContainedPduOffset)"!]</int>
+                  </field>
+                  
+                  <!-- IpduMUpdateBitBytePosition -->
+                  [!IF "node:exists(IpduMPduUpdateBitPosition)"!]
+                    <field>
+                      <int>[!"num:i(node:value(IpduMPduUpdateBitPosition) div 8)"!]</int>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <int>0</int>
+                    </field>
+                  [!ENDIF!]
+                  
+                  <!-- PduLength -->
+                  <field>
+                    <int>[!"node:value(as:ref(IpduMContainedRxPduRef)/PduLength)"!]</int>
+                  </field>
+              
+                  <!-- OutgoingHandleId -->
+                  [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="./IpduMContainedRxPduRef"!]
+                  <field>
+                    <int>[!"$PduID"!]</int>
+                  </field>
+                  
+                  <!-- IpduMUpdateBitMask -->
+                  [!IF "node:exists(IpduMPduUpdateBitPosition)"!]
+                    <field>
+                      <int>[!"num:i(bit:shl(1, num:i(node:value(IpduMPduUpdateBitPosition) mod 8)))"!]</int>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <int>0</int>
+                    </field>
+                  [!ENDIF!]
+                  
+                  <!-- HasIpduMUpdateBitPositionSet -->
+                  [!IF "node:exists(IpduMPduUpdateBitPosition)"!]
+                    <field>
+                      <symbol>TRUE</symbol>
+                    </field>
+                  [!ELSE!]
+                    <field>
+                      <symbol>FALSE</symbol>
+                    </field>
+                  [!ENDIF!]
+    
+                </field>
+              [!ENDLOOP!]
+            [!ENDLOOP!]
+            </field>
+          [!ENDIF!]
+        [!ENDIF!]
+        
+        [!IF "$numTxContainer > 0"!]
+        [!CALL "GetIpduMTxContainersLst"!]
+        <!--IpduM_ContainerTxPdu-->
+        <field>
+          <!--node:order can't check if a param exists and node:when always evaluates the arguments -->
+          [!FOR "i" = "0" TO "$numTxContainer - 1"!]
+          [!NOCODE!]
+          <symbol-def name="IPDUM_TXCNTR_CURRENT_DATA_OFFSET_[!"$i"!]">
+            <parameter reference="IPDUM_TXCNTR_CURRENT_DATA_OFFSET_[!"$i"!]"/>
+          </symbol-def>
+          <symbol-def name="IPDUM_TXCNTR_PDUS_LIST_OFFSET_[!"$i"!]">
+            <parameter reference="IPDUM_TXCNTR_PDUS_LIST_OFFSET_[!"$i"!]"/>
+          </symbol-def>
+          <symbol-def name="IPDUM_TXCNTR_CONFIRM_LIST_OFFSET_[!"$i"!]">
+            <parameter reference="IPDUM_TXCNTR_CONFIRM_LIST_OFFSET_[!"$i"!]"/>
+          </symbol-def>
+          <symbol-def name="IPDUM_TXCNTR_BUFFER_OFFSET_[!"$i"!]">
+            <parameter reference="IPDUM_TXCNTR_BUFFER_OFFSET_[!"$i"!]"/>
+          </symbol-def>
+          <symbol-def name="IPDUM_TXCNTR_QUEUE_BUFFER_OFFSET_[!"$i"!]">
+            <parameter reference="IPDUM_TXCNTR_QUEUE_BUFFER_OFFSET_[!"$i"!]"/>
+          </symbol-def>
+          [!ENDNOCODE!]
+          
+          [!VAR "nd" = "text:split(string(text:split($IpduMTxContainersLst,';')[position()-1 = $i]),':')[1]"!]
+          [!SELECT "as:ref($nd)"!]
+          <field>
+            <!--[!"concat($i,': ',node:name(.))"!]-->
+            [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+              <!--StaticSduLength-->
+              [!IF "node:value(IpduMContainerHeaderSize) = 'IPDUM_HEADERTYPE_NONE'"!]
+                [!VAR "CntrName" = "node:name(.)"!]
+                [!VAR "NumCntdStatic" = "num:i(count(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/* [node:name(as:ref(IpduMContainedTxInContainerPduRef)) = $CntrName]))"!]
+                
+                [!IF "$NumCntdStatic > 1"!]
+                  [!VAR "CntdPduLen" = "as:ref(node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/* [node:name(as:ref(IpduMContainedTxInContainerPduRef)) = $CntrName], 'IpduMContainedPduOffset')[last() - 1]/IpduMContainedTxPduRef)/PduLength"!]
+                  [!VAR "ByteOffsetMax" = "num:i(node:value(node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/* [node:name(as:ref(IpduMContainedTxInContainerPduRef)) = $CntrName], 'IpduMContainedPduOffset')[last() - 1]/IpduMContainedPduOffset))"!]
+                [!ELSE!]
+                  [!VAR "CntdPduLen" = "as:ref(node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/* [node:name(as:ref(IpduMContainedTxInContainerPduRef)) = $CntrName], 'IpduMContainedPduOffset')[1]/IpduMContainedTxPduRef)/PduLength"!]
+                  [!VAR "ByteOffsetMax" = "num:i(node:value(node:order(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/* [node:name(as:ref(IpduMContainedTxInContainerPduRef)) = $CntrName], 'IpduMContainedPduOffset')[1]/IpduMContainedPduOffset))"!]
+                [!ENDIF!]
+                                 
+                [!IF "not(node:exists(IpduMUnusedAreasDefault))"!]
+                  [!VAR "ByteUpdateBitMax" = "num:i(num:max(as:modconf('IpduM')[1]/IpduMConfig/*[1]/IpduMContainedTxPdu/*/IpduMPduUpdateBitPosition [node:name(as:ref(../IpduMContainedTxInContainerPduRef)) = $CntrName]) div 8)"!]
+                  <field>
+                    <int>
+                      [!IF "$ByteOffsetMax + $CntdPduLen > $ByteUpdateBitMax + 1"!]
+                        [!"num:i($ByteOffsetMax + $CntdPduLen)"!]
+                      [!ELSE!]
+                        [!"num:i($ByteUpdateBitMax + 1)"!]
+                      [!ENDIF!]
+                    </int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <int>[!"num:i($ByteOffsetMax + $CntdPduLen)"!]</int>
+                  </field>
+                [!ENDIF!]
+              [!ELSE!]
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+            [!VAR "Val" = "0"!]
+            
+            <!--IpduMContainerTxSizeThreshold-->
+            [!IF "node:exists(IpduMContainerTxSizeThreshold)"!]
+              <field>
+                <int>[!"node:value(IpduMContainerTxSizeThreshold)"!]</int>
+              </field>
+            [!ELSE!]
+              <field>
+                <int>[!"node:value(as:ref(IpduMContainerTxPduRef)/PduLength)"!]</int>
+              </field>
+            [!ENDIF!]
+      
+            <!--IpduMContainerTxConfirmationTimeout-->
+            [!IF "node:exists(IpduMContainerTxConfirmationTimeout)"!]
+              [!CALL "TxTimeoutToMFC", "nodePath"="$nd", "valPathNode"="concat($nd,'/IpduMContainerTxConfirmationTimeout')"!]
+              <field>
+                <int>[!"$mVal"!]</int>
+              </field>
+            [!ELSE!]
+              <field>
+                <int>0</int>
+              </field>
+            [!ENDIF!]
+      
+            <!--IpduMContainerTxHandleId-->
+            [!CALL "GetOutputPduId","IpduMOutgoingPduRef"="IpduMContainerTxPduRef"!][!//
+            <field>
+              <int>[!"$PduID"!]</int>
+            </field>
+      
+            <!--PduLength-->
+            <field>
+              <int>[!"node:value(as:ref(IpduMContainerTxPduRef)/PduLength)"!]</int>
+            </field>
+      
+            <!--CurrentDataOffset-->
+            [!CALL "GetTempDataStoreOffset", "ContainerPath"="node:path(.)"!]
+            <field>
+              <symbol>IPDUM_TXCNTR_CURRENT_DATA_OFFSET_[!"$i"!]</symbol>
+            </field>
+            [!CALL "GetPduListOffset", "ContainerPath"="node:path(.)"!]
+            <!--PdusListOffset-->
+            <field>
+              <symbol>IPDUM_TXCNTR_PDUS_LIST_OFFSET_[!"$i"!]</symbol>
+            </field>
+            <!--ConfirmListOffset-->
+            <field>
+              <symbol>IPDUM_TXCNTR_CONFIRM_LIST_OFFSET_[!"$i"!]</symbol>
+            </field>
+            [!CALL "GetIpduMCntrCollectSemantics", "Container" = "node:path(.)"!]
+            [!IF "$CollectionSemantics = 'IPDUM_COLLECT_LAST_IS_BEST'"!]
+              [!VAR "Val" = "bit:or($Val, 16)"!]
+            [!ENDIF!]
+            [!IF "$IpduMContainerQueuingTxEnable = 'true'"!]
+              [!CALL "GetBuffSliceIdx", "Direction"="'TX'", "ContainerIdx"="node:pos(.)"!]
+              [!IF "$BuffSliceIdx != num:i(-1)"!]
+              [!VAR "Val" = "bit:or($Val, 8)"!]
+            <!--BuffOffset-->
+                <field>
+                  <symbol>IPDUM_TXCNTR_BUFFER_OFFSET_[!"$i"!]</symbol>
+                </field>
+            <!--QueueBuffOffset-->
+                <field>
+                  <symbol>IPDUM_TXCNTR_QUEUE_BUFFER_OFFSET_[!"$i"!]</symbol>
+                </field>   
+              [!ELSE!]
+            <!--BuffOffset-->
+                <field>
+                  <int>0</int>
+                </field>
+            <!--QueueBuffOffset-->
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+            <!--NumCntdStatic-->
+            [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+              [!IF "node:value(IpduMContainerHeaderSize) = 'IPDUM_HEADERTYPE_NONE'"!]
+                <field>
+                  <int>[!"$NumCntdStatic"!]</int>
+                </field>
+              [!ELSE!]
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+            [!IF "$IpduMContainerQueuingTxEnable = 'true'"!]
+            <!--chunkSize-->
+            [!IF "$CollectionSemantics = 'IPDUM_COLLECT_QUEUED'"!]
+              [!IF "node:value(IpduMContainerHeaderSize) = 'IPDUM_HEADERTYPE_SHORT'"!]
+                [!VAR "minSize" = "num:i(5)"!]
+              [!ELSE!]
+                [!VAR "minSize" = "num:i(9)"!]
+              [!ENDIF!]
+              <field>
+                <int>[!"num:i(ceiling(node:value(as:ref(./IpduMContainerTxPduRef)/PduLength) div $minSize) + 1)"!]</int>
+              </field>
+              [!ELSE!]
+                [!VAR "listSize" = "count(node:refs(../../../*/IpduMContainedTxPdu/*[node:path(node:ref(IpduMContainedTxInContainerPduRef)) = node:path(node:current())]/IpduMContainedTxPduRef))"!]
+                <field>
+                  <int>[!"num:i($listSize + 1)"!]</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+
+            <!--IpduMUnusedAreasDefault-->
+            [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+              [!IF "node:exists(IpduMUnusedAreasDefault)"!]
+                <field>
+                  <int>[!"num:i(node:value(IpduMUnusedAreasDefault))"!]</int>
+                </field>
+              [!ELSE!]
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+            [!ENDIF!]
+
+            <!--IpduMContainerQueueSize-->
+            [!IF "node:exists(IpduMContainerQueueSize)"!]
+              <field>
+                <int>[!"num:i(node:value(IpduMContainerQueueSize))"!]</int>
+              </field>
+            [!ELSE!]
+              <field>
+                <int>0</int>
+              </field>
+            [!ENDIF!]
+
+            [!NOCODE!]
+
+            [!IF "'true' = node:value(IpduMContainerTxFirstContainedPduTrigger)"!]
+              [!VAR "Val" = "bit:or($Val, 2)"!]
+            [!ENDIF!]
+
+            [!IF "'IPDUM_DIRECT' = node:value(IpduMContainerTxTriggerMode)"!]
+              [!VAR "Val" = "bit:or($Val, 4)"!]
+            [!ENDIF!]
+
+            [!IF "not(node:exists(IpduMUnusedAreasDefault))"!]
+              [!VAR "Val" = "bit:or($Val, 32)"!]
+            [!ENDIF!]
+            
+            [!IF "$IpduMContainedTxPduPriorityHandlingEnable = 'true'"!]
+              [!CALL "GetIpduMCntdTxPrioFlag", "Container" = "node:path(.)"!]
+              [!IF "$prioFlag = 1"!]
+                [!VAR "Val" = "bit:or($Val, 64)"!]
+              [!ENDIF!]
+            [!ENDIF!]
+            
+            [!ENDNOCODE!]
+            <!--HeaderSize-->
+            <field>
+              <symbol>[!"node:value(IpduMContainerHeaderSize)"!]</symbol>
+            </field>
+            
+            
+      
+            <!--CfgFlags-->
+            <field>
+              <int>[!"num:i($Val)"!]</int>
+            </field>
+
+          </field>
+          [!ENDSELECT!]
+          [!ENDFOR!]
+        </field>
+        [!ENDIF!]
+        
+        [!IF "$numContainedTx > 0"!]
+          <!--IpduM_ContainedTxPdu-->
+          <field>
+            [!LOOP "node:order(IpduMContainedTxPdu/*, 'node:value(.)')"!]
+            [!NOCODE!]
+            <symbol-def name="IPDUM_TXCNTD_BUFFER_OFFSET_[!"$i"!]">
+              <parameter reference="IPDUM_TXCNTD_BUFFER_OFFSET_[!"$i"!]"/>
+            </symbol-def>
+            [!ENDNOCODE!]
+            
+            <field>
+              <!--[!"node:name(.)"!]-->
+              <!--IpduMContainedPduHeaderId-->
+              [!IF "node:exists(IpduMContainedPduHeaderId)"!]
+                [!CALL "IpduMGetHeaderID", "headerIDVal"="node:value(IpduMContainedPduHeaderId)"!][!//
+                <field>
+                  <int>[!"$IpduMHeaderID"!]</int>
+                </field>
+              [!ELSE!]
+	      	<!--Header ID is limited to start from 1 from configuration, so using value 0 should be safe-->
+                <field>
+                  <int>0</int>
+                </field>
+              [!ENDIF!]
+
+              [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+                <!-- IpduMContainedPduOffset -->
+                [!IF "node:exists(IpduMContainedPduOffset)"!]
+                  <field>
+                    <int>[!"num:i(node:value(IpduMContainedPduOffset))"!]</int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <int>0</int>
+                  </field>
+                [!ENDIF!]
+                
+                <!-- IpduMUpdateBitBytePosition -->
+                [!IF "node:exists(IpduMPduUpdateBitPosition)"!]
+                  <field>
+                    <int>[!"num:i(node:value(IpduMPduUpdateBitPosition) div 8)"!]</int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <int>0</int>
+                  </field>
+                [!ENDIF!]
+              [!ENDIF!]
+                      
+              <!--IpduMContainedTxPduHandleId-->
+              [!CALL "GetResponsePduId","IpduMPduRef"="IpduMContainedTxPduRef"!][!//
+              <field>
+                <int>[!"$ResponsePduID"!]</int>
+              </field>
+        
+              <!--IpduMContainedTxPduSendTimeout-->
+              [!CALL "GetMinTxSendTimeout", "ValPath1"="as:path(.)"!][!//
+              <field>
+                <int>[!"$MinTxSendTimeout"!]</int>
+              </field>
+        
+              <!--IpduMContainerTxIndex-->
+              [!CALL "GetIpduMCntdInCntrIdx", "ContainerPath"="as:path(as:ref(IpduMContainedTxInContainerPduRef))"!]
+              <field>
+                <int>[!"$IpduMCntdInCntrIdx"!]</int>
+              </field>
+        
+              <!--PduLength-->
+              <field>
+                <int>[!"node:value(as:ref(IpduMContainedTxPduRef)/PduLength)"!]</int>
+              </field>
+        
+              [!NOCODE!]
+        
+              [!VAR "Val" = "0"!]
+              [!IF "node:exists(IpduMContainedTxPduConfirmation) and 'true' = node:value(IpduMContainedTxPduConfirmation)"!]
+                [!VAR "Val" = "bit:or($Val, 1)"!]
+              [!ENDIF!]
+        
+              [!IF "'IPDUM_TRIGGER_ALWAYS' = node:value(IpduMContainedTxPduTrigger)"!]
+                [!VAR "Val" = "bit:or($Val, 2)"!]
+              [!ENDIF!]
+        
+              [!ENDNOCODE!]
+              <!--BuffOffset-->
+              <field>
+                <symbol>IPDUM_TXCNTD_BUFFER_OFFSET_[!"node:pos(.)"!]</symbol>
+              </field>
+              
+              [!IF "$IpduMStaticContainerPduHandlingEnable = 'true'"!]
+                <!-- IpduMUpdateBitMask -->
+                [!IF "node:exists(IpduMPduUpdateBitPosition)"!]
+                  <field>
+                    <int>[!"num:i(bit:shl(1, num:i(node:value(IpduMPduUpdateBitPosition) mod 8)))"!]</int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <int>0</int>
+                  </field>
+                [!ENDIF!]
+              [!ENDIF!]
+              
+              [!IF "$IpduMContainedTxPduPriorityHandlingEnable = 'true'"!]
+                <!-- IpduMContainedTxPduPriority -->
+                [!IF "node:exists(IpduMContainedTxPduPriority)"!]
+                  <field>
+                    <int>[!"num:i(node:value(IpduMContainedTxPduPriority))"!]</int>
+                  </field>
+                [!ELSE!]
+                  <field>
+                    <int>255</int>
+                  </field>
+                [!ENDIF!]
+              [!ENDIF!]
+ 
+              <!--CfgFlags-->
+              <field>
+                <int>[!"num:i($Val)"!]</int>
+              </field>
+  
+            </field>
+            [!ENDLOOP!]
+          </field>
+        [!ENDIF!]
+          
+        [!ENDIF!]
+          
+        </instance>
+      </memory-section>
+      [!ENDSELECT!]
+      
+   </configuration>
+ </module>
+ <xi:include href="Base.xgen" xpointer="element(/1/1)" />
+</xgen>
+[!ENDCODE!]

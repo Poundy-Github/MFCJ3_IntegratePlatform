@@ -1,0 +1,20 @@
+;InitScript for eclipse integration
+
+entry &workspace &project &launchconfig &invokeme &param1 &param2
+print "workspace=&workspace project=&project launchconfig=&launchconfig"
+
+wait 2s
+setup.breaktransfer OFF
+
+do &invokeme &param1 &param2
+
+; show windows
+;do my_windows.cmm
+
+; set breakpoints
+;do my_breakpoints.cmm
+
+wait 2s
+setup.breaktransfer ON
+
+Print "Started"

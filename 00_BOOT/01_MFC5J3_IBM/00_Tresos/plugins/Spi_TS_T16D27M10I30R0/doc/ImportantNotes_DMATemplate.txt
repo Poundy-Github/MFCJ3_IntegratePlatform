@@ -1,0 +1,45 @@
+The SPI uses the service of the DMA for data transmission in asynchronous mode.
+The Dma Channels used by Spi are configurable and the allocation of the same is
+done in MCU. Each channel can work in software triggered mode or hardware
+triggered mode. For SPI to use DMA channel, the channel should be configured as
+hardware trigger type.
+
+In this implementation the Combined Software/Hardware Controlled Mode will be
+used. Hence the first DMA transfer will be triggered by software when setting
+the corresponding request channel bit in the Software Transaction Request
+Register, while the hardware requests are still disabled. The subsequent DMA
+transfers are triggered by the corresponding hardware request, this happens
+after the hardware requests have been enabled.
+
+The QSPI Peripheral’s RX or TX Interrupt Line is used to trigger the DMA
+transactions. Each QSPI Peripheral uses two DMA channels to trigger reception
+and transmission respectively.
+
+The DMA Mechanism is used for the asynchronous transmission mode. It is not
+used during synchronous transmission mode. The SPI handler driver initializes
+the DMA channels used.
+
+The DMA channel number used by SPI will be used as the priority number as per
+HW recommendation.
+
+-------------------------------------------------------------------------------
+
+QSPI RX and TX have to be mapped to DMA - not to interrupts. Infineon IRQ
+module is capable to map interrupt nodes to CPU0/CPU1/CPU2 interrupts or to DMA.
+This functionality have to be implemented in the user application as part of
+integration code with EB's Autocore OS or Safety OS and with AutoCore Generic.
+
+Please copy following files
+* "user application"\generate\templates\Spi_UserCode.h
+* "user application"\generate\templates\Spi_UserCode.c
+into your user application and add them to your build environment.
+
+Please change following macros in Spi_UserCode.h to your needs
+* #define QSPI_SCR_RX_PRIO  (4u)
+* #define QSPI_SCR_TX_PRIO  (5u)
+This example will map QSPI2RX to DMA channel 4 and QSPI2TX to DMA channel 5.
+
+In order to map QSPI RX and TX the template function Spi_InitDMAUsr should be
+executed after Spi_Init function. Therefore, please add include Spi_UserCode.h
+in BswM_UserCallouts.c after include of Spi.h. Additionally add function call
+Spi_InitDMAUsr after Spi_Init, e.g. SPI_INIT_FUNC function macro.

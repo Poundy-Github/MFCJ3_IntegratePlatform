@@ -1,0 +1,17 @@
+592b72ddabb1452c826baeab99ad2159253b7aac *plugins\SA_TS_TxDxM1I6R0\META-INF\MANIFEST.MF
+6830f41bc2dedfbc80126e8fb5a2063360591624 *plugins\SA_TS_TxDxM1I6R0\anchors.xml
+ab738b482818d6dfbf39062003e2f42da2220e92 *plugins\SA_TS_TxDxM1I6R0\config\SA.xdm
+e39cd0538346427e2cc26d308b99b846b6f82436 *plugins\SA_TS_TxDxM1I6R0\generate\include\SA_Cbk.h
+f28a7daae3edc44e9b8fa5dedb26b6295cbf40dc *plugins\SA_TS_TxDxM1I6R0\generate\include\SA_Cfg.h
+74d98cb11efa5c61e0858fa122164e53d69a7801 *plugins\SA_TS_TxDxM1I6R0\generate\include\SA_Types.h
+848d87c886fc073d366413c5446efdeff522ebe9 *plugins\SA_TS_TxDxM1I6R0\generate\src\SA_Cfg.c
+e0a7a98c2046bb1f7b3d2287d487fe086ef50f02 *plugins\SA_TS_TxDxM1I6R0\generate\templates\SA_Cbk.c
+dbb2befcf62d06ae9ba0ac83e9e9461d14c688e2 *plugins\SA_TS_TxDxM1I6R0\generate\templates\SA_MemMap.h
+bfb41a3e51fd4fb9531272c4c0571f8a292f78e7 *plugins\SA_TS_TxDxM1I6R0\include\SA_Priv.h
+64055311cab5d3175a70538fe99db59c15ef1ac9 *plugins\SA_TS_TxDxM1I6R0\include\SA_Pub.h
+aeb68628de50061966f60d10f55277191e6b81d6 *plugins\SA_TS_TxDxM1I6R0\include\SA_Trace.h
+ced79e4324adebd9d26c30ae01698d690e4da701 *plugins\SA_TS_TxDxM1I6R0\make\SA_defs.mak
+dc519281fb358a9977513aec22d5912c48a28c8c *plugins\SA_TS_TxDxM1I6R0\make\SA_rules.mak
+6c4389db06b801960a6fa6a947e64cdb788ff6aa *plugins\SA_TS_TxDxM1I6R0\plugin.xml
+30ab3d4a943fefbd379fa64a066e18f592f41ba7 *plugins\SA_TS_TxDxM1I6R0\src\SA_Decomp.c
+6fe77f3d572ef66262a29d14e5b2ea9492475a89 *plugins\SA_TS_TxDxM1I6R0\src\SA_Prg.c

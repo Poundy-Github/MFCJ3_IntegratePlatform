@@ -1,0 +1,51 @@
+/*
+ * Partial linker script to define board memory layout.
+ * This file is used for GNU-like linkers.
+ *
+ * $Id$
+ *
+ * Copyright Elektrobit Automotive GmbH
+ * All rights exclusively reserved for Elektrobit Automotive GmbH,
+ * unless expressly agreed to otherwise.
+*/
+
+MEMORY
+{
+	/* Usage of flash:
+	 *
+	 * There's 3*3MiB flash in PF0 to PF2.
+	 * There's   1MiB flash in PF3.
+	 *
+	 * Note that some of this flash might be used by the HSM.
+	 * Sectors 0 to 64 of PF0 are located at 0x80000000 .. 0x800fffff.
+	 * Sector size is 0x4000 B = 16 kiB.
+	 * PF0 logical sectors S0 to S39 may be configured as "HSM_exclusive".
+	 * In this example we don't expect that this memory is reserved for HSM.
+	 *
+	 *
+	 * Note, that early versions of TC3XX have only 96k of int_ram_core[01],
+	 * while newer steppings will have 2*240k for core 0 and core 1.
+	*/
+	int_rom_vect  : org = 0x80000000, len = 80k
+	int_rom       : org = 0x80080000, len = 10M - 512k
+	int_ram_core0 : org = 0x70000000, len = (96k - (GENLD_csaCore0_NCSA*64))
+	int_ram_core1 : org = 0x60000000, len = (96k - (GENLD_csaCore1_NCSA*64))
+	int_ram_core2 : org = 0x50000000, len = (96k - (GENLD_csaCore2_NCSA*64))
+	int_ram_core3 : org = 0x40000000, len = (96k - (GENLD_csaCore3_NCSA*64))
+}
+
+/* Where the CSA memory is located:
+ * OS_csaCorex_BEGIN is the base of the CSA block of core x
+ * GENLD_csaCore0_NCSA is the number of CSAs in the block
+ *
+ * OS_csaCorex_BEGIN must be aligned on a 64-byte boundary (lower 6 bits all zero)
+ */
+OS_csaCore0_BEGIN  = 0xd0000000 + LENGTH(int_ram_core0);
+OS_csaCore1_BEGIN  = 0xd0000000 + LENGTH(int_ram_core1);
+OS_csaCore2_BEGIN  = 0xd0000000 + LENGTH(int_ram_core2);
+OS_csaCore3_BEGIN  = 0xd0000000 + LENGTH(int_ram_core3);
+
+/* for read-only memory region providing access to all RAMs */
+__GLBL_DATA_START = ORIGIN(int_ram_core3);
+__GLBL_DATA_END = ORIGIN(int_ram_core0) + LENGTH(int_ram_core0);
+

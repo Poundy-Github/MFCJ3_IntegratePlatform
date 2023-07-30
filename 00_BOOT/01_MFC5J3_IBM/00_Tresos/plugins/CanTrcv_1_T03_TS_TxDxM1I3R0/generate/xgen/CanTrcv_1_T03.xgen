@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?module CanTrcv_1_T03?>
+
+<xgen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.elektrobit.com/2013/xgen" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+[!CODE!]
+[!AUTOSPACING!]
+[!INCLUDE "../include/CanTrcv_1_T03_Vars.m"!][!//
+
+[!VAR "CANTRCV_1_T03_INIT_MODE_NORMAL"="num:i(0)"!][!//
+[!VAR "CANTRCV_1_T03_INIT_MODE_SLEEP"="num:i(1)"!][!//
+[!VAR "CANTRCV_1_T03_INIT_MODE_STANDBY"="num:i(2)"!][!//
+[!VAR "FALSE"="num:i(0)"!][!//
+[!VAR "TRUE"="num:i(1)"!][!//
+[!VAR "CANTRCV_1_T03_STANDARD_ID"="num:i(0)"!][!//
+[!VAR "CANTRCV_1_T03_EXTENDED_ID"="num:i(1)"!][!//
+[!VAR "CANTRCV_1_T03_INVALID_ICU_CHANNEL"="num:i(65535)"!][!//
+[!VAR "INVALID_WAKEUP_SOURCE"="num:i(255)"!][!//
+
+[!SELECT "as:modconf('CanTrcv')[(CommonPublishedInformation/VendorId = 1) and (CommonPublishedInformation/VendorApiInfix = 'T03')]"!]
+
+  <!-- This is the configuration of module CanTrcv -->
+  <module name="CanTrcv_1_T03">
+
+    <!-- This is the Precompile-time configuration of the module. -->
+    <configuration class="PreCompile">
+
+      <?artifact directory="include" file="CanTrcv_1_T03_Types.h" type="types-h" ?>
+
+      [!VAR "relocatable" = "'false'"!]
+      [!IF "node:contains(node:refs(as:modconf('PbcfgM')/PbcfgMBswModules/*/PbcfgMBswModuleRef), .) = 'true'"!]
+      [!IF "as:modconf('PbcfgM')/PbcfgMGeneral/PbcfgMRelocatableCfgEnable = 'true'"!]
+      [!VAR "relocatable" = "'true'"!]
+      [!ENDIF!]
+      [!ELSE!]
+      [!IF "VendorSpecific/CanTrcvRelocatablePbcfgEnable = 'true'"!]
+      [!VAR "relocatable" = "'true'"!]
+      [!ENDIF!]
+      [!ENDIF!]
+
+      <parameter name="relocatable-enable">
+        <boolean-value>[!"$relocatable"!]</boolean-value>
+      </parameter>
+
+      <!-- This is the type definition of the root structure -->
+      <type name="CanTrcv_1_T03_ConfigType">
+        <struct>
+          <comment><![CDATA[Post-build configuration type]]></comment>
+          <member name="PlatformSignature" type="uint32">
+            <comment><![CDATA[Used to validate the platform]]></comment>
+          </member>
+          <member name="LcfgSignature" type="uint32">
+            <comment><![CDATA[Used to validate the post build configuration against the link time configuration.]]></comment>
+          </member>
+          <member name="CfgSignature" type="uint32">
+            <comment><![CDATA[Used to validate the post build configuration against the precompile time configuration.]]></comment>
+          </member>
+          <member name="PublicInfoSignature" type="uint32">
+            <comment><![CDATA[Used to validate the post build configuration against the precompile time published info configuration.]]></comment>
+          </member>
+          <!-- Pointers to post build data structures -->
+          <member name="channelConfigPtr" type="CanTrcv_1_T03_ChannelConfigType">
+            <comment><![CDATA[ptr. to array of channel configurations.]]></comment>
+            <compiler-abstraction>
+              <ref2cfg />
+            </compiler-abstraction>
+          </member>
+          <member name="nrOfChannels" type="uint8">
+            <comment><![CDATA[number of configured CanTrcv channels.]]></comment>
+          </member>
+        </struct>
+      </type>
+
+      <!--  Type for channel configuration. -->
+      <type name="CanTrcv_1_T03_ChannelConfigType">
+        <struct>
+          <member name="CanIfTrcvId" type="uint8">
+            <comment><![CDATA[Abstracted CanIf transceiver Id used in callbacks]]></comment>
+          </member>
+          <member name="CanTrcvHwPnSupport" type="uint8">
+            <comment><![CDATA[CPNC bit]]></comment>
+          </member>
+          [!IF "node:value(VendorSpecific/CanTrcvIcuDriverSupportApiEnable) = 'true'"!]
+          <member name="CanTrcvIcuChannel" type="uint16">
+            <comment><![CDATA[Icu channel of the configuration]]></comment>
+          </member>
+          [!ENDIF!]
+          <member name="CanTrcvSpiSequence" type="uint8">
+            <comment><![CDATA[Spi sequence of the configuration]]></comment>
+          </member>
+          <member name="CanTrcvSpiChannel" type="uint8">
+            <comment><![CDATA[Spi channel of the configuration]]></comment>
+          </member>
+          <member name="CanTrcvSpiAccess" type="uint8">
+            <comment><![CDATA[Spi access type]]></comment>
+          </member>
+          <member name="CanTrcvInitState" type="uint8">
+            <comment><![CDATA[MC bits]]></comment>
+          </member>
+          <member name="CanTrcvModeSlct" type="uint8">
+            <comment><![CDATA[CMC bit]]></comment>
+          </member>
+          <member name="CanTrcvTransceiverEventReg" type="uint8">
+            <comment><![CDATA[Transceiver event register en(dis)abling]]></comment>
+          </member>
+          <member name="CanTrcvWakePinReg" type="uint8">
+            <comment><![CDATA[Wake pin event register en(dis)abling]]></comment>
+          </member>
+          [!IF "node:value(CanTrcvGeneral/CanTrcvWakeUpSupport) != 'CANTRCV_WAKEUP_NOT_SUPPORTED'"!]
+          <member name="CanTrcvWakeupUsed" type="uint8">
+            <comment><![CDATA[wake up by bus or pin supported?]]></comment>
+          </member>
+          <member name="CanTrcvSyserrWakeupSourceRef" type="uint8">
+            <comment><![CDATA[Supported by HW. SYSERR wake-up]]></comment>
+          </member>
+          <member name="CanTrcvByBusWakeupSourceRef" type="uint8">
+            <comment><![CDATA[Supported by HW. By bus wake-up]]></comment>
+          </member>
+          <member name="CanTrcvByPinWakeupSourceRef" type="uint8">
+            <comment><![CDATA[Supported by HW. By pin wake-up]]></comment>
+          </member>
+          [!ENDIF!]
+          [!IF "VendorSpecific/CanTrcvPnSupport = 'true'"!]
+          <member name="CanTrcvBaudRate" type="uint8">
+            <comment><![CDATA[CDR bits]]></comment>
+          </member>
+          <member name="CanTrcvPnFrameCanId" type="uint32">
+            <comment><![CDATA[ID register]]></comment>
+          </member>
+          <member name="CanTrcvPnFrameCanIdMask" type="uint32">
+            <comment><![CDATA[mask register]]></comment>
+          </member>
+          <member name="CanTrcvPnCanIdIsExtended" type="uint8">
+            <comment><![CDATA[IDE of the frame control register]]></comment>
+          </member>
+          <member name="CanTrcvPnFrameDlc" type="uint8">
+            <comment><![CDATA[DLC of the frame control register]]></comment>
+          </member>
+          <member name="CanTrcvPnFrameDataMaskSpec" type="uint8" count="8">
+            <comment><![CDATA[Data mask register]]></comment>
+          </member>
+          <member name="CanTrcvPnFramePNDM" type="uint8">
+            <comment><![CDATA[DLC and data check activation]]></comment>
+          </member>
+          <member name="CanTrcvPnEnabled" type="uint8">
+            <comment><![CDATA[PN enabled bit]]></comment>
+          </member>
+          [!ENDIF!]
+        </struct>
+      </type>
+
+    </configuration>  <!-- PreCompile -->
+
+    <!-- This is the post-build configuration of the module. -->
+    <configuration class="PostBuild">
+
+      <?artifact directory="include" file="CanTrcv_1_T03_PBcfg.h" type="postbuild-h" ?>
+      <?artifact directory="src" file="CanTrcv_1_T03_PBcfg.c" type="postbuild-c" ?>
+
+      <!-- This is the type definition of the layout type of the
+           modules' postbuild configuration structure -->
+      <type name="CanTrcv_1_T03_ConfigLayoutType">
+        <struct>
+          <!-- Member of the layout type starting with the RootCfg -->
+          <member name="RootCfg" type="CanTrcv_1_T03_ConfigType"/>
+          <member name="ChannelCfg" type="CanTrcv_1_T03_ChannelConfigType" count="[!"$VarChannelNumber"!]"/>
+        </struct>
+      </type>
+
+      <type name="CanTrcv_1_T03_ConstConfigLayoutType">
+        <reference type="CanTrcv_1_T03_ConfigLayoutType">
+          <compiler-abstraction>
+            <const memory-class="CANTRCV_1_T03_APPL_CONST" />
+          </compiler-abstraction>
+        </reference>
+      </type>
+
+      <memory-section name="CONFIG_DATA_UNSPECIFIED">
+      <instance type="CanTrcv_1_T03_ConstConfigLayoutType"
+             name="CanTrcv_1_T03_ConfigLayout">
+
+        <comment><![CDATA[CanTrcv post build config. - Static code accesses this config
+ solely via the pointer of type CanTrcv_1_T03_ConfigLayoutType passed to
+ \a CanTrcv_1_T03_Init() as parameter.]]></comment>
+
+        <parameter name="postbuild-configuration-name">
+          <symbolic-value>[!"node:name(CanTrcvConfigSet/*[1])"!]</symbolic-value>
+        </parameter>
+
+        <!-- CanTrcv_1_T03_ConfigLayout.RootCfg -->
+        <field>
+          <field>
+            <int>[!"num:i(asc:getPlatformSignature())"!]</int>
+          </field>
+          <field>
+            <int>[!"asc:getConfigSignature(.//*[not(child::*) and (node:configclass() = 'Link')])"!]</int>
+          </field>
+          <field>
+            <int>[!"asc:getConfigSignature(.//*[not(child::*) and (node:configclass() = 'PreCompile') ])"!]</int>
+          </field>
+          <field>
+            <int>[!"asc:getConfigSignature(node:difference(CommonPublishedInformation//*[not(child::*) and (node:configclass() = 'PublishedInformation') ], CommonPublishedInformation/Release))"!]</int>
+          </field>
+          <field>
+            <ref>
+              <struct-field name="ChannelCfg"/>
+              <array-field index="0" />
+            </ref>
+          </field>
+          <field>
+            <int>[!"$VarChannelNumber"!]</int>
+          </field>
+        </field> <!-- CanTrcv_1_T03_ConfigLayout.RootCfg -->
+
+        <!-- CanTrcv_ConfigLayout.ChannelCfg -->
+        <field>
+          [!LOOP "CanTrcvConfigSet/*[1]/CanTrcvChannel/*"!]
+          <field>
+            <field>
+              [!IF "node:exists(as:modconf('CanIf')[1]/CanIfTrcvDrvCfg/*/CanIfTrcvCfg/*[(node:refvalid(CanIfTrcvCanTrcvRef)) and (node:path(as:ref(CanIfTrcvCanTrcvRef)) = node:path(node:current()))])"!]
+              <int>[!"node:value(as:modconf('CanIf')[1]/CanIfTrcvDrvCfg/*/CanIfTrcvCfg/*[(node:refvalid(CanIfTrcvCanTrcvRef)) and (node:path(as:ref(CanIfTrcvCanTrcvRef)) = node:path(node:current()))]/CanIfTrcvId)"!]</int>
+              [!ELSE!]
+                [!ERROR!]No relating CanIfTrcvCfg configuration found in CanIf for CanTrcv channel with CanTrcvChannelId [!"./CanTrcvChannelId"!].[!ENDERROR!]
+              [!ENDIF!]
+            </field>
+            <field>
+              [!IF "CanTrcvHwPnSupport = 'true'"!]
+              <int>[!"$TRUE"!]</int>
+              [!ELSE!]
+              <int>[!"$FALSE"!]</int>
+              [!ENDIF!]
+            </field>
+            [!IF "node:value(../../../../VendorSpecific/CanTrcvIcuDriverSupportApiEnable) = 'true'"!]
+            <field>
+              [!IF "node:exists(VendorSpecific/CanTrcvIcuChannelRef)"!]
+              <int>[!"node:value(node:ref(VendorSpecific/CanTrcvIcuChannelRef)/IcuChannelId)"!]</int>
+              [!ELSE!]
+              <int>[!"$CANTRCV_1_T03_INVALID_ICU_CHANNEL"!]</int>
+              [!ENDIF!]
+            </field>
+            [!ENDIF!]
+            <field>
+              <int>[!CALL "FindSequenceSpiId", "SpiSeq"="CanTrcvAccess/CanTrcvSpiSequenceName/*[1]"!]</int>
+            </field>
+            <field>
+              <int>[!CALL "FindChannelSpi", "SpiSeq"="CanTrcvAccess/CanTrcvSpiSequenceName/*[1]"!]</int>
+            </field>
+            <field>
+            [!IF "node:exists(CanTrcvAccess/CanTrcvSpiAccessSynchronous)"!]
+              [!IF "node:value(CanTrcvAccess/CanTrcvSpiAccessSynchronous) = "true""!]
+            <int>[!"$TRUE"!]</int>
+              [!ELSE!]
+            <int>[!"$FALSE"!]</int>
+              [!ENDIF!]
+            [!ELSE!]
+            <int>[!"$TRUE"!]</int>
+            [!ENDIF!]
+             </field>
+             <field>
+               [!IF "CanTrcvInitState = 'CANTRCV_OP_MODE_NORMAL'"!]
+               <int>[!"$CANTRCV_1_T03_INIT_MODE_NORMAL"!]</int>
+               [!ELSEIF "CanTrcvInitState = 'CANTRCV_OP_MODE_STANDBY'"!]
+               <int>[!"$CANTRCV_1_T03_INIT_MODE_STANDBY"!]</int>
+               [!ELSE!]
+               <int>[!"$CANTRCV_1_T03_INIT_MODE_SLEEP"!]</int>
+               [!ENDIF!]
+             </field>
+             <field>
+               [!IF "VendorSpecific/CanTrcvSubModeCMC = 'Active'"!]
+               <int>1</int>
+               [!ELSEIF "VendorSpecific/CanTrcvSubModeCMC = 'Offline'"!]
+               <int>0</int>
+               [!ELSE!]
+               <int>3</int>
+               [!ENDIF!]
+             </field>
+            [!VAR "DATA_REGISTER" = "0"!][!//
+            [!IF "VendorSpecific/CanTrcvTrcvEventRegister/CanTrcvSilentDetection = 'true'"!]
+              [!VAR "DATA_REGISTER" = "num:i(num:add(text:split(num:i($DATA_REGISTER)) , text:split(num:i(16))))"!]
+            [!ENDIF!]
+            [!IF "node:exists(CanTrcvWakeupByBusUsed) = 'true'"!]
+              [!IF "CanTrcvWakeupByBusUsed = 'true'"!]
+                [!VAR "DATA_REGISTER" = "num:i(num:add(text:split(num:i($DATA_REGISTER)) , text:split(num:i(1))))"!]
+              [!ENDIF!]
+            [!ENDIF!]
+            [!IF "VendorSpecific/CanTrcvTrcvEventRegister/CanTrcvCanFailureDetection = 'true'"!]
+              [!VAR "DATA_REGISTER" = "num:i(num:add(text:split(num:i($DATA_REGISTER)) , text:split(num:i(2))))"!]
+            [!ENDIF!]
+            <field>
+             <int>[!"num:i($DATA_REGISTER)"!]</int>
+            </field>
+            [!VAR "DATA_REGISTER" = "0"!][!//
+            [!IF "VendorSpecific/CanTrcvWakeEventRegister/CanTrcvRisingEdgeDetection = 'true'"!]
+              [!VAR "DATA_REGISTER" = "num:i(num:add(text:split(num:i($DATA_REGISTER)) , text:split(num:i(2))))"!]
+            [!ENDIF!]
+            [!IF "VendorSpecific/CanTrcvWakeEventRegister/CanTrcvFallingEdgeDetection = 'true'"!]
+              [!VAR "DATA_REGISTER" = "num:i(num:add(text:split(num:i($DATA_REGISTER)) , text:split(num:i(1))))"!]
+            [!ENDIF!]
+            <field>
+             <int>[!"num:i($DATA_REGISTER)"!]</int>
+            </field>
+            [!IF "node:value(../../../../CanTrcvGeneral/CanTrcvWakeUpSupport) != 'CANTRCV_WAKEUP_NOT_SUPPORTED'"!]
+            <field>
+              [!IF "(node:exists(CanTrcvWakeupByBusUsed) and CanTrcvWakeupByBusUsed = 'true') or node:exists(CanTrcvByPinWakeupSourceRef) or node:exists(CanTrcvSyserrWakeupSourceRef)"!]
+              <int>[!"$TRUE"!]</int>
+              [!ELSE!]
+              <int>[!"$FALSE"!]</int>
+              [!ENDIF!]
+            </field>
+            <field>
+              <int>[!IF "node:exists(CanTrcvSyserrWakeupSourceRef) = 'true'"!][!CALL "FindEcuMWakeupSourceId", "EcuMWakeupSourceName"="node:name(node:value(CanTrcvSyserrWakeupSourceRef))"!][!ELSE!][!"$INVALID_WAKEUP_SOURCE"!][!ENDIF!]</int>
+            </field>
+            <field>
+              <int>[!IF "node:exists(CanTrcvByBusWakeupSourceRef) = 'true'"!][!CALL "FindEcuMWakeupSourceId", "EcuMWakeupSourceName"="node:name(node:value(CanTrcvByBusWakeupSourceRef))"!][!ELSE!][!"$INVALID_WAKEUP_SOURCE"!][!ENDIF!]</int>
+            </field>
+            <field>
+              <int>[!IF "node:exists(CanTrcvByPinWakeupSourceRef) = 'true'"!][!CALL "FindEcuMWakeupSourceId", "EcuMWakeupSourceName"="node:name(node:value(CanTrcvByPinWakeupSourceRef))"!][!ELSE!][!"$INVALID_WAKEUP_SOURCE"!][!ENDIF!]</int>
+            </field>
+            [!ENDIF!] <!-- CANTRCV_1_T03_GENERAL_WAKE_UP_SUPPORT != 'CANTRCV_WAKEUP_NOT_SUPPORTED' -->
+            [!IF "../../../../VendorSpecific/CanTrcvPnSupport = 'true'"!]
+            [!IF "node:exists(CanTrcvPartialNetwork) = 'true'"!]
+            <field>
+              [!IF "CanTrcvPartialNetwork/CanTrcvBaudRate = '125'"!]
+              <int>2</int>
+              [!ELSEIF "CanTrcvPartialNetwork/CanTrcvBaudRate = '250'"!]
+              <int>3</int>
+              [!ELSEIF "CanTrcvPartialNetwork/CanTrcvBaudRate = '500'"!]
+              <int>5</int>
+              [!ELSE!]
+              <int>7</int>
+              [!ENDIF!]
+            </field>
+            <field>
+              <int>[!"num:i(CanTrcvPartialNetwork/CanTrcvPnFrameCanId)"!]</int>
+            </field>
+            <field>
+              <int>[!"num:i(CanTrcvPartialNetwork/CanTrcvPnFrameCanIdMask)"!]</int>
+            </field>
+            <field>
+              [!IF "CanTrcvPartialNetwork/CanTrcvPnCanIdIsExtended = 'true'"!]
+              <int>[!"$CANTRCV_1_T03_EXTENDED_ID"!]</int>
+              [!ELSE!]
+              <int>[!"$CANTRCV_1_T03_STANDARD_ID"!]</int>
+              [!ENDIF!]
+            </field>
+            <field>
+              <int>[!"CanTrcvPartialNetwork/CanTrcvPnFrameDlc"!]</int>
+            </field>
+            <field>
+            [!IF "num:i(CanTrcvPartialNetwork/CanTrcvPnFrameDlc) > 0"!]
+              [!IF "num:i(count(CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/*)) != CanTrcvPartialNetwork/CanTrcvPnFrameDlc"!]
+                [!ERROR!]The CanTrcvPnFrameDlc ([!"CanTrcvPartialNetwork/CanTrcvPnFrameDlc"!]) is not in accordance with number of data defined in CanTrcvPnFrameDataMaskSpec ([!"num:i(count(CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/*))"!])[!ENDERROR!]
+              [!ENDIF!]
+              [!IF "count(CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/*[CanTrcvPnFrameDataMask = 0]) = num:i(CanTrcvPartialNetwork/CanTrcvPnFrameDlc)"!]
+                [!WARNING!]The CanTrcv will not wake-up if any data is configured with one bit to 1[!ENDWARNING!][!//
+              [!ENDIF!]
+              [!FOR "DataLengthCnt" = "0" TO "7"!]
+                [!IF "$DataLengthCnt < CanTrcvPartialNetwork/CanTrcvPnFrameDlc"!]
+                  [!IF "count(CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/*[CanTrcvPnFrameDataMaskIndex = $DataLengthCnt]) > 1"!]
+                    [!ERROR!]The parameter 'CanTrcvPnFrameDataMaskIndex' has an index defined more than once![!ENDERROR!][!//
+                  [!ENDIF!]
+                  [!LOOP "CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/*"!]
+                    [!IF "CanTrcvPnFrameDataMaskIndex >= ../../../CanTrcvPartialNetwork/CanTrcvPnFrameDlc"!]
+                      [!ERROR!]Unexpected value for parameter 'CanTrcvPnFrameDataMaskSpec'. It has to be under DLC value[!ENDERROR!]
+                    [!ENDIF!]
+                    [!IF "num:i(num:sub(../../../CanTrcvPartialNetwork/CanTrcvPnFrameDlc,($DataLengthCnt+1))) = CanTrcvPnFrameDataMaskIndex"!]
+              <field>
+                <int>[!"num:i(CanTrcvPnFrameDataMask)"!]</int>
+              </field>
+                      [!VAR "ValueFound" = "1"!]
+                    [!ENDIF!]
+                  [!ENDLOOP!]
+                [!ELSE!]
+              <field>
+                <int>0</int>
+              </field>
+                [!ENDIF!]
+              [!ENDFOR!]
+            [!ELSE!]
+              [!FOR "DataLengthCnt" = "0" TO "7"!]
+              <field>
+                <int>0</int>
+              </field>
+              [!ENDFOR!]
+            [!ENDIF!]
+            </field>
+            <field>
+              [!IF "VendorSpecific/CanTrcvPnFramePNDM = 'true'"!]
+              <int>1</int>
+              [!ELSE!]
+              <int>0</int>
+              [!ENDIF!]
+            </field>
+            <field>
+              [!IF "CanTrcvPartialNetwork/CanTrcvPnEnabled = 'true'"!]
+              <int>[!"$TRUE"!]</int>
+              [!ELSE!]
+              <int>[!"$FALSE"!]</int>
+              [!ENDIF!]
+            </field>
+            [!ELSE!][!// IF "node:exists(CanTrcvPartialNetwork) = 'true'"
+            <field>
+             <int>0</int>
+            </field>
+            <field>
+             <int>0</int>
+            </field>
+            <field>
+             <int>0</int>
+            </field>
+            <field>
+             <int>[!"$CANTRCV_1_T03_STANDARD_ID"!]</int>
+            </field>
+            <field>
+             <int>0</int>
+            </field>
+            <field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+              <field>
+                <int>0</int>
+              </field>
+            </field>
+            <field>
+              <int>0</int>
+            </field>
+            <field>
+             <int>0</int>
+            </field>
+            [!ENDIF!][!// IF "node:exists(CanTrcvPartialNetwork) = 'true'"
+            [!ENDIF!][!// IF "VendorSpecific/CanTrcvPnSupport = 'true'"
+          </field>
+          [!ENDLOOP!]
+        </field>
+
+      </instance> <!-- CanTrcv_1_T03_ConfigLayoutType -->
+      </memory-section>
+
+    </configuration>
+  </module>
+
+  <!-- include the AUTOSAR standard data types, etc. -->
+  <xi:include href="Base.xgen" xpointer="element(/1/1)"/>
+
+[!ENDSELECT!]
+[!ENDCODE!]
+</xgen>

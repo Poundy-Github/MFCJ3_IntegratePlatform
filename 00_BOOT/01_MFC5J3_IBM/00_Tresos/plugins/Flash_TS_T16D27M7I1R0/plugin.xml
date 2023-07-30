@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+  <!--
+    ** \brief AUTOSAR Flash_TS_T16D27M7I1R0 plugin
+    ** \project AUTOSAR Standard Core
+    ** \file plugin.xdm
+    **
+    ** Copyright 2008 by Elektrobit Automotive GmbH
+    ** All rights exclusively reserved for Elektrobit Automotive GmbH,
+    ** unless expressly agreed to otherwise.
+  -->
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Flash_TS_T16D27M7I1R0_ModuleId"
+             name="Flash_TS_T16D27M7I1R0 Module">
+
+    <module id="Flash_TS_T16D27M7I1R0"
+            label="Flash"
+            mandatory="false"
+            allowMultiple="false"
+            description="OCM-Drivers: OsekCore Communication Routines - FLASH Driver (TRICORE TC38XQ)"
+            copyright="(c) 2009 Elektrobit Automotive GmbH"
+            swVersionMajor="7"
+            swVersionMinor="1"
+            swVersionPatch="6"
+            swVersionSuffix=""
+            specVersionMajor="0"
+            specVersionMinor="0"
+            specVersionPatch="0"
+            specVersionSuffix="0000"
+            relVersionMajor="4"
+            relVersionMinor="0"
+            relVersionPatch="3"
+            relVersionSuffix="M4_REL_VERSION_SUFFIX"
+            categoryType="Flash"
+            categoryLayer="System Services - Std Lib"
+            categoryCategory="FLASH"
+            categoryComponent="ECUC">
+
+      <ecuType target="TRICORE" derivate="TC38XQ"/>
+
+    </module>
+  </extension>
+
+  <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="Flash_TS_T16D27M7I1R0_ConfigId"
+             name="Flash_TS_T16D27M7I1R0 Configuration">
+    <configuration moduleId="Flash_TS_T16D27M7I1R0">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/Flash.xdm" type="xdm"/>
+        
+          <!-- register the recommended-configuration configuration for Flash 
+          <resource value="config_ext/FlashRecConfigurationBolero.xdm" 
+                    id="res_FlashRecConfigurationBolero" 
+                    type="xdm"/>
+          <recconfig name="FlashRecConfigurationBolero" 
+                     default="true" 
+                     description="Flash Preconfiguration"
+                     resourceId="res_FlashRecConfigurationBolero" 
+                     path="ASPath:/TS_T16D27M7I1R0/FlashRecConfigurationBolero"/>     -->   
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TS_T16D27M7I1R0/Flash"/>
+      </data>
+
+      <editor id="Flash_TS_T16D27M7I1R0_EditorId"
+              label="Default"
+              tooltip="Flash configuration template">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TS_T16D27M7I1R0/Flash"/>
+          <parameter name="title" value="Flash"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+
+  
+    <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="Flash_TS_T16D27M7I1R0_GeneratorId"
+              name="Flash_TS_T16D27M7I1R0 Generator">
+    <generator moduleId="Flash_TS_T16D27M7I1R0"
+               class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator">
+               
+      <!-- common template path parameters -->
+      <parameter name="templates" 
+                 mode="generate,verify" value="generate"/>
+                 
+
+
+    </generator>
+  </extension>
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension>  
+  </plugin>
+

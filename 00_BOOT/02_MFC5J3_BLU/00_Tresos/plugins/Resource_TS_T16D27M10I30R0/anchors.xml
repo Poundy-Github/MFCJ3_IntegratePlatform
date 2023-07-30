@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Resource TRICORE/TC38XQ" link_to="../eb.tresos.doc.autocore.mcal.releasenotes/anchors.xml#EB_tresos_AutoCore_MCAL_releasenotes" topic="$nl$/index.html">
+  <topic label="Resource" href="">
+  <topic label="Releasenote_MC-ISAR_AS42x_TC3xx_BASIC_1.30.0.pdf" href="doc/Releasenote_MC-ISAR_AS42x_TC3xx_BASIC_1.30.0.pdf"/>
+  <topic label="Releasenote_MC-ISAR_AS42x_TC3xx_CD_1.30.0.pdf" href="doc/Releasenote_MC-ISAR_AS42x_TC3xx_CD_1.30.0.pdf"/>
+  <topic label="Releasenote_MC-ISAR_AS42x_TC3xx_COM-E_1.30.0.pdf" href="doc/Releasenote_MC-ISAR_AS42x_TC3xx_COM-E_1.30.0.pdf"/>
+  <topic label="Releasenote_MC-ISAR_AS42x_TC3xx_DEMO_1.30.0.pdf" href="doc/Releasenote_MC-ISAR_AS42x_TC3xx_DEMO_1.30.0.pdf"/>
+  <topic label="TC3xx_SW_MCAL_DemoApp.pdf" href="doc/TC3xx_SW_MCAL_DemoApp.pdf"/>
+   <topic label="TC3xx_SW_MCAL_UM_Basic.pdf" href="doc/TC3xx_SW_MCAL_UM_Basic.pdf"/>
+   <topic label="TC3xx_SW_MCAL_UM_CD.pdf" href="doc/TC3xx_SW_MCAL_UM_CD.pdf"/>
+   <topic label="TC3xx_SW_MCAL_UM_COM-E.pdf" href="doc/TC3xx_SW_MCAL_UM_COM-E.pdf"/>
+   <topic label="TC3xx_SW_MCAL_UM_DEMO-E.pdf" href="doc/TC3xx_SW_MCAL_UM_DEMO-E.pdf"/>
+  </topic>
+</toc>

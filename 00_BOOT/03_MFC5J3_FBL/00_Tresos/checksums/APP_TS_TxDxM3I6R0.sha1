@@ -1,0 +1,13 @@
+cddee491b1bfd931b0440567fc772827abb2bbc0 *plugins\APP_TS_TxDxM3I6R0\META-INF\MANIFEST.MF
+46a5368319fd6b16805c03fd7d6789c18a32a6e1 *plugins\APP_TS_TxDxM3I6R0\anchors.xml
+90e001a2039bb33942a658c26e612c11e6154500 *plugins\APP_TS_TxDxM3I6R0\config\APP.xdm
+bde3e1b2d4dbb35b9e10cefc67f8aee638edd680 *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Boot.c
+1a7b35c7ec15c406e307c21483fbe30341a22519 *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Boot.h
+cbfdb9d0eff13f1074d6315214af23e44f191893 *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Cbk.h
+546d78fd89460c03ad8d933e718619af7befeb0a *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Prg.c
+b4d1f322e84af0800635293248f9f0f59f4dd2cc *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Pub.h
+9d43a93c142ee2649b5121dee9ae2ce0dbb5a5b5 *plugins\APP_TS_TxDxM3I6R0\generate\templates\APP_Types.h
+5a4adc3b5ae9173843b0274aa89f589288fd861e *plugins\APP_TS_TxDxM3I6R0\include\APP_Trace.h
+d900b2c4f7295a64a5d2b0b5d5eae3263bc6227f *plugins\APP_TS_TxDxM3I6R0\make\APP_defs.mak
+9ed8ce6ad3a9b7382fef271a47214ca9dc520776 *plugins\APP_TS_TxDxM3I6R0\make\APP_rules.mak
+169d3fac391f0519e551e5b94063a073e52b5d0e *plugins\APP_TS_TxDxM3I6R0\plugin.xml

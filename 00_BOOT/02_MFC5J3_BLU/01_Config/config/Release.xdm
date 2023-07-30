@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<datamodel version="3.0" 
+  xmlns="http://www.tresos.de/_projects/DataModel2/08/root.xsd" 
+  xmlns:a="http://www.tresos.de/_projects/DataModel2/08/attribute.xsd" 
+  xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+  xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+    xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"  
+    xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TS_TxDxM1I0R0" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+
+          <d:chc name="Demo" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+
+              <!-- Release -->
+              <a:a name="RELEASE" value="asc:4.0"/>
+
+            </v:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

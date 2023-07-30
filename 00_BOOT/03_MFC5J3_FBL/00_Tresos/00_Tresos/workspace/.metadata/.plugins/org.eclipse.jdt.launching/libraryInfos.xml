@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="E:\FBL_DEV\00_Tresos\jre_x86_64\win32" version="1.8.0_121">
+<bootpath>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\resources.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\rt.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\sunrsasign.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\jsse.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\jce.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\charsets.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\jfr.jar"/>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\ext"/>
+<entry path="C:\windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="E:\FBL_DEV\00_Tresos\jre_x86_64\win32\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

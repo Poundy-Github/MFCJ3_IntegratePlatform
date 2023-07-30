@@ -1,0 +1,272 @@
+// board-tasking.ldscript
+//
+// Minimal TRICORE CPU description for Tasking linker.
+//
+// This file contains a stripped-down CPU description for the Tasking linker.
+//
+// Copyright 1998-2019 Elektrobit Automotive GmbH
+// All rights exclusively reserved for Elektrobit Automotive GmbH,
+// unless expressly agreed to otherwise.
+//
+//
+
+
+// ATTENTION:
+// File contains some mechanism to dectect wrong memory mapping!
+// Here, everything must be mapped to dedicated memory sections
+// Everything else is mapped to the default section.
+// The script uses the regular expressions to map sections defined in the MemMap.xdm
+// to dedicated sections. Everything mapped this way got removed from the symbol table!
+// Everyting remaining after this mapping approach (e.g. .text*) is mapped to the default section
+// and indicates an error!
+// Do not modify this parts without good cause!
+
+#include "board-tasking.def"
+
+architecture TC
+{
+	endianness
+	{
+		little;
+	}
+
+	space linear
+	{
+		id = 1;
+		mau = 8;
+
+		map (src_offset=0x00000000, dest_offset=0x00000000, size=4G, dest=bus:fpi_bus);
+
+		copytable (align = 1 << 2, copy_unit = 1, dest = linear);
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+	}
+}
+
+architecture TC_ARCH extends TC
+{
+}
+
+processor spe
+{
+	derivative = TC_DERIVATE;
+}
+
+derivative TC_DERIVATE
+{
+	core tc
+	{
+		architecture = TC_ARCH;
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+		map (dest=bus:tc:fpi_bus, dest_offset=0, size=4G);
+	}
+}
+
+memory int_rom_vect
+{
+	mau = 8;
+	size = 20K;
+	type = rom;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x80000000, size=20K);
+}
+
+memory int_rom
+{
+	mau = 8;
+	size = 16M;
+	type = rom;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x80000000+20K, size=( 16M - 20K));
+}
+
+memory int_ram_core0
+{
+	mau = 8;
+	size = 120k;
+	type = ram;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x70000000, size=120k);
+}
+
+memory int_ram_core1
+{
+	mau = 8;
+	size = 120k;
+	type = ram;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x60000000, size=120k);
+}
+
+memory int_ram_core2
+{
+	mau = 8;
+	size = 120k;
+	type = ram;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x50000000, size=120k);
+}
+
+memory int_ram_core3
+{
+	mau = 8;
+	size = 120k;
+	type = ram;
+	map (dest=bus:spe:fpi_bus, dest_offset=0x40000000, size=120k);
+}
+
+section_setup spe:tc:linear
+{
+
+    reserved 0xa0014000 .. 0xa001c000; // PS0, S5 (Tuning Protection), S6 (HSM)
+    reserved 0xa0020000 .. 0xa0028000; // PS0, S8 (BMI Header)
+    reserved 0xa0060000 .. 0xa0080000; // PS0, S16..S17 (HSM)
+}
+
+
+section_layout spe:tc:linear
+{
+
+  group __AREA_vectors(contiguous, ordered, run_addr = mem:int_rom_vect)
+  {
+    group text.vectors (contiguous, ordered)
+    {
+      select "OS_Startup";
+      select "OS_InterruptVectors";
+      select "OS_StartupVectors";
+      select "OS_ExceptionVectors";
+    }
+  }
+
+  // <<<<<<<<<<<<  .text  >>>>>>>>>>
+
+  group __AREA_text (contiguous, ordered, run_addr = mem:int_rom)
+  {
+    // Map all functions with AUTOSAR memory mappings to dedicated section
+    group group_rom_code_testing (contiguous, ordered, align=8)
+    {
+      select ".text*";
+    }
+
+    // Os does not use AUTOSAR memory mappings
+    // Map all functions from Os compilation unit to dedicated section
+    group group_rom_code_os (contiguous, ordered, align=8)
+    {
+      select ".text.Os.*";
+    }
+
+    // Startup code does not use AUTOSAR memory mappings
+    // Map all functions from startup code to dedicated section
+    group group_rom_code_startup (contiguous, ordered, align=8)
+    {
+      select ".text.board.*";
+      select ".text.main.*";
+    }
+  }
+
+  // <<<<<<<<<<<<  .data  >>>>>>>>>>
+
+  group __AREA_initdata (contiguous, ordered, load_addr = mem:int_rom, align=8)
+  {
+    // Map all constants of initialized data with AUTOSAR memory mappings to dedicated section
+    group group_raminit_testing (contiguous, ordered, align=8)
+    {
+      select ".data*";
+    }
+
+    // Os does not use AUTOSAR memory mappings
+    // Map everything from Os compilation unit to dedicated section
+    group group_raminit_os (contiguous, ordered, align=8)
+    {
+      select ".data.Os.*";
+    }
+  }
+
+  // <<<<<<<<<<<<  .rodata  >>>>>>>>>>
+
+  group __AREA_rodata (contiguous, ordered, run_addr = mem:int_rom, align=8)
+  {
+    // Map all constants with AUTOSAR memory mappings to dedicated section
+    group group_rom_const_testing (contiguous, ordered, align=8)
+    {
+      select ".rodata*";
+    }
+
+    // Os does not use AUTOSAR memory mappings
+    // Map everything from Os compilation unit to dedicated section
+    group group_rom_const_os (contiguous, ordered, align=8)
+    {
+      select ".rodata.Os.*";
+    }
+
+    // The tasking toolchain creates symbols for initializer of data allocated on the stack.
+    // The identifier of these symbols is a number with a leading point (e.g. .rodata..1).
+    // The following regular expressin catches these symbols
+    group group_rom_const_unnamed_symbols (contiguous, ordered, align=8)
+    {
+      select ".rodata.*..[0-9]+.*";
+    }
+  }
+
+  // <<<<<<<<<<<<  .bss  >>>>>>>>>>
+
+  group __AREA_databss (contiguous, ordered, run_addr = mem:int_ram_core0, align=8)
+  {
+    group stacks.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".bss.os_kernstack";
+      select ".bss.os_taskstack";
+    }
+
+    // Map all initialized data with AUTOSAR memory mappings to dedicated section
+    group group_data_ram_testing (contiguous, ordered, align=8)
+    {
+      select ".data*";
+    }
+
+    // Map all non-initialized data with AUTOSAR memory mappings to dedicated section
+    group group_bss_ram_testing (contiguous, ordered, align=8)
+    {
+      select ".bss*";
+    }
+
+    // Os does not use AUTOSAR memory mappings
+    // Map everything from Os compilation unit to dedicated section
+    group group_data_ram_os (contiguous, ordered, align=8)
+    {
+      select ".data.Os.*";
+    }
+    group group_bss_ram_os (contiguous, ordered, align=8)
+    {
+      select ".bss.Os.*";
+    }
+
+    // Startup code does not use AUTOSAR memory mappings
+    // Map all functions from startup code to dedicated section
+    group group_bss_ram_entryPoint (contiguous, ordered, align=8)
+    {
+      select ".bss.board.*";
+    }
+  }
+
+
+  // Symbols for the global initialisation.
+  "__INITDATA"  := "_lc_gb_initdata.TRICORE";
+  "__STARTDATA" := "_lc_gb_data.TRICORE";
+  "__ENDDATA"   := "_lc_ge_data.TRICORE";
+  "__STARTBSS"  := "_lc_gb_bss.TRICORE";
+  "__ENDBSS"    := "_lc_ge_bss.TRICORE";
+
+  "__GLBL_TEXT_START"   := "_lc_gb___AREA_text";
+  "__GLBL_TEXT_END"     := "_lc_ge___AREA_text";
+  "__GLBL_RODATA_START" := "_lc_gb___AREA_rodata";
+  "__GLBL_RODATA_END"   := "_lc_ge___AREA_rodata";
+  "__GLBL_DATA_START"   := "_lc_gb___AREA_databss";
+  "__GLBL_DATA_END"     := "_lc_ge___AREA_databss";
+
+  // Symbols for the initialisation of private data areas.
+}

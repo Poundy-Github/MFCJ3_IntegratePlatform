@@ -1,0 +1,48 @@
+//
+//  board-tasking.def : Linker script definition file
+//
+//  linker definition file to define all target specific parameters.
+//
+//  Copyright Elektrobit Automotive GmbH
+//  All rights exclusively reserved for Elektrobit Automotive GmbH,
+//  unless expressly agreed to otherwise.
+//
+
+
+
+#define BOARD_DERIVATE_TC38XQ
+
+#if (defined BOARD_DERIVATE_TC38XQ)
+
+#define TC_ARCH TC1V1.6.2
+#define TC_DERIVATE tcxxx
+
+#endif
+
+#if (defined BOARD_DERIVATE_TC39XX)
+
+#define TC_ARCH TC1V1.6.2
+#define TC_DERIVATE tcxxx
+
+#endif
+
+#if (defined BOARD_DERIVATE_TC29XT)
+
+#define TC_ARCH TC1V1.6.X
+#define TC_DERIVATE tcxxx
+
+#endif
+
+#if (defined BOARD_DERIVATE_TC277)
+
+#define TC_ARCH TC1V1.6.X
+#define TC_DERIVATE tcxxx
+
+#endif
+
+#if (defined BOARD_DERIVATE_TC275)
+
+#define TC_ARCH TC1V1.6.X
+#define TC_DERIVATE tcxxx
+
+#endif

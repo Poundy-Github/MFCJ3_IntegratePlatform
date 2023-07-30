@@ -1,0 +1,3255 @@
+<?xml version='1.0'?>
+<datamodel version="7.0" 
+           xmlns="http://www.tresos.de/_projects/DataModel2/16/root.xsd" 
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/16/attribute.xsd" 
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TS_T0D1M4I0R0" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Os" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+              <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                <ad:ADMIN-DATA>
+                  <ad:DOC-REVISIONS>
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.1.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2010-12-03</ad:DATE>
+                    </ad:DOC-REVISION>
+                  </ad:DOC-REVISIONS>
+                </ad:ADMIN-DATA>
+              </a:a>
+              <a:a name="DESC" 
+                   value="EN: Configuration of the Os (Operating System) module."/>
+              <a:a name="LOWER-MULTIPLICITY" value="1"/>
+              <a:a name="RELEASE" value="asc:4.0"/>
+              <a:a name="UPPER-MULTIPLICITY" value="1"/>
+              <a:a name="UUID" value="eb8bfe8c-8711-4524-a55a-ed5e42afadce"/>
+              <v:ctr name="CommonPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Common container, aggregated by all modules. It contains published information about vendor and versions.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="Common Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:a00be3e0-8783-9123-2d52-1eb616737ca6"/>
+                <v:var name="ArMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:948f3f2e-f129-4bc5-b4e1-7a7bdb8599e1"/>
+                  <a:da name="DEFAULT" value="4"/>
+                </v:var>
+                <v:var name="ArMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:2893b920-59d5-4ac2-b2c1-e23742e66d70"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="ArPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:6428eb9b-8790-488a-b9a3-0fba52d0f59e"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="SwMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of the vendor specific implementation of the module.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:605b18ae-3f9a-41d4-9225-67c9c5f6fc34"/>
+                  <a:da name="DEFAULT" value="4"/>
+                </v:var>
+                <v:var name="SwMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a7fe44dc-ea25-4b8d-8fad-9fbcae86d56f"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="SwPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a318d2d9-0e75-49da-ac43-e7e4e682e2f9"/>
+                  <a:da name="DEFAULT" value="3"/>
+                </v:var>
+                <v:var name="ModuleId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Module ID of this module from Module List
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Numeric Module ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:78bc8362-080f-4253-b3da-804ab69a7154"/>
+                  <a:da name="DEFAULT" value="001"/>
+                </v:var>
+                <v:var name="VendorId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Vendor ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:01b0f467-6943-4558-b4f2-3fa1fad28449"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="Release" type="STRING_LABEL">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Release Information"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:1c68a547-f24e-4a4e-9540-69fbd533ec89"/>
+                  <a:da name="DEFAULT" value=""/>
+                </v:var>
+              </v:ctr>
+              <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                <a:a name="LABEL" value="Config Variant"/>
+                <a:a name="UUID" value="4242fd15-786d-497d-b2b4-02e0ae0142d4"/>
+                <a:da name="DEFAULT" value="VariantPreCompile"/>
+                <a:da name="RANGE" value="VariantPreCompile"/>
+              </v:var>
+              <v:lst name="OsAlarm" type="MAP">
+                <a:a name="COLUMNS" value="OsAlarmCounterRef"/>
+                <v:ctr name="OsAlarm" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: An OsAlarm may be used to asynchronously inform or activate a specific task. It is possible to start alarms automatically at system start-up depending on the application mode."/>
+                  <a:a name="UUID" value="0dbab454-1b1c-4ba7-aa64-ba79f0f7afa8"/>
+                  <v:lst name="OsAlarmAccessingApplication">
+                    <v:ref name="OsAlarmAccessingApplication" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Reference to applications which have an access to this object."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="06385a49-7244-4d13-927a-a862b355ea88"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ref name="OsAlarmCounterRef" type="REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Reference to the assigned counter for that alarm"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="ef271828-9a66-423f-8d63-efaea82f4c36"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+                  </v:ref>
+                  <v:chc name="OsAlarmAction" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container defines which type of notification is used when the alarm expires."/>
+                    <a:a name="UUID" 
+                         value="77e56907-3f2f-4c65-87ac-cf9083230b4a"/>
+                    <v:ctr name="OsAlarmActivateTask" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container specifies the parameters to activate a task."/>
+                      <a:a name="UUID" 
+                           value="0b46e85f-3729-40a5-87da-39d7916b3d0f"/>
+                      <v:ref name="OsAlarmActivateTaskRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to the task that will be activated by that alarm action"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="599f301a-f09b-4f72-b583-b860d7d5f23b"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                      </v:ref>
+                    </v:ctr>
+                    <v:ctr name="OsAlarmCallback" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container specifies the parameters to call a callback OS alarm action."/>
+                      <a:a name="UUID" 
+                           value="9f74bdc9-500b-4c07-8c85-eb28e180d5c3"/>
+                      <v:var name="OsAlarmCallbackName" type="FUNCTION-NAME">
+                        <a:a name="DESC" 
+                             value="EN: Name of the function that is called when this alarm callback is triggered."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="1ff6a818-7f4a-41df-aab9-3052c8cd6c7b"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      </v:var>
+                    </v:ctr>
+                    <v:ctr name="OsAlarmIncrementCounter" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container specifies the parameters to increment a counter."/>
+                      <a:a name="UUID" 
+                           value="abf1ab59-5098-48aa-a06e-5078fd81d2d8"/>
+                      <v:ref name="OsAlarmIncrementCounterRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to the counter that will be incremented by that alarm action"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="3c2a1e81-7c51-4d31-b8e7-fe039377f15f"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+                      </v:ref>
+                    </v:ctr>
+                    <v:ctr name="OsAlarmSetEvent" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container specifies the parameters to set an event"/>
+                      <a:a name="UUID" 
+                           value="fae90fc3-0eaf-492c-8b37-b4bfc276a817"/>
+                      <v:ref name="OsAlarmSetEventRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to the event that will be set by that alarm action"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="81d5b27b-0d05-4c77-be79-97d815f2495d"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsEvent"/>
+                      </v:ref>
+                      <v:ref name="OsAlarmSetEventTaskRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to the task that will be activated by that event"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="371f53d4-4089-4f89-b4b0-cf00bc88aaef"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                      </v:ref>
+                    </v:ctr>
+                  </v:chc>
+                  <v:ctr name="OsAlarmAutostart" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: If present this container defines if an alarm is started automatically at system start-up depending on the application mode."/>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="d9894b82-7e1d-4fe1-9137-2767db0d92fa"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:var name="OsAlarmAlarmTime" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: The relative or absolute tick value when the alarm expires for the first time. Note that for an alarm which is RELATIVE the value must be at bigger than 0."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="79efd4d0-9cc0-4f87-bf04-404cb253109d"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=4294967295"/>
+                        <a:tst expr="&gt;=1"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsAlarmAutostartType" type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: This specifies the type of autostart for the alarm.."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="f7119e09-bafa-4cd7-a8cc-1c92a8fd6760"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="RELATIVE"/>
+                      <a:da name="RANGE">
+                        <a:v>ABSOLUTE</a:v>
+                        <a:v>RELATIVE</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsAlarmCycleTime" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Cycle time of a cyclic alarm in ticks. If the value is 0 than the alarm is not cyclic."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="e588c683-a992-4e0a-9bc7-b6b94ff70894"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=4294967295"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="OsAlarmAppModeRef">
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="OsAlarmAppModeRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to the application modes for which the AUTOSTART shall be performed"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="7393e2c3-45e8-4dee-8869-c8b047648534"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsAppMode"/>
+                      </v:ref>
+                    </v:lst>
+                    <v:var name="OsTimeUnit" type="ENUMERATION">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:d3e95a4b-a4cb-4d8f-96fb-02eea69014d3"/>
+                      <a:da name="DEFAULT" value="TICKS"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="RANGE">
+                        <a:v>NANOSECONDS</a:v>
+                        <a:v>TICKS</a:v>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsApplication" type="MAP">
+                <a:a name="COLUMNS" value="OsTrusted"/>
+                <v:ctr name="OsApplication" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: An AUTOSAR OS must be capable of supporting a collection of OS objects (tasks, interrupts, alarms, hooks etc.) that form a cohesive functional unit. This collection of objects is termed an OS-Application."/>
+                  <a:a name="UUID" value="18352e7a-df36-4076-8ae2-7c273074ef6c"/>
+                  <v:var name="OsApplicationCoreAssignment" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: ID of the core onto which the OsApplication is bound."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="3b3536b2-d271-41b2-8bf9-381b02270d96"/>
+                    <a:da name="EDITABLE" value="true"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="INVALID" type="XPath">
+                      <a:tst expr=". &lt; 0" true="Core Id may not be negative"/>
+                      <a:tst expr=". &gt;= ../../../OsOS/OsMaxNumberOfCores" 
+                             true="Core Id invalid (must be less than the maximum number of cores)."/>
+                    </a:da>
+                  </v:var>
+                  <v:ref name="OsAppEcucPartitionRef" type="REFERENCE">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="8fef9170-a37c-4541-8bf4-7006d62bd73f"/>
+                    <a:da name="EDITABLE" value="true"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"/>
+                  </v:ref>
+                  <v:var name="OsTrusted" type="BOOLEAN">
+                    <a:a name="DESC" 
+                         value="EN: Parameter to specify if an OS-Application is trusted or not."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="051196f1-bec8-49c8-aa30-a4699ed41e84"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:lst name="OsAppAlarmRef">
+                    <v:ref name="OsAppAlarmRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Specifies the OsAlarms that belong to the OsApplication."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="0162e3b8-04da-48c2-9ba0-144fda2dcdbc"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsAlarm"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsAppCounterRef">
+                    <v:ref name="OsAppCounterRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: References the OsCounters that belong to the OsApplication."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="b8640158-ddec-4a01-8791-8515b4d480df"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsAppIsrRef">
+                    <v:ref name="OsAppIsrRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: references which OsIsrs belong to the OsApplication"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="aba7087c-394d-4fd8-95bd-6a7c5f2d1be0"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsIsr"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsAppResourceRef">
+                    <v:ref name="OsAppResourceRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: References the OsResources that belong to the OsApplication."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="aa275ff2-d59b-46fb-95ab-02c6d01fe5e7"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsAppScheduleTableRef">
+                    <v:ref name="OsAppScheduleTableRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: References the OsScheduleTables that belong to the OsApplication."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="40670a3f-6568-4d0e-b3cf-125fdb23395b"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsScheduleTable"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsAppTaskRef">
+                    <v:ref name="OsAppTaskRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: references which OsTasks belong to the OsApplication"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="c9ae35c2-40f5-4f95-9494-01ac49e0a87c"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ref name="OsRestartTask" type="REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Optionally one task of an OS-Application may be defined as Restart Task."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="e8c75b5a-8727-44e1-8995-2aa7b9e8dbd4"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                  </v:ref>
+                  <v:ctr name="OsApplicationHooks" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: Container to structure the OS-Application-specific hooks"/>
+                    <a:a name="UUID" 
+                         value="b7e2715d-d941-40cc-8a7c-62c20f3095ba"/>
+                    <v:var name="OsAppErrorHook" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Select the OS-Application error hook."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="04360518-cce7-42a7-a5dc-54b09e446a28"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="false"/>
+                      <a:da name="WARNING" type="XPath" 
+                            expr="(. = &apos;true&apos;) and (../../../../OsOS/OsAutosarCustomization/OsErrorHandling = &apos;MINIMAL&apos;)" 
+                            true="Application error hook is enabled but OsErrorHandling set to MINIMAL"/>
+                    </v:var>
+                    <v:var name="OsAppShutdownHook" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Select the OS-Application specific shutdown hook for the OS-Application."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="76a45c15-248f-4b41-89a7-1d5b138e1ba5"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                    <v:var name="OsAppStartupHook" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Select the OS-Application specific startup hook for the OS-Application."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="b3e2857f-a1e7-4955-bd85-1a9fcf6a998d"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                    <v:var name="OsAppErrorHookStack" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="UUID" 
+                           value="F7E7375A-54FB-4234-A9AA-257A4B66B83F"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=65535"/>
+                        <a:tst expr="&gt;=1"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsAppShutdownHookStack" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="UUID" 
+                           value="3F9DF506-F839-4F0B-B91D-8F85B733DBB9"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=65535"/>
+                        <a:tst expr="&gt;=1"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsAppStartupHookStack" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="UUID" 
+                           value="6C930286-F65A-471F-880E-67FD78346EF3"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=65535"/>
+                        <a:tst expr="&gt;=1"/>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                  <v:lst name="OsApplicationTrustedFunction" type="MAP">
+                    <v:ctr name="OsApplicationTrustedFunction" 
+                           type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container to structure the configration parameters of trusted functions"/>
+                      <a:a name="UUID" 
+                           value="ef2eec07-a9e1-45bf-be1d-fec19fa746c9"/>
+                      <v:var name="OsTrustedFunctionName" type="FUNCTION-NAME">
+                        <a:a name="DESC" 
+                             value="EN: Trusted function (as part of a trusted OS-Application) available to other OS-Applications. This also supersedes the OSEK OIL attribute TRUSTED in APPLICATION because the optionality of this parameter is describing that already."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="3357465f-46e4-4268-b07c-d59edd99697a"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      </v:var>
+                      <v:var name="OsTrustedFunctionStacksize" type="INTEGER">
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                        <a:a name="UUID" 
+                             value="CFD02BA6-7CA5-431E-969C-2A582743A1A5"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=65535"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                    </v:ctr>
+                  </v:lst>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsAppMode" type="MAP">
+                <a:da name="MIN" value="1"/>
+                <v:ctr name="OsAppMode" type="IDENTIFIABLE">
+                  <a:a name="UUID" 
+                       value="ECUC:44b2af00-f4af-494b-ab23-6c4bd5ea9ca7"/>
+                  <v:lst name="OsAlarmRef">
+                    <v:ref name="OsAlarmRef" type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="ECUC:c3482777-1ece-41b2-b304-ef4cd3255106"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsAlarm"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsScheduleTableRef">
+                    <v:ref name="OsScheduleTableRef" type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="ECUC:ae3ffd27-9ce6-4bd7-acba-b9d9dde919c6"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsScheduleTable"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsTaskRef">
+                    <v:ref name="OsTaskRef" type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="ECUC:eb28ccef-3b91-4a35-93f3-366901fbba83"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                    </v:ref>
+                  </v:lst>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsCounter" type="MAP">
+                <a:a name="COLUMNS">
+                  <a:v>OsCounterMaxAllowedValue</a:v>
+                  <a:v>OsCounterMinCycle</a:v>
+                  <a:v>OsCounterTicksPerBase</a:v>
+                  <a:v>OsCounterType</a:v>
+                </a:a>
+                <v:ctr name="OsCounter" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: Configuration information for the counters that belong to the OsApplication."/>
+                  <a:a name="UUID" value="df7fda06-e274-42b0-9c8b-908da29f8588"/>
+                  <v:var name="OsCounterMaxAllowedValue" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: Maximum possible allowed value of the system counter in ticks."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="262d0a9d-d8db-444f-a276-5459e186a8cd"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967295"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCounterMinCycle" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: The MINCYCLE attribute specifies the minimum allowed number of counter ticks for a cyclic alarm linked to the counter."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="80759c8c-d502-4179-a91c-a8f43c44ea48"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="INVALID" type="XPath" 
+                          expr="(. &lt; 1) or (. &gt; ../OsCounterMaxAllowedValue)" 
+                          true="OsCounterMinCycle &lt;1 or &gt;OsCounterMaxAllowedValue."/>
+                  </v:var>
+                  <v:var name="OsCounterTicksPerBase" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: The TICKSPERBASE attribute specifies the number of ticks required to reach a counterspecific unit. The interpretation is implementation-specific."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="9bc500e6-f1f2-4e8b-8b0f-b90c0f1ca02d"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967295"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCounterType" type="ENUMERATION">
+                    <a:a name="DESC" 
+                         value="EN: This parameter contains the natural type or unit of the counter."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="6567976a-4b5b-4a45-8450-b492586ef8fd"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="RANGE">
+                      <a:v>HARDWARE</a:v>
+                      <a:v>SOFTWARE</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCounterWindowsTimer" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="DCE:7c05ef06-51b8-4930-80f4-6f13674a3514"/>
+                    <a:da name="ENABLE" type="XPath" 
+                          expr="../OsCounterType=&apos;HARDWARE&apos;"/>
+                    <a:da name="RANGE">
+                      <a:v>TIMER0</a:v>
+                      <a:v>TIMER1</a:v>
+                      <a:v>TIMER2</a:v>
+                      <a:v>TIMER3</a:v>
+                      <a:v>TSIM_00</a:v>
+                      <a:v>TSIM_01</a:v>
+                      <a:v>TSIM_10</a:v>
+                      <a:v>TSIM_11</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="OsCounterAccessingApplication">
+                    <v:ref name="OsCounterAccessingApplication" 
+                           type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Reference to applications which have an access to this object."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="7bb8cd48-14ad-42a1-8225-dd5210839799"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:var name="OsWindowsIrqLevel" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="Select the relative interrupt level of the timer"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="D3E95A4B-A4CB-4d8f-96FB-12EEA69014D3"/>
+                    <a:da name="DEFAULT" value="1"/>
+                    <a:da name="ENABLE" type="XPath" 
+                          expr="../OsCounterType=&apos;HARDWARE&apos;"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=32"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="OsTimeConstant" type="MAP">
+                    <v:ctr name="OsTimeConstant" type="IDENTIFIABLE">
+                      <a:a name="UUID" 
+                           value="f3393eae-b0c6-44b7-87fd-1079dd4fb152"/>
+                      <a:da name="INVALID" type="XPath" 
+                            expr="(../../OsCounterType != &apos;SOFTWARE&apos;) or node:exists(../../OsSecondsPerTick)" 
+                            false="OsCounterType set to SOFTWARE but OsSecondsPerTick not configured"/>
+                      <v:var name="OsConstName" type="STRING">
+                        <a:a name="DESC" 
+                             value="EN: The name which is accessed by the application to get the OsTimeValue of the constant."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="56771f40-d06d-4039-8d14-2b1560948940"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      </v:var>
+                      <v:var name="OsTimeValue" type="FLOAT">
+                        <a:a name="DESC" 
+                             value="EN: This parameter contains the value of the constant in seconds."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="718c9ae4-2512-49c5-80d7-b27ac344e16a"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=86400.0"/>
+                          <a:tst expr="&gt;=0.0"/>
+                        </a:da>
+                      </v:var>
+                    </v:ctr>
+                  </v:lst>
+                  <v:ctr name="OsDriver" type="IDENTIFIABLE">
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="3f64ecc2-bd5f-4a4f-8586-c3cfbd23b108"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="INVALID" type="XPath" 
+                          expr="../OsCounterType != &apos;SOFTWARE&apos;" 
+                          true="OsCounterType must be &apos;SOFTWARE&apos; if OsDriver is enabled."/>
+                    <v:ref name="OsGptChannelRef" type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="8e0975d2-5e06-4e85-93a9-6ab6a344461d"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration"/>
+                    </v:ref>
+                    <v:ctr name="OsHwIncrementer" type="IDENTIFIABLE">
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="UUID" 
+                           value="efc3bdc3-0133-4e58-b635-3423fda1b27c"/>
+                      <a:da name="EDITABLE" value="false"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <v:var name="OsHwModule" type="ENUMERATION">
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="efc3bda3-0833-4e58-b635-3427fda1227c"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="RANGE" value="NONE"/>
+                      </v:var>
+                      <v:var name="OsIncrementerIrqLevel" type="INTEGER">
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="efc3bdf3-0233-4e58-b725-3427fda1227c"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=1"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                    </v:ctr>
+                  </v:ctr>
+                  <v:var name="OsSecondsPerTick" type="FLOAT">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="25ad7353-96c5-42ae-8a12-5e7677159926"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="0.001"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=86400.0"/>
+                      <a:tst expr="&gt;0.0"/>
+                    </a:da>
+                    <a:da name="WARNING" type="XPath" 
+                          expr="../OsCounterType = &apos;HARDWARE&apos; and num:floating(.) != num:floating(0.001)" 
+                          true="Hardware counters on Windows always work with 0.001 seconds per tick. Please use this value, unless you know what you&apos;re doing."/>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:ctr name="OsIoc" type="IDENTIFIABLE">
+                <a:a name="OPTIONAL" value="true"/>
+                <a:a name="TAB" value="OsIoc"/>
+                <a:a name="UUID" value="36dd152a-1415-4202-b316-4d6d4d57b2df"/>
+                <a:da name="ENABLE" value="false"/>
+                <a:da name="INVALID" type="XPath" 
+                      expr="count(OsIocCommunication/*/OsIocDataType/*) &lt; 65536" 
+                      false="The sum of all DataType references may not exceed 65535"/>
+                <v:var name="OsIocLocksToUse" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:ab5372dc-9ffc-4da3-9810-9c94591bac7c"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=7"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:lst name="OsIocDataTypeIncludeHeader" type="MAP">
+                  <a:a name="TAB" value="OsIoc"/>
+                  <a:da name="MIN" value="1"/>
+                  <v:ctr name="OsIocDataTypeIncludeHeader" type="IDENTIFIABLE">
+                    <v:var name="IncludeHeaderName" type="STRING">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="TAB" value="OsIoc"/>
+                      <a:a name="UUID" 
+                           value="ae3f17d0-80f4-4d06-82e5-c905fbfe2c66"/>
+                      <a:da name="INVALID" type="XPath" expr=". = &apos;&apos;" 
+                            true="No include header file name is specified. Specify the include header file name."/>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="OsIocCommunication" type="MAP">
+                  <a:a name="TAB" value="OsIoc"/>
+                  <v:ctr name="OsIocCommunication" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: Representation of a 1:1 or N:1 communication between software parts located in different OS-Applications that are bound to the same or to different cores."/>
+                    <a:a name="UUID" 
+                         value="3198886f-55a3-4a7d-99aa-d5c86cc01bc1"/>
+                    <v:lst name="OsIocDataTypeRef">
+                      <a:a name="VISIBLE" value="FALSE"/>
+                      <a:da name="EDITABLE" value="FALSE"/>
+                      <a:da name="MIN" value="0"/>
+                      <v:ref name="OsIocDataTypeRef" type="FOREIGN-REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This AUTOSAR standard parameter is not used and should not be edited."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="788c2253-1606-44fe-b4ab-45d88a97f4a1"/>
+                        <a:a name="VISIBLE" value="FALSE"/>
+                        <a:da name="EDITABLE" value="FALSE"/>
+                        <a:da name="REF" 
+                              value="ASTyped:IMPLEMENTATION-DATA-TYPE"/>
+                      </v:ref>
+                    </v:lst>
+                    <v:var name="OsIocSenderApiIsTrapping" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="false"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:a name="UUID" 
+                           value="4ba3b382-249d-11e5-b345-feff819cdc9f"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                    <v:var name="OsIocUseExtendedAPI" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: If enabled, the IOC channel uses an extended API. The extended API allows to transmit multiple data elements with one call.                         For channels with LastIsBest semantics, the extended API enables partial update of data elements.                         For channels with queued semantics, the extended API enables the use of dynamic length data elements.                         The extended API is automatically used for channels with multiple data elements."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="false"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:a name="UUID" 
+                           value="2a360d87-b760-4fc2-8e19-51f7fc75a6bb"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                    <v:var name="OsIocIntraCoreLockType" type="ENUMERATION">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="false"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:a name="UUID" 
+                           value="DCE:e383a583-3c14-4a82-9745-2de7e8f804f3"/>
+                      <a:da name="DEFAULT" value="INTERRUPT_LOCK"/>
+                      <a:da name="RANGE">
+                        <a:v>NO_LOCK</a:v>
+                        <a:v>INTERRUPT_LOCK</a:v>
+                        <a:v>RESOURCE_LOCK</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsIocUseInterCoreLock" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="false"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:a name="UUID" 
+                           value="DCE:5cf15d52-07eb-473c-bafc-2a0f39ddad18"/>
+                      <a:da name="DEFAULT" value="true"/>
+                      <a:da name="ENABLE" value="true"/>
+                    </v:var>
+                    <v:lst name="OsIocDataType" type="MAP">
+                      <a:a name="TAB" value="General"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ctr name="OsIocDataType" type="IDENTIFIABLE">
+                        <a:a name="UUID" 
+                             value="c06593a0-c140-494a-abc2-e2f8d67f77a9"/>
+                        <v:var name="DataTypeName" type="STRING">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ae3f17d0-80f4-4d06-82e5-c905fbde2c81"/>
+                          <a:da name="DEFAULT" value=""/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="node:empty(.)" 
+                                true="The DataTypeName parameter must not be empty. Please enter a                               valid C type identifier."/>
+                        </v:var>
+                        <v:var name="IsComplexType" type="BOOLEAN">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ae3f17d0-80f4-4d06-82e5-c905fbde2c81"/>
+                          <a:da name="DEFAULT" value="false"/>
+                        </v:var>
+                        <v:var name="IsArrayOrStringType" type="BOOLEAN">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ae3f17d0-80f4-4d06-82e5-c905fbde2c81"/>
+                          <a:da name="DEFAULT" value="false"/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="(. = &apos;true&apos;) and (../IsComplexType != &apos;true&apos;)" 
+                                true="IsArrayType has to be set to false since IsComplexType is set to false. An array type is a complex type."/>
+                        </v:var>
+                        <v:var name="VariableLength" type="BOOLEAN">
+                          <a:a name="DESC">
+                            <a:v>EN: 
+                                &lt;html&gt;
+                                  This flag indicates, that the data type has a variable length.
+                                  Primitive data types can&apos;t have variable length.
+                                  The length, given at runtime, must not exceed the size of this type.
+                                &lt;/html&gt;</a:v>
+                          </a:a>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="57ec28d3-f9cd-4bc3-9af7-c6aa186faa78"/>
+                          <a:da name="DEFAULT" value="false"/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="(. = &apos;true&apos;) and (../IsComplexType != &apos;true&apos;) and (../IsArrayOrStringType != &apos;true&apos;)" 
+                                true="Primitive data types can&apos;t have variable length."/>
+                        </v:var>
+                      </v:ctr>
+                    </v:lst>
+                    <v:chc name="OsIocCommunicationSemantics" 
+                           type="IDENTIFIABLE">
+                      <a:a name="TAB" value="General"/>
+                      <a:a name="UUID" 
+                           value="9e48ca55-3149-4920-bdb4-d3a744770fa2"/>
+                      <v:ctr name="OsIocLastIsBestCommunication" 
+                             type="IDENTIFIABLE">
+                        <a:a name="UUID" 
+                             value="2663720e-8009-4ac5-9d60-80c0cfdef0c5"/>
+                        <v:var name="OsIocInitValueSymbol" type="LINKER-SYMBOL">
+                          <a:a name="DESC" 
+                               value="EN: Symbolic value to be used as initializer for the data buffer. This symbol is generated by the RTE (e.g. as a macro), so that the IOC does not have to consider the data structure from the RTE, but can use the symbol in the generated C-Code as initializer."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="d0094501-70fd-4f39-a477-d910a5c289add"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="INVALID" type="XPath">
+                            <a:tst expr="count(../../OsIocDataType/*) &gt; 1" 
+                                   true="This parameter can only be set if a single data type is referenced."/>
+                            <a:tst expr=". = &apos;&apos;" 
+                                   true="This parameter must not be empty, but a valid C literal or symbol."/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="OsIocMaxRetryTime" type="INTEGER">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="TAB" value="General"/>
+                          <a:a name="UUID" 
+                               value="3acc5860-246c-11e5-b696-feff819cdc9f"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                      </v:ctr>
+                      <v:ctr name="OsIocQueuedCommunication" 
+                             type="IDENTIFIABLE">
+                        <a:a name="UUID" 
+                             value="9f22ef21-b6ff-4e50-bfa6-d8fe84ee9c57"/>
+                        <v:var name="OsIocBufferLength" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: This attribute defines the size of the IOC internal queue to be allocated for a queued communication."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="7a94cd18-bab1-4e6b-b36e-97554373b836"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=65535"/>
+                            <a:tst expr="&gt;=1"/>
+                          </a:da>
+                        </v:var>
+                      </v:ctr>
+                    </v:chc>
+                    <v:lst name="OsIocReceiverProperties" type="MAP">
+                      <a:a name="COLUMNS" value="OsIocReceivingOsApplicationRef"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:da name="MIN" value="1"/>
+                      <a:da name="WARNING" type="XPath" 
+                            expr="(count(./*) &gt; 1) and (../OsIocCommunicationSemantics = &apos;OsIocQueuedCommunication&apos;)" 
+                            true="Be careful with multiple receivers in queued communication: every element sent will be consumed by the first receiver!"/>
+                      <v:ctr name="OsIocReceiverProperties" type="IDENTIFIABLE">
+                        <a:a name="UUID" 
+                             value="7748837c-c78f-4d1d-be0a-96a61a7b5d03"/>
+                        <v:var name="OsIocReceiverId" type="INTEGER">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                          <a:a name="UUID" 
+                               value="37e0ea2c-99bb-44ba-bd7c-022e8bfe7d41"/>
+                          <a:da name="ENABLE" type="XPath" 
+                                expr="count(../../*)&gt;1"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=255"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="OsIocReceiverPullCB" type="FUNCTION-NAME">
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="d0094501-70fd-4439-a477-d90a8c2e9add"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                        <v:ref name="OsIocReceivingOsApplicationRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: This attribute is a reference to the receiving OsApplication instance defined in the configuration file of the OS."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="3f693c52-c3a3-47ba-9db5-d41c304186eb"/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="node:refvalid(.)" 
+                                false="You need to specify a receiving OS Application."/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                        </v:ref>
+                      </v:ctr>
+                    </v:lst>
+                    <v:lst name="OsIocSenderProperties" type="MAP">
+                      <a:a name="COLUMNS" value="OsIocSendingOsApplicationRef"/>
+                      <a:a name="TAB" value="General"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ctr name="OsIocSenderProperties" type="IDENTIFIABLE">
+                        <a:a name="UUID" 
+                             value="a22ab016-7554-4837-81ec-bf468e3b7087"/>
+                        <a:da name="INVALID" type="XPath">
+                          <a:tst 
+                                 expr="(count(../*) = 1) and node:exists(./OsIocSenderId)" 
+                                 true="OsIocSenderId may only be enabled if more than one sender is configured"/>
+                          <a:tst 
+                                 expr="(count(../*) &gt; 1) and (count(../*) != count(../*/OsIocSenderId))" 
+                                 true="OsIocSenderId must be set if more than one sender is configured"/>
+                        </a:da>
+                        <v:var name="OsIocSenderId" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Representation of a sender in a N:1 communication to distinguish between senders."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="e7e278f4-9d40-4df3-a02a-a1cce9b8780f"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=255"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:ref name="OsIocSendingOsApplicationRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: This attribute is a reference to the sending OS-Application instance defined in the configuration file of the OS."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="43bf9ce6-6605-489c-9d6b-95009b4441b5"/>
+                          <a:da name="INVALID" type="XPath" 
+                                expr="node:refvalid(.)" 
+                                false="You need to specify a sending OS Application."/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                        </v:ref>
+                      </v:ctr>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+              </v:ctr>
+              <v:lst name="OsEvent" type="MAP">
+                <a:a name="COLUMNS" value="OsEventMask"/>
+                <v:ctr name="OsEvent" type="IDENTIFIABLE">
+                  <a:a name="UUID" value="219c86d3-a7fa-44cc-86f6-2ecb93928e43"/>
+                  <v:var name="OsEventMask" type="INTEGER">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="83f574e7-6d8c-47ad-9568-cf6582e02dd7"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967295"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsSpinlock" type="MAP">
+                <a:da name="ENABLE" value="true"/>
+                <a:da name="MIN" value="0"/>
+                <v:ctr name="OsSpinlock" type="IDENTIFIABLE">
+                  <a:a name="UUID" value="186f2f9d-43da-4728-8e9a-64ec3bfa389a"/>
+                  <a:da name="ENABLE" value="true"/>
+                  <v:lst name="OsSpinlockAccessingApplication">
+                    <a:da name="MIN" value="1"/>
+                    <v:ref name="OsSpinlockAccessingApplication" 
+                           type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="cdb8d88f-ea70-451f-b718-290caf5e6d8d"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ref name="OsSpinlockSuccessor" type="REFERENCE">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="b61b0bcf-d5db-42ed-b6cf-50b0d1818705"/>
+                    <a:da name="ENABLE" value="true"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsSpinlock"/>
+                  </v:ref>
+                  <v:var name="OsSpinlockLockMethod" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="d141418b-341c-4439-a651-b04f583a45b0"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="LOCK_NOTHING"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>LOCK_NOTHING</a:v>
+                      <a:v>LOCK_ALL_INTERRUPTS</a:v>
+                      <a:v>LOCK_CAT2_INTERRUPTS</a:v>
+                      <a:v>LOCK_WITH_RES_SCHEDULER</a:v>
+                      <a:v>LOCK_VIA_RESOURCES</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsIsr" type="MAP">
+                <a:a name="COLUMNS">
+                  <a:v>OsIsrCategory</a:v>
+                  <a:v>OsStacksize</a:v>
+                </a:a>
+                <v:ctr name="OsIsr" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: The OsIsr container represents an OSEK interrupt service routine."/>
+                  <a:a name="UUID" value="1d7292f6-bc26-4ef5-a50c-8a4eae907601"/>
+                  <v:var name="OsIsrCategory" type="ENUMERATION">
+                    <a:a name="DESC" 
+                         value="EN: This attribute specifies the category of this ISR."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="0a521579-d44b-4543-a95a-3e0e435270bd"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="RANGE">
+                      <a:v>CATEGORY_1</a:v>
+                      <a:v>CATEGORY_2</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="OsIsrResourceRef">
+                    <v:ref name="OsIsrResourceRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference defines the resources accessed by this ISR."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="11fd8098-e0ab-49ff-9d6a-8a429cb5fb81"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:var name="OsMeasure_Max_Runtime" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="0F3CCA34-9C42-453A-80E4-660097044F43"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="ENABLE" value="false"/>
+                  </v:var>
+                  <v:var name="OsEnable_On_Startup" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="5F4E193C-6D85-44B4-9803-7DEC4B711456"/>
+                    <a:da name="DEFAULT" value="true"/>
+                    <a:da name="ENABLE" value="false"/>
+                  </v:var>
+                  <v:var name="OsWindowsVector" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="3D855434-C46E-40a1-EDCC-B85F085D2EFB"/>
+                    <a:da name="RANGE">
+                      <a:v>INTUSER00</a:v>
+                      <a:v>INTUSER01</a:v>
+                      <a:v>INTUSER02</a:v>
+                      <a:v>INTUSER03</a:v>
+                      <a:v>INTUSER04</a:v>
+                      <a:v>INTUSER05</a:v>
+                      <a:v>INTUSER06</a:v>
+                      <a:v>INTUSER07</a:v>
+                      <a:v>INTUSER08</a:v>
+                      <a:v>INTUSER09</a:v>
+                      <a:v>INTUSER10</a:v>
+                      <a:v>INTUSER11</a:v>
+                      <a:v>INTUSER12</a:v>
+                      <a:v>INTUSER13</a:v>
+                      <a:v>INTUSER14</a:v>
+                      <a:v>INTUSER15</a:v>
+                      <a:v>INTUSER16</a:v>
+                      <a:v>INTUSER17</a:v>
+                      <a:v>INTUSER18</a:v>
+                      <a:v>INTUSER19</a:v>
+                      <a:v>INTUSER20</a:v>
+                      <a:v>INTUSER21</a:v>
+                      <a:v>INTUSER22</a:v>
+                      <a:v>INTUSER23</a:v>
+                      <a:v>INTUSER24</a:v>
+                      <a:v>INTUSER25</a:v>
+                      <a:v>INTUSER26</a:v>
+                      <a:v>INTUSER27</a:v>
+                      <a:v>INTUSER28</a:v>
+                      <a:v>INTUSER29</a:v>
+                      <a:v>INTUSER30</a:v>
+                      <a:v>INTUSER31</a:v>
+                      <a:v>TIMER0</a:v>
+                      <a:v>TIMER1</a:v>
+                      <a:v>TIMER2</a:v>
+                      <a:v>TIMER3</a:v>
+                      <a:v>XCORE0</a:v>
+                      <a:v>XCORE1</a:v>
+                      <a:v>XCORE2</a:v>
+                      <a:v>XCORE3</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="OsIsrAccessingApplication">
+                    <v:ref name="OsIsrAccessingApplication" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Reference to applications which have access to this object."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="UUID" 
+                           value="CFFD5493-D095-4521-8502-E7EDEC3807ED"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ctr name="OsIsrTimingProtection" type="IDENTIFIABLE">
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="55ab1c90-fd84-4d4b-84b9-86f278b9509d"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:var name="OsIsrAllInterruptLockBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the maximum time for which the ISR is allowed to lock all interrupts (via SuspendAllInterrupts() or DisableAllInterrupts()) (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="9c84fdaa-5f43-4769-857a-e7d4014057c2"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=86400.0"/>
+                        <a:tst expr="&gt;0.0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsIsrExecutionBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: The parameter contains the maximum allowed execution time of the interrupt (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="0705f6a0-afb6-4f75-986e-fd2ea3691431"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="XPath" 
+                            expr="( . &lt;= 86400.0) and (. &gt; 0.0)" 
+                            false="ISR execution budget out of range."/>
+                    </v:var>
+                    <v:var name="OsIsrOsInterruptLockBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the maximum time for which the ISR is allowed to lock all Category 2 interrupts (via SuspendOSInterrupts()) (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="b16a2b59-871d-45d9-9fe6-e88c7469474a"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="XPath" 
+                            expr="(. &lt; 0) or (. &lt; ../OsIsrAllInterruptLockBudget)" 
+                            true="Os interrupt lock budget &lt;0 or &lt;OsIsrAllInterruptLockBudget."/>
+                    </v:var>
+                    <v:var name="OsIsrTimeFrame" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the minimum inter-arrival time between successive interrupts (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="543e1289-46b0-4669-8009-0d1dff6ada97"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=86400.0"/>
+                        <a:tst expr="&gt;=0.0"/>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="OsIsrResourceLock" type="MAP">
+                      <v:ctr name="OsIsrResourceLock" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: This container contains a list of times the interrupt uses resources."/>
+                        <a:a name="UUID" 
+                             value="2f31e182-5248-47b3-99ee-48c9dfacada9"/>
+                        <v:var name="OsIsrResourceLockBudget" type="FLOAT">
+                          <a:a name="DESC" 
+                               value="EN: This parameter contains the maximum time the interrupt is allowed to hold the given resource (in seconds)."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="f5c56c12-ed58-4e3f-b565-eb63e6eb8af3"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=86400.0"/>
+                            <a:tst expr="&gt;0.0"/>
+                          </a:da>
+                        </v:var>
+                        <v:ref name="OsIsrResourceLockResourceRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: Reference to the resource the locking time is depending on"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="dd9b7a9c-369a-4eff-80e9-8f72c70474ee"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                        </v:ref>
+                      </v:ctr>
+                    </v:lst>
+                    <v:var name="OsIsrCountLimit" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:774555ef-f674-40bd-a17b-e79657039d87"/>
+                      <a:da name="DEFAULT" value="1"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&gt;=0"/>
+                        <a:tst expr="&lt;65536"/>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                  <v:var name="OsWindowsIrqLevel" type="INTEGER">
+                    <a:a name="DESC" value="Select the relative interrupt level"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="D3E95A4B-A4CB-4d8f-96FB-12EEA69014D3"/>
+                    <a:da name="DEFAULT" value="1"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=31"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsStacksize" type="INTEGER">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="DCE:ab5372dc-9ffc-4da3-9810-9c94591bac7c"/>
+                    <a:da name="DEFAULT" value="1"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967292"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsTask" type="MAP">
+                <a:a name="COLUMNS">
+                  <a:v>OsTaskActivation</a:v>
+                  <a:v>OsTaskPriority</a:v>
+                  <a:v>OsTaskSchedule</a:v>
+                  <a:v>OsStacksize</a:v>
+                </a:a>
+                <v:ctr name="OsTask" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: This container represents an OSEK task."/>
+                  <a:a name="UUID" value="83fabd6a-af72-4c0a-bb76-abaa9dffe796"/>
+                  <v:var name="OsTaskActivation" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: This attribute defines the maximum number of queued activation requests for the task. A value equal to &quot;1&quot; means that at any time only a single activation is permitted for this task. Note that the value must be a natural number starting at 1."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="42ccc913-dc09-428c-b2cb-b56884977d19"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="1"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=255"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsTaskPriority" type="INTEGER">
+                    <a:a name="DESC" 
+                         value="EN: The priority of a task is defined by the value of this attribute. This value has to be understood as a relative value, i.e. the values show only the relative ordering of the tasks."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="9e8bd3cd-76ab-4165-9fb8-cc087b7fdffc"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=255"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsMeasure_Max_Runtime" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="850140E1-B2B8-4600-8880-0404DD9FE817"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="ENABLE" value="false"/>
+                  </v:var>
+                  <v:lst name="OsTaskAccessingApplication">
+                    <v:ref name="OsTaskAccessingApplication" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Reference to applications which have an access to this object."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="7ca7a9c0-aaaa-4be6-a3be-6ab3950f11fc"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsTaskEventRef">
+                    <v:ref name="OsTaskEventRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference defines the list of events the extended task may react on."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="5e75f80a-207c-4d25-9424-a1eaf43da449"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsEvent"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:lst name="OsTaskResourceRef">
+                    <v:ref name="OsTaskResourceRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference defines a list of resources accessed by this task."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="c90888c1-23f4-4a81-880f-30761974471c"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ctr name="OsTaskAutostart" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container determines whether the task is activated during the system start-up procedure or not for some specific application modes."/>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="593e5769-366f-46cc-a94c-f662f8aadbb8"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:lst name="OsTaskAppModeRef">
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="OsTaskAppModeRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference to application modes in which that task is activated on startup of the OS"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="478f0e2d-fad4-473e-8cc4-6759f4ef38b3"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsAppMode"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                  <v:var name="OsTaskUse_Hw_Fp" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="38A13287-3F89-4563-9E4F-E9AC9425ED73"/>
+                    <a:da name="ENABLE" value="false"/>
+                  </v:var>
+                  <v:var name="OsTaskCallScheduler" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="EEED52A0-0A30-487E-9076-F11761B82F6F"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>DONTKNOW</a:v>
+                      <a:v>YES</a:v>
+                      <a:v>NO</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsTaskType" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="BBB2CC76-B853-42C1-99AD-0999E98EEC93"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>BASIC</a:v>
+                      <a:v>EXTENDED</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsStacksize" type="INTEGER">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="DCE:f127e2d4-81a6-47b2-93cc-e1f18ef8811d"/>
+                    <a:da name="DEFAULT" value="1"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967292"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:ctr name="OsTaskTimingProtection" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains all parameters regarding timing protection of the task."/>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="0ddda8fe-69ce-4842-a10b-e01650628c41"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:var name="OsTaskAllInterruptLockBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the maximum time for which the task is allowed to lock all interrupts (via SuspendAllInterrupts() or DisableAllInterrupts()) (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="cf94feaa-47d8-4751-b835-86deaec4662f"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=86400.0"/>
+                        <a:tst expr="&gt;=0.0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsTaskExecutionBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the maximum allowed execution time of the task (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="631cc981-b2b3-4e4b-a469-6ea598aec065"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="XPath" 
+                            expr="(. &lt;= 86400.0) and (. &gt; 0.0)" 
+                            false="Task execution budget out of range."/>
+                    </v:var>
+                    <v:var name="OsTaskOsInterruptLockBudget" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: This parameter contains the maximum time for which the task is allowed to lock all Category 2 interrupts (via SuspendOSInterrupts()) (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="99c47731-852a-4b1b-8c7b-48152c2db8f7"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="XPath" 
+                            expr="(. &lt; 0) or (. &lt; ../OsTaskAllInterruptLockBudget)" 
+                            true="Os interrupt lock budget &lt;0 or &lt;OsTaskAllInterruptLockBudget."/>
+                    </v:var>
+                    <v:var name="OsTaskTimeFrame" type="FLOAT">
+                      <a:a name="DESC" 
+                           value="EN: The minimum inter-arrival time between activations and/or releases of a task (in seconds)."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="2bb46d97-fe78-494e-b4e6-32e84db5020d"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=86400.0"/>
+                        <a:tst expr="&gt;=0.0"/>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="OsTaskResourceLock" type="MAP">
+                      <v:ctr name="OsTaskResourceLock" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: This container contains the worst case time between getting and releasing a given resource (in seconds)."/>
+                        <a:a name="UUID" 
+                             value="58c472f8-e702-4877-a5df-f42390144820"/>
+                        <v:var name="OsTaskResourceLockBudget" type="FLOAT">
+                          <a:a name="DESC" 
+                               value="EN: This parameter contains the maximum time the task is allowed to lock the resource (in seconds)"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="f0e01a50-c9a3-47ba-919c-013bf49a4aa3"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=86400.0"/>
+                            <a:tst expr="&gt;0.0"/>
+                          </a:da>
+                        </v:var>
+                        <v:ref name="OsTaskResourceLockResourceRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: Reference to the resource used by the task"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="f1c66678-0d0d-4a1e-8dce-008ba5066f7e"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                        </v:ref>
+                      </v:ctr>
+                    </v:lst>
+                    <v:var name="OsTaskCountLimit" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:774555ef-f674-40bd-a17b-e79657039d87"/>
+                      <a:da name="DEFAULT" value="1"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&gt;=0"/>
+                        <a:tst expr="&lt;65536"/>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                  <v:var name="OsTaskSchedule" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="a98241e0-5ae2-4265-a303-2d7c0a591d09"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="FULL"/>
+                    <a:da name="INVALID" type="XPath" 
+                          expr="(. = &apos;FULL&apos;) and (../../../OsOS/OsSchedule = &apos;NON&apos;)" 
+                          true="OsTaskSchedule is set to FULL, but OsSchedule (in OsOS container) is set to NON."/>
+                    <a:da name="RANGE">
+                      <a:v>FULL</a:v>
+                      <a:v>NON</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsResource" type="MAP">
+                <a:a name="COLUMNS" value="OsResourceProperty"/>
+                <v:ctr name="OsResource" type="IDENTIFIABLE">
+                  <a:a name="UUID" value="39df94d3-6f5a-44b5-863c-039f69d53b51"/>
+                  <v:var name="OsResourceProperty" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="aa4f2e21-4950-4451-a912-49e04e0ba136"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="STANDARD"/>
+                    <a:da name="RANGE">
+                      <a:v>INTERNAL</a:v>
+                      <a:v>LINKED</a:v>
+                      <a:v>STANDARD</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:lst name="OsResourceAccessingApplication">
+                    <v:ref name="OsResourceAccessingApplication" 
+                           type="REFERENCE">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="f7be30b8-783c-4c0e-94ac-473c55d4418f"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ref name="OsResourceLinkedResourceRef" type="REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: The link to the resource. Must be valid if OsResourceProperty is LINKED. If OsResourceProperty is not LINKED the value is ignored."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="dd1dc639-c140-44e6-9cb6-8f6db4a0b85b"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsResource"/>
+                  </v:ref>
+                </v:ctr>
+              </v:lst>
+              <v:lst name="OsScheduleTable" type="MAP">
+                <a:a name="COLUMNS">
+                  <a:v>OsScheduleTableDuration</a:v>
+                  <a:v>OsScheduleTableRepeating</a:v>
+                  <a:v>OsScheduleTableCounterRef</a:v>
+                </a:a>
+                <v:ctr name="OsScheduleTable" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: An OsScheduleTable addresses the synchronization issue by providing an encapsulation of a statically defined set of alarms that cannot be modified at runtime."/>
+                  <a:a name="UUID" value="36d37688-585b-4e31-916d-43ac07163241"/>
+                  <v:var name="OsScheduleTableDuration" type="INTEGER">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="ECUC:d3e95a4b-a4cb-4d8f-96fb-02eea69014d3"/>
+                    <a:da name="DEFAULT" value="0"/>
+                  </v:var>
+                  <v:var name="OsScheduleTableRepeating" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="59d6eb8a-a3b9-4f4c-bbc2-f723816ca3ae"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:lst name="OsSchTblAccessingApplication">
+                    <v:ref name="OsSchTblAccessingApplication" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: Reference to applications which have an access to this object."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="066d141f-e7b1-4c58-adb6-794636616376"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsApplication"/>
+                    </v:ref>
+                  </v:lst>
+                  <v:ref name="OsScheduleTableCounterRef" type="REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: This parameter contains a reference to the counter which drives the schedule table.Each Schedule Table must be associated with exactly one Counter."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="b7f9c6b7-de57-49f9-84d5-da6bd23d63c6"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="REF" 
+                          value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+                  </v:ref>
+                  <v:ctr name="OsScheduleTableAutostart" type="IDENTIFIABLE">
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="285d0d6e-b975-40f3-970b-fe405e4d166b"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:var name="OsScheduleTableStartValue" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="98092c83-fddb-4b7d-a3b6-902ba3f6e54c"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=4294967295"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsScheduleTableAutostartType" 
+                           type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: This specifies the type of the autostart for the schedule table."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="5935ca20-971f-4c80-8eb8-0efa814c33f5"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="RELATIVE"/>
+                      <a:da name="RANGE">
+                        <a:v>ABSOLUTE</a:v>
+                        <a:v>RELATIVE</a:v>
+                        <a:v>SYNCHRON</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="OsScheduleTableAppModeRef">
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="OsScheduleTableAppModeRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: Reference in which application modes the schedule table should be started during startup"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="1570e1bf-baaa-47e7-8ab7-3c7ac277c299"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsAppMode"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                  <v:lst name="OsScheduleTableExpiryPoint" type="MAP">
+                    <a:da name="MIN" value="1"/>
+                    <v:ctr name="OsScheduleTableExpiryPoint" 
+                           type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: The point on a Schedule Table at which the OS activates tasks and/or sets events"/>
+                      <a:a name="UUID" 
+                           value="d9c4be19-759c-4b9a-8dd6-9f14483953c7"/>
+                      <v:var name="OsScheduleTblExpPointOffset" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: The offset from zero (in ticks) at which the expiry point is to be processed."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="87b483a1-313e-4bf2-8fca-3f2854a1ed0b"/>
+                        <a:a name="__ORIGIN" value="AUTOSAR"/>
+                        <a:da name="INVALID" type="XPath" 
+                              expr="(. &lt; 0) or (. &gt; ../../../OsScheduleTableDuration)" 
+                              true="Expiry point offset &lt;0 or &gt;OsScheduleTableDuration."/>
+                      </v:var>
+                      <v:lst name="OsScheduleTableEventSetting" type="MAP">
+                        <a:a name="COLUMNS" value="OsScheduleTableSetEventRef"/>
+                        <v:ctr name="OsScheduleTableEventSetting" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Event that is triggered by that schedule table."/>
+                          <a:a name="UUID" 
+                               value="8e873981-0bca-46d8-9cbb-5a0819d5c387"/>
+                          <v:ref name="OsScheduleTableSetEventRef" 
+                                 type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Reference to event that will be set by action"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="UUID" 
+                                 value="1487d479-e6da-4780-be31-289404e2fe7b"/>
+                            <a:a name="__ORIGIN" value="AUTOSAR"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsEvent"/>
+                          </v:ref>
+                          <v:ref name="OsScheduleTableSetEventTaskRef" 
+                                 type="REFERENCE">
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="UUID" 
+                                 value="629819ab-e835-40a4-9607-07090021bb34"/>
+                            <a:a name="__ORIGIN" value="AUTOSAR"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                          </v:ref>
+                        </v:ctr>
+                      </v:lst>
+                      <v:lst name="OsScheduleTableTaskActivation" type="MAP">
+                        <a:a name="COLUMNS" 
+                             value="OsScheduleTableActivateTaskRef"/>
+                        <v:ctr name="OsScheduleTableTaskActivation" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Task that is triggered by that schedule table."/>
+                          <a:a name="UUID" 
+                               value="430c936c-98ed-43c6-906d-c31f27ef784a"/>
+                          <v:ref name="OsScheduleTableActivateTaskRef" 
+                                 type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Reference to task that will be activated by action"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="UUID" 
+                                 value="2b36cdb4-c6a4-4727-b303-7409f5e9ce5b"/>
+                            <a:a name="__ORIGIN" value="AUTOSAR"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsTask"/>
+                          </v:ref>
+                        </v:ctr>
+                      </v:lst>
+                      <v:ctr name="OsScheduleTblAdjustableExpPoint" 
+                             type="IDENTIFIABLE">
+                        <a:a name="DESC" value="EN: Adjustable expiry point"/>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="UUID" 
+                             value="ec3c8dab-4fb7-4923-a2d2-1b402d1176ba"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="WARNING" type="XPath" 
+                              expr="node:exists(../../../OsScheduleTableSync/OsScheduleTblSyncStrategy) and (../../../OsScheduleTableSync/OsScheduleTblSyncStrategy = &apos;EXPLICIT&apos;)" 
+                              false="OsScheduleTblAdjustableExpPoint is enabled, but schedule table is not synchronized explicitly (OsScheduleTblSyncStrategy != EXPLICIT)."/>
+                        <v:var name="OsScheduleTableMaxLengthen" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: The maximum positive adjustment that can be made to the expiry point offset specified in nanoseconds or ticks depending on the UNIT attribute of the schedule table."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="70357e93-ed1c-471d-8203-ab81c9e160eb"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="OsScheduleTableMaxShorten" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: The maximum negative adjustment that can be made to the expiry point offset specified in nanoseconds or ticks depending on the UNIT attribute of the schedule table."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="223cc475-8275-419d-aa5f-923dca3a19c0"/>
+                          <a:a name="__ORIGIN" value="AUTOSAR"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                      </v:ctr>
+                    </v:ctr>
+                  </v:lst>
+                  <v:ctr name="OsScheduleTableSync" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This parameter specifies the synchronization parameters of the schedule table."/>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="UUID" 
+                         value="71b2cfac-d8b5-43e0-a33b-a461f6e17ff5"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <v:var name="OsScheduleTblExplicitPrecision" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="8eba85f0-750b-4ccf-a0ee-4a1943d407e6"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="EDITABLE" type="XPath" 
+                            expr="../OsScheduleTblSyncStrategy = &apos;EXPLICIT&apos;"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=4294967295"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsScheduleTblSyncStrategy" type="ENUMERATION">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="8cf93a09-8bcb-4ffb-a6de-0a749552346a"/>
+                      <a:a name="__ORIGIN" value="AUTOSAR"/>
+                      <a:da name="DEFAULT" value="NONE"/>
+                      <a:da name="RANGE">
+                        <a:v>EXPLICIT</a:v>
+                        <a:v>IMPLICIT</a:v>
+                        <a:v>NONE</a:v>
+                      </a:da>
+                      <a:da name="WARNING" type="XPath" 
+                            expr="(. = &apos;EXPLICIT&apos;) and (count(../../OsScheduleTableExpiryPoint/*/OsScheduleTblAdjustableExpPoint) = 0)" 
+                            true="Schedule table is set to EXPLICIT synchronization, but no expiry points with OsScheduleTblAdjustableExpPoint configuration exist."/>
+                    </v:var>
+                  </v:ctr>
+                  <v:var name="OsTimeUnit" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="ECUC:d3e95a4b-a4cb-4d8f-96fb-02eea69014d3"/>
+                    <a:da name="DEFAULT" value="TICKS"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>NANOSECONDS</a:v>
+                      <a:v>TICKS</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:lst>
+              <v:ctr name="OsOS" type="IDENTIFIABLE">
+                <a:a name="TAB" value="OsOS"/>
+                <a:a name="UUID" value="037FEE7C-9826-4ab9-9067-69B24B57FE12"/>
+                <v:var name="OsScalabilityClass" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="9e1c3ba5-c222-43d6-89f8-655c4b5b9cb8"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>SC1</a:v>
+                    <a:v>SC2</a:v>
+                    <a:v>SC3</a:v>
+                    <a:v>SC4</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsNumberOfCores" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="95944563-648b-42e5-8654-5c73ee58bb74"/>
+                  <a:da name="DEFAULT" value="1"/>
+                  <a:da name="EDITABLE" value="true"/>
+                  <a:da name="ENABLE" value="true"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(. &gt;= 0) and (. &lt;= ../OsMaxNumberOfCores)" 
+                        false="Number of cores exceeds the maximum number of cores for this derivative."/>
+                </v:var>
+                <v:var name="OsMaxNumberOfCores" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e1d0fa14-6094-4565-9232-b23fa77dd1eb"/>
+                  <a:a name="VISIBLE" value="true"/>
+                  <a:da name="DEFAULT" value="4"/>
+                  <a:da name="EDITABLE" value="false"/>
+                  <a:da name="INVALID" type="Range" expr="=4"/>
+                </v:var>
+                <v:var name="OsStatus" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e3dd21e3-76c1-49f5-b059-f1c687dd97e2"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="DEFAULT" value="STANDARD"/>
+                  <a:da name="RANGE">
+                    <a:v>EXTENDED</a:v>
+                    <a:v>STANDARD</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsUseGetServiceId" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="d0b53bbc-c338-445b-a181-c4c988e4bcee"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsUseParameterAccess" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="c56dedcb-c1cf-4100-9675-1f2a7d04452e"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsUseResScheduler" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="db693403-1142-4742-9423-78106e02188e"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="OsCC" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="5A1F0C0D-F538-47CF-BBF5-522C26C0F777"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>BCC1</a:v>
+                    <a:v>BCC2</a:v>
+                    <a:v>ECC1</a:v>
+                    <a:v>ECC2</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsTrace" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="9257CAE9-9D12-4FA2-8DBB-C06F8608C870"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsExtra_Runtime_Checks" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="9257CAE9-9D97-4FA2-8DBB-C06F8608C870"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsStartupChecks" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="9257CAE9-9F67-4FA2-8DBB-C16F8608C870"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsServiceTrace" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="Check this if you want to trace system calls via ORTI"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="D892A51B-BBCC-4F15-8BEE-537B699913F6"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsSourceOptimization" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="Check this if you want to build a library optimized according to the configuration."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="15F1C6FC-EE1D-4A00-B07F-4FE1CA5450C2"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsStackMonitoring" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="4203d985-315e-4a3f-8a23-83b25d2e68a5"/>
+                  <a:a name="__ORIGIN" value="AUTOSAR"/>
+                  <a:da name="DEFAULT" value="false"/>
+                  <a:da name="EDITABLE" value="false"/>
+                </v:var>
+                <v:var name="OsMicrocontroller" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:732543db-dd1f-42a5-8a1b-cea49770b89b"/>
+                  <a:da name="DEFAULT" value="WIN32X86"/>
+                  <a:da name="RANGE" value="WIN32X86"/>
+                </v:var>
+                <v:var name="OsUseLastError" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="A8AB6731-70C3-4632-9B93-B4001638B552"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="OsTracebuffer" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:c012d02f-3038-4a7c-9838-3092fe08afc9"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&gt;=0"/>
+                    <a:tst expr="&lt;65536"/>
+                  </a:da>
+                </v:var>
+                <v:var name="OsSchedule" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="2677CF64-2D20-44B5-8AF9-1D623E857C76"/>
+                  <a:da name="DEFAULT" value="MIXED"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(. = &apos;NON&apos;) and (count(../../OsTask/*[OsTaskSchedule = &apos;FULL&apos;]) &gt; 0)" 
+                        true="OsSchedule is set to NON, but there are tasks with OsTaskSchedule set to FULL."/>
+                  <a:da name="RANGE">
+                    <a:v>NON</a:v>
+                    <a:v>FULL</a:v>
+                    <a:v>MIXED</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsSchedulingAlgorithm" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="656b8e74-7312-4e55-8ec3-ee05b5fd563b"/>
+                  <a:da name="DEFAULT" value="CLZ_QUEUE"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>CLZ_QUEUE</a:v>
+                    <a:v>LINKED_LIST</a:v>
+                  </a:da>
+                </v:var>
+                <v:ctr name="OsHooks" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: Container to structure all hooks belonging to the OS"/>
+                  <a:a name="UUID" value="E03DAB8E-C227-44c9-BF9B-38F0564BD4DF"/>
+                  <v:var name="OsErrorHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="563b0aa9-2748-4a39-b23b-79e9f79da974"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsPostTaskHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="59710f79-5e1a-4ec4-9aaa-2206885b34f9"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsPreTaskHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="783e7929-b188-4c7f-8afe-95a84d2d5306"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsProtectionHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="9d8d17de-f43f-4d81-bfac-987f59e401e0"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="ENABLE" value="false"/>
+                    <a:da name="WARNING" type="XPath" 
+                          expr="(. = &apos;true&apos;) and (../../OsAutosarCustomization/OsErrorHandling = &apos;MINIMAL&apos;)" 
+                          true="Protection hook is enabled but OsErrorHandling is set to MINIMAL."/>
+                  </v:var>
+                  <v:var name="OsShutdownHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="365d3342-11e9-49f3-97f9-a397bcacce09"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsStartupHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="e4e876ef-7e31-4061-aa23-098c793f16a9"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsPreISRHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="AD220EDB-42F3-4A1F-86A6-CE03D966CDB1"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsPostISRHook" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="C0284CD4-0781-4D99-B673-EC8498B51F56"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                </v:ctr>
+                <v:var name="OsWindowsExecutionTimer" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:2bcfeb90-5355-4991-8096-ef14affbb78f"/>
+                  <a:da name="EDITABLE" value="false"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>TIMER0</a:v>
+                    <a:v>TIMER1</a:v>
+                    <a:v>TIMER2</a:v>
+                    <a:v>TIMER3</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsGenerateSWCD" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="false"/>
+                  <a:da name="WARNING" type="XPath" 
+                        expr=". = &apos;true&apos; and count(as:modconf(&apos;Rte&apos;)) = 0" 
+                        true="The usage of the RTE is enabled for the Os, but the RTE is disabled or missing."/>
+                </v:var>
+                <v:lst name="OsCoreConfig" type="MAP">
+                  <a:a name="COLUMNS" value="OsCoreId"/>
+                  <v:ctr name="OsCoreConfig" type="IDENTIFIABLE">
+                    <a:a name="UUID" 
+                         value="F91D29D3-17E4-4A05-AD36-D8F521B728D0"/>
+                    <v:var name="OsCoreId" type="INTEGER">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:771555ef-f674-40bd-a17b-e79617039d87"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="XPath">
+                        <a:tst 
+                               expr="(. &gt;= 0) and (. &lt; ../../../OsMaxNumberOfCores)" 
+                               false="Core Id is invalid."/>
+                        <a:tst expr="text:uniq(../../*/OsCoreId, .)" 
+                               false="OsCoreId needs to be unique"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="OsWindowsExecutionTimer" type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="Choose a timer for the execution protection."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                      <a:a name="UUID" 
+                           value="DCE:2bcfeb90-5355-4991-8096-ef14affbb78f"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="RANGE">
+                        <a:v>TIMER0</a:v>
+                        <a:v>TIMER1</a:v>
+                        <a:v>TIMER2</a:v>
+                        <a:v>TIMER3</a:v>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:ctr name="OsCpuLoadMeasurement" type="IDENTIFIABLE">
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="UUID" value="E03DCB8E-C237-41c9-BA9B-38F0564BD4FF"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <v:var name="OsCpuLoadIntervalDuration" type="FLOAT">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="abc68abf-904f-4ef9-b1b6-f001c766aad2"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="0.1"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=86400.0"/>
+                      <a:tst expr="&gt;0.0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCpuLoadNumIntervals" type="INTEGER">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="abc68abf-904f-4ef9-b0b6-f001a666aad2"/>
+                    <a:a name="__ORIGIN" value="AUTOSAR"/>
+                    <a:da name="DEFAULT" value="10"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4294967295"/>
+                      <a:tst expr="&gt;=1"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCpuLoadRounding" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="NEAREST"/>
+                    <a:da name="RANGE">
+                      <a:v>DOWN</a:v>
+                      <a:v>NEAREST</a:v>
+                      <a:v>UP</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+                <v:var name="OsTrappingKernel" type="BOOLEAN">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                  <a:da name="DEFAULT" value="true"/>
+                  <a:da name="EDITABLE" value="false"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="XPath" expr=". = &apos;false&apos;" 
+                        true="System call kernel only."/>
+                </v:var>
+                <v:var name="OsInitCoreId" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="635a4674-2187-4651-9e90-3b24c52c350b"/>
+                  <a:da name="EDITABLE" value="true"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="XPath" 
+                        expr="(. &gt;= 0) and (. &lt; ../OsMaxNumberOfCores)" 
+                        false="OsInitCoreId must lie within 0 to OsMaxNumberOfCores-1."/>
+                </v:var>
+                <v:var name="OsTimestampTimer" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:da name="DEFAULT" value="INTERNAL"/>
+                  <a:da name="RANGE">
+                    <a:v>INTERNAL</a:v>
+                    <a:v>TIMER0</a:v>
+                    <a:v>TIMER1</a:v>
+                    <a:v>TIMER2</a:v>
+                    <a:v>TIMER3</a:v>
+                  </a:da>
+                </v:var>
+                <v:ctr name="OsAutosarCustomization" type="IDENTIFIABLE">
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="UUID" value="E03DAB8E-C227-44c9-BF9B-38F0564BD4FF"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <v:var name="OsExceptionHandling" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06F860FC870"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="EDITABLE" value="false"/>
+                  </v:var>
+                  <v:var name="OsErrorHandling" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="AUTOSAR"/>
+                    <a:da name="RANGE">
+                      <a:v>MINIMAL</a:v>
+                      <a:v>AUTOSAR</a:v>
+                      <a:v>FULL</a:v>
+                    </a:da>
+                    <a:da name="WARNING" type="XPath" 
+                          expr="(. = &apos;MINIMAL&apos;) and (../../OsSourceOptimization != &apos;true&apos;)" 
+                          true="OsErrorHandling is set to MINIMAL, but won&apos;t have any effect as OsSourceOptimization is disabled."/>
+                  </v:var>
+                  <v:var name="OsStrictServiceProtection" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DFB-C06F8608C870"/>
+                    <a:da name="DEFAULT" value="true"/>
+                  </v:var>
+                  <v:var name="OsCat1DirectCall" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8EBB-C06F860FC870"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsUserTaskReturn" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="KILL_TASK"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>KILL_TASK</a:v>
+                      <a:v>LOOP</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsInterruptLockingChecks" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DFB-C06F8608C870"/>
+                    <a:da name="DEFAULT" value="AUTOSAR"/>
+                    <a:da name="RANGE">
+                      <a:v>MINIMAL</a:v>
+                      <a:v>EXTRACHECK</a:v>
+                      <a:v>AUTOSAR</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsFastInterruptLocking" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="OPTIONAL" value="true"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9A97-4FA2-8ECB-C16F365FC870"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="ENABLE" value="false"/>
+                  </v:var>
+                  <v:var name="OsCallIsr" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="DIRECTLY"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>DIRECTLY</a:v>
+                      <a:v>VIA_WRAPPER</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsCallAppErrorHook" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="DIRECTLY"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>DIRECTLY</a:v>
+                      <a:v>VIA_WRAPPER</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="OsPermitSystemObjects" type="BOOLEAN">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DFB-C06F8608C870"/>
+                    <a:da name="DEFAULT" value="false"/>
+                  </v:var>
+                  <v:var name="OsCallAppStartupShutdownHook" type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="UUID" 
+                         value="9257CAE9-9D97-4FA2-8DBB-C06FF608C870"/>
+                    <a:da name="DEFAULT" value="DIRECTLY"/>
+                    <a:da name="EDITABLE" value="false"/>
+                    <a:da name="RANGE">
+                      <a:v>DIRECTLY</a:v>
+                      <a:v>VIA_WRAPPER</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+                <v:var name="OsProtection" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:d0486548-50de-4c09-ad4d-f63473661e73"/>
+                  <a:da name="DEFAULT" value="OFF"/>
+                  <a:da name="EDITABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>OFF</a:v>
+                    <a:v>PARTIAL</a:v>
+                    <a:v>ON</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsStackOptimization" type="ENUMERATION">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:c473b532-aa0c-4ef6-b9c1-c44881f71017"/>
+                  <a:da name="DEFAULT" value="NO"/>
+                  <a:da name="EDITABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>GLOBAL</a:v>
+                    <a:v>NO</a:v>
+                    <a:v>WITHIN_APPLICATIONS</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="OsWindowsTimeWarpFactor" type="INTEGER">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="UUID" 
+                       value="DCE:c012d02f-3038-4b7c-9838-3092fe08afc9"/>
+                  <a:da name="DEFAULT" value="1"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&gt;=1"/>
+                    <a:tst expr="&lt;4294967296"/>
+                  </a:da>
+                </v:var>
+              </v:ctr>
+              <d:ref type="REFINED_MODULE_DEF" 
+                     value="ASPath:/AUTOSAR/EcucDefs/Os"/>
+              <v:ctr name="PublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Additional published parameters not covered by CommonPublishedInformation container.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="EB Published Information"/>
+                <a:a name="TAB" value="EB Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:cb4128ed-26c1-4ddd-906e-854bed917e07"/>
+                <v:var name="PbcfgMSupport" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Specifies whether or not the Os can use the PbcfgM module for post-build support.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="PbcfgM support"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:eb61002e-69c0-4f16-a910-c27adb75f6ee"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+              </v:ctr>
+            </v:ctr>
+          </d:chc>
+          <d:chc name="myEcuParameterDefinition" type="AR-ELEMENT" 
+                 value="ECU_PARAMETER_DEFINITION">
+            <d:ctr type="AR-ELEMENT">
+              <a:a name="DEF" 
+                   value="ASPath:/AR_PACKAGE_SCHEMA/ECU_PARAMETER_DEFINITION"/>
+              <d:lst name="MODULE_REF">
+                <d:ref type="MODULE_REF" value="ASPath:/TS_T0D1M4I0R0/Os"/>
+              </d:lst>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

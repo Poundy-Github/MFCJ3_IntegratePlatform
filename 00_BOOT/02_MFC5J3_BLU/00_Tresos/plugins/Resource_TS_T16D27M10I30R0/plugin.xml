@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!--
+*   @file    plugin.xml
+*   @version 10.30.1
+*
+*   @brief   AUTOSAR Resource_TS_T16D27M10I30R0 - Tresos Studio plugin configuration file.
+*   @details This file contains the configuration for the Resource Tresos Studio plugin.
+-->
+<!--
+====================================================================================================
+*   Project              : AUTOSAR 4.2 MCAL
+*   Platform             : TRICORE
+*   Peripheral           : TC38XQ
+*   Dependencies         : none
+*
+*   Autosar Version      : 4.2.2
+*   Autosar Revision     : ASR_REL_4_2_REV_M4_VERSION_SUFFIX
+*   Autosar Conf.Variant :
+*
+*   This file is part of MCAL integration. Elektrobit included or updated extentions.
+*   (c) 2019 Infineon Technologies
+*   All rights exclusively reserved for Infineon,
+*   unless expressly agreed to otherwise.
+====================================================================================================
+====================================================================================================
+====================================================================================================
+-->
+
+<plugin>
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+          id="Resource_TS_T16D27M10I30R0_ModuleId"
+          name="Resource Driver PlugIn with a TemplateGenerator">
+
+
+          <module id="Resource_TS_T16D27M10I30R0"
+            label="Resource"
+            mandatory="true"
+            allowMultiple="true"
+            description="%ModuleDesc"
+            copyright="(c) 2019 Infineon Technologies"
+            swVersionMajor="10"
+            swVersionMinor="30"
+            swVersionPatch="1"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="2"
+            specVersionPatch="2"
+            specVersionSuffix=""
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="2"
+            relVersionPatch="2"
+            categoryType="Resource"
+            categoryLayer="EB ECU Resource Manager"
+            categoryCategory="EB"
+            categoryComponent="ECUC">
+
+           <ecuType target="TRICORE" derivate="TC38XQ"/>
+       </module>
+   </extension>
+
+   <!--
+     This extension is used to register configuration specific information:
+
+     - Schemas (including pre-configuration and recommended configuration)
+     - Editors
+   -->
+   <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+              id="Resource_TS_T16D27M10I30R0_ConfigId"
+              name="Resource_TS_T16D27M10I30R0 Configuration">
+    <configuration moduleId="Resource_TS_T16D27M10I30R0">
+
+           <!--
+             Register the files from which schemas and pre- an
+             recommended configuration is loaded. For Autosar Modules
+             this is normally dreisoft.tresos.autosar2.project.AutosarSchemaManager
+           -->
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+          <!-- Define the file(s) from which to load the schemas -->
+          <resource value="config/Resource.xdm"  type="xdm"/>
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TS_T16D27M10I30R0/EcucDefs/ResourceM"/>
+      </data>
+
+      <editor id="Resource_TS_T16D27M10I30R0_EditorId"
+              label="Default"
+              tooltip="%ModuleDesc">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TS_T16D27M10I30R0/EcucDefs/ResourceM"/>
+          <parameter name="title" value="Resource"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+
+
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="Resource_TS_T16D27M10I30R0_GeneratorId"
+              name="Resource_TS_T16D27M10I30R0 Generator">
+    <generator moduleId="Resource_TS_T16D27M10I30R0"
+               class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate"/>
+        <!-- swcd modes and template path parameters -->
+      <parameter name="mode_type" mode="generate_swcd" value="generate"/>
+      <parameter name="mode_type" mode="verify_swcd" value="verify"/>
+      <parameter name="templates" mode="generate_swcd,verify_swcd" value="generate_swcd"/>
+      </generator>
+  </extension>
+ <extension point="dreisoft.tresos.autosar2.api.plugin.ecuresource">
+    <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/AURIX2G_TC387.properties">
+      <parameter name="derivative" value="AURIX2G_TC387"/>
+    </ecuresource>
+    <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/AURIX2G_TC389.properties">
+      <parameter name="derivative" value="AURIX2G_TC389"/>
+    </ecuresource>
+     <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/AURIX2G_TC387x.properties">
+      <parameter name="subderivative" value="TC387x"/>
+    </ecuresource>
+    <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/AURIX2G_TC389x.properties">
+      <parameter name="subderivative" value="TC389x"/>
+    </ecuresource>
+    <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/canwizard.properties">
+    </ecuresource>
+    <ecuresource
+      target="TRICORE"
+      derivate="TC38XQ"
+      moduleId="Resource_TS_T16D27M10I30R0"
+      file="resource/cangeneraltypesmapping.properties">
+    </ecuresource>
+  </extension>
+
+  <extension point="dreisoft.tresos.autosar2.api.plugin.ecuresourcefinder">
+    <ecuresourcefinder>
+      <finder class="dreisoft.tresos.autosar2.api.ecuresource.DefaultEcuResourceFinder">
+      <parameter name="name" value="derivative"/>
+        <parameter name="path" value="ASPath:/TS_T16D27M10I30R0/EcucDefs/ResourceM/ResourceMGeneral/ResourceDerivative"/>        
+      </finder>
+	  </ecuresourcefinder>
+	  <ecuresourcefinder>
+	  <finder class="dreisoft.tresos.autosar2.api.ecuresource.DefaultEcuResourceFinder">	  
+        <parameter name="name" value="subderivative"/>
+        <parameter name="path" value="ASPath:/TS_T16D27M10I30R0/EcucDefs/ResourceM/ResourceMGeneral/ResourceMSubDerivative"/>
+      </finder>
+    </ecuresourcefinder>
+  </extension>
+
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension>
+</plugin>

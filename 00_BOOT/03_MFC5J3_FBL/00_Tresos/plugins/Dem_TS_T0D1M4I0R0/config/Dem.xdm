@@ -1,0 +1,2826 @@
+<?xml version='1.0'?>
+<datamodel version="7.0" 
+           xmlns="http://www.tresos.de/_projects/DataModel2/16/root.xsd" 
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/16/attribute.xsd" 
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TS_T0D1M4I0R0" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Dem" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+              <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                <ad:ADMIN-DATA>
+                  <ad:DOC-REVISIONS>
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.2.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2011-12-09</ad:DATE>
+                    </ad:DOC-REVISION>
+                  </ad:DOC-REVISIONS>
+                </ad:ADMIN-DATA>
+              </a:a>
+              <a:a name="DESC" 
+                   value="EN: Configuration of the Dem (Diagnostic Event Manager) module."/>
+              <a:a name="LOWER-MULTIPLICITY" value="1"/>
+              <a:a name="RELEASE" value="asc:4.0"/>
+              <a:a name="UPPER-MULTIPLICITY" value="1"/>
+              <a:a name="UUID" value="d8674ef1-81fd-4504-bdcc-b3bef350cc25"/>
+              <v:ctr name="CommonPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Common container, aggregated by all modules. It contains published information about vendor and versions.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="Common Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:a00be3e0-8783-9123-2d52-1eb616737ca6"/>
+                <v:var name="ArMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:948f3f2e-f129-4bc5-b4e1-7a7bdb8599e1"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="ArMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:2893b920-59d5-4ac2-b2c1-e23742e66d70"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="ArPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of AUTOSAR specification on which the appropriate implementation is based on.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="AUTOSAR Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:6428eb9b-8790-488a-b9a3-0fba52d0f59e"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="SwMajorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Major version number of the vendor specific implementation of the module.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Major Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:605b18ae-3f9a-41d4-9225-67c9c5f6fc34"/>
+                  <a:da name="DEFAULT" value="4"/>
+                </v:var>
+                <v:var name="SwMinorVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Minor version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Minor Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a7fe44dc-ea25-4b8d-8fad-9fbcae86d56f"/>
+                  <a:da name="DEFAULT" value="0"/>
+                </v:var>
+                <v:var name="SwPatchVersion" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Patch level version number of the vendor specific implementation of the module. The numbering is vendor specific.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Software Patch Version"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a318d2d9-0e75-49da-ac43-e7e4e682e2f9"/>
+                  <a:da name="DEFAULT" value="3"/>
+                </v:var>
+                <v:var name="ModuleId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Module ID of this module from Module List
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Numeric Module ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:78bc8362-080f-4253-b3da-804ab69a7154"/>
+                  <a:da name="DEFAULT" value="054"/>
+                </v:var>
+                <v:var name="VendorId" type="INTEGER_LABEL">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Vendor ID"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:01b0f467-6943-4558-b4f2-3fa1fad28449"/>
+                  <a:da name="DEFAULT" value="1"/>
+                </v:var>
+                <v:var name="Release" type="STRING_LABEL">
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="Release Information"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:1c68a547-f24e-4a4e-9540-69fbd533ec89"/>
+                  <a:da name="DEFAULT" value=""/>
+                </v:var>
+              </v:ctr>
+              <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                <a:a name="LABEL" value="Config Variant"/>
+                <a:a name="UUID" value="431e5738-3414-4612-b56d-5ba7cc3e0eca"/>
+                <a:da name="DEFAULT" value="VariantPostBuild"/>
+                <a:da name="RANGE">
+                  <a:v>VariantPostBuild</a:v>
+                  <a:v>VariantPreCompile</a:v>
+                </a:da>
+              </v:var>
+              <v:lst name="DemConfigSet" 
+                     type="MULTIPLE-CONFIGURATION-CONTAINER">
+                <a:da name="MIN" value="1"/>
+                <v:ctr name="DemConfigSet" 
+                       type="MULTIPLE-CONFIGURATION-CONTAINER">
+                  <a:a name="DESC" 
+                       value="EN: This container contains the configuration parameters and sub containers of the Dem module supporting multiple configuration sets. This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set."/>
+                  <a:a name="UUID" value="95c52228-f4a2-4616-8f7e-14111191010f"/>
+                  <v:lst name="DemDTCClass" type="MAP">
+                    <a:da name="MAX" value="65535"/>
+                    <v:ctr name="DemDTCClass" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the configuration (parameters) for DTCClass."/>
+                      <a:a name="UUID" 
+                           value="b937c3b8-de50-4f6d-ba42-50db3489c7c4"/>
+                      <v:var name="DemDTCFunctionalUnit" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: DTCFuncitonalUnit is a 1-byte value which identifies the corresponding basic vehicle / system function which reports the DTC. This parameter is necessary for the report of severity informations."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="439730d5-2e85-419d-8cb7-9523ac49bcf0"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemDTCSeverity" type="ENUMERATION">
+                        <a:a name="DESC" value="EN: DTC severity"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="81ef92a5-dfbe-4848-b146-7c11763a6fe7"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="RANGE">
+                          <a:v>DEM_DTC_SEV_CHECK_AT_NEXT_HALT</a:v>
+                          <a:v>DEM_DTC_SEV_IMMEDIATELY</a:v>
+                          <a:v>DEM_DTC_SEV_MAINTENANCE_ONLY</a:v>
+                          <a:v>DEM_DTC_SEV_NO_SEVERITY</a:v>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemImmediateNvStorage" type="BOOLEAN">
+                        <a:a name="DESC" 
+                             value="EN: Switch to enable immediate storage triggering of an according event memory entriy persistently to NVRAM."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="20c035b3-2776-4660-b9e7-1450c0e1b803"/>
+                        <a:da name="DEFAULT" value="true"/>
+                      </v:var>
+                      <v:var name="DemObdDTC" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Unique Diagnostic Trouble Code value for OBD"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="e979a29e-4aef-405e-aee7-2dc1c41b6c04"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=65535"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemUdsDTC" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Unique Diagnostic Trouble Code value for UDS"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="c1fc7bad-0617-4667-8f03-ef4094b29060"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=16777214"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:lst name="DemCallbackInitMForF" type="MAP">
+                        <v:ctr name="DemCallbackInitMForF" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: The presence of this container indicates, that the Dem has access to an &quot;InitMonitorForFunction&quot; callback, which the Dem will call to initialize a monitor."/>
+                          <a:a name="UUID" 
+                               value="a26e99a2-01bc-4379-bd28-056c0f91b09e"/>
+                          <v:var name="DemCallbackInitMForFFnc" 
+                                 type="FUNCTION-NAME">
+                            <a:a name="DESC" 
+                                 value="EN: Function name of prototype &quot;InitMonitorForFunction&quot;."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                              <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="OPTIONAL" value="true"/>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="db9d7d05-e290-438c-91bc-74152b4f5eb6"/>
+                            <a:da name="ENABLE" value="false"/>
+                          </v:var>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                  </v:lst>
+                  <v:lst name="DemEventParameter" type="MAP">
+                    <a:da name="MAX" value="65535"/>
+                    <a:da name="MIN" value="1"/>
+                    <v:ctr name="DemEventParameter" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the configuaration (parameters) for events."/>
+                      <a:a name="UUID" 
+                           value="e22cc426-5736-48eb-930b-372077faa198"/>
+                      <v:var name="DemEventId" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Unique identifier of a diagnostic event."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                        <a:a name="UUID" 
+                             value="1bc1bbfc-47d8-4e41-81d5-610e66013146"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=65535"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemEventKind" type="ENUMERATION">
+                        <a:a name="DESC" 
+                             value="EN: This parameter is used to distinguish between SW-C and BSW events. SW-C events are reported by Dem_SetEventStatus API and BSW events are reported by Dem_ReportErrorStatus API."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="c4ffa1d7-a9f5-4772-a6b4-b3a1a7cf680b"/>
+                        <a:da name="RANGE">
+                          <a:v>DEM_EVENT_KIND_BSW</a:v>
+                          <a:v>DEM_EVENT_KIND_SWC</a:v>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemMaxNumberFreezeFrameRecords" 
+                             type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: This parameter defines the number of according freeze frame records, which can maximal be stored for this event. Therefore all these freeze frame records have the same freeze frame class."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="7b316302-e9e4-4e5b-9968-4c04c1744323"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
+                      <v:ref name="DemDTCClassRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This parameter defines the DTC configuration associated with the diagnostic event."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="1a10707e-e2eb-4e70-a12d-6cb01a964f51"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTCClass"/>
+                      </v:ref>
+                      <v:ref name="DemExtendedDataClassRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This reference defines the link to an extended data class sampler."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="ab2067aa-6664-4db1-9c61-39a9ff0f4e2c"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemExtendedDataClass"/>
+                      </v:ref>
+                      <v:ref name="DemFreezeFrameClassRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: These references define the links to a freeze frame class sampler."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="f6a20549-39db-425a-930e-f0f59e5312f8"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemFreezeFrameClass"/>
+                      </v:ref>
+                      <v:ref name="DemFreezeFrameRecNumClassRef" 
+                             type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This parameter defines the list of dedicated freeze frame record numbers associated with the diagnostic event. These record numbers are assigned to the freeze frame records (instead of calculated record numbers)."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="7f613a0f-04d0-414f-958e-bfcb0bc97a7e"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemFreezeFrameRecNumClass"/>
+                      </v:ref>
+                      <v:ctr name="DemCallbackClearEventAllowed" 
+                             type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: The presence of this container indicates that the Dem has access to a &quot;ClearEventAllowed&quot; callback."/>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="UUID" 
+                             value="0fdeb97f-2816-4c1c-b224-061031cff998"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <v:var name="DemCallbackClearEventAllowedFnc" 
+                               type="FUNCTION-NAME">
+                          <a:a name="DESC" 
+                               value="EN: Function name of prototype &quot;ClearEventAllowed&quot;."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="35c91910-e0c9-4902-92a7-6dbbaa6bd14f"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                      </v:ctr>
+                      <v:ctr name="DemCallbackEventDataChanged" 
+                             type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: The presence of this container indicates that the Dem has access to an &quot;EventDataChanged&quot; callback."/>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="UUID" 
+                             value="b920dee1-a1c5-4ce6-ad67-544198eb84d5"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <v:var name="DemCallbackEventDataChangedFnc" 
+                               type="FUNCTION-NAME">
+                          <a:a name="DESC" 
+                               value="EN: Function name of prototype &quot;EventDataChanged&quot;"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="a78445dd-e1ab-4c11-bd42-2a679e8b5dd8"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                      </v:ctr>
+                      <v:lst name="DemCallbackEventStatusChanged" type="MAP">
+                        <v:ctr name="DemCallbackEventStatusChanged" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: The presence of this container indicates, that the Dem has access to an &quot;EventStatusChanged&quot; callback, which the Dem will call to notify other components about the change in the status of an event."/>
+                          <a:a name="UUID" 
+                               value="8f3f85ca-92c5-44a5-9fb7-fc122e64bb63"/>
+                          <v:var name="DemCallbackEventStatusChangedFnc" 
+                                 type="FUNCTION-NAME">
+                            <a:a name="DESC" 
+                                 value="EN: Function name of prototype &quot;EventStatusChanged&quot;"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                              <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="OPTIONAL" value="true"/>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="3a27a5e1-dc1e-4c17-8f0a-159bd518844e"/>
+                            <a:da name="ENABLE" value="false"/>
+                          </v:var>
+                        </v:ctr>
+                      </v:lst>
+                      <v:ctr name="DemCallbackInitMForE" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: The presence of this container indicates, that the Dem has access to an &quot;InitMonitorForEvent&quot; callback, which the Dem will call to initialize a monitor."/>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="UUID" 
+                             value="e652046f-37ce-4947-a123-fa07156f907d"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <v:var name="DemCallbackInitMForEFnc" 
+                               type="FUNCTION-NAME">
+                          <a:a name="DESC" 
+                               value="EN: Function name of prototype &quot;InitMonitorForEvent&quot;."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="6eca6184-1c45-47c6-9339-f755fa1c39f6"/>
+                          <a:da name="ENABLE" value="false"/>
+                        </v:var>
+                      </v:ctr>
+                      <v:ctr name="DemEventClass" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: This container contains the configuaration (parameters) for EventClass"/>
+                        <a:a name="UUID" 
+                             value="4c2b3a03-e9c1-4ba8-9ab5-d6b630317a17"/>
+                        <v:var name="DemAgingAllowed" type="BOOLEAN">
+                          <a:a name="DESC" 
+                               value="EN: Switch to allow aging/unlearning of the event or not."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="105c25b7-f805-4c8b-964c-dc4b901d3001"/>
+                          <a:da name="DEFAULT" value="true"/>
+                        </v:var>
+                        <v:var name="DemAgingCycleCounterThreshold" 
+                               type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Number ot aging cycles needed to unlearn/delete the event."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="63695304-2000-44e4-bff1-23a71db75e20"/>
+                          <a:da name="DEFAULT" value="1"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=256"/>
+                            <a:tst expr="&gt;=1"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="DemConsiderPtoStatus" type="BOOLEAN">
+                          <a:a name="DESC" 
+                               value="EN: This parameter is TRUE, when the event is affected by the Dem PTO handling."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="6c53e2dd-95ff-4359-b204-80d9dcf862a3"/>
+                          <a:da name="DEFAULT" value="true"/>
+                        </v:var>
+                        <v:lst name="DemEventDestination">
+                          <a:da name="MAX" value="4"/>
+                          <v:var name="DemEventDestination" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: The event destination assigns events to none, one or multiple origins."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                              <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="80310a46-cc4a-41e6-93ae-bed5d4bc3c38"/>
+                            <a:da name="RANGE">
+                              <a:v>DEM_DTC_ORIGIN_MIRROR_MEMORY</a:v>
+                              <a:v>DEM_DTC_ORIGIN_PRIMARY_MEMORY</a:v>
+                              <a:v>DEM_DTC_ORIGIN_SECONDARY_MEMORY</a:v>
+                            </a:da>
+                          </v:var>
+                        </v:lst>
+                        <v:var name="DemEventFailureCycleCounterThreshold" 
+                               type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Defines the number of failure cycles for the event based fault confirmation."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ce1bd283-9ba6-44f7-822f-e6deed904f6c"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=256"/>
+                            <a:tst expr="&gt;=1"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="DemEventOBDReadinessGroup" 
+                               type="ENUMERATION">
+                          <a:a name="DESC" 
+                               value="EN: This parameter specifies the Event OBD Readiness group for PID $01 and PID $41 computation."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="a5e5c5e6-af32-4986-a04f-d0ddea2da6d8"/>
+                          <a:da name="RANGE">
+                            <a:v>DEM_OBD_RDY_AC</a:v>
+                            <a:v>DEM_OBD_RDY_BOOSTPR</a:v>
+                            <a:v>DEM_OBD_RDY_CAT</a:v>
+                            <a:v>DEM_OBD_RDY_CMPRCMPT</a:v>
+                            <a:v>DEM_OBD_RDY_EGSENS</a:v>
+                            <a:v>DEM_OBD_RDY_ERG</a:v>
+                            <a:v>DEM_OBD_RDY_EVAP</a:v>
+                            <a:v>DEM_OBD_RDY_FLSYS</a:v>
+                            <a:v>DEM_OBD_RDY_HCCAT</a:v>
+                            <a:v>DEM_OBD_RDY_HTCAT</a:v>
+                            <a:v>DEM_OBD_RDY_MISF</a:v>
+                            <a:v>DEM_OBD_RDY_NONE</a:v>
+                            <a:v>DEM_OBD_RDY_NOXCAT</a:v>
+                            <a:v>DEM_OBD_RDY_O2SENS</a:v>
+                            <a:v>DEM_OBD_RDY_O2SENSHT</a:v>
+                            <a:v>DEM_OBD_RDY_PMFLT</a:v>
+                            <a:v>DEM_OBD_RDY_SECAIR</a:v>
+                          </a:da>
+                        </v:var>
+                        <v:var name="DemEventPriority" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Priority of the event, in view of full event buffer."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="e76d30d8-d7c9-45cf-b556-9c4962cd7eda"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=256"/>
+                            <a:tst expr="&gt;=1"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="DemEventSignificance" type="ENUMERATION">
+                          <a:a name="DESC" 
+                               value="EN: Significance of the event, which indicates additional information concerning fault classification and resolution."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="9faba3ca-428b-4580-ae12-e2b322418254"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="RANGE">
+                            <a:v>DEM_EVENT_SIGNIFICANCE_FAULT</a:v>
+                            <a:v>DEM_EVENT_SIGNIFICANCE_OCCURRENCE</a:v>
+                          </a:da>
+                        </v:var>
+                        <v:var name="DemFFPrestorageSupported" type="BOOLEAN">
+                          <a:a name="DESC" 
+                               value="EN: If this parameter is set to true, then the Prestorage of FreezeFrames is supported by the assigned event. This parameter is useful to calculate the buffer size."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="224047b6-074d-405d-8e6e-fcace4b748ef"/>
+                          <a:da name="DEFAULT" value="true"/>
+                        </v:var>
+                        <v:ref name="DemAgingCycleRef" type="CHOICE-REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: Reference to the cycle which is triggering the aging of the event. This can either be the same as the operation cycle of the event, or a separate aging cycle reported via API Dem_SetAgingCycleState. If external aging is configured (refer to DemAgingCycleCounterProcessing), this parameter is not used."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                          <a:a name="UUID" 
+                               value="b1e30d3c-b48c-45f7-960b-a162a0459ae6"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="REF">
+                            <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemAgingCycle</a:v>
+                            <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemOperationCycle</a:v>
+                          </a:da>
+                        </v:ref>
+                        <v:ref name="DemEnableConditionGroupRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: References an enable condition group."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                          <a:a name="UUID" 
+                               value="eb943cc7-7faa-49d4-8ba6-070412834caa"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemEnableConditionGroup"/>
+                        </v:ref>
+                        <v:ref name="DemEventFailureCycleRef" type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: Kind of failure cycle for the event based fault confirmation."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                          <a:a name="UUID" 
+                               value="5a8ad572-eb83-4ced-93dc-2fadc61fafea"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemOperationCycle"/>
+                        </v:ref>
+                        <v:ref name="DemOperationCycleRef" type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: Kind of operation cycle for the event (e.g. power cycle, driving cycle, ...)"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                          <a:a name="UUID" 
+                               value="da2469ae-3178-4e89-a18e-996d71619fb5"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemOperationCycle"/>
+                        </v:ref>
+                        <v:ref name="DemStorageConditionGroupRef" 
+                               type="REFERENCE">
+                          <a:a name="DESC" 
+                               value="EN: References a storage condition group."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="OPTIONAL" value="true"/>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                          <a:a name="UUID" 
+                               value="0e49a0e7-0585-408a-931f-63c96e014fa3"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="REF" 
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemStorageConditionGroup"/>
+                        </v:ref>
+                        <v:chc name="DemDebounceAlgorithmClass" 
+                               type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Debounce algorithm class: counter based, time based, or monitor internal."/>
+                          <a:a name="UUID" 
+                               value="f64d8d01-c9ce-4d76-aec2-52825e27d350"/>
+                          <v:ctr name="DemDebounceCounterBased" 
+                                 type="IDENTIFIABLE">
+                            <a:a name="DESC" 
+                                 value="EN: This container contains the configuration (parameters) for counter based debouncing."/>
+                            <a:a name="UUID" 
+                                 value="c8d310e0-2327-444b-8ca0-186ee0eebee1"/>
+                            <v:var name="DemDebounceCounterDecrementStepSize" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the step size for decrementation of the internal fault detection counter (PREPASSED)."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="76b55cd7-196b-4755-81b0-e001945bfaea"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=32768"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceCounterFailedThreshold" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the value of the internal fault detection counter, which indicates the failed status."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="fee876eb-40ab-4065-b70a-cf910f3d337e"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=32767"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceCounterIncrementStepSize" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the step size for incrementation of the internal fault detection counter (PREFAILED)."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="30c07334-8c8e-46a9-8815-c92a3bbdf67c"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=32767"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceCounterJumpDown" 
+                                   type="BOOLEAN">
+                              <a:a name="DESC" 
+                                   value="EN: Switch for the activation of Jump-Down."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="25c9416c-f813-4aea-818f-30a52b730e39"/>
+                              <a:da name="DEFAULT" value="true"/>
+                            </v:var>
+                            <v:var name="DemDebounceCounterJumpDownValue" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Jump-Down value of the internal fault detection counter."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="3e2ae3f5-8096-4182-a164-50cf139a0fa4"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=32767"/>
+                                <a:tst expr="&gt;=-32768"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceCounterJumpUp" 
+                                   type="BOOLEAN">
+                              <a:a name="DESC" 
+                                   value="EN: Switch for the activation of Jump-Up."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="2aa75d06-0211-4c65-b54b-e3b2e065425d"/>
+                              <a:da name="DEFAULT" value="true"/>
+                            </v:var>
+                            <v:var name="DemDebounceCounterJumpUpValue" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Jump-Up value of the internal fault detection counter."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="e82c7876-87cb-4be0-9a26-eab6d2d60e14"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=32767"/>
+                                <a:tst expr="&gt;=-32768"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceCounterPassedThreshold" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the value of the internal fault detection counter, which indicates the passed status."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="3792145d-973a-432f-8ad6-2fa3fe120ab1"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=0"/>
+                                <a:tst expr="&gt;=-32768"/>
+                              </a:da>
+                            </v:var>
+                          </v:ctr>
+                          <v:ctr name="DemDebounceMonitorInternal" 
+                                 type="IDENTIFIABLE">
+                            <a:a name="DESC" 
+                                 value="EN: This container contains the configuration (parameters) for monitor internal debouncing."/>
+                            <a:a name="UUID" 
+                                 value="3d8bf397-3876-4c60-9a0f-6069088034f2"/>
+                            <v:ctr name="DemCallbackGetFDC" type="IDENTIFIABLE">
+                              <a:a name="DESC" 
+                                   value="EN: The presence of this container indicates, that the Dem has access to a &quot;GetFaultDetectionCounter&quot; callback, which the Dem will call to obtain the value of the fault detection counter."/>
+                              <a:a name="UUID" 
+                                   value="b7b6104a-99ec-4281-81dd-a83864655666"/>
+                              <v:var name="DemCallbackGetFDCFnc" 
+                                     type="FUNCTION-NAME">
+                                <a:a name="DESC" 
+                                     value="EN: Function name of prototype &quot;GetFaultDetectionCounter&quot;."/>
+                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                     type="IMPLEMENTATIONCONFIGCLASS">
+                                  <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                </a:a>
+                                <a:a name="OPTIONAL" value="true"/>
+                                <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                                <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                                <a:a name="UUID" 
+                                     value="289dec5a-d043-4921-a0f8-d2b5bf8a9813"/>
+                                <a:da name="ENABLE" value="false"/>
+                              </v:var>
+                            </v:ctr>
+                          </v:ctr>
+                          <v:ctr name="DemDebounceTimeBase" type="IDENTIFIABLE">
+                            <a:a name="DESC" 
+                                 value="EN: This container contains the configuration (parameters) for time based debouncing."/>
+                            <a:a name="UUID" 
+                                 value="9a753146-6526-4db7-b51f-a8b87ebf7b7f"/>
+                            <v:var name="DemDebounceTimeFailedThreshold" 
+                                   type="FLOAT">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the time out duration for &quot;Event Failed&quot; qualification."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="8a6d4c75-3eba-41bb-a8d5-a9066fc772b9"/>
+                              <a:da name="DEFAULT" value="0.0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=3600.0"/>
+                                <a:tst expr="&gt;=0.0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemDebounceTimePassedThreshold" 
+                                   type="FLOAT">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the time out duration for &quot;Event Passed&quot; qualification."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="82085a42-728b-4422-b087-074b34cce7dc"/>
+                              <a:da name="DEFAULT" value="0.0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=3600.0"/>
+                                <a:tst expr="&gt;=0.0"/>
+                              </a:da>
+                            </v:var>
+                          </v:ctr>
+                        </v:chc>
+                        <v:lst name="DemIndicatorAttribute" type="MAP">
+                          <a:da name="MAX" value="255"/>
+                          <v:ctr name="DemIndicatorAttribute" 
+                                 type="IDENTIFIABLE">
+                            <a:a name="DESC" 
+                                 value="EN: This container contains the event specific configuration of Indicators."/>
+                            <a:a name="UUID" 
+                                 value="ae908ef8-b76a-4aa1-afbd-14f392fb6d8e"/>
+                            <v:var name="DemIndicatorBehaviour" 
+                                   type="ENUMERATION">
+                              <a:a name="DESC" 
+                                   value="EN: Behaviour of the linked indicator"/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="d5315aad-cb15-4957-9ffe-f9f3e701721e"/>
+                              <a:da name="RANGE">
+                                <a:v>DEM_INDICATOR_BLINKING</a:v>
+                                <a:v>DEM_INDICATOR_BLINK_CONT</a:v>
+                                <a:v>DEM_INDICATOR_CONTINUOUS</a:v>
+                              </a:da>
+                            </v:var>
+                            <v:var 
+                                   name="DemIndicatorFailureCycleCounterThreshold" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the number of failure cycles for the WarningIndicatorOnCriteria."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="OPTIONAL" value="true"/>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="96636f9a-cf2f-4f17-9ea7-dc52b71393ff"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="ENABLE" value="false"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=255"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:var name="DemIndicatorFailureCycleSource" 
+                                   type="ENUMERATION">
+                              <a:a name="DESC" 
+                                   value="EN: This parameter defines, which failure cycle is used for the WarningIndicatorOnCriteria handling."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="c2fb03ee-eef9-497c-9e04-da6a76d2880b"/>
+                              <a:da name="RANGE">
+                                <a:v>DEM_FAILURE_CYCLE_EVENT</a:v>
+                                <a:v>DEM_FAILURE_CYCLE_INDICATOR</a:v>
+                              </a:da>
+                            </v:var>
+                            <v:var 
+                                   name="DemIndicatorHealingCycleCounterThreshold" 
+                                   type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Defines the number of healing cycles for the WarningIndicatorOffCriteria."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" 
+                                   value="d5f35623-b818-4d65-9a54-50dd4310efc9"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=255"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:ref name="DemIndicatorFailureCycleRef" 
+                                   type="REFERENCE">
+                              <a:a name="DESC" 
+                                   value="EN: Kind of failure cycle for the indicator controlled by the according event used for the WarningIndicatorOnCriteria."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="OPTIONAL" value="true"/>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="UUID" 
+                                   value="0b0ee935-28f8-4b45-a18c-1bd540853933"/>
+                              <a:da name="ENABLE" value="false"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemOperationCycle"/>
+                            </v:ref>
+                            <v:ref name="DemIndicatorHealingCycleRef" 
+                                   type="REFERENCE">
+                              <a:a name="DESC" 
+                                   value="EN: Kind of healing cycle for the indicator controlled by the according event used for the WarningIndicatorOffCriteria."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="UUID" 
+                                   value="b738542b-fa93-4707-9c59-53068ccd2b98"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemOperationCycle"/>
+                            </v:ref>
+                            <v:ref name="DemIndicatorRef" type="REFERENCE">
+                              <a:a name="DESC" 
+                                   value="EN: Reference to the used indicator."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="UUID" 
+                                   value="84c78df6-0da2-4c59-b43a-7882cae71d0f"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemIndicator"/>
+                            </v:ref>
+                          </v:ctr>
+                        </v:lst>
+                      </v:ctr>
+                    </v:ctr>
+                  </v:lst>
+                  <v:lst name="DemPidClass" type="MAP">
+                    <a:da name="MAX" value="255"/>
+                    <v:ctr name="DemPidClass" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the different PIDs for the single global OBD relevant freeze frame class. It is assembled out of one or several data elements."/>
+                      <a:a name="UUID" 
+                           value="286619cd-8454-4d16-983b-d9ba497f90e4"/>
+                      <v:var name="DemPidIdentifier" type="INTEGER">
+                        <a:a name="DESC" value="EN: identifier of the PID"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="ab1143c5-4f97-4ff3-935c-3ce069ae28da"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
+                      <v:lst name="DemPidDataElement" type="MAP">
+                        <a:da name="MAX" value="255"/>
+                        <a:da name="MIN" value="1"/>
+                        <v:ctr name="DemPidDataElement" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: This container contains the different data elements contained in the specific PID."/>
+                          <a:a name="UUID" 
+                               value="2edc97ca-1d50-40f2-acf7-29c73370e62d"/>
+                          <v:ref name="DemPidDataElementClassRef" 
+                                 type="CHOICE-REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: This reference contains the link to a data element class."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="UUID" 
+                                 value="9f557f8d-a0ad-41b6-804a-c0d6e5094a1a"/>
+                            <a:da name="REF">
+                              <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                              <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                              <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemInternalDataElementClass</a:v>
+                            </a:da>
+                          </v:ref>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                  </v:lst>
+                </v:ctr>
+              </v:lst>
+              <v:ctr name="DemGeneral" type="IDENTIFIABLE">
+                <a:a name="DESC" 
+                     value="EN: This container contains the configuration (parameters) of the BSW Dem"/>
+                <a:a name="UUID" value="b5ab90c4-30b1-4ee6-ba78-643d09fa0d09"/>
+                <v:ctr name="DemServiceAPI" type="IDENTIFIABLE">
+                  <a:a name="DESC">
+                    <a:v>&lt;html&gt;
+                        &lt;p&gt;Container for configuration of the service API of Dem.&lt;/p&gt;
+                      &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Service API Parameters"/>
+                  <a:a name="UUID" 
+                       value="ECUC:352fda93-d427-40a5-8e00-1b2ca95773b3"/>
+                  <v:var name="DemEnableASR40ServiceAPI" type="BOOLEAN">
+                    <a:a name="DESC">
+                      <a:v>&lt;html&gt;
+                        &lt;p&gt;Configures whether the AUTOSAR 4.0 service API shall be provided.&lt;/p&gt;
+                          &lt;ul&gt;
+                            &lt;li&gt;&lt;code&gt;TRUE&lt;/code&gt; = Enables AUTOSAR 4.0 service API.&lt;/li&gt;
+                            &lt;li&gt;&lt;code&gt;FALSE&lt;/code&gt; = Disables AUTOSAR 4.0 service API.&lt;/li&gt;
+                          &lt;/ul&gt;
+                        &lt;/html&gt;</a:v>
+                    </a:a>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="LABEL" value="Enable AUTOSAR 4.0 service API"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="ECUC:291ac52b-064b-4579-93a6-1d70a6d8114f"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="EDITABLE" value="true"/>
+                  </v:var>
+                  <v:var name="DemEnableASR42ServiceAPI" type="BOOLEAN">
+                    <a:a name="DESC">
+                      <a:v>&lt;html&gt;
+                          &lt;p&gt;Configures whether the AUTOSAR 4.2 service API shall be provided.&lt;/p&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;&lt;code&gt;TRUE&lt;/code&gt; = Enables AUTOSAR 4.2 service API.&lt;/li&gt;
+                              &lt;li&gt;&lt;code&gt;FALSE&lt;/code&gt; = Disables AUTOSAR 4.2 service API.&lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;p&gt;If parameter is enabled, the stub functions Dem_GetDebouncingOfEvent(),
+                            Dem_GetEventFreezeFrameDataEx() and Dem_GetEventExtendedDataRecordEx() will be available.&lt;/p&gt;
+                        &lt;/html&gt;</a:v>
+                    </a:a>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="LABEL" value="Enable AUTOSAR 4.2 service API"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="ECUC:9515885f-c1aa-42a7-9238-80c839c3076d"/>
+                    <a:da name="DEFAULT" value="false"/>
+                    <a:da name="EDITABLE" value="true"/>
+                  </v:var>
+                  <v:var name="DemDefaultASRServiceAPI" type="ENUMERATION">
+                    <a:a name="DESC">
+                      <a:v>&lt;html&gt;
+                            &lt;p&gt;Defines the default AUTOSAR version used for creating the service API.&lt;/p&gt;
+                              &lt;ul&gt;
+                                &lt;li&gt;&lt;code&gt;AUTOSAR_40&lt;/code&gt; = AUTOSAR 4.0 is used as base.&lt;/li&gt;
+                                &lt;li&gt;&lt;code&gt;AUTOSAR_42&lt;/code&gt; = AUTOSAR 4.2 is used as base.&lt;/li&gt;
+                              &lt;/ul&gt;
+                            &lt;p&gt;If value &lt;code&gt;AUTOSAR_42&lt;/code&gt; is selected, parts of the service APIs will be compatible to
+                              AUTOSAR 4.2 specification and the stub functions Dem_GetDebouncingOfEvent(),
+                              Dem_GetEventFreezeFrameDataEx() and Dem_GetEventExtendedDataRecordEx() will be available.
+                              The remaning APIs will still be based on the AUTOSAR_40 specification.&lt;/p&gt;
+                          &lt;/html&gt;</a:v>
+                    </a:a>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="LABEL" value="Default AUTOSAR service API"/>
+                    <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="ECUC:0164dac6-ac95-4d38-a479-15c24e4c6463"/>
+                    <a:da name="DEFAULT" value="AUTOSAR_40"/>
+                    <a:da name="RANGE">
+                      <a:v>AUTOSAR_40</a:v>
+                      <a:v>AUTOSAR_42</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+                <v:var name="DemAgingCycleCounterProcessing" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether the aging counter is calculated Dem-internally or provided via Dem_SetAgingCycleCounterValue."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a0296885-7d2f-4bb1-b0ce-f5c092741026"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_PROCESS_AGINGCTR_EXTERN</a:v>
+                    <a:v>DEM_PROCESS_AGINGCTR_INTERN</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemBswErrorBufferSize" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum number of elements in buffer for handling of BSW errors (ref. to Dem107)."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0727f959-2bd6-4d52-84c4-0fa91c107a2e"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemClearDTCBehavior" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: Defines the clearing process of diagnostic information for volatile and non-volatile memory and the positive response handling for the Dcm module."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a3fbbbfe-113c-4be0-a92d-fb9ac4954c5f"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_CLRRESP_NONVOLATILE_FINISH</a:v>
+                    <a:v>DEM_CLRRESP_NONVOLATILE_TRIGGER</a:v>
+                    <a:v>DEM_CLRRESP_VOLATILE</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemDTCSuppressionSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for DTC suppression is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="47ec2b45-2e8a-4415-98a1-6eb0bf1fb5e9"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemDebounceCounterBasedSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for counter based debouncing is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="92e4d36a-9e10-418e-84ca-1b6a5a3b30c1"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemDebounceTimeBasedSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for time based debouncing is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0e53951e-0be5-4744-a73b-0c2453ee68d0"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemDevErrorDetect" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the Development Error Detection and Notification."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="7d844061-955f-4ff7-8a9d-6a99d315f724"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemDtcStatusAvailabilityMask" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Mask for the supported DTC status bits by the Dem. This mask is used by UDS service 0x19."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="f9ff20fc-951e-4443-a91d-4151290360aa"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemEnableConditionSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for enable conditions is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="45064284-9a93-425f-b043-1fc265f474c8"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemEventCombinationSupport" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the type of event combination supported by the Dem."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="09a04b9b-56fb-4d4e-a0f6-c1eadfd79d6c"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_EVCOMB_DISABLED</a:v>
+                    <a:v>DEM_EVCOMB_TYPE1</a:v>
+                    <a:v>DEM_EVCOMB_TYPE2</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemEventDisplacementSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for event displacement is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="19248e87-339f-499e-8c37-851754928133"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemExtendedDataCapture" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the point in time, when the extended data collection is done for the initial event memory entry."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="dc3a38b7-1727-4a9d-b8f5-8409fee72fb5"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_TRIGGER_EVENT_MEMORY_STORAGE</a:v>
+                    <a:v>DEM_TRIGGER_TESTFAILED</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemFreezeFrameCapture" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the point in time, when the freeze frame data collection is done for the initial event memory entry."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="7bd50d04-5b8b-4d8f-9fae-e57e8ff59e5e"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_TRIGGER_EVENT_MEMORY_STORAGE</a:v>
+                    <a:v>DEM_TRIGGER_TESTFAILED</a:v>
+                  </a:da>
+                </v:var>
+                <v:lst name="DemHeaderFileInclusion">
+                  <v:var name="DemHeaderFileInclusion" type="STRING">
+                    <a:a name="DESC" 
+                         value="EN: Name of the header file(s) to be included by the Dem module containing the used C-callback declarations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID" 
+                         value="dbc41c42-95f2-4138-8547-95337afb4964"/>
+                    <a:da name="INVALID" type="Multi">
+                      <mt:regex 
+                                false="The value must match the regular expression &quot;[a-zA-Z0-9_]([a-zA-Z0-9\._])*&quot;" 
+                                expr="[a-zA-Z0-9_]([a-zA-Z0-9\._])*"/>
+                    </a:da>
+                  </v:var>
+                </v:lst>
+                <v:var name="DemImmediateNvStorageLimit" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the maximum number of occurrences, a specific event memory entry is allowed, to be stored in NVRAM immediately (refer to DemImmediateNvStorage)."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="abc8dd48-c0a9-4d34-81c5-1973f033418a"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=1"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemMaxNumberEventEntryMirror" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum number of events which can be stored in the mirror memory"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0499865c-eb70-461d-9b77-808a759810b7"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemMaxNumberEventEntryPermanent" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum number of events which can be stored in the permanent memory."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="d4af6baf-02ef-4951-af76-94d9743d9535"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemMaxNumberEventEntryPrimary" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum number of events which can be stored in the primary memory"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="51419d24-8247-4151-b490-248f51f40545"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=1"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemMaxNumberEventEntrySecondary" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum number of events which can be stored in the secondary memory"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="0c02b122-441a-48b1-92aa-a7bc140ac26d"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemMaxNumberPrestoredFF" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Defines the maximum number for prestored freeze frames."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="7a054539-278b-4943-9196-b7c43c8690dd"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemOBDSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines whether OBD is supported or not"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="b13bc8b4-deec-4fd1-8013-cc56630f1efd"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemOccurrenceCounterProcessing" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines the consideration of the fault confirmation process for the occurrence counter. For OBD and mixed systems (OBD/non OBD, refer to DemOBDSupport) the fault confirmation process must not be considered."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="9198819a-a74c-400c-918f-2f10613ae363"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_PROCESS_OCCCTR_CDTC</a:v>
+                    <a:v>DEM_PROCESS_OCCCTR_TF</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemOperationCycleProcessing" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether the operation cycles are triggered by DEM_CYCLE_STATE_START or collecting an external counter value, which results in respective state changes."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Operation Cycle Processing"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="c6300d57-88cb-4c33-b72e-18e346da8dfb"/>
+                  <a:da name="DEFAULT" value="DEM_PROCESS_OPCYC_STATE"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_PROCESS_OPCYC_COUNTER</a:v>
+                    <a:v>DEM_PROCESS_OPCYC_STATE</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemOperationCycleStatusStorage" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Defines if the operation cycle state is available over the power cycle (stored non-volatile) or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="41860dcc-a22a-4447-9016-80328a9575ba"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemPTOSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether PTO support (and therefore PID $1E support) is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e5f97b76-999f-4bf2-98ae-354fdd2a3d71"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemStatusBitHandlingTestFailedSinceLastClear" 
+                       type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether the aging and displacement mechanism shall be applied to the &quot;TestFailedSinceLastClear&quot; status bits."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="bcf344c1-e4b6-47b2-836b-93bda8616623"/>
+                  <a:da name="DEFAULT" value="DEM_STATUS_BIT_NORMAL"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_STATUS_BIT_AGING_AND_DISPLACEMENT</a:v>
+                    <a:v>DEM_STATUS_BIT_NORMAL</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemStatusBitStorageTestFailed" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the permanent storage of the &quot;TestFailed&quot; status bits."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="1f1ee160-5976-432b-8491-d1aa7f6fe061"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemStorageConditionSupport" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: This configuration switch defines, whether support for storage conditions is enabled or not."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="47939aef-548e-4e37-8ec3-3c9fac114195"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemTaskTime" type="FLOAT">
+                  <a:a name="DESC" 
+                       value="EN: Allow to configure the time for the periodic cyclic task. Please note: This configuration value shall be equal to the value in the Basic Software Scheduler configuration of the RTE module."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="bcd7e06b-a1ba-4a2f-b09d-af730c185fee"/>
+                  <a:da name="DEFAULT" value="0.0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=0.1"/>
+                    <a:tst expr="&gt;=0.0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="DemTriggerDcmReports" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the notification to the Diagnostic Communication Manager for ROE processing."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="1d5f5ae4-5265-4931-8f78-c01b694273f5"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemTriggerDltReports" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the notification to the Diagnostic Log and Trace."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="d1201b65-314e-4b83-a0dd-b044f2956097"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemTriggerFiMReports" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the notification to the Funciton Inhibition Manager."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="803d439b-0ed3-43e7-9e6c-56afab93aeb7"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemTriggerMonitorInitBeforeClearOk" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Defines if the monitor re-initialization has to be triggered before or after the Dem module returns DEM_CLEAR_OK."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="27e1a633-c43a-468e-97c9-28621b021f51"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="DemTypeOfDTCSupported" type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the format returned by Dem_GetTranslationType and does not relate to/influence the supported Dem functionality."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="3531f3ea-9cf7-44fe-ad38-2b9b9a4664bc"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_DTC_TRANSLATION_ISO11992_4</a:v>
+                    <a:v>DEM_DTC_TRANSLATION_ISO14229_1</a:v>
+                    <a:v>DEM_DTC_TRANSLATION_ISO15031_6</a:v>
+                    <a:v>DEM_DTC_TRANSLATION_SAEJ1939_73</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemTypeOfFreezeFrameRecordNumeration" 
+                       type="ENUMERATION">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the type of assigning freeze frame record numbers for event-specific freeze frame records."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="7ef4387a-50f3-43ac-9476-5e8caa4a2eea"/>
+                  <a:da name="RANGE">
+                    <a:v>DEM_FF_RECNUM_CALCULATED</a:v>
+                    <a:v>DEM_FF_RECNUM_CONFIGURED</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="DemVersionInfoApi" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Activate/Deactivate the version information API."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="cdcbfba7-137c-480c-b536-ad3b94928d0f"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:ref name="DemMILIndicatorRef" type="REFERENCE">
+                  <a:a name="DESC" 
+                       value="EN: This parameter defines the indicator representing the MIL."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="UUID" value="1c8e30eb-826b-43c7-9fee-ec52d49489d7"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="REF" 
+                        value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemIndicator"/>
+                </v:ref>
+                <v:lst name="DemAgingCycle" type="MAP">
+                  <a:da name="MAX" value="256"/>
+                  <v:ctr name="DemAgingCycle" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: Note that this container definition does not explicitly define a symbolic name parameter. Instead, the short name of the container will be used in the Ecu Configuration Description to specify the symbolic name of the aging cycle name. These aging cycles are reported via API Dem_SetAgingCycleState only."/>
+                    <a:a name="UUID" 
+                         value="25f625cb-f3db-4091-922d-c554992647c4"/>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemCallbackDTCStatusChanged" type="MAP">
+                  <v:ctr name="DemCallbackDTCStatusChanged" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: The presence of this container indicates, that the Dem has access to a &quot;DTCStatusChanged&quot; callback, which the Dem will call to notify other components about the change in the status of a DTC."/>
+                    <a:a name="UUID" 
+                         value="1272fdf1-e9e3-4de2-ad24-a05a20cf93c2"/>
+                    <v:var name="DemCallbackDTCStatusChangedFnc" 
+                           type="FUNCTION-NAME">
+                      <a:a name="DESC" 
+                           value="EN: Function name of prototype &quot;DTCStatusChanged&quot;."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="0b011161-c144-4131-98f6-97aae683b5c9"/>
+                      <a:da name="ENABLE" value="false"/>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemDataElementClass" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:chc name="DemDataElementClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for an internal/external data element class."/>
+                    <a:a name="UUID" 
+                         value="e17de2c3-615b-4fdc-ba13-f09fa19dc0a8"/>
+                    <v:ctr name="DemExternalCSDataElementClass" 
+                           type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the configuration (parameters) for an external client/server based data element class."/>
+                      <a:a name="UUID" 
+                           value="5018cbe7-c3d9-4119-a38a-b186f2b77d5c"/>
+                      <v:var name="DemDataElementDataSize" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Defines the size of the data element in bytes."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="d7cecb6e-b215-482c-8fae-4d15b6b4b5cb"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemDataElementReadFnc" type="FUNCTION-NAME">
+                        <a:a name="DESC" 
+                             value="EN: In case of DemDataElementUsePort is false, this parameter defines the prototype of the C function &quot;ReadDataElement&quot; used to get the according value."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="70bf4df8-4b41-4f7d-8bab-ace9cf5ebaea"/>
+                        <a:da name="ENABLE" value="false"/>
+                      </v:var>
+                      <v:var name="DemDataElementUsePort" type="BOOLEAN">
+                        <a:a name="DESC" 
+                             value="EN: If the parameter is set to True, a R-Port is generated, to obtain the data element (interface DataServices_&lt;SyncDataElement&gt;)."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="d489d643-591f-455d-86e2-30da51eb2379"/>
+                        <a:da name="DEFAULT" value="true"/>
+                      </v:var>
+                    </v:ctr>
+                    <v:ctr name="DemExternalSRDataElementClass" 
+                           type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the configuration (parameters) for an external sender/receiver based data element class. It defines, how the Dem can obtain the value of the data element from a SW-C, by using a sender/receiver port."/>
+                      <a:a name="UUID" 
+                           value="711759e1-8b87-455e-b127-cab8be1765fa"/>
+                      <v:var name="DemDataElementDataSize" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Defines the size of the data element in bits."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="c9e4d097-9529-425c-a79c-653a0484f32e"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:ctr name="DemDataElementInstanceRef" type="INSTANCE">
+                        <a:a name="DESC" 
+                             value="EN: Instance Reference to the actual OperationPrototype which shall be traced."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="ddab6b37-fa7d-44eb-86c2-ae4c78699d43"/>
+                        <v:ref name="TARGET" type="REFERENCE">
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="UUID" 
+                               value="09f76323-afb5-429c-a4c5-d548e66c1340"/>
+                          <a:da name="REF" 
+                                value="ASTyped:VARIABLE-DATA-PROTOTYPE"/>
+                        </v:ref>
+                        <v:lst name="CONTEXT">
+                          <v:ref name="CONTEXT" type="REFERENCE">
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="UUID" 
+                                 value="5f3cca76-52f6-4428-9794-d27e953625cf"/>
+                            <a:da name="RANGE" type="IRefCtxt">
+                              <a:tst expr="ROOT-SW-COMPOSITION-PROTOTYP"/>
+                              <a:tst expr="SW-COMPONENT-PROTOTYPE+"/>
+                              <a:tst expr="PORT-PROTOTYPE"/>
+                            </a:da>
+                          </v:ref>
+                        </v:lst>
+                      </v:ctr>
+                    </v:ctr>
+                    <v:ctr name="DemInternalDataElementClass" 
+                           type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: This container contains the configuration (parameters) for an internal data element class."/>
+                      <a:a name="UUID" 
+                           value="c2b7ce1c-261c-48ce-bea6-2d568a3ab7f2"/>
+                      <v:var name="DemDataElementDataSize" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: Defines the size of the data element in bytes."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="d7971a28-662f-482c-aa8e-c415431d62f6"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=255"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                      <v:var name="DemInternalDataElement" type="ENUMERATION">
+                        <a:a name="DESC" 
+                             value="EN: This parameter defines the Dem-internal data value, which is mapped to the data element."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="18b744a5-24fc-4e0e-9b44-183244cd1b98"/>
+                        <a:da name="RANGE">
+                          <a:v>DEM_AGINGCTR</a:v>
+                          <a:v>DEM_OCCCTR</a:v>
+                          <a:v>DEM_OVFLIND</a:v>
+                          <a:v>DEM_SIGNIFICANCE</a:v>
+                        </a:da>
+                      </v:var>
+                    </v:ctr>
+                  </v:chc>
+                </v:lst>
+                <v:lst name="DemDidClass" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemDidClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for a data Id class. It is assembled out of one or several data elements."/>
+                    <a:a name="UUID" 
+                         value="d47482da-5fe4-4dbf-97bd-135273db0585"/>
+                    <v:var name="DemDidIdentifier" type="INTEGER">
+                      <a:a name="DESC" value="EN: Identifier of the Data ID."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="b32bb0b9-a6ea-4c6c-b923-74fd44e72d64"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=65535"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="DemDidDataElementClassRef">
+                      <a:da name="MAX" value="255"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemDidDataElementClassRef" 
+                             type="CHOICE-REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This reference contains the link to a data element class."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="535b1801-4b16-436e-943c-b3f2c9d80ace"/>
+                        <a:da name="REF">
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemInternalDataElementClass</a:v>
+                        </a:da>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemEnableCondition" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemEnableCondition" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for enable conditions."/>
+                    <a:a name="UUID" 
+                         value="7575791e-a5f0-4d25-b219-24a239f0149b"/>
+                    <v:var name="DemEnableConditionId" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Defines a unique enable condition Id."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                      <a:a name="UUID" 
+                           value="a8260d60-7ff9-45db-b30e-19ee9c362e75"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=255"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="DemEnableConditionStatus" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Defines the inital status for enable or disable of acceptance of event reports of a diagnostic event."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="d3fed100-e3fd-4934-b57e-9baeaa63733b"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemEnableConditionGroup" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemEnableConditionGroup" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for enable condition groups."/>
+                    <a:a name="UUID" 
+                         value="6a06b09c-8132-4c6a-9777-c9cdfd87debb"/>
+                    <v:lst name="DemEnableConditionRef">
+                      <a:da name="MAX" value="255"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemEnableConditionRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: References an enable condition."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                        <a:a name="UUID" 
+                             value="34a2820b-5069-4f51-b043-26646523b88d"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemEnableCondition"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemExtendedDataClass" type="MAP">
+                  <v:ctr name="DemExtendedDataClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This class contains the combinations of extended data records for an extended data class."/>
+                    <a:a name="UUID" 
+                         value="f71a8847-d111-4783-8245-bb3740f1898e"/>
+                    <v:lst name="DemExtendedDataRecordClassRef">
+                      <a:da name="MAX" value="253"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemExtendedDataRecordClassRef" 
+                             type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This reference contains the link to an extended data class record."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="dfe2431b-831d-44a6-86e4-efdfa78f2ef0"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemExtendedDataRecordClass"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemExtendedDataRecordClass" type="MAP">
+                  <a:da name="MAX" value="253"/>
+                  <v:ctr name="DemExtendedDataRecordClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for an extended data record class."/>
+                    <a:a name="UUID" 
+                         value="44282a7d-d307-4e51-8926-f2dec3cc503f"/>
+                    <v:var name="DemExtendedDataRecordNumber" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: This configuration parameter specifies an unique identifier for an extended data record."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="7f381154-7c47-42f0-b267-2c1867737844"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=253"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="DemExtendedDataRecordUpdate" 
+                           type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: This parameter defines the case, when the extended data record is stored/updated."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="4896fe82-b411-42dd-8472-272eb5e117bf"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="RANGE">
+                        <a:v>DEM_UPDATE_RECORD_NO</a:v>
+                        <a:v>DEM_UPDATE_RECORD_YES</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="DemDataElementClassRef">
+                      <a:da name="MAX" value="255"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemDataElementClassRef" 
+                             type="CHOICE-REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This reference contains the link to a data element class."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="def9ef32-7a0f-4093-8ea6-9eba3187aee1"/>
+                        <a:da name="REF">
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemInternalDataElementClass</a:v>
+                        </a:da>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemFreezeFrameClass" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemFreezeFrameClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the combinations of DIDs for a non OBD relevant freeze frame class."/>
+                    <a:a name="UUID" 
+                         value="cb61dbfc-da1b-40ee-9723-9e2196a3124f"/>
+                    <v:lst name="DemDidClassRef">
+                      <a:da name="MAX" value="255"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemDidClassRef" type="REFERENCE">
+                        <a:a name="DESC" value="EN: For OBD relevant data"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="440cec96-f895-49f9-89d1-b0fa2015a1f9"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDidClass"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemFreezeFrameRecNumClass" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemFreezeFrameRecNumClass" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains a list of dedicated, different freeze frame record numbers assigned to an event. The order of record numbers in this list is assigned to the chronological order of the according freeze frame records."/>
+                    <a:a name="UUID" 
+                         value="16d964af-25a5-44ca-b4b8-2c29baeea5a9"/>
+                    <v:lst name="DemFreezeFrameRecordNumber">
+                      <a:da name="MAX" value="254"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:var name="DemFreezeFrameRecordNumber" type="INTEGER">
+                        <a:a name="DESC" 
+                             value="EN: This parameter defines a record number for a freeze frame record. This record number is unique per freeze frame record number class."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="3b746e0e-3eb3-4590-81a0-3eeb23ca433b"/>
+                        <a:da name="DEFAULT" value="0"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=254"/>
+                          <a:tst expr="&gt;=1"/>
+                        </a:da>
+                      </v:var>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:ctr name="DemGeneralOBD" type="IDENTIFIABLE">
+                  <a:a name="DESC" 
+                       value="EN: This container contains the general OBD-specific configuration (parameters) of the Dem module."/>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="UUID" value="e75eb381-a46b-4ad8-b3cd-7904750c8aea"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <v:ref name="DemOBDInputAcceleratorPaddleInformation" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the accelerator paddle information, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="4c875c49-b222-4f9d-aac6-fb295438877d"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputAmbientPressure" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the ambient pressure, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="03b7f50a-1f75-409a-97d0-07525013de8c"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputAmbientTemperature" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the ambient temperature, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="470025ca-ac15-40e9-9e16-41d459b45871"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputDistanceInformation" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the distance information, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="9f803313-55a9-416a-9191-476d1c06af4b"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputEngineSpeed" type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the engine speed, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="64212ac4-7c25-4238-bb96-645cfd6ed159"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputEngineTemperature" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the engine temperature, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="08786e09-ed11-4bb3-91fd-0d97ed7c7d35"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputProgrammingEvent" 
+                         type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the programming event, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="215c45c9-138d-475d-ba68-0d5a3a3f3bb4"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                  <v:ref name="DemOBDInputVehicleSpeed" type="CHOICE-REFERENCE">
+                    <a:a name="DESC" 
+                         value="EN: Input variable for the vehicle speed, which is assigned to a specific data element used as interface for the Dem-internal PID calculations."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                    <a:a name="UUID" 
+                         value="444ea82d-14af-4e98-9d7b-5ac50396afa0"/>
+                    <a:da name="REF">
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass</a:v>
+                      <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass</a:v>
+                    </a:da>
+                  </v:ref>
+                </v:ctr>
+                <v:lst name="DemGroupOfDTC" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemGroupOfDTC" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuaration (parameters) for DTC groups."/>
+                    <a:a name="UUID" 
+                         value="67920725-bfe5-4bad-90a2-e2dd870a6e69"/>
+                    <v:var name="DemGroupDTCs" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: DTC value of the selected group of DTC"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                      <a:a name="UUID" 
+                           value="5bd4beef-d514-4532-bb44-908d140eb0a9"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=16777214"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemIndicator" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemIndicator" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for Indicators."/>
+                    <a:a name="UUID" 
+                         value="57552d1f-0cf8-409b-b845-337dccdc83cf"/>
+                    <v:var name="DemIndicatorID" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Unique identifier of an indicator."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                      <a:a name="UUID" 
+                           value="25152e3e-671d-44ae-8097-06474c7bf37e"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=255"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemNvRamBlockId" type="MAP">
+                  <v:ctr name="DemNvRamBlockId" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuaration (parameters) for a non-volatile memory block, which is used from the Dem. If no permanent storage of event memory entries is required, no block needs to be configured."/>
+                    <a:a name="UUID" 
+                         value="ead70414-f22d-4376-ac05-464a15687c44"/>
+                    <v:ref name="DemNvRamBlockIdRef" 
+                           type="SYMBOLIC-NAME-REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference contains the link to a non-volatile memory block. For post build time configurations worst case szenario shall be used."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                      <a:a name="UUID" 
+                           value="1afd9872-ee3c-4128-bf97-1269a81ea000"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"/>
+                    </v:ref>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemOperationCycle" type="MAP">
+                  <a:da name="MAX" value="256"/>
+                  <a:da name="MIN" value="1"/>
+                  <v:ctr name="DemOperationCycle" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: Note that this container definition does not explicitly define a symbolic name parameter. Instead, the short name of the container will be used in the Ecu Configuration Description to specify the symbolic name of the operation cycle name."/>
+                    <a:a name="UUID" 
+                         value="6849a376-b407-475e-a4c5-492f1a502c8c"/>
+                    <v:var name="DemOperationCycleType" type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: Operation cycles types for the Dem to be supported by cycle-state APIs."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="4db757e2-6d7a-4fda-8043-cf646eb02aec"/>
+                      <a:da name="RANGE">
+                        <a:v>DEM_OPCYC_IGNITION</a:v>
+                        <a:v>DEM_OPCYC_OBD_DCY</a:v>
+                        <a:v>DEM_OPCYC_OTHER</a:v>
+                        <a:v>DEM_OPCYC_POWER</a:v>
+                        <a:v>DEM_OPCYC_TIME</a:v>
+                        <a:v>DEM_OPCYC_WARMUP</a:v>
+                      </a:da>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemRatioId" type="MAP">
+                  <a:da name="MAX" value="65535"/>
+                  <v:ctr name="DemRatioId" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the OBD specific ratio Id configuraiton. It is related to a specific event, a FID, and an IUMPR group."/>
+                    <a:a name="UUID" 
+                         value="860fb9a6-cebc-400b-a5d9-ef34cf5ba703"/>
+                    <v:var name="DemIUMPRGroup" type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: This parameter specifies the assigned IUMPR group of the ratio Id."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="7b7817d2-9d36-4d95-9851-72f0e1494d1b"/>
+                      <a:da name="RANGE">
+                        <a:v>DEM_IUMPR_BOOSTPRS</a:v>
+                        <a:v>DEM_IUMPR_CAT1</a:v>
+                        <a:v>DEM_IUMPR_CAT2</a:v>
+                        <a:v>DEM_IUMPR_EGR</a:v>
+                        <a:v>DEM_IUMPR_EGSENSOR</a:v>
+                        <a:v>DEM_IUMPR_EVAP</a:v>
+                        <a:v>DEM_IUMPR_NMHCCAT</a:v>
+                        <a:v>DEM_IUMPR_NOXADSORB</a:v>
+                        <a:v>DEM_IUMPR_NOXCAT</a:v>
+                        <a:v>DEM_IUMPR_OXS1</a:v>
+                        <a:v>DEM_IUMPR_OXS2</a:v>
+                        <a:v>DEM_IUMPR_PMFILTER</a:v>
+                        <a:v>DEM_IUMPR_PRIVATE</a:v>
+                        <a:v>DEM_IUMPR_SAIR</a:v>
+                        <a:v>DEM_IUMPR_SECOXS1</a:v>
+                        <a:v>DEM_IUMPR_SECOXS2</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:var name="DemRatioIdType" type="ENUMERATION">
+                      <a:a name="DESC" 
+                           value="EN: This parameter defines whether the ratio Id will be calculated API or observer based."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="c272bbb8-3d06-4d9f-9475-2e36025eae33"/>
+                      <a:da name="RANGE">
+                        <a:v>DEM_RATIO_API</a:v>
+                        <a:v>DEM_RATIO_OBSERVER</a:v>
+                      </a:da>
+                    </v:var>
+                    <v:ref name="DemDiagnosticEventRef" type="REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference contains the link to a diagnostic event."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="d12c2b28-e18a-4eaf-809c-cf33d440d3ed"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
+                    </v:ref>
+                    <v:ref name="DemFunctionIdRef" 
+                           type="SYMBOLIC-NAME-REFERENCE">
+                      <a:a name="DESC" 
+                           value="EN: This reference contains the link to a function identifier within the FiM which is used as a primary FID."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="UUID" 
+                           value="5d13c1f0-d4c5-417f-9c63-1e00920f0679"/>
+                      <a:da name="REF" 
+                            value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/FiM/FiMConfigSet/FiMFID"/>
+                    </v:ref>
+                    <v:lst name="DemSecondaryFunctionIdRef">
+                      <v:ref name="DemSecondaryFunctionIdRef" 
+                             type="SYMBOLIC-NAME-REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: This reference contains the link to a function identifier within the FiM which is used as a secondary FID."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="UUID" 
+                             value="48718548-1795-412d-a803-72c0e418f233"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/FiM/FiMConfigSet/FiMFID"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemStorageCondition" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemStorageCondition" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for storage conditions."/>
+                    <a:a name="UUID" 
+                         value="387c3a36-78e2-489c-9ce9-f30a30f61994"/>
+                    <v:var name="DemStorageConditionId" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Defines a unique storage condition Id. This parameter should not be changeable by user, because the Id should be generated by Dem itself to prevent gaps and multiple use of an Id. The storage conditions should be sequentially ordered beginning with 0 and no gaps in between."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                      <a:a name="UUID" 
+                           value="5b059d10-7f43-4ff0-9fd1-b3c3449c1a3d"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=255"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="DemStorageConditionStatus" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Defines the initial status for enable or disable of storage of a diagnostic event."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="b555e9c8-ecbf-4ac6-ba6e-0c5b8668a1d8"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+                <v:lst name="DemStorageConditionGroup" type="MAP">
+                  <a:da name="MAX" value="255"/>
+                  <v:ctr name="DemStorageConditionGroup" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the configuration (parameters) for storage condition groups."/>
+                    <a:a name="UUID" 
+                         value="0a9a77b2-78f8-4287-a170-b4668638040c"/>
+                    <v:lst name="DemStorageConditionRef">
+                      <a:da name="MAX" value="255"/>
+                      <a:da name="MIN" value="1"/>
+                      <v:ref name="DemStorageConditionRef" type="REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: References an enable condition."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC V1.0.0"/>
+                        <a:a name="UUID" 
+                             value="3d50d706-10a0-4d8f-a6ac-1e98e8c52286"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemGeneral/DemStorageCondition"/>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+              </v:ctr>
+              <d:ref type="REFINED_MODULE_DEF" 
+                     value="ASPath:/AUTOSAR/EcucDefs/Dem"/>
+              <v:ctr name="PublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC">
+                  <a:v>EN:
+                    &lt;html&gt;
+                      Additional published parameters not covered by CommonPublishedInformation container.
+                  &lt;/html&gt;</a:v>
+                </a:a>
+                <a:a name="LABEL" value="EB Published Information"/>
+                <a:a name="TAB" value="EB Published Information"/>
+                <a:a name="UUID" 
+                     value="ECUC:cb4128ed-26c1-4ddd-906e-854bed917e07"/>
+                <v:var name="PbcfgMSupport" type="BOOLEAN">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        Specifies whether or not the Dem can use the PbcfgM module for post-build support.
+                    &lt;/html&gt;</a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       value="PublishedInformation"/>
+                  <a:a name="LABEL" value="PbcfgM support"/>
+                  <a:a name="ORIGIN" value="Elektrobit Automotive GmbH"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:eb61002e-69c0-4f16-a910-c27adb75f6ee"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+              </v:ctr>
+            </v:ctr>
+          </d:chc>
+          <d:chc name="myEcuParameterDefinition" type="AR-ELEMENT" 
+                 value="ECU_PARAMETER_DEFINITION">
+            <d:ctr type="AR-ELEMENT">
+              <a:a name="DEF" 
+                   value="ASPath:/AR_PACKAGE_SCHEMA/ECU_PARAMETER_DEFINITION"/>
+              <d:lst name="MODULE_REF">
+                <d:ref type="MODULE_REF" value="ASPath:/TS_T0D1M4I0R0/Dem"/>
+              </d:lst>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

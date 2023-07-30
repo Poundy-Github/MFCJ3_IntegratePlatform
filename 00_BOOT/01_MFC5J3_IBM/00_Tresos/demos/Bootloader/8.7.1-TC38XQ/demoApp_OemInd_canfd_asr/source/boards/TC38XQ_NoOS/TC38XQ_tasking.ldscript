@@ -1,0 +1,214 @@
+/* Linker script for the TRICORE system. */
+
+architecture TC
+{
+	endianness
+	{
+		little;
+	}
+
+	space linear
+	{
+		id = 1;
+		mau = 8;
+
+		map (src_offset=0x00000000, dest_offset=0x00000000, size=4G, dest=bus:fpi_bus);
+
+		copytable (align = 1 << 2, copy_unit = 1, dest = linear);
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+	}
+}
+
+architecture TC1V1.6.2 extends TC
+{
+}
+
+processor spe
+{
+	derivative = tcxxx;
+}
+
+derivative tcxxx
+{
+	core tc
+	{
+		architecture = TC1V1.6.2;
+	}
+
+	bus fpi_bus
+	{
+		mau = 8;
+		width = 32;
+		map (dest=bus:tc:fpi_bus, dest_offset=0, size=4G);
+	}
+}
+
+/*******************************************************************************
+ *                    ROM / FLASH Configuration
+ ******************************************************************************/
+
+/* Flash ROM at 0xa0100000 (1M - 16k), PMU0*/
+memory int_PFLASH
+{
+    mau = 8;
+    size = 1M -16k;
+    type = rom;
+    map (dest=bus:spe:fpi_bus, dest_offset=0xa0100000, size=1M -16k);
+}
+
+/* Area Flash CALIBRATION 0xa01fc000 */
+memory int_PFLASH_CAL
+{
+    mau = 8;
+    size = 16k;
+    type = rom;
+    map (dest=bus:spe:fpi_bus, dest_offset=0xa01fc000, size=16k);
+}
+
+
+
+/*******************************************************************************
+ *                    RAM Configuration
+ ******************************************************************************/
+
+
+ memory int_Data_Scratch_Pad_SRAM
+{
+  mau = 8;
+  size = 160k;
+  type = ram;
+  map (dest=bus:spe:fpi_bus, dest_offset=0x70000000, size=160k);
+}
+
+
+section_layout spe:tc:linear
+{
+  "BOARD_CSAMEMORY_BEGIN"  := 0x70028000;
+  "BOARD_CSAMEMORY_END"    := 0x7002C000;
+}
+
+section_layout spe:tc:linear
+{
+/*******************************************************************************
+ *                    ROM Configuration
+ ******************************************************************************/
+
+   group __AREA_reset (contiguous, ordered, run_addr = mem:int_PFLASH[0])
+  {
+      select ".reset";
+  }
+  
+  
+   group __AREA_textvect (contiguous, ordered, run_addr = mem:int_PFLASH[0x1000])
+  {
+    group text.vectors (contiguous, ordered)
+    {
+      select ".intctab";
+    }
+    group text.exept (contiguous, ordered)
+    {
+      select ".exctab";
+    }
+  }
+  
+   group __AREA_startup (contiguous, ordered, run_addr = mem:int_PFLASH)
+  {
+      select ".startup";
+  }
+
+
+ 
+
+
+  group __AREA_initdata (contiguous, ordered, load_addr = mem:int_PFLASH, align=8)
+  {
+    group initdata.TRICORE (contiguous, ordered)
+    {
+      select ".data*";
+    }
+  }
+
+
+  group __AREA_rodata (contiguous, ordered, run_addr = mem:int_PFLASH, align=8)
+  {
+    group rodata.TRICORE (contiguous, ordered)
+    {
+      select ".rodata*";
+    }
+  }
+  
+  group __AREA_text (contiguous, ordered, run_addr = mem:int_PFLASH)
+  {
+
+    group FLS_DRV_WRITE_CODE (contiguous, ordered, align=8)
+    {
+        section "text_fls_drv_write_code" (fill=0, attributes=rx, blocksize=8)
+        {
+            select ".text.*.*.DRV_FLS_WRITE_SEC";
+        }
+    }
+
+    group text.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".text*";
+    }
+  }
+
+/*******************************************************************************
+ *                    RAM Configuration
+ ******************************************************************************/
+
+  group __AREA_databssnoinit (attributes=s, contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[sizeof(mem:int_Data_Scratch_Pad_SRAM)-0x100], align=8)
+  {
+    group bssnoinit.TRICORE (contiguous, ordered)
+    {
+      select "*.prog_sig*";
+      select "*.ram_no_init*";
+    }
+  }
+
+  group __AREA_FLS_DRV_RAM (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0], align=8)
+  {
+    group(align=8, attributes=rwx)
+    {
+      reserved "FLS_LOADER_RAM_AREA" ( size = 4k );
+    }
+  }
+
+
+  group __AREA_stack (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM[0x1000], align=8)
+  {
+    group stacks.TRICORE (contiguous, ordered)
+    {
+      select ".bss.stack*";
+    }
+  }
+  
+
+  group __AREA_databss (contiguous, ordered, run_addr = mem:int_Data_Scratch_Pad_SRAM, align=8)
+  {
+    group data.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".data*";
+    }
+
+    group bss.TRICORE (contiguous, ordered, align=8)
+    {
+      select ".bss*";
+    }
+  }
+
+
+  /* Symbols for the global initialisation.*/
+  "__INITDATA"  := "_lc_gb_initdata.TRICORE";
+  "__STARTDATA" := "_lc_gb_data.TRICORE";
+  "__ENDDATA"   := "_lc_ge_data.TRICORE";
+  "__STARTBSS"  := "_lc_gb_bss.TRICORE";
+  "__ENDBSS"    := "_lc_ge_bss.TRICORE";
+
+}

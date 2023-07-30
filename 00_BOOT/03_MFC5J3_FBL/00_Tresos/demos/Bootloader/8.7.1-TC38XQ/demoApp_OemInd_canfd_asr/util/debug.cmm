@@ -1,0 +1,2 @@
+do ..\source\boards\TC38XQ_NoOS\TC38XQ.cmm ..\output\bin\TRICORE_TC38XQ_demoApp_OemInd_canfd_asr.elf
+
